@@ -1,0 +1,3177 @@
+# Translation of Plugins - MetForm &#8211; Contact Form, Survey, Quiz, &amp; Custom Form Builder for Elementor - Stable (latest release) in Chinese (China)
+# This file is distributed under the same license as the Plugins - MetForm &#8211; Contact Form, Survey, Quiz, &amp; Custom Form Builder for Elementor - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2023-05-31 06:18:53+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/4.0.1\n"
+"Language: zh_CN\n"
+"Project-Id-Version: Plugins - MetForm &#8211; Contact Form, Survey, Quiz, &amp; Custom Form Builder for Elementor - Stable (latest release)\n"
+
+#: widgets/date/date.php:170
+msgid "Set maximum date manually"
+msgstr "手动设置最大日期"
+
+#: widgets/date/date.php:155
+msgid "Set minimum date manually"
+msgstr "手动设置最小日期"
+
+#: widgets/date/date.php:143
+msgid "Set current date as minimum date"
+msgstr "将当前日期设置为最小日期"
+
+#: core/forms/views/modal-editor.php:529
+msgid "Enter here tag id. "
+msgstr "在此处输入标签 ID。"
+
+#: core/forms/views/modal-editor.php:513
+msgid "Active campaign Tag ID:"
+msgstr "活动广告系列标签 ID："
+
+#: core/forms/views/modal-editor.php:505
+msgid "Enter here list id. "
+msgstr "在此处输入列表 ID。"
+
+#: core/forms/views/modal-editor.php:489
+msgid "Active campaign List ID:"
+msgstr "活动广告系列列表 ID："
+
+#: core/forms/views/modal-editor.php:327
+msgid "Configure Google Sheet."
+msgstr "配置 Google 表格。"
+
+#: core/forms/views/modal-editor.php:327
+msgid "Integrate google sheet with this form."
+msgstr "将谷歌表格与此表单集成。"
+
+#: core/forms/views/modal-editor.php:325
+msgid "Google Sheet:"
+msgstr "谷歌表格："
+
+#: core/entries/action.php:729
+msgid "ssl certificate or google oauth credentials problem"
+msgstr "ssl 证书或 google oauth 凭据问题"
+
+#: core/admin/views/settings.php:1061
+msgid "Click on \"Save Changes\""
+msgstr "点击“保存更改”"
+
+#: core/admin/views/settings.php:1060
+msgid "After getting the App ID & App Secret, put those information"
+msgstr "拿到App ID & App Secret后，把这些信息"
+
+#: core/admin/views/settings.php:1059
+msgid "Must add the following URL to the \"Valid OAuth redirect URIs\" field:"
+msgstr "必须将以下 URL 添加到“有效的 OAuth 重定向 URI”字段："
+
+#: core/admin/views/settings.php:1058
+msgid "Check how to create App/Project On Google developer account"
+msgstr "检查如何在 Google 开发者帐户上创建 App/Project"
+
+#: core/admin/views/settings.php:1051
+msgid "Enter here your google secret id. "
+msgstr "在此处输入您的 Google 机密 ID。"
+
+#: core/admin/views/settings.php:1049
+msgid "Google OAuth Client Secret"
+msgstr "Google OAuth 客户端密钥"
+
+#: core/admin/views/settings.php:1067
+msgid "Note:- After 200 days your token will be expired, before the expiration of your token, generate a new token."
+msgstr "注意：- 200 天后您的令牌将过期，在您的令牌到期之前，生成一个新令牌。"
+
+#: core/admin/views/settings.php:1064
+msgid "Generate Access Token"
+msgstr "生成访问令牌"
+
+#: core/admin/views/settings.php:1062
+msgid "Click on \"Generate Access Token\""
+msgstr "点击 “生成访问令牌”"
+
+#: core/forms/views/modal-editor.php:756
+msgid "Available Mailboxes"
+msgstr "可用邮箱"
+
+#: core/forms/views/modal-editor.php:751
+msgid "Configure Helpscout."
+msgstr "配置Helpscout。"
+
+#: core/forms/views/modal-editor.php:751
+msgid "Integrate Helpscout with this form. "
+msgstr "将此表单与Helpscout集成在一起。"
+
+#: core/forms/views/modal-editor.php:749
+msgid "Helpscout"
+msgstr "Helpscout"
+
+#: widgets/select/select.php:475
+msgid "Selected"
+msgstr "下拉列表"
+
+#: widgets/select/select.php:337
+msgid "Option"
+msgstr "下拉选项"
+
+#: utils/stories/views/template.php:137
+msgid "Need Help?"
+msgstr "需要帮助吗？"
+
+#: utils/pro-awareness/pro-awareness.php:159
+#: utils/pro-awareness/pro-awareness.php:174
+msgid "Default Title"
+msgstr "默认标题"
+
+#: traits/common-controls.php:487 widgets/gdpr-consent/gdpr-consent.php:280
+#: widgets/recaptcha/recaptcha.php:91
+#: widgets/simple-captcha/simple-captcha.php:255
+msgid "Warning Text Typography"
+msgstr "警告文字排版"
+
+#: traits/common-controls.php:467 widgets/gdpr-consent/gdpr-consent.php:261
+#: widgets/recaptcha/recaptcha.php:75
+#: widgets/simple-captcha/simple-captcha.php:239
+msgid "Warning Text Color:"
+msgstr "警告文字颜色："
+
+#: utils/stories/stories.php:255
+msgid "Wpmet Stories"
+msgstr "Wpmet的故事"
+
+#: utils/stories/views/template.php:145
+msgid "Facebook Community"
+msgstr "Facebook 社区"
+
+#: utils/stories/views/template.php:141
+msgid "Blog"
+msgstr "博客"
+
+#: widgets/email/email.php:57
+msgid "Show Logged in Email"
+msgstr "显示已登录的电子邮件"
+
+#: core/entries/meta-data.php:361
+msgid "Total"
+msgstr "总计"
+
+#: core/entries/meta-data.php:354
+msgid "Order Status"
+msgstr "订单状态"
+
+#: core/entries/meta-data.php:348
+msgid "Order ID "
+msgstr "订单ID"
+
+#: core/entries/meta-data.php:325
+msgid "Woocommerce Checkout"
+msgstr "Woocommerce 结帐"
+
+#: core/forms/views/modal-editor.php:557
+msgid "Mailster Forms"
+msgstr "Mailster 表单"
+
+#: widgets/file-upload/file-upload.php:59
+msgid "No file chosen Text"
+msgstr "未选择文件文本"
+
+#: core/forms/views/modal-editor.php:548
+msgid "Mailster:"
+msgstr "Mailster:"
+
+#: widgets/file-upload/file-upload.php:51
+msgid "Choose file Text"
+msgstr "选择文件文本"
+
+#: core/forms/views/modal-editor.php:551
+msgid "Integrate Mailster with this form."
+msgstr "将 Mailster 与该表单集成。"
+
+#: widgets/date/date.php:414
+msgid "Enable time 24hr?"
+msgstr "启用24小时时间制？"
+
+#: widgets/date/date.php:289
+msgid "Localization"
+msgstr "本地化"
+
+#: widgets/date/date.php:99
+msgid "Welsh"
+msgstr "威尔士语"
+
+#: widgets/date/date.php:98
+msgid "Vietnamese"
+msgstr "越南语"
+
+#: widgets/date/date.php:97
+msgid "Ukrainian"
+msgstr "乌克兰语"
+
+#: widgets/date/date.php:96
+msgid "Turkish"
+msgstr "土耳其语"
+
+#: widgets/date/date.php:95
+msgid "Thai"
+msgstr "泰语"
+
+#: widgets/date/date.php:94
+msgid "Swedish"
+msgstr "瑞典语"
+
+#: widgets/date/date.php:93
+msgid "Spanish"
+msgstr "西班牙语"
+
+#: widgets/date/date.php:92
+msgid "Slovenian"
+msgstr "斯洛文尼亚语"
+
+#: widgets/date/date.php:91
+msgid "Slovak"
+msgstr "斯洛伐克语"
+
+#: widgets/date/date.php:90
+msgid "Sinhala"
+msgstr "僧伽罗语"
+
+#: widgets/date/date.php:88
+msgid "Serbian"
+msgstr "塞尔维亚语"
+
+#: widgets/date/date.php:87
+msgid "Russian"
+msgstr "俄语"
+
+#: widgets/date/date.php:86
+msgid "Romanian"
+msgstr "罗马尼亚语"
+
+#: widgets/date/date.php:84
+msgid "Portuguese"
+msgstr "葡萄牙语"
+
+#: widgets/date/date.php:83
+msgid "Polish"
+msgstr "波兰语"
+
+#: widgets/date/date.php:82
+msgid "Persian"
+msgstr "波斯语"
+
+#: widgets/date/date.php:81
+msgid "Norwegian"
+msgstr "挪威语"
+
+#: widgets/date/date.php:80
+msgid "Mongolian"
+msgstr "蒙古语"
+
+#: widgets/date/date.php:76
+msgid "Macedonian"
+msgstr "马其顿语"
+
+#: widgets/date/date.php:75
+msgid "Lithuanian"
+msgstr "立陶宛语"
+
+#: widgets/date/date.php:74
+msgid "Latvian"
+msgstr "拉脱维亚语"
+
+#: widgets/date/date.php:73
+msgid "Korean"
+msgstr "朝鲜语"
+
+#: widgets/date/date.php:72
+msgid "Khmer"
+msgstr "高棉语"
+
+#: widgets/date/date.php:71
+msgid "Kazakh"
+msgstr "哈萨克语"
+
+#: widgets/date/date.php:70
+msgid "Japanese"
+msgstr "日语"
+
+#: widgets/date/date.php:69
+msgid "Italian"
+msgstr "意大利语"
+
+#: widgets/date/date.php:68
+msgid "Indonesian"
+msgstr "印度尼西亚语"
+
+#: widgets/date/date.php:67
+msgid "Icelandic"
+msgstr "冰岛语"
+
+#: widgets/date/date.php:66
+msgid "Hungarian"
+msgstr "匈牙利语"
+
+#: widgets/date/date.php:65
+msgid "Hindi"
+msgstr "印地语"
+
+#: widgets/date/date.php:64
+msgid "Hebrew"
+msgstr "希伯来语"
+
+#: widgets/date/date.php:63
+msgid "Greek"
+msgstr "希腊语"
+
+#: widgets/date/date.php:62
+msgid "German"
+msgstr "德语"
+
+#: widgets/date/date.php:61
+msgid "Georgian"
+msgstr "格鲁吉亚语"
+
+#: widgets/date/date.php:60
+msgid "French"
+msgstr "法语"
+
+#: widgets/date/date.php:59
+msgid "Finnish"
+msgstr "芬兰语"
+
+#: widgets/date/date.php:58
+msgid "Faroese"
+msgstr "法罗语"
+
+#: widgets/date/date.php:57
+msgid "Estonian"
+msgstr "爱沙尼亚语"
+
+#: widgets/date/date.php:56
+msgid "Esperanto"
+msgstr "世界语"
+
+#: widgets/date/date.php:55
+msgid "English"
+msgstr "英语"
+
+#: widgets/date/date.php:54
+msgid "Dutch"
+msgstr "荷兰语"
+
+#: widgets/date/date.php:53
+msgid "Danish"
+msgstr "丹麦语"
+
+#: widgets/date/date.php:52
+msgid "Czech"
+msgstr "捷克语"
+
+#: widgets/date/date.php:51
+msgid "Croatian"
+msgstr "克罗地亚语"
+
+#: widgets/date/date.php:50
+msgid "Catalan"
+msgstr "加泰罗尼亚语"
+
+#: widgets/date/date.php:49
+msgid "Burmese"
+msgstr "缅甸语"
+
+#: widgets/date/date.php:48
+msgid "Bulgarian"
+msgstr "保加利亚语"
+
+#: widgets/date/date.php:47
+msgid "Bosnian"
+msgstr "波斯尼亚语。"
+
+#: widgets/date/date.php:46
+msgid "Belarusian"
+msgstr "白俄罗斯语"
+
+#: widgets/date/date.php:44
+msgid "Azerbaijan"
+msgstr "阿塞拜疆"
+
+#: widgets/date/date.php:43
+msgid "Austria"
+msgstr "奥地利"
+
+#: widgets/date/date.php:42
+msgid "Arabic"
+msgstr "阿拉伯语"
+
+#: widgets/date/date.php:41
+msgid "Albanian"
+msgstr "阿尔巴尼亚语"
+
+#: widgets/date/date.php:290
+msgid "Language change will be shown on preview."
+msgstr "语言更改将在预览中显示。"
+
+#: widgets/date/date.php:85
+msgid "Punjabi"
+msgstr "旁遮普语"
+
+#: widgets/date/date.php:79
+msgid "MandarinTraditional"
+msgstr "普通话"
+
+#: widgets/date/date.php:78
+msgid "Mandarin"
+msgstr "普通话"
+
+#: widgets/date/date.php:45
+msgid "Bangla"
+msgstr "孟加拉语"
+
+#: widgets/date/date.php:89
+msgid "SerbianCyrillic"
+msgstr "塞尔维亚文"
+
+#: widgets/date/date.php:77
+msgid "Malaysian"
+msgstr "马来西亚"
+
+#: traits/button-controls.php:57
+msgid "Justified"
+msgstr "两端对齐"
+
+#: core/admin/views/settings.php:886
+msgid "API URL:"
+msgstr "API URL:"
+
+#: controls/form-editor-modal.php:15
+msgid "Update & Close"
+msgstr "更新和关闭"
+
+#: core/forms/views/modal-editor.php:122
+msgid "Stop scrolling effect when submitting the form."
+msgstr "提交表单时停止滚动效果。"
+
+#: core/forms/views/modal-editor.php:120
+msgid "Stop Vertical Scrolling:"
+msgstr "停止垂直滚动："
+
+#: core/admin/views/settings.php:887
+msgid "ActiveCampaign API URL"
+msgstr "ActiveCampaign API 网址"
+
+#: widgets/url/url.php:157
+msgid "Please enter a valid URL"
+msgstr "请输入一个有效的url"
+
+#: widgets/email/email.php:248
+msgid "Please enter a valid Email address"
+msgstr "请输入有效的电邮地址"
+
+#: widgets/checkbox/checkbox.php:194 widgets/date/date.php:134
+#: widgets/file-upload/file-upload.php:110
+#: widgets/gdpr-consent/gdpr-consent.php:107
+#: widgets/listing-optin/listing-optin.php:88
+#: widgets/multi-select/multi-select.php:152 widgets/radio/radio.php:198
+#: widgets/range/range.php:62 widgets/rating/rating.php:62
+#: widgets/select/select.php:215 widgets/switch/switch.php:81
+#: widgets/time/time.php:66 widgets/url/url.php:63
+msgid "Validation Type"
+msgstr "验证类型"
+
+#: core/entries/hooks.php:29
+msgid "Referral"
+msgstr "来源"
+
+#: core/admin/views/settings.php:794
+msgid "Redirect url:"
+msgstr "重定向网址："
+
+#: widgets/recaptcha/recaptcha.php:112
+msgid "reCAPTCHA is required."
+msgstr "reCAPTCHA 是必需的。"
+
+#: widgets/simple-captcha/simple-captcha.php:394
+msgid "Captcha didn't matched."
+msgstr "验证码不匹配。"
+
+#: widgets/range/range.php:114
+msgid "<strong>Important Note : </strong> For taking dual range input, You have to enter dual default value in the field Value (Exactly bottom of this notice field. ). Example: Min:10, Max:20"
+msgstr "<strong>重要说明:</strong>要进行双量程输入，您必须在值字段（此通知字段的正下方）中输入双默认值。示例：最小值:10,最大值:20"
+
+#: widgets/range/range.php:101
+msgid "Dual range input:"
+msgstr "双量程输入："
+
+#: core/forms/views/modal-editor.php:484
+msgid "Integrate ActiveCampaign with this form."
+msgstr "将此表单与 ActiveCampaign 集成。"
+
+#: core/forms/views/modal-editor.php:399
+msgid "Aweber List ID:"
+msgstr "Aweber 列表ID:"
+
+#: core/forms/views/modal-editor.php:395
+msgid "Configure aweber."
+msgstr "配置 aweber."
+
+#: core/forms/views/modal-editor.php:393
+msgid "Aweber:"
+msgstr "Aweber:"
+
+#: core/forms/views/modal-editor.php:25
+msgid "CRM"
+msgstr "CRM"
+
+#: core/admin/views/settings.php:849
+msgid "Secret Key:"
+msgstr "密钥："
+
+#: core/admin/views/settings.php:743
+msgid "ConvertKit"
+msgstr "ConvertKit(邮件营销工具)"
+
+#: core/admin/views/settings.php:350
+msgid "review"
+msgstr "审核"
+
+#: core/admin/views/settings.php:245
+#: core/integrations/onboard/views/settings-sections/dashboard.php:76
+msgid "FAQ"
+msgstr "常见问题"
+
+#: core/admin/views/settings.php:206
+msgid "View Details"
+msgstr "查看具体内容"
+
+#: core/admin/views/settings.php:203 core/admin/views/settings.php:219
+#: core/admin/views/settings.php:233
+msgid "Store Entries"
+msgstr "存储表单数据"
+
+#: core/admin/views/settings.php:201 core/admin/views/settings.php:217
+#: core/admin/views/settings.php:231
+msgid "Hide Form After Submission"
+msgstr "提交后隐藏表单"
+
+#: core/admin/views/settings.php:199 core/admin/views/settings.php:215
+#: core/admin/views/settings.php:229
+msgid "Success Message"
+msgstr "成功消息"
+
+#: core/admin/views/settings.php:181 core/admin/views/settings.php:184
+#: core/admin/views/settings.php:187
+msgid "Pro"
+msgstr "Pro"
+
+#: core/admin/views/settings.php:169
+#: core/integrations/onboard/views/onboard-steps/step-05.php:13
+msgid "PRO"
+msgstr "专业版"
+
+#: core/admin/views/settings.php:142
+msgid "Dynamic Forms"
+msgstr "动态表单"
+
+#: core/admin/views/settings.php:121 core/admin/views/settings.php:181
+msgid "Easy to use"
+msgstr "容易使用"
+
+#: core/admin/views/settings.php:111 core/admin/views/settings.php:171
+msgid "features"
+msgstr "特征"
+
+#: core/admin/views/settings.php:109
+msgid "Features"
+msgstr "功能"
+
+#: core/admin/views/settings.php:108
+msgid "Top Notch"
+msgstr "顶尖"
+
+#: core/admin/views/settings.php:356
+#: core/integrations/onboard/views/settings-sections/dashboard.php:154
+msgid "Rate it now"
+msgstr "立即评分"
+
+#: core/admin/views/settings.php:362
+#: core/integrations/onboard/views/settings-sections/dashboard.php:159
+msgid "Rate Now Thumb"
+msgstr "现在评价"
+
+#: core/forms/views/modal-editor.php:481
+msgid "ActiveCampaign:"
+msgstr "ActiveCampaign:"
+
+#: core/forms/views/modal-editor.php:446
+msgid "GetResponse:"
+msgstr "GetResponse:"
+
+#: core/forms/views/modal-editor.php:417
+msgid "ConvertKit:"
+msgstr "ConvertKit:"
+
+#: core/forms/views/modal-editor.php:362
+msgid "MailPoet:"
+msgstr "MailPoet:"
+
+#: core/admin/views/settings.php:955 core/admin/views/settings.php:982
+msgid "GetResponse API Key:"
+msgstr "GetResponse API密钥："
+
+#: core/admin/views/settings.php:288
+#: core/integrations/onboard/views/settings-sections/dashboard.php:110
+msgid "View all faq’s"
+msgstr "查看所有常见问题"
+
+#: core/admin/views/settings.php:277
+#: core/integrations/onboard/views/settings-sections/dashboard.php:99
+msgid "3. How to add custom css in specific section shortcode?"
+msgstr "3.如何在特定部分的简码中添加自定义CSS？"
+
+#: core/admin/views/settings.php:266
+msgid "2. How to translate language with WPML?"
+msgstr "2.如何使用WPML翻译语言？"
+
+#: core/admin/views/settings.php:244
+#: core/integrations/onboard/views/settings-sections/dashboard.php:75
+msgid "General Knowledge Base"
+msgstr "通用知识库"
+
+#: core/admin/views/settings.php:184
+msgid "Modern Typography"
+msgstr "现代版式"
+
+#: core/admin/views/settings.php:156
+msgid "Awesome Layout"
+msgstr "很棒的布局"
+
+#: core/admin/views/settings.php:149
+msgid "Create Faster"
+msgstr "更快地创建"
+
+#: core/admin/views/settings.php:135 core/admin/views/settings.php:187
+msgid "Perfectly Match"
+msgstr "完美搭配"
+
+#: core/admin/views/settings.php:128
+msgid "Moden Typography"
+msgstr "现代版式"
+
+#: core/integrations/mail-chimp.php:53
+msgid "Your data inserted on ActiveCampaign."
+msgstr "您的数据已插入 ActiveCampaign."
+
+#: core/forms/views/modal-editor.php:709
+msgid "Configure Zoho."
+msgstr "配置 Zoho."
+
+#: core/forms/views/modal-editor.php:709
+msgid "Integrate Zoho contacts with this form. "
+msgstr "将 Zoho 联系人与该表单集成在一起。"
+
+#: core/forms/views/modal-editor.php:707
+msgid "Zoho Contact:"
+msgstr "Zoho 联系人："
+
+#: core/forms/views/modal-editor.php:484
+msgid "Configure ActiveCampaign."
+msgstr "配置 ActiveCampaign."
+
+#: core/forms/views/modal-editor.php:464
+msgid "Enter here GetResponse list id. "
+msgstr "在此处输入 GetResponse 列表ID."
+
+#: core/forms/views/modal-editor.php:463
+msgid "GetResponse contact list id"
+msgstr "GetResponse 联系人列表 ID"
+
+#: core/forms/views/modal-editor.php:455
+msgid "GetResponse List ID:"
+msgstr "GetResponse 列表 ID:"
+
+#: core/forms/views/modal-editor.php:449
+msgid "Configure GetResponse."
+msgstr "配置 GetResponse."
+
+#: core/forms/views/modal-editor.php:449
+msgid "Integrate GetResponse with this form."
+msgstr "将 GetResponse 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:429
+msgid "Enter here ConvertKit form id. "
+msgstr "在此处输入 ConvertKit 表单 ID."
+
+#: core/forms/views/modal-editor.php:423
+msgid "ConvertKit Forms ID:"
+msgstr "ConvertKit 表单 ID:"
+
+#: core/forms/views/modal-editor.php:419
+msgid "Configure ConvertKit."
+msgstr "配置 ConvertKit."
+
+#: core/forms/views/modal-editor.php:419
+msgid "Integrate convertKit with this form."
+msgstr "将 convertKit 与此表单集成。"
+
+#: core/forms/views/modal-editor.php:405
+msgid "Enter here aweber list id. "
+msgstr "在此处输入 aweber 列表 ID."
+
+#: core/forms/views/modal-editor.php:395
+msgid "Integrate aweber with this form."
+msgstr "将 aweber 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:382 core/forms/views/modal-editor.php:406
+#: core/forms/views/modal-editor.php:431 core/forms/views/modal-editor.php:506
+#: core/forms/views/modal-editor.php:530
+msgid "Refresh List"
+msgstr "刷新列表"
+
+#: core/forms/views/modal-editor.php:375
+msgid "MailPoet List ID:"
+msgstr "MailPoet 列表 ID:"
+
+#: core/forms/views/modal-editor.php:368
+msgid "Configure MailPoet."
+msgstr "配置 MailPoet."
+
+#: core/forms/views/modal-editor.php:365
+msgid "Integrate MailPoet with this form."
+msgstr "将 MailPoet 与该表单集成。"
+
+#: core/integrations/onboard/views/settings-sections/dashboard.php:152
+msgid "Don’t forget to rate our item."
+msgstr "不要忘了给我们的项目打分。"
+
+#: core/admin/views/settings.php:259 core/admin/views/settings.php:270
+#: core/admin/views/settings.php:281
+#: core/integrations/onboard/views/settings-sections/dashboard.php:86
+#: core/integrations/onboard/views/settings-sections/dashboard.php:94
+#: core/integrations/onboard/views/settings-sections/dashboard.php:102
+msgid "You will get 20+ complete homepages and total 450+ blocks in our layout library and we’re continuously updating the numbers there."
+msgstr "您将在我们的布局库中获得20多个完整的主页和总共450多个区块，并且我们会在那里不断更新那里的数字。"
+
+#: core/admin/views/settings.php:255
+msgid "1. How to create a Invitation Form using MetForm?"
+msgstr "1.如何使用 MetForm 创建邀请表单？"
+
+#: core/admin/views/settings.php:200 core/admin/views/settings.php:216
+#: core/admin/views/settings.php:230
+msgid "Required Login"
+msgstr "必须登录"
+
+#: core/admin/views/settings.php:196 core/admin/views/settings.php:212
+#: core/admin/views/settings.php:226
+msgid "Get started by spending some time with the documentation to get familiar with MetForm Get started by spending some time with the documentation to get notification in real time."
+msgstr "通过花一些时间来熟悉 MetForm，以开始使用 MetForm，花些时间来获取实时通知。"
+
+#: core/admin/views/settings.php:168
+msgid "What included with Free &"
+msgstr "免费提供的内容 &"
+
+#: core/admin/views/settings.php:113 core/admin/views/settings.php:173
+#: core/admin/views/settings.php:247
+msgid "Get started by spending some time with the documentation to get familiar with ElementsKit."
+msgstr "先花些时间阅读文档，以熟悉ElementsKit。"
+
+#: core/admin/views/settings.php:123 core/admin/views/settings.php:130
+#: core/admin/views/settings.php:137 core/admin/views/settings.php:144
+#: core/admin/views/settings.php:151 core/admin/views/settings.php:158
+msgid "Get started by spending some time with the documentation to get familiar with MetForm"
+msgstr "先花些时间阅读文档，以熟悉 MetForm"
+
+#: core/forms/views/modal-editor.php:239
+msgid "Integrate hubspot with this form. "
+msgstr "将 hubspot 与该表单集成。"
+
+#: core/admin/views/settings.php:956 core/admin/views/settings.php:983
+msgid "GetResponse API key"
+msgstr "GetResponse API 密钥"
+
+#: core/admin/views/settings.php:895 core/admin/views/settings.php:922
+msgid "ActiveCampaign API key"
+msgstr "ActiveCampaign API 密钥"
+
+#: widgets/widget-notice.php:18
+msgid "Go Pro for More Features"
+msgstr "使用 Pro 获得更多功能"
+
+#: core/forms/views/modal-editor.php:93
+msgid "Enter here title of this form entries."
+msgstr "在此输入此表单数据的标题。"
+
+#: core/forms/views/modal-editor.php:91
+msgid "Entry Title"
+msgstr "表单数据标题"
+
+#: core/admin/views/settings.php:779 core/admin/views/settings.php:829
+#: core/admin/views/settings.php:871 core/admin/views/settings.php:914
+#: core/admin/views/settings.php:941 core/admin/views/settings.php:974
+#: core/admin/views/settings.php:1001
+msgid "View Documentation"
+msgstr "查看使用手册"
+
+#: core/admin/views/settings.php:758 core/admin/views/settings.php:840
+#: core/admin/views/settings.php:894 core/admin/views/settings.php:921
+msgid "API Key:"
+msgstr "API Key："
+
+#: core/admin/views/settings.php:739
+msgid "Get Response"
+msgstr "Get Response"
+
+#: core/admin/views/settings.php:471
+msgid "API:"
+msgstr "API:"
+
+#: core/admin/views/settings.php:60
+msgid "All newsletter integration info here"
+msgstr "此处显示所有通讯集成信息"
+
+#: core/admin/views/settings.php:59 core/admin/views/settings.php:717
+msgid "Newsletter Integration"
+msgstr "通讯集成"
+
+#: core/admin/views/settings.php:22 core/admin/views/settings.php:97
+msgid "Dashboard"
+msgstr "仪表盘"
+
+#: core/forms/views/modal-form-template-item.php:26
+msgid "Demo"
+msgstr "演示"
+
+#: widgets/widget-notice.php:25
+msgid "Unlock more possibilities"
+msgstr "释放更多可能性"
+
+#: core/admin/views/settings.php:735
+msgid "ActiveCampaign"
+msgstr "ActiveCampaign"
+
+#: core/admin/views/settings.php:776 core/admin/views/settings.php:826
+#: core/admin/views/settings.php:868 core/admin/views/settings.php:911
+#: core/admin/views/settings.php:938 core/admin/views/settings.php:971
+#: core/admin/views/settings.php:998
+msgid "Item 3"
+msgstr "项目 3"
+
+#: core/admin/views/settings.php:775 core/admin/views/settings.php:825
+#: core/admin/views/settings.php:867 core/admin/views/settings.php:910
+#: core/admin/views/settings.php:937 core/admin/views/settings.php:970
+#: core/admin/views/settings.php:997
+msgid "Item 2"
+msgstr "项目 2"
+
+#: core/admin/views/settings.php:774 core/admin/views/settings.php:824
+#: core/admin/views/settings.php:866 core/admin/views/settings.php:909
+#: core/admin/views/settings.php:936 core/admin/views/settings.php:969
+#: core/admin/views/settings.php:996
+msgid "Item 1"
+msgstr "项目 1"
+
+#: core/admin/views/settings.php:771 core/admin/views/settings.php:821
+#: core/admin/views/settings.php:863 core/admin/views/settings.php:906
+#: core/admin/views/settings.php:933 core/admin/views/settings.php:966
+#: core/admin/views/settings.php:993
+msgid "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede."
+msgstr "Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non, semper suscipit, posuere a, pede."
+
+#: core/admin/views/settings.php:48
+msgid "All payment info here"
+msgstr "此处显示所有付款信息"
+
+#: core/admin/views/settings.php:35
+msgid "All General info here"
+msgstr "此处显示所有常规信息"
+
+#: core/admin/views/settings.php:23
+msgid "All dashboard info here"
+msgstr "此处显示所有仪表盘信息"
+
+#: core/admin/views/settings.php:770 core/admin/views/settings.php:820
+#: core/admin/views/settings.php:862 core/admin/views/settings.php:905
+#: core/admin/views/settings.php:932 core/admin/views/settings.php:965
+#: core/admin/views/settings.php:992
+msgid "How To"
+msgstr "如何"
+
+#: core/forms/views/modal-form-template-item.php:22
+msgid "Buy Pro"
+msgstr "购买专业版"
+
+#: widgets/gdpr-consent/gdpr-consent.php:16
+msgid "GDPR Consent"
+msgstr "GDPR(协议/条例同意选项)"
+
+#: widgets/summary/summary.php:108
+msgid "Summary will be shown on preview."
+msgstr "摘要将显示在预览中。"
+
+#: widgets/simple-captcha/simple-captcha.php:92
+msgid "Inline"
+msgstr "内嵌"
+
+#: widgets/simple-captcha/simple-captcha.php:91
+msgid "Block"
+msgstr "区块"
+
+#: widgets/simple-captcha/simple-captcha.php:66
+msgid "Label Position"
+msgstr "标签位置"
+
+#: core/forms/views/modal-editor.php:676
+msgid "Configure paypal payment."
+msgstr "配置 PayPal(贝宝) 付款。"
+
+#: core/forms/views/modal-editor.php:304
+msgid "Configure Mail Chimp."
+msgstr "配置Mail Chimp。"
+
+#: core/forms/views/modal-editor.php:304 core/forms/views/modal-editor.php:366
+#: core/forms/views/modal-editor.php:395 core/forms/views/modal-editor.php:419
+#: core/forms/views/modal-editor.php:449 core/forms/views/modal-editor.php:484
+#: core/forms/views/modal-editor.php:551
+msgid "The form must have at least one Email widget and it should be required. "
+msgstr "该表单必须至少有一个电子邮件小部件，它应该是必需的。"
+
+#: core/admin/views/settings.php:564
+msgid "Enter here your paypal email. "
+msgstr "在此处输入您的 PayPal(贝宝) 电子邮件。"
+
+#: core/admin/views/settings.php:542
+msgid "Stripe"
+msgstr "Stripe支付"
+
+#: core/admin/views/settings.php:537
+msgid "Paypal"
+msgstr "Paypal"
+
+#: core/admin/views/settings.php:414
+msgid "reCAPTCHA V3"
+msgstr "reCAPTCHA V3"
+
+#: core/admin/views/settings.php:388
+msgid "Map"
+msgstr "地图"
+
+#: core/admin/views/settings.php:383
+msgid "reCaptcha"
+msgstr "reCAPTCHA人机识别系统"
+
+#: core/admin/views/settings.php:98 core/admin/views/settings.php:377
+#: core/admin/views/settings.php:531 core/admin/views/settings.php:719
+#: core/admin/views/settings.php:1025
+#: core/integrations/onboard/views/onboard-steps/step-06.php:5
+#: utils/render.php:40
+msgid "Save Changes"
+msgstr "保存更改"
+
+#: widgets/simple-captcha/simple-captcha.php:268
+msgid "Refresh Captcha"
+msgstr "刷新验证码"
+
+#: widgets/simple-captcha/simple-captcha.php:94
+msgid "Select input and captcha display property."
+msgstr "选择输入和验证码显示属性。"
+
+#: widgets/simple-captcha/simple-captcha.php:87
+msgid "Input captcha display"
+msgstr "输入验证码显示"
+
+#: widgets/simple-captcha/simple-captcha.php:22
+msgid "Simple Captcha"
+msgstr "简单验证码"
+
+#: core/admin/views/settings.php:621
+msgid "Enable this for testing your payment system. "
+msgstr "启用它以测试您的支付系统。"
+
+#: core/admin/views/settings.php:580
+msgid "Enable this for testing payment method. "
+msgstr "启用此项以测试付款方式。"
+
+#: core/admin/views/settings.php:436 core/admin/views/settings.php:455
+msgid "Insert secret key"
+msgstr "插入密钥"
+
+#: core/admin/views/settings.php:428 core/admin/views/settings.php:447
+msgid "Insert site key"
+msgstr "插入站点密钥"
+
+#: core/admin/views/settings.php:407
+msgid "Select version:"
+msgstr "选择版本："
+
+#: widgets/simple-captcha/simple-captcha.php:430
+msgid "Entry captcha from the picture"
+msgstr "图片中的输入验证码"
+
+#: core/forms/views/modal-editor.php:687
+msgid "Configure stripe payment."
+msgstr "配置 stripe 支付。"
+
+#: core/entries/action.php:173
+msgid "Google captcha token not found."
+msgstr "找不到 Google 验证码令牌。"
+
+#: core/admin/views/settings.php:761 core/admin/views/settings.php:843
+#: core/admin/views/settings.php:852 core/admin/views/settings.php:889
+#: core/admin/views/settings.php:897 core/admin/views/settings.php:924
+msgid "Get API."
+msgstr "获取 API."
+
+#: core/admin/views/settings.php:596
+msgid "Enter here your stripe image url. This image will show on stripe payment pop up modal. "
+msgstr "在此处输入您的 stripe 图像网址。此图像将在 stripe 支付弹出模式中显示。"
+
+#: core/admin/views/settings.php:438 core/admin/views/settings.php:457
+msgid "Create google reCaptcha secret key from reCaptcha admin panel. "
+msgstr "从 reCaptcha 管理面板创建 Google reCaptcha 密钥。"
+
+#: core/admin/views/settings.php:430 core/admin/views/settings.php:449
+msgid "Create google reCaptcha site key from reCaptcha admin panel. "
+msgstr "从 reCaptcha 管理面板创建 google reCaptcha 网站密钥。"
+
+#: core/admin/views/settings.php:419
+msgid "Select google reCaptcha version which one want to use."
+msgstr "选择要使用的 google reCaptcha 版本。"
+
+#: widgets/recaptcha/recaptcha.php:48
+msgid "reCAPTCHA configure: "
+msgstr "reCAPTCHA 配置："
+
+#: widgets/summary/summary.php:16
+msgid "Summary"
+msgstr "概要"
+
+#: traits/conditional-controls.php:65
+msgid "Action"
+msgstr "功能"
+
+#: traits/conditional-controls.php:53
+msgid "OR"
+msgstr "或"
+
+#: traits/conditional-controls.php:52
+msgid "AND"
+msgstr "和"
+
+#: core/forms/views/modal-editor.php:687
+msgid "Integrate stripe payment with this form. "
+msgstr "将 stripe payment 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:685
+msgid "Stripe:"
+msgstr "Stripe:"
+
+#: core/forms/hooks.php:37
+msgid "Views/ Conversion"
+msgstr "浏览 / 转换"
+
+#: core/entries/action.php:544
+msgid " Please wait... Redirecting to paypal."
+msgstr "请稍候...重定向到 PayPal(贝宝)。"
+
+#: core/admin/views/settings.php:593
+msgid "Image url:"
+msgstr "图片链接："
+
+#: core/forms/views/modal-editor.php:114
+msgid "Track form views."
+msgstr "跟踪表单视图。"
+
+#: core/entries/action.php:230
+msgid "Enter correct captcha."
+msgstr "输入正确的验证码。"
+
+#: core/entries/action.php:221
+msgid "Time out of this captcha. Please reload or choose another one."
+msgstr "验证码时间到了。请重新加载或选择另一个。"
+
+#: core/admin/views/settings.php:638
+msgid "Enter here your test secret key. "
+msgstr "在此处输入您的测试密钥。"
+
+#: core/admin/views/settings.php:635
+msgid "Test secret key:"
+msgstr "测试密钥："
+
+#: core/admin/views/settings.php:631
+msgid "Enter here your test publishiable key. "
+msgstr "在此处输入您的测试可发布密钥。"
+
+#: core/admin/views/settings.php:628
+msgid "Test publishiable key:"
+msgstr "测试可发布密钥："
+
+#: core/admin/views/settings.php:609
+msgid "Live secret key:"
+msgstr "实时密钥："
+
+#: core/admin/views/settings.php:601
+msgid "Live publishiable key:"
+msgstr "实时发布密钥："
+
+#: core/admin/views/settings.php:411
+msgid "reCAPTCHA V2"
+msgstr "reCAPTCHA V2"
+
+#: core/forms/views/modal-editor.php:112
+msgid "Count views:"
+msgstr "计算浏览量："
+
+#: core/entries/action.php:587
+msgid " Please wait... Open a Stripe Popup Box."
+msgstr "请稍候...打开 Stripe 弹出框。"
+
+#: core/admin/views/settings.php:636
+msgid "Stripe test secret key"
+msgstr "Stripe 测试密钥"
+
+#: core/admin/views/settings.php:629
+msgid "Stripe test publishiable key"
+msgstr "Stripe 测试可发布密钥"
+
+#: core/admin/views/settings.php:612
+msgid "Enter here your stripe live secret key. "
+msgstr "在此处输入您的 Stripe 实时密钥。"
+
+#: core/admin/views/settings.php:610
+msgid "Stripe live secret key"
+msgstr "Stripe 实时密钥"
+
+#: core/admin/views/settings.php:604
+msgid "Enter here your stripe live publishiable key. "
+msgstr "在此处输入您的 Stripe 实时发布密钥。"
+
+#: core/admin/views/settings.php:602
+msgid "Stripe live publishiable key"
+msgstr "Stripe 实时发布密钥"
+
+#: core/admin/views/settings.php:594
+msgid "Stripe image url"
+msgstr "Stripe 图片网址"
+
+#: widgets/switch/switch.php:189
+msgid "Inactive"
+msgstr "未激活"
+
+#: widgets/form.php:63
+msgid "Select Form: "
+msgstr "选择表单："
+
+#: traits/common-controls.php:250 widgets/checkbox/checkbox.php:441
+#: widgets/date/date.php:563 widgets/email/email.php:247
+#: widgets/file-upload/file-upload.php:491
+#: widgets/gdpr-consent/gdpr-consent.php:485
+#: widgets/listing-fname/listing-fname.php:163
+#: widgets/listing-lname/listing-lname.php:163
+#: widgets/listing-optin/listing-optin.php:325
+#: widgets/multi-select/multi-select.php:264 widgets/number/number.php:146
+#: widgets/password/password.php:162 widgets/radio/radio.php:462
+#: widgets/range/range.php:427 widgets/rating/rating.php:315
+#: widgets/select/select.php:575 widgets/switch/switch.php:582
+#: widgets/telephone/telephone.php:146 widgets/text/text.php:165
+#: widgets/textarea/textarea.php:170 widgets/time/time.php:179
+#: widgets/url/url.php:156
+msgid "This field is required."
+msgstr "此项为必填项。"
+
+#: core/forms/views/modal-editor.php:676
+msgid "Integrate paypal payment with this form."
+msgstr "将 PayPal 付款与此表单集成。"
+
+#: core/forms/views/modal-editor.php:674
+msgid "Paypal:"
+msgstr "Paypal:"
+
+#: core/forms/action.php:108 core/forms/action.php:140
+msgid "You must enable \"store entries\" for integrating payment method."
+msgstr "您必须启用\"存储表单数据\"以集成付款方式。"
+
+#: core/forms/action.php:104
+msgid "You must active at least one field of these fields \"store entry/ Confirmation/ Notification/ MailChimp/ Zapier\". "
+msgstr "您必须至少激活以下字段中的一个字段\"存储表单数据/确认邮件/通知/MailChimp/Zapier\"."
+
+#: core/entries/meta-data.php:93
+msgid "Entry ID"
+msgstr "表单数据 ID"
+
+#: core/admin/views/settings.php:572
+msgid "Enter here your paypal token. This is optional. "
+msgstr "在此处输入您的 PayPal(贝宝) 令牌。这是可选的。"
+
+#: core/admin/views/settings.php:570
+msgid "Paypal token"
+msgstr "Paypal token"
+
+#: core/admin/views/settings.php:569
+msgid "Paypal token:"
+msgstr "Paypal token:"
+
+#: core/admin/views/settings.php:562
+msgid "Paypal email"
+msgstr "Paypal电子邮件"
+
+#: core/admin/views/settings.php:561
+msgid "Paypal email:"
+msgstr "PayPal邮箱:"
+
+#: core/admin/views/settings.php:47 core/admin/views/settings.php:530
+#: core/entries/meta-data.php:387 core/forms/views/modal-editor.php:23
+msgid "Payment"
+msgstr "付款"
+
+#: traits/common-controls.php:247 traits/common-controls.php:249
+msgid "Warning message"
+msgstr "警告信息"
+
+#: traits/common-controls.php:155 traits/common-controls.php:177
+msgid "By expression based"
+msgstr "基于表达式"
+
+#: traits/common-controls.php:151
+msgid "By Word length"
+msgstr "按字长"
+
+#: traits/common-controls.php:147
+msgid "By character length"
+msgstr "按字符长度"
+
+#: traits/common-controls.php:88 traits/quiz-control.php:44
+msgid "Name is must required. Enter name without space or any special character. use only underscore/ hyphen (_/-) for multiple word. Name must be different."
+msgstr "名称为必填项。输入名称，不带空格或任何特殊字符。多个单词只能使用下划线/连字符(_/-).名称必须不同。"
+
+#: core/forms/action.php:78 core/forms/action.php:100
+msgid "Form settings inserted"
+msgstr "插入表单设置"
+
+#: core/entries/action.php:847
+msgid "Mail not found."
+msgstr "找不到邮件。"
+
+#: core/admin/views/settings.php:577 core/admin/views/settings.php:618
+msgid "Enable sandbox mode:"
+msgstr "启用沙箱模式："
+
+#: widgets/switch/switch.php:50
+msgid "Active Text"
+msgstr "有效文本"
+
+#: widgets/switch/switch.php:59
+msgid "Inactive Text"
+msgstr "无效文本"
+
+#: traits/common-controls.php:415 widgets/gdpr-consent/gdpr-consent.php:243
+#: widgets/simple-captcha/simple-captcha.php:223
+msgid "Required Indicator Color:"
+msgstr "必填的指示器(*)颜色："
+
+#: plugin.php:603
+msgid "MetForm Pro"
+msgstr "MetForm Pro"
+
+#: traits/common-controls.php:236
+msgid "Ex: [a-zA-Z]+ "
+msgstr "例如:[a-zA-Z]+"
+
+#: plugin.php:607 plugin.php:624
+msgid "We have MetForm Pro version. Check out our pro feature."
+msgstr "我们有 MetForm Pro 版本。查看我们的专业功能。"
+
+#: core/forms/views/modal-editor.php:289
+msgid "GET"
+msgstr "GET"
+
+#: core/forms/views/modal-editor.php:288
+msgid "POST"
+msgstr "文章"
+
+#: traits/common-controls.php:233
+msgid "Expression for validate "
+msgstr "用于验证的表达式"
+
+#: traits/common-controls.php:162 traits/common-controls.php:174
+msgid "Validation type"
+msgstr "验证类型"
+
+#: core/forms/views/modal-editor.php:282
+msgid "Rest api url/webhook"
+msgstr "REST API URL/Webhook"
+
+#: core/forms/views/modal-editor.php:281
+msgid "URL/Webhook:"
+msgstr "URL/Webhook:"
+
+#: core/forms/views/modal-editor.php:283
+msgid "Enter rest api url/webhook here."
+msgstr "在此处输入 rest api url/webhook."
+
+#: core/forms/views/modal-editor.php:276
+msgid "Send entry data to third party api/webhook"
+msgstr "将输入数据发送到第三方 api/webhook"
+
+#: widgets/file-upload/file-upload.php:312
+msgid "Bottom"
+msgstr "下"
+
+#: widgets/file-upload/file-upload.php:283
+msgid "Icon Spacing"
+msgstr "图标间距"
+
+#: widgets/file-upload/file-upload.php:255
+msgid "Icon Size"
+msgstr "图标大小"
+
+#: widgets/checkbox/checkbox.php:144 widgets/multi-select/multi-select.php:103
+#: widgets/radio/radio.php:148 widgets/select/select.php:104
+msgid "Make this option default selected"
+msgstr "将此选项默认为选中"
+
+#: traits/quiz-control.php:292 traits/quiz-control.php:382
+#: widgets/checkbox/checkbox.php:137 widgets/multi-select/multi-select.php:96
+#: widgets/radio/radio.php:141 widgets/select/select.php:97
+msgid "Select it default ? "
+msgstr "选择默认吗？"
+
+#: widgets/file-upload/file-upload.php:77
+msgid "File Upload Icon Position"
+msgstr "文件上传图标位置"
+
+#: widgets/file-upload/file-upload.php:68
+msgid "File Upload Icon:"
+msgstr "文件上传图标："
+
+#: widgets/date/date.php:402
+msgid "Want to input time with it ?"
+msgstr "想要输入时间吗？"
+
+#: widgets/date/date.php:194
+msgid "Disable date List"
+msgstr "禁用日期列表"
+
+#: core/forms/views/modal-editor.php:274
+msgid "REST API:"
+msgstr "REST API:"
+
+#: widgets/file-upload/file-upload.php:298
+msgid "File Name:"
+msgstr "文件名称："
+
+#: widgets/date/date.php:183
+msgid "Disable date : "
+msgstr "禁用日期："
+
+#: widgets/checkbox/checkbox.php:324 widgets/gdpr-consent/gdpr-consent.php:369
+#: widgets/listing-optin/listing-optin.php:209 widgets/radio/radio.php:344
+msgid "Checked"
+msgstr "已选中"
+
+#: widgets/checkbox/checkbox.php:402 widgets/gdpr-consent/gdpr-consent.php:447
+#: widgets/listing-optin/listing-optin.php:287 widgets/radio/radio.php:423
+msgid "Typography for text"
+msgstr "文字排版"
+
+#: widgets/checkbox/checkbox.php:389 widgets/gdpr-consent/gdpr-consent.php:434
+#: widgets/listing-optin/listing-optin.php:274 widgets/radio/radio.php:410
+msgid "Typography for icon"
+msgstr "图标排版"
+
+#: widgets/checkbox/checkbox.php:350 widgets/gdpr-consent/gdpr-consent.php:395
+#: widgets/listing-optin/listing-optin.php:235 widgets/radio/radio.php:370
+msgid "Horizontal position of icon"
+msgstr "图标水平位置"
+
+#: widgets/telephone/telephone.php:16
+msgid "Telephone"
+msgstr "电话"
+
+#: traits/conditional-controls.php:135
+msgid "E.g 100, name, anything"
+msgstr "例如 100,名字,任何东西"
+
+#: traits/conditional-controls.php:120
+msgid "50"
+msgstr "50"
+
+#: traits/conditional-controls.php:107
+msgid "smaller than"
+msgstr "小于"
+
+#: traits/conditional-controls.php:105
+msgid "greater than"
+msgstr "多于"
+
+#: traits/conditional-controls.php:103
+msgid "equals"
+msgstr "等于"
+
+#: traits/conditional-controls.php:102
+msgid "empty"
+msgstr "空"
+
+#: traits/conditional-controls.php:101
+msgid "not empty"
+msgstr "非空"
+
+#: traits/conditional-controls.php:87
+msgid "If"
+msgstr "如果"
+
+#: traits/conditional-controls.php:25
+msgid "Conditional logic"
+msgstr "条件逻辑"
+
+#: controls/form-picker-modal.php:92 core/forms/views/modal-add-new-form.php:71
+msgid "Edit form"
+msgstr "编辑表单"
+
+#: controls/form-picker-modal.php:37 core/forms/views/modal-add-new-form.php:14
+msgid "Enter a form name"
+msgstr "输入表单名称"
+
+#: controls/form-picker-modal.php:24
+msgid "Create new form"
+msgstr "建立新表单"
+
+#: controls/form-picker-modal.php:23
+msgid "New"
+msgstr "新增"
+
+#: controls/form-picker-modal.php:13
+msgid "Select saved form"
+msgstr "选择已保存的表单"
+
+#: controls/form-picker-modal.php:12
+msgid "Select Form"
+msgstr "选择表单"
+
+#: controls/form-editor-modal.php:14
+msgid "Form settings"
+msgstr "表单设置"
+
+#: widgets/date/date.php:475
+msgid "Calendar Typography"
+msgstr "日历版式"
+
+#: traits/conditional-controls.php:134
+msgid "Enter value for set"
+msgstr "输入设定值"
+
+#: traits/conditional-controls.php:132
+msgid "Value for set"
+msgstr "设定值"
+
+#: traits/conditional-controls.php:117
+msgid "Match value"
+msgstr "匹配值"
+
+#: traits/conditional-controls.php:108
+msgid "smaller than equal"
+msgstr "小于等于"
+
+#: traits/conditional-controls.php:106
+msgid "greater than equal"
+msgstr "大于等于"
+
+#: traits/conditional-controls.php:104
+msgid "not equals"
+msgstr "不等于"
+
+#: traits/conditional-controls.php:97
+msgid "Match ( comparison )"
+msgstr "匹配（比较）"
+
+#: traits/conditional-controls.php:47
+msgid "Condition match criteria"
+msgstr "条件匹配条件"
+
+#: traits/conditional-controls.php:36
+msgid "This feature only works on the frontend."
+msgstr "此功能仅适用于前端。"
+
+#: controls/form-picker-utils.php:40
+msgid "No content is added yet."
+msgstr "尚未添加任何内容。"
+
+#: controls/form-picker-utils.php:33
+msgid "Edit Form Content"
+msgstr "编辑表单内容"
+
+#: controls/form-picker-modal.php:93
+msgid "Save & close"
+msgstr "保存并关闭"
+
+#: widgets/form-basic.php:12
+msgid "MetForm Basic"
+msgstr "MetForm 基本"
+
+#: traits/conditional-controls.php:90
+msgid "Input field name"
+msgstr "输入框字段名称"
+
+#: widgets/url/url.php:16
+msgid "URL"
+msgstr "链接"
+
+#: widgets/time/time.php:75
+msgid "Use time 24H"
+msgstr "使用24小时时间制"
+
+#: widgets/time/time.php:20
+msgid "Time"
+msgstr "时间选择"
+
+#: widgets/textarea/textarea.php:17
+msgid "Textarea"
+msgstr "多行文本"
+
+#: widgets/text/text.php:17
+msgid "Text"
+msgstr "单行文本"
+
+#: widgets/switch/switch.php:16
+msgid "Switch"
+msgstr "切换/开关"
+
+#: widgets/select/select.php:17 widgets/select/select.php:270
+msgid "Select"
+msgstr "下拉列表"
+
+#: widgets/recaptcha/recaptcha.php:13
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: widgets/rating/rating.php:16
+msgid "Rating"
+msgstr "评分"
+
+#: widgets/range/range.php:192 widgets/range/range.php:250
+#: widgets/range/range.php:346 widgets/switch/switch.php:153
+#: widgets/textarea/textarea.php:106
+msgid "Height"
+msgstr "高度"
+
+#: widgets/range/range.php:314
+msgid "Counter"
+msgstr "计数器"
+
+#: widgets/range/range.php:125
+msgid "Value"
+msgstr "值"
+
+#: widgets/range/range.php:92
+msgid "Steps"
+msgstr "步骤"
+
+#: widgets/range/range.php:16 widgets/range/range.php:223
+msgid "Range Slider"
+msgstr "范围滑块"
+
+#: widgets/radio/radio.php:394
+msgid "Add space after radio"
+msgstr "单选后增加间距"
+
+#: widgets/radio/radio.php:327 widgets/radio/radio.php:351
+msgid "Radio Color"
+msgstr "单选颜色"
+
+#: widgets/radio/radio.php:155
+msgid "Radio Options"
+msgstr "单选选项"
+
+#: widgets/radio/radio.php:107
+msgid "Radio Option Text"
+msgstr "单选文本"
+
+#: widgets/radio/radio.php:96
+msgid "Before Radio"
+msgstr "单选按钮前"
+
+#: widgets/radio/radio.php:95
+msgid "After Radio"
+msgstr "单选按钮后"
+
+#: widgets/radio/radio.php:85
+msgid "Radio option display style."
+msgstr "单选显示样式。"
+
+#: widgets/radio/radio.php:25 widgets/radio/radio.php:255
+msgid "Radio"
+msgstr "单选按钮"
+
+#: widgets/password/password.php:16
+msgid "Password"
+msgstr "密码"
+
+#: widgets/number/number.php:16
+msgid "Number"
+msgstr "数字"
+
+#: traits/quiz-control.php:374 widgets/multi-select/multi-select.php:83
+#: widgets/select/select.php:84
+msgid "Status"
+msgstr "状态"
+
+#: widgets/multi-select/multi-select.php:17
+msgid "Multi Select"
+msgstr "下拉多选"
+
+#: core/integrations/onboard/views/onboard-steps/step-05.php:13
+#: widgets/manifest.php:114
+msgid "Metform"
+msgstr "Metform"
+
+#: widgets/form-basic.php:58
+msgid "Select Form : "
+msgstr "选择表单："
+
+#: widgets/file-upload/file-upload.php:16
+msgid "File Upload"
+msgstr "文件上传"
+
+#: widgets/email/email.php:21
+msgid "Email"
+msgstr "电子邮件"
+
+#: widgets/date/date.php:489 widgets/email/email.php:150
+#: widgets/listing-fname/listing-fname.php:111
+#: widgets/listing-lname/listing-lname.php:111
+#: widgets/multi-select/multi-select.php:218 widgets/number/number.php:109
+#: widgets/password/password.php:109 widgets/select/select.php:513
+#: widgets/simple-captcha/simple-captcha.php:365
+#: widgets/telephone/telephone.php:109 widgets/text/text.php:128
+#: widgets/textarea/textarea.php:133 widgets/time/time.php:133
+#: widgets/url/url.php:119
+msgid "Place Holder"
+msgstr "占位符"
+
+#: widgets/date/date.php:464 widgets/email/email.php:138
+#: widgets/file-upload/file-upload.php:245
+#: widgets/listing-fname/listing-fname.php:99
+#: widgets/listing-lname/listing-lname.php:99
+#: widgets/multi-select/multi-select.php:206 widgets/number/number.php:97
+#: widgets/password/password.php:97 widgets/rating/rating.php:119
+#: widgets/simple-captcha/simple-captcha.php:317 widgets/switch/switch.php:128
+#: widgets/telephone/telephone.php:97 widgets/text/text.php:116
+#: widgets/textarea/textarea.php:98 widgets/time/time.php:121
+#: widgets/url/url.php:107
+msgid "Input"
+msgstr "输入"
+
+#: widgets/date/date.php:24
+msgid "Date"
+msgstr "日期"
+
+#: widgets/checkbox/checkbox.php:131 widgets/multi-select/multi-select.php:90
+#: widgets/radio/radio.php:135 widgets/select/select.php:91
+msgid "Want to make a option? which user can see the option but can't select it. make it disable."
+msgstr "选择禁用状态，用户可以看到该选项但不能选择它。"
+
+#: widgets/checkbox/checkbox.php:127 widgets/multi-select/multi-select.php:88
+#: widgets/radio/radio.php:131 widgets/select/select.php:89
+msgid "Disable"
+msgstr "禁用"
+
+#: widgets/checkbox/checkbox.php:126 widgets/radio/radio.php:130
+#: widgets/rating/rating.php:193 widgets/switch/switch.php:372
+msgid "Active"
+msgstr "激活"
+
+#: traits/quiz-control.php:284 traits/quiz-control.php:456
+#: traits/quiz-control.php:600 widgets/checkbox/checkbox.php:123
+#: widgets/radio/radio.php:127
+msgid "Option Status"
+msgstr "选项状态"
+
+#: widgets/checkbox/checkbox.php:416 widgets/date/date.php:501
+#: widgets/email/email.php:220 widgets/file-upload/file-upload.php:446
+#: widgets/gdpr-consent/gdpr-consent.php:460
+#: widgets/listing-fname/listing-fname.php:123
+#: widgets/listing-lname/listing-lname.php:123
+#: widgets/listing-optin/listing-optin.php:300
+#: widgets/multi-select/multi-select.php:230 widgets/number/number.php:121
+#: widgets/password/password.php:121 widgets/radio/radio.php:437
+#: widgets/range/range.php:403 widgets/rating/rating.php:290
+#: widgets/select/select.php:525 widgets/simple-captcha/simple-captcha.php:350
+#: widgets/summary/summary.php:68 widgets/switch/switch.php:557
+#: widgets/telephone/telephone.php:121 widgets/text/text.php:140
+#: widgets/textarea/textarea.php:145 widgets/time/time.php:145
+#: widgets/url/url.php:131
+msgid "Help Text"
+msgstr "帮助文字"
+
+#: traits/quiz-control.php:275 traits/quiz-control.php:277
+#: traits/quiz-control.php:364 traits/quiz-control.php:446
+#: traits/quiz-control.php:591 traits/quiz-control.php:593
+#: widgets/checkbox/checkbox.php:113 widgets/checkbox/checkbox.php:115
+#: widgets/radio/radio.php:117 widgets/radio/radio.php:119
+msgid "Option Value"
+msgstr "选项值"
+
+#: traits/quiz-control.php:176 traits/quiz-control.php:197
+#: widgets/checkbox/checkbox.php:75 widgets/gdpr-consent/gdpr-consent.php:55
+#: widgets/radio/radio.php:79
+msgid "Vertical"
+msgstr "垂直"
+
+#: traits/quiz-control.php:175 traits/quiz-control.php:196
+#: widgets/checkbox/checkbox.php:74 widgets/gdpr-consent/gdpr-consent.php:54
+#: widgets/radio/radio.php:78
+msgid "Horizontal"
+msgstr "水平"
+
+#: widgets/checkbox/checkbox.php:25 widgets/checkbox/checkbox.php:251
+#: widgets/gdpr-consent/gdpr-consent.php:296
+#: widgets/listing-optin/listing-optin.php:136
+msgid "Checkbox"
+msgstr "复选框"
+
+#: widgets/button/button.php:96
+msgid "Shadow"
+msgstr "阴影"
+
+#: widgets/button/button.php:69
+msgid "Button"
+msgstr "按钮"
+
+#: widgets/button/button.php:56
+msgid "Hidden"
+msgstr "隐藏"
+
+#: widgets/button/button.php:40 widgets/checkbox/checkbox.php:50
+#: widgets/checkbox/checkbox.php:60 widgets/date/date.php:112
+#: widgets/email/email.php:49 widgets/file-upload/file-upload.php:41
+#: widgets/form-basic.php:49 widgets/gdpr-consent/gdpr-consent.php:40
+#: widgets/listing-fname/listing-fname.php:40
+#: widgets/listing-lname/listing-lname.php:40
+#: widgets/listing-optin/listing-optin.php:40
+#: widgets/multi-select/multi-select.php:43
+#: widgets/multi-select/multi-select.php:53 widgets/number/number.php:40
+#: widgets/password/password.php:40 widgets/radio/radio.php:52
+#: widgets/radio/radio.php:63 widgets/range/range.php:40
+#: widgets/rating/rating.php:40 widgets/recaptcha/recaptcha.php:40
+#: widgets/select/select.php:43 widgets/select/select.php:53
+#: widgets/simple-captcha/simple-captcha.php:45 widgets/summary/summary.php:40
+#: widgets/switch/switch.php:40 widgets/telephone/telephone.php:40
+#: widgets/text/text.php:43 widgets/textarea/textarea.php:41
+#: widgets/time/time.php:44 widgets/url/url.php:41
+msgid "Content"
+msgstr "正文"
+
+#: widgets/button/button.php:16
+msgid "Submit Button"
+msgstr "提交按钮"
+
+#: traits/conditional-controls.php:33 widgets/multi-select/multi-select.php:87
+#: widgets/select/select.php:88
+msgid "Enable"
+msgstr "启用"
+
+#: traits/common-controls.php:681 traits/common-controls.php:740
+#: traits/common-controls.php:798 widgets/file-upload/file-upload.php:344
+#: widgets/file-upload/file-upload.php:375 widgets/select/select.php:430
+#: widgets/select/select.php:464 widgets/select/select.php:498
+msgid "Background"
+msgstr "背景"
+
+#: traits/common-controls.php:400 traits/common-controls.php:592
+#: traits/common-controls.php:625 widgets/checkbox/checkbox.php:270
+#: widgets/email/email.php:206 widgets/file-upload/file-upload.php:410
+#: widgets/gdpr-consent/gdpr-consent.php:226
+#: widgets/gdpr-consent/gdpr-consent.php:315
+#: widgets/listing-optin/listing-optin.php:155 widgets/radio/radio.php:291
+#: widgets/rating/rating.php:139 widgets/select/select.php:357
+#: widgets/simple-captcha/simple-captcha.php:208
+#: widgets/simple-captcha/simple-captcha.php:288
+#: widgets/simple-captcha/simple-captcha.php:337
+msgid "Margin"
+msgstr "外距"
+
+#: core/integrations/onboard/views/settings-sections/usersettings.php:304
+#: traits/common-controls.php:355 traits/common-controls.php:547
+#: traits/common-controls.php:903 traits/common-controls.php:944
+#: widgets/email/email.php:170 widgets/file-upload/file-upload.php:331
+#: widgets/file-upload/file-upload.php:362
+#: widgets/gdpr-consent/gdpr-consent.php:181 widgets/select/select.php:414
+#: widgets/select/select.php:448 widgets/select/select.php:482
+#: widgets/simple-captcha/simple-captcha.php:163
+#: widgets/simple-captcha/simple-captcha.php:300 widgets/switch/switch.php:205
+#: widgets/switch/switch.php:387
+msgid "Color"
+msgstr "颜色"
+
+#: traits/common-controls.php:323 traits/common-controls.php:515
+#: widgets/gdpr-consent/gdpr-consent.php:149 widgets/range/range.php:177
+#: widgets/range/range.php:232 widgets/range/range.php:331
+#: widgets/simple-captcha/simple-captcha.php:135 widgets/switch/switch.php:136
+msgid "Width"
+msgstr "宽度"
+
+#: traits/common-controls.php:284 traits/common-controls.php:694
+#: traits/common-controls.php:752 traits/common-controls.php:812
+#: widgets/button/button.php:84 widgets/file-upload/file-upload.php:423
+#: widgets/rating/rating.php:183 widgets/rating/rating.php:216
+#: widgets/select/select.php:318 widgets/select/select.php:397
+msgid "Border"
+msgstr "边框"
+
+#: traits/common-controls.php:276 traits/common-controls.php:878
+#: widgets/range/range.php:392 widgets/rating/rating.php:280
+#: widgets/select/select.php:327 widgets/switch/switch.php:170
+msgid "Box Shadow"
+msgstr "盒子影子"
+
+#: traits/common-controls.php:140
+msgid "Is this field is required for submit the form?. Make it \"Yes\"."
+msgstr "提交表单是否需要此字段？选择\"是\"。"
+
+#: core/entries/hooks.php:80 traits/common-controls.php:137
+#: traits/common-controls.php:978 traits/quiz-control.php:304
+#: traits/quiz-control.php:394 traits/quiz-control.php:477
+#: traits/quiz-control.php:620 widgets/checkbox/checkbox.php:142
+#: widgets/date/date.php:146 widgets/date/date.php:208
+#: widgets/date/date.php:220 widgets/date/date.php:232
+#: widgets/date/date.php:244 widgets/date/date.php:405
+#: widgets/date/date.php:417 widgets/email/email.php:60
+#: widgets/email/email.php:88 widgets/multi-select/multi-select.php:101
+#: widgets/radio/radio.php:146 widgets/range/range.php:104
+#: widgets/select/select.php:102 widgets/switch/switch.php:61
+#: widgets/time/time.php:78
+msgid "No"
+msgstr "否"
+
+#: core/entries/hooks.php:78 traits/common-controls.php:136
+#: traits/common-controls.php:977 traits/quiz-control.php:303
+#: traits/quiz-control.php:393 traits/quiz-control.php:476
+#: traits/quiz-control.php:619 widgets/checkbox/checkbox.php:141
+#: widgets/date/date.php:145 widgets/date/date.php:207
+#: widgets/date/date.php:219 widgets/date/date.php:231
+#: widgets/date/date.php:243 widgets/date/date.php:404
+#: widgets/date/date.php:416 widgets/email/email.php:59
+#: widgets/email/email.php:87 widgets/multi-select/multi-select.php:100
+#: widgets/radio/radio.php:145 widgets/range/range.php:103
+#: widgets/select/select.php:101 widgets/switch/switch.php:52
+#: widgets/time/time.php:77
+msgid "Yes"
+msgstr "是"
+
+#: traits/common-controls.php:134
+msgid "Required ?"
+msgstr "必填？"
+
+#: traits/common-controls.php:84 traits/quiz-control.php:40
+msgid "Name"
+msgstr "名字"
+
+#: traits/common-controls.php:72
+msgid "Name : "
+msgstr "Name : "
+
+#: traits/common-controls.php:41 widgets/file-upload/file-upload.php:83
+#: widgets/range/range.php:266 widgets/simple-captcha/simple-captcha.php:70
+msgid "Top"
+msgstr "上"
+
+#: traits/common-controls.php:37 widgets/file-upload/file-upload.php:307
+msgid "Position"
+msgstr "位置"
+
+#: traits/common-controls.php:27 traits/quiz-control.php:489
+#: widgets/simple-captcha/simple-captcha.php:56
+msgid "Hide"
+msgstr "隐藏"
+
+#: traits/common-controls.php:26 traits/quiz-control.php:488
+#: widgets/simple-captcha/simple-captcha.php:55
+msgid "Show"
+msgstr "显示"
+
+#: traits/button-controls.php:467
+msgid "Vertical Align"
+msgstr "垂直对齐"
+
+#: traits/button-controls.php:424
+msgid "Font Size"
+msgstr "字号"
+
+#: traits/button-controls.php:381 traits/button-controls.php:406
+msgid "Icon Color"
+msgstr "图标颜色"
+
+#: traits/button-controls.php:342 traits/common-controls.php:291
+#: traits/common-controls.php:847 widgets/file-upload/file-upload.php:431
+#: widgets/range/range.php:300 widgets/range/range.php:379
+#: widgets/rating/rating.php:229 widgets/select/select.php:290
+#: widgets/select/select.php:369
+msgid "Border Radius"
+msgstr "边框圆角"
+
+#: traits/button-controls.php:303 traits/button-controls.php:326
+msgctxt "Border Control"
+msgid "Color"
+msgstr "颜色"
+
+#: traits/button-controls.php:277
+msgctxt "Border Control"
+msgid "Width"
+msgstr "宽度"
+
+#: traits/button-controls.php:265 widgets/switch/switch.php:241
+#: widgets/switch/switch.php:325 widgets/switch/switch.php:422
+#: widgets/switch/switch.php:506
+msgctxt "Border Control"
+msgid "Groove"
+msgstr "沟槽"
+
+#: traits/button-controls.php:264 widgets/switch/switch.php:240
+#: widgets/switch/switch.php:324 widgets/switch/switch.php:421
+#: widgets/switch/switch.php:505
+msgctxt "Border Control"
+msgid "Dashed"
+msgstr "虚线"
+
+#: traits/button-controls.php:263 widgets/switch/switch.php:239
+#: widgets/switch/switch.php:323 widgets/switch/switch.php:420
+#: widgets/switch/switch.php:504
+msgctxt "Border Control"
+msgid "Dotted"
+msgstr "点线"
+
+#: traits/button-controls.php:262 widgets/switch/switch.php:238
+#: widgets/switch/switch.php:322 widgets/switch/switch.php:419
+#: widgets/switch/switch.php:503
+msgctxt "Border Control"
+msgid "Double"
+msgstr "双实线"
+
+#: traits/button-controls.php:261 widgets/switch/switch.php:237
+#: widgets/switch/switch.php:321 widgets/switch/switch.php:418
+#: widgets/switch/switch.php:502
+msgctxt "Border Control"
+msgid "Solid"
+msgstr "实线"
+
+#: traits/button-controls.php:260 traits/common-controls.php:146
+#: traits/common-controls.php:177 widgets/switch/switch.php:236
+#: widgets/switch/switch.php:320 widgets/switch/switch.php:417
+#: widgets/switch/switch.php:501
+msgid "None"
+msgstr "无"
+
+#: traits/button-controls.php:257
+msgctxt "Border Control"
+msgid "Border Type"
+msgstr "边框类型"
+
+#: traits/button-controls.php:224 traits/button-controls.php:317
+#: traits/button-controls.php:399 traits/common-controls.php:706
+#: widgets/file-upload/file-upload.php:355 widgets/select/select.php:441
+msgid "Hover"
+msgstr "悬停"
+
+#: traits/button-controls.php:202 traits/button-controls.php:231
+#: widgets/checkbox/checkbox.php:282 widgets/gdpr-consent/gdpr-consent.php:327
+#: widgets/listing-optin/listing-optin.php:167 widgets/radio/radio.php:303
+#: widgets/switch/switch.php:221 widgets/switch/switch.php:402
+msgid "Text Color"
+msgstr "文字颜色"
+
+#: traits/button-controls.php:195 traits/button-controls.php:293
+#: traits/button-controls.php:374 traits/common-controls.php:643
+#: widgets/checkbox/checkbox.php:300 widgets/file-upload/file-upload.php:324
+#: widgets/gdpr-consent/gdpr-consent.php:345
+#: widgets/listing-optin/listing-optin.php:185 widgets/radio/radio.php:320
+#: widgets/rating/rating.php:160 widgets/select/select.php:407
+msgid "Normal"
+msgstr "正常"
+
+#: traits/button-controls.php:177 traits/common-controls.php:373
+#: traits/common-controls.php:565 traits/common-controls.php:834
+#: traits/common-controls.php:890 traits/common-controls.php:933
+#: widgets/email/email.php:185 widgets/gdpr-consent/gdpr-consent.php:199
+#: widgets/range/range.php:323 widgets/rating/rating.php:267
+#: widgets/simple-captcha/simple-captcha.php:181 widgets/switch/switch.php:197
+#: widgets/switch/switch.php:379
+msgid "Typography"
+msgstr "排版"
+
+#: traits/button-controls.php:157 traits/button-controls.php:450
+#: traits/common-controls.php:386 traits/common-controls.php:578
+#: traits/common-controls.php:609 traits/common-controls.php:959
+#: widgets/checkbox/checkbox.php:259 widgets/email/email.php:195
+#: widgets/file-upload/file-upload.php:398
+#: widgets/gdpr-consent/gdpr-consent.php:212
+#: widgets/gdpr-consent/gdpr-consent.php:304
+#: widgets/listing-optin/listing-optin.php:144 widgets/radio/radio.php:280
+#: widgets/rating/rating.php:127 widgets/select/select.php:345
+#: widgets/simple-captcha/simple-captcha.php:194
+#: widgets/simple-captcha/simple-captcha.php:276
+#: widgets/simple-captcha/simple-captcha.php:325 widgets/switch/switch.php:282
+#: widgets/switch/switch.php:463
+msgid "Padding"
+msgstr "内边距"
+
+#: traits/button-controls.php:145
+msgid "Input List"
+msgstr "Input List"
+
+#: traits/button-controls.php:136
+msgid "Input Class"
+msgstr "Input Class"
+
+#: traits/button-controls.php:119
+msgid "Input Name : "
+msgstr "Input Name : "
+
+#: traits/button-controls.php:108
+msgid "ID"
+msgstr "ID"
+
+#: traits/button-controls.php:106
+msgid "id"
+msgstr "id"
+
+#: traits/button-controls.php:99
+msgid "Class Name"
+msgstr "类别"
+
+#: traits/button-controls.php:97
+msgid "Class"
+msgstr "Class"
+
+#: traits/button-controls.php:86 traits/quiz-control.php:236
+#: traits/quiz-control.php:520 widgets/file-upload/file-upload.php:82
+msgid "After"
+msgstr "之后"
+
+#: traits/button-controls.php:85 traits/quiz-control.php:237
+#: traits/quiz-control.php:519 widgets/file-upload/file-upload.php:81
+msgid "Before"
+msgstr "之前"
+
+#: traits/button-controls.php:81 traits/quiz-control.php:515
+msgid "Icon Position"
+msgstr "图标位置"
+
+#: traits/button-controls.php:72 traits/quiz-control.php:499
+#: widgets/button/button.php:108
+msgid "Icon"
+msgstr "图标"
+
+#: traits/button-controls.php:53 widgets/file-upload/file-upload.php:311
+msgid "Right"
+msgstr "右"
+
+#: traits/button-controls.php:49
+msgid "Center"
+msgstr "居中"
+
+#: traits/button-controls.php:45 traits/common-controls.php:42
+#: widgets/simple-captcha/simple-captcha.php:71
+msgid "Left"
+msgstr "左"
+
+#: traits/button-controls.php:41
+msgid "Button alignment"
+msgstr "按钮对齐"
+
+#: traits/button-controls.php:19 traits/quiz-control.php:31
+#: traits/quiz-control.php:52 widgets/checkbox/checkbox.php:213
+#: widgets/checkbox/checkbox.php:223 widgets/date/date.php:437
+#: widgets/email/email.php:109 widgets/file-upload/file-upload.php:218
+#: widgets/listing-fname/listing-fname.php:72
+#: widgets/listing-lname/listing-lname.php:72
+#: widgets/multi-select/multi-select.php:170
+#: widgets/multi-select/multi-select.php:178 widgets/number/number.php:70
+#: widgets/password/password.php:70 widgets/radio/radio.php:217
+#: widgets/radio/radio.php:227 widgets/range/range.php:142
+#: widgets/rating/rating.php:92 widgets/recaptcha/recaptcha.php:67
+#: widgets/select/select.php:233 widgets/select/select.php:242
+#: widgets/simple-captcha/simple-captcha.php:127 widgets/summary/summary.php:53
+#: widgets/switch/switch.php:100 widgets/telephone/telephone.php:70
+#: widgets/text/text.php:78 widgets/text/text.php:88
+#: widgets/textarea/textarea.php:71 widgets/time/time.php:94
+#: widgets/url/url.php:80
+msgid "Label"
+msgstr "标签"
+
+#: plugin.php:619
+msgid "Update Elementor"
+msgstr "更新 Elementor"
+
+#: plugin.php:583
+msgid "Install Elementor"
+msgstr "安装Elementor"
+
+#: plugin.php:576
+msgid "Activate Elementor"
+msgstr "激活 Elementor"
+
+#: core/forms/views/modal-editor.php:796
+msgid "Save changes"
+msgstr "保存更改"
+
+#: core/forms/views/modal-editor.php:794
+msgid "Edit content"
+msgstr "编辑内容"
+
+#: core/forms/views/modal-editor.php:614
+msgid "create from here"
+msgstr "从这里开始创建"
+
+#: core/forms/views/modal-editor.php:614
+msgid "Enter here slack web hook."
+msgstr "在此处输入 slack web hook。"
+
+#: core/forms/views/modal-editor.php:613
+msgid "Slack webhook"
+msgstr "Slack webhook"
+
+#: core/forms/views/modal-editor.php:612
+msgid "Slack webhook:"
+msgstr "Slack webhook:"
+
+#: core/forms/views/modal-editor.php:608
+msgid "slack info."
+msgstr "slack 信息。"
+
+#: core/forms/views/modal-editor.php:608
+msgid "Integrate slack with this form."
+msgstr "将 slack 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:606
+msgid "Slack:"
+msgstr "Slack:"
+
+#: core/forms/views/modal-editor.php:589
+msgid "Zapier:"
+msgstr "Zapier:"
+
+#: core/forms/views/modal-editor.php:302
+msgid "Mail Chimp:"
+msgstr "Mail Chimp:"
+
+#: core/forms/views/modal-editor.php:217
+msgid "Email reply to"
+msgstr "电子邮件回复"
+
+#: core/forms/views/modal-editor.php:205
+msgid "example@mail.com, example@email.com"
+msgstr "example@mail.com, example@email.com"
+
+#: core/forms/views/modal-editor.php:194
+msgid "Want to send a submission copy to admin by email? Active this one."
+msgstr "想通过电子邮件向管理员发送提交副本吗？激活这个。"
+
+#: core/forms/views/modal-editor.php:170
+msgid "Thank you message!"
+msgstr "谢谢留言！"
+
+#: core/forms/views/modal-editor.php:169
+msgid "Thank you message :"
+msgstr "感谢留言："
+
+#: core/forms/views/modal-editor.php:164
+msgid "Reply to email"
+msgstr "回复电子邮件"
+
+#: core/forms/views/modal-editor.php:158
+msgid "From email"
+msgstr "发件人邮箱"
+
+#: core/forms/views/modal-editor.php:152 core/forms/views/modal-editor.php:199
+msgid "Email subject"
+msgstr "邮件主题"
+
+#: core/forms/views/modal-editor.php:147
+msgid "Want to send a submission copy to user by email? Active this one."
+msgstr "想通过电子邮件向管理员发送提交副本吗？激活这个。"
+
+#: core/forms/views/modal-editor.php:100
+msgid "Limit Total Entries:"
+msgstr "限制表单数据总数目："
+
+#: core/forms/views/modal-editor.php:85
+msgid "Store Entries:"
+msgstr "存储表单数据："
+
+#: core/forms/views/modal-editor.php:77
+msgid "Hide Form After Submission:"
+msgstr "提交后隐藏表单："
+
+#: core/forms/views/modal-editor.php:61
+msgid "Required Login:"
+msgstr "必需登录："
+
+#: core/forms/builder.php:38 core/forms/views/modal-editor.php:44
+msgid "Thank you! Form submitted successfully."
+msgstr "谢谢您！表单提交成功。"
+
+#: core/forms/views/modal-editor.php:43
+msgid "Success Message:"
+msgstr "成功消息："
+
+#: core/forms/views/modal-editor.php:39
+msgid "This is the form title"
+msgstr "这是表单标题"
+
+#: core/forms/views/modal-editor.php:37
+msgid "Title:"
+msgstr "标题:"
+
+#: core/forms/views/modal-editor.php:20
+msgid "Integration"
+msgstr "整合"
+
+#: core/forms/views/modal-editor.php:18
+msgid "Notification"
+msgstr "通知"
+
+#: core/forms/views/modal-editor.php:16
+msgid "Confirmation"
+msgstr "确认"
+
+#: core/forms/views/modal-editor.php:11
+msgid "Form Settings"
+msgstr "表单设置"
+
+#: core/forms/hooks.php:62
+msgid "Export CSV"
+msgstr "导出为 CSV"
+
+#: core/forms/hooks.php:35
+msgid "Shortcode"
+msgstr "短代码"
+
+#: core/forms/cpt.php:517
+msgid "metform form"
+msgstr "metform 表单"
+
+#: core/forms/cpt.php:507
+msgid "Filter froms list"
+msgstr "从列表中筛选"
+
+#: core/forms/cpt.php:506
+msgid "Forms list navigation"
+msgstr "表单列表导航"
+
+#: core/forms/cpt.php:505
+msgid "Forms list"
+msgstr "表单列表"
+
+#: core/forms/cpt.php:504
+msgid "Uploaded to this form"
+msgstr "上传到此表单"
+
+#: core/forms/cpt.php:503
+msgid "Insert into form"
+msgstr "插入表单"
+
+#: core/forms/cpt.php:496
+msgid "Search Forms"
+msgstr "搜索表单"
+
+#: core/forms/cpt.php:495
+msgid "View Forms"
+msgstr "查看表单"
+
+#: core/forms/cpt.php:494
+msgid "View Form"
+msgstr "查看"
+
+#: core/forms/cpt.php:493
+msgid "Update Form"
+msgstr "更新表单"
+
+#: core/forms/cpt.php:492
+msgid "Edit Form"
+msgstr "编辑表单"
+
+#: core/forms/cpt.php:491
+msgid "New Form"
+msgstr "新表单"
+
+#: core/forms/cpt.php:489
+msgid "Add New Form"
+msgstr "新增表单"
+
+#: core/forms/cpt.php:488 core/forms/cpt.php:516
+msgid "Forms"
+msgstr "表单"
+
+#: core/forms/cpt.php:485
+msgid "Form Archives"
+msgstr "表单归档"
+
+#: core/forms/cpt.php:483 core/forms/cpt.php:484 widgets/form.php:47
+msgid "Form"
+msgstr "表单"
+
+#: core/forms/cpt.php:482
+msgctxt "Post Type Singular Name"
+msgid "Form"
+msgstr "表单"
+
+#: core/forms/cpt.php:481
+msgctxt "Post Type General Name"
+msgid "Forms"
+msgstr "表单"
+
+#: core/entries/meta-data.php:284
+msgid "View"
+msgstr "查看"
+
+#: core/entries/meta-data.php:87
+msgid "Form Name "
+msgstr "表单名称"
+
+#: core/entries/meta-data.php:64
+msgid "Info"
+msgstr "信息"
+
+#: core/entries/hooks.php:27 core/forms/views/modal-add-new-form.php:13
+msgid "Form Name"
+msgstr "表单名"
+
+#: core/entries/cpt.php:45
+msgid "metform-entry"
+msgstr "metform-表单数据"
+
+#: core/entries/cpt.php:44
+msgid "Form entry"
+msgstr "表单数据"
+
+#: core/entries/cpt.php:40
+msgid "Filter from entry list"
+msgstr "从表单数据列表过滤"
+
+#: core/entries/cpt.php:39
+msgid "Form entries list navigation"
+msgstr "表单数据列表导航"
+
+#: core/entries/cpt.php:38
+msgid "Form entries list"
+msgstr "表单数据列表"
+
+#: core/entries/cpt.php:35 core/forms/cpt.php:502
+msgid "Use as featured image"
+msgstr "作为特色图像"
+
+#: core/entries/cpt.php:34 core/forms/cpt.php:501
+msgid "Remove featured image"
+msgstr "移除特色图片"
+
+#: core/entries/cpt.php:33 core/forms/cpt.php:500
+msgid "Set featured image"
+msgstr "设置特色图像"
+
+#: core/entries/cpt.php:32 core/forms/cpt.php:499
+msgid "Featured Image"
+msgstr "特色图像"
+
+#: core/entries/cpt.php:31 core/forms/cpt.php:498
+msgid "Not found in Trash"
+msgstr "回收站里未找到"
+
+#: core/entries/cpt.php:30 core/forms/cpt.php:497
+msgid "Not found"
+msgstr "未找到"
+
+#: core/entries/cpt.php:29
+msgid "Search Item"
+msgstr "搜索项目"
+
+#: core/entries/cpt.php:28
+msgid "View Items"
+msgstr "查看项目"
+
+#: core/entries/cpt.php:27
+msgid "View Item"
+msgstr "查看项目"
+
+#: core/entries/cpt.php:26
+msgid "Update Item"
+msgstr "更新项目"
+
+#: core/entries/cpt.php:25
+msgid "Edit Item"
+msgstr "编辑项目"
+
+#: core/entries/cpt.php:24
+msgid "New Item"
+msgstr "新项目"
+
+#: core/entries/cpt.php:23 core/forms/cpt.php:490
+msgid "Add New"
+msgstr "新增"
+
+#: core/entries/cpt.php:22
+msgid "Add New Item"
+msgstr "新增项目"
+
+#: core/entries/cpt.php:21 core/forms/hooks.php:36
+msgid "Entries"
+msgstr "表单数据"
+
+#: core/entries/cpt.php:20 core/forms/cpt.php:487
+msgid "Parent Item:"
+msgstr "父项："
+
+#: core/entries/cpt.php:19
+msgid "Entry Attributes"
+msgstr "表单数据属性"
+
+#: core/entries/cpt.php:18
+msgid "Entry Archives"
+msgstr "表单数据存档"
+
+#: core/entries/cpt.php:16 core/entries/cpt.php:17
+msgid "Entry"
+msgstr "表单数据"
+
+#: core/entries/cpt.php:15
+msgctxt "Post Type Singular Name"
+msgid "Entry"
+msgstr "表单数据"
+
+#: core/entries/cpt.php:14
+msgctxt "Post Type General Name"
+msgid "Entries"
+msgstr "表单数据"
+
+#: core/admin/views/settings.php:434 core/admin/views/settings.php:453
+msgid "Secret key:"
+msgstr "私钥："
+
+#: core/admin/views/settings.php:34 core/admin/views/settings.php:376
+#: core/forms/views/modal-editor.php:14
+msgid "General"
+msgstr "常规"
+
+#: core/admin/base.php:31 traits/button-controls.php:32
+#: widgets/checkbox/checkbox.php:183 widgets/date/date.php:124
+#: widgets/email/email.php:76 widgets/file-upload/file-upload.php:100
+#: widgets/gdpr-consent/gdpr-consent.php:97
+#: widgets/listing-fname/listing-fname.php:52
+#: widgets/listing-lname/listing-lname.php:52
+#: widgets/listing-optin/listing-optin.php:78
+#: widgets/multi-select/multi-select.php:142 widgets/number/number.php:52
+#: widgets/password/password.php:52 widgets/radio/radio.php:187
+#: widgets/range/range.php:52 widgets/rating/rating.php:52
+#: widgets/select/select.php:205 widgets/switch/switch.php:70
+#: widgets/telephone/telephone.php:52 widgets/text/text.php:58
+#: widgets/textarea/textarea.php:53 widgets/time/time.php:56
+#: widgets/url/url.php:53
+msgid "Settings"
+msgstr "设置"
+
+#: controls/form-picker-utils.php:33
+msgid "Edit"
+msgstr "编辑"
+
+#: controls/form-editor-modal.php:46
+msgid "Loading"
+msgstr "加载"
+
+#: controls/form-editor-modal.php:20 controls/form-editor-modal.php:21
+#: controls/form-picker-modal.php:95
+msgid "Close"
+msgstr "关闭"
+
+#. Author URI of the plugin
+#: metform.php
+msgid "https://wpmet.com"
+msgstr "https://wpmet.com"
+
+#. Author of the plugin
+#: metform.php
+msgid "Wpmet"
+msgstr "Wpmet"
+
+#. Description of the plugin
+#: metform.php
+msgid "Most flexible and design friendly form builder for Elementor"
+msgstr "最灵活和设计友好的 Elementor 表单生成器"
+
+#. Plugin URI of the plugin
+#: metform.php
+msgid "http://products.wpmet.com/metform/"
+msgstr "http://products.wpmet.com/metform/"
+
+#. Plugin Name of the plugin
+#: metform.php controls/form-editor-modal.php:12 plugin.php:558 plugin.php:559
+#: widgets/form.php:26
+msgid "MetForm"
+msgstr "MetForm"
+
+#: widgets/file-upload/file-upload.php:201
+msgid ".csv"
+msgstr ".csv"
+
+#: widgets/file-upload/file-upload.php:200
+msgid ".zip"
+msgstr ".zip"
+
+#: widgets/file-upload/file-upload.php:199
+msgid ".3g2"
+msgstr ".3g2"
+
+#: widgets/file-upload/file-upload.php:198
+msgid ".3gp"
+msgstr ".3gp"
+
+#: widgets/file-upload/file-upload.php:197
+msgid ".ogv"
+msgstr ".ogv"
+
+#: widgets/file-upload/file-upload.php:196
+msgid ".mpg"
+msgstr ".mpg"
+
+#: widgets/file-upload/file-upload.php:195
+msgid ".avi"
+msgstr ".avi"
+
+#: widgets/file-upload/file-upload.php:194
+msgid ".wmv"
+msgstr ".wmv"
+
+#: widgets/file-upload/file-upload.php:193
+msgid ".mov"
+msgstr ".mov"
+
+#: widgets/file-upload/file-upload.php:192
+msgid ".m4v"
+msgstr ".m4v"
+
+#: widgets/file-upload/file-upload.php:191
+msgid ".mp4"
+msgstr ".mp4"
+
+#: widgets/file-upload/file-upload.php:190
+msgid ".wav"
+msgstr ".wav"
+
+#: widgets/file-upload/file-upload.php:189
+msgid ".ogg"
+msgstr ".ogg"
+
+#: widgets/file-upload/file-upload.php:188
+msgid ".m4a"
+msgstr ".m4a"
+
+#: widgets/file-upload/file-upload.php:187
+msgid ".mp3"
+msgstr ".mp3"
+
+#: widgets/file-upload/file-upload.php:186
+msgid ".psd"
+msgstr ".psd"
+
+#: widgets/file-upload/file-upload.php:185
+msgid ".xlsx"
+msgstr ".xlsx"
+
+#: widgets/file-upload/file-upload.php:184
+msgid ".xls"
+msgstr ".xls"
+
+#: widgets/file-upload/file-upload.php:183
+msgid ".odt"
+msgstr ".odt"
+
+#: widgets/file-upload/file-upload.php:182
+msgid ".ppsx"
+msgstr ".ppsx"
+
+#: widgets/file-upload/file-upload.php:181
+msgid ".pps"
+msgstr ".pps"
+
+#: widgets/file-upload/file-upload.php:180
+msgid ".pptx"
+msgstr ".pptx"
+
+#: widgets/file-upload/file-upload.php:179
+msgid ".ppt"
+msgstr ".ppt"
+
+#: widgets/file-upload/file-upload.php:178
+msgid ".docx"
+msgstr ".docx"
+
+#: widgets/file-upload/file-upload.php:177
+msgid ".doc"
+msgstr ".doc"
+
+#: widgets/file-upload/file-upload.php:176
+msgid ".pdf"
+msgstr ".pdf"
+
+#: widgets/file-upload/file-upload.php:175
+msgid ".ico"
+msgstr ".ico"
+
+#: widgets/file-upload/file-upload.php:174
+msgid ".png"
+msgstr ".png"
+
+#: widgets/file-upload/file-upload.php:173
+msgid ".gif"
+msgstr ".gif"
+
+#: widgets/file-upload/file-upload.php:172
+msgid ".jpeg"
+msgstr ".jpeg"
+
+#: widgets/file-upload/file-upload.php:171
+msgid ".jpg"
+msgstr ".jpg"
+
+#: widgets/file-upload/file-upload.php:167
+msgid "File Types : "
+msgstr "文件类型 ："
+
+#: widgets/file-upload/file-upload.php:145
+msgid "128"
+msgstr "128"
+
+#: widgets/file-upload/file-upload.php:141
+msgid "Maximum File Size (KB) : "
+msgstr "最大文件大小（KB）："
+
+#: widgets/file-upload/file-upload.php:130
+msgid "File Size Limit : "
+msgstr "文件大小限制："
+
+#: widgets/multi-select/multi-select.php:64 widgets/select/select.php:64
+msgid "Input Field Text"
+msgstr "输入框字段文本"
+
+#: traits/quiz-control.php:357 widgets/multi-select/multi-select.php:66
+#: widgets/select/select.php:66
+msgid "Input Text"
+msgstr "输入框文本"
+
+#: core/admin/views/settings.php:430 core/admin/views/settings.php:438
+#: core/admin/views/settings.php:449 core/admin/views/settings.php:457
+#: core/admin/views/settings.php:475 core/admin/views/settings.php:564
+#: core/admin/views/settings.php:572 core/admin/views/settings.php:604
+#: core/admin/views/settings.php:612 core/admin/views/settings.php:631
+#: core/admin/views/settings.php:638 core/admin/views/settings.php:1044
+#: core/admin/views/settings.php:1051
+msgid "Create from here"
+msgstr "从这里创建"
+
+#: traits/common-controls.php:24 widgets/simple-captcha/simple-captcha.php:53
+msgid "Show Label"
+msgstr "显示标签"
+
+#: core/forms/views/modal-editor.php:38
+msgid "New Form # "
+msgstr "新表单 #"
+
+#: traits/button-controls.php:127 traits/quiz-control.php:366
+#: widgets/multi-select/multi-select.php:75 widgets/select/select.php:76
+msgid "Input Value"
+msgstr "输入框值"
+
+#: widgets/multi-select/multi-select.php:73 widgets/select/select.php:74
+msgid "Input Field Value"
+msgstr "输入框字段值"
+
+#: widgets/select/select.php:124
+msgid "Dropdown List"
+msgstr "下拉列表"
+
+#: widgets/rating/rating.php:71
+msgid "Number of rating star : "
+msgstr "星级数："
+
+#: widgets/multi-select/multi-select.php:110
+msgid "Multi Select List"
+msgstr "多选列表"
+
+#: traits/quiz-control.php:368 widgets/multi-select/multi-select.php:77
+#: widgets/select/select.php:78
+msgid "Select list value that will be store/mail to desired person."
+msgstr "选择将存储/邮寄给所需人员的清单值。"
+
+#: widgets/multi-select/multi-select.php:68 widgets/select/select.php:68
+msgid "Select list text that will be show to user."
+msgstr "选择将显示给用户的列表文本。"
+
+#: widgets/date/date.php:375
+msgid "YY.DD"
+msgstr "YY.DD"
+
+#: widgets/date/date.php:374
+msgid "DD.YY"
+msgstr "DD.YY"
+
+#: widgets/date/date.php:373
+msgid "YY-DD"
+msgstr "YY-DD"
+
+#: widgets/date/date.php:372
+msgid "DD-YY"
+msgstr "DD-YY"
+
+#: widgets/date/date.php:341
+msgid "YY.MM"
+msgstr "YY.MM"
+
+#: widgets/date/date.php:340
+msgid "MM.YY"
+msgstr "MM.YY"
+
+#: widgets/date/date.php:339
+msgid "YY-MM"
+msgstr "YY-MM"
+
+#: widgets/date/date.php:338
+msgid "MM-YY"
+msgstr "MM-YY"
+
+#: widgets/date/date.php:307
+msgid "DD.MM"
+msgstr "DD.MM"
+
+#: widgets/recaptcha/recaptcha.php:150 widgets/recaptcha/recaptcha.php:185
+msgid "reCAPTCHA will be shown on preview."
+msgstr "reCAPTCHA 将显示在预览中。"
+
+#: widgets/recaptcha/recaptcha.php:58
+msgid "Add Extra Class Name : "
+msgstr "添加额外的 Class 名："
+
+#: widgets/date/date.php:306
+msgid "MM.DD"
+msgstr "MM.DD"
+
+#: widgets/listing-optin/listing-optin.php:66
+msgid "Subscribe to ours newsletter."
+msgstr "订阅我们的新闻通讯。"
+
+#: widgets/listing-optin/listing-optin.php:16
+msgid "Opt in ( Listing )"
+msgstr "选择加入（清单）"
+
+#: widgets/listing-fname/listing-fname.php:16
+msgid "First Name (Listing)"
+msgstr "名（清单）"
+
+#: widgets/gdpr-consent/gdpr-consent.php:86
+#: widgets/listing-optin/listing-optin.php:68
+msgid "Select option name that will be show to user."
+msgstr "选择将显示给用户的选项名称。"
+
+#: widgets/date/date.php:253 widgets/date/date.php:300
+#: widgets/date/date.php:334 widgets/date/date.php:368
+msgid "Date format : "
+msgstr "日期格式："
+
+#: widgets/date/date.php:241
+msgid "Date input ?"
+msgstr "日期输入？"
+
+#: widgets/date/date.php:229
+msgid "Month input ?"
+msgstr "月输入？"
+
+#: widgets/date/date.php:217
+msgid "Year input ?"
+msgstr "年输入？"
+
+#: widgets/date/date.php:205
+msgid "Range date input ?"
+msgstr "范围日期输入？"
+
+#: widgets/checkbox/checkbox.php:373 widgets/gdpr-consent/gdpr-consent.php:418
+#: widgets/listing-optin/listing-optin.php:258
+msgid "Add space after checkbox"
+msgstr "复选框后添加空间"
+
+#: widgets/checkbox/checkbox.php:307 widgets/checkbox/checkbox.php:331
+#: widgets/gdpr-consent/gdpr-consent.php:352
+#: widgets/gdpr-consent/gdpr-consent.php:376
+#: widgets/listing-optin/listing-optin.php:192
+#: widgets/listing-optin/listing-optin.php:216
+msgid "Checkbox Color"
+msgstr "复选框颜色"
+
+#: widgets/gdpr-consent/gdpr-consent.php:126
+#: widgets/listing-optin/listing-optin.php:107
+msgid "Input Label"
+msgstr "输入标签"
+
+#: traits/quiz-control.php:334 traits/quiz-control.php:424
+#: traits/quiz-control.php:552 traits/quiz-control.php:647
+#: widgets/checkbox/checkbox.php:172 widgets/multi-select/multi-select.php:131
+#: widgets/radio/radio.php:176 widgets/select/select.php:145
+msgid "You can add/edit here your selector options."
+msgstr "您可以在此处添加/编辑选择器选项。"
+
+#: widgets/checkbox/checkbox.php:151
+msgid "Checkbox Options"
+msgstr "复选框选项"
+
+#: widgets/checkbox/checkbox.php:117 widgets/radio/radio.php:121
+msgid "Select option value that will be store/mail to desired person."
+msgstr "选择将存储/邮寄给所需人员的选项值。"
+
+#: traits/quiz-control.php:269 traits/quiz-control.php:359
+#: widgets/checkbox/checkbox.php:107 widgets/radio/radio.php:111
+msgid "Select option text that will be show to user."
+msgstr "选择将显示给用户的选项文本。"
+
+#: widgets/checkbox/checkbox.php:95 widgets/gdpr-consent/gdpr-consent.php:75
+#: widgets/listing-optin/listing-optin.php:58 widgets/radio/radio.php:99
+msgid "Where do you want to label?"
+msgstr "您想在哪里贴标签？"
+
+#: widgets/checkbox/checkbox.php:92 widgets/gdpr-consent/gdpr-consent.php:72
+#: widgets/listing-optin/listing-optin.php:55
+msgid "Before Checkbox"
+msgstr "复选框前"
+
+#: widgets/checkbox/checkbox.php:91 widgets/gdpr-consent/gdpr-consent.php:71
+#: widgets/listing-optin/listing-optin.php:54
+msgid "After Checkbox"
+msgstr "复选框后"
+
+#: traits/quiz-control.php:233 widgets/checkbox/checkbox.php:88
+#: widgets/gdpr-consent/gdpr-consent.php:68
+#: widgets/listing-optin/listing-optin.php:51 widgets/radio/radio.php:92
+msgid "Option Text Position : "
+msgstr "选项文字位置："
+
+#: widgets/checkbox/checkbox.php:81 widgets/gdpr-consent/gdpr-consent.php:61
+msgid "Checkbox option display style. "
+msgstr "复选框选项的显示样式。"
+
+#: traits/quiz-control.php:172 traits/quiz-control.php:193
+#: widgets/checkbox/checkbox.php:70 widgets/gdpr-consent/gdpr-consent.php:50
+#: widgets/radio/radio.php:74
+msgid "Option Display : "
+msgstr "选项显示："
+
+#: traits/common-controls.php:765
+msgid "Focus"
+msgstr "焦点"
+
+#: traits/common-controls.php:220 widgets/range/range.php:81
+msgid "Max Length"
+msgstr "最长长度"
+
+#: traits/common-controls.php:209 widgets/range/range.php:71
+msgid "Min Length"
+msgstr "最小长度"
+
+#: traits/common-controls.php:123 widgets/simple-captcha/simple-captcha.php:118
+msgid "Type your help text here"
+msgstr "在此处输入帮助文本"
+
+#: traits/common-controls.php:120 traits/quiz-control.php:161
+#: widgets/simple-captcha/simple-captcha.php:115
+msgid "Help Text : "
+msgstr "帮助文字："
+
+#: traits/common-controls.php:112 traits/quiz-control.php:347
+msgid "Enter here place holder"
+msgstr "在这里输入占位符"
+
+#: traits/common-controls.php:109
+msgid "Place holder"
+msgstr "占位符"
+
+#: traits/common-controls.php:87
+msgid "Enter here name of the input"
+msgstr "在此输入输入名称"
+
+#: traits/common-controls.php:61 widgets/simple-captcha/simple-captcha.php:105
+msgid "Enter here label of input"
+msgstr "在此处输入输入标签"
+
+#: traits/common-controls.php:58 widgets/simple-captcha/simple-captcha.php:102
+msgid "Label : "
+msgstr "标签："
+
+#: traits/common-controls.php:30 widgets/simple-captcha/simple-captcha.php:59
+msgid "for adding label on input turn it on. Don't want to use label? turn it off."
+msgstr "用于在输入上添加标签的功能将其打开。不想使用标签？把它关掉。"
+
+#: core/integrations/google-recaptcha.php:38
+#: core/integrations/google-recaptcha.php:71
+msgid "Captcha is not verified."
+msgstr "验证码未验证。"
+
+#: core/forms/views/modal-editor.php:596
+msgid "Zapier webhook"
+msgstr "Zap Webhook"
+
+#: core/forms/views/modal-editor.php:595
+msgid "Zapier webhook:"
+msgstr "Zapier Webhook:"
+
+#: core/forms/views/modal-editor.php:224
+msgid "Enter here your email body. Which will be send to admin."
+msgstr "在此处输入您的电子邮件正文。它将发送给管理员。"
+
+#: core/forms/views/modal-editor.php:223
+msgid "Admin note!"
+msgstr "管理员注意！"
+
+#: core/forms/views/modal-editor.php:222
+msgid "Admin Note : "
+msgstr "管理员注意事项："
+
+#: core/forms/views/modal-editor.php:218
+msgid "Enter email where admin can reply/ you want to get reply."
+msgstr "输入电子邮件，管理员可以在其中回复/您想获得回复。"
+
+#: core/forms/views/modal-editor.php:212
+msgid "Enter the email by which you want to send email to admin."
+msgstr "输入您要用来发送电子邮件给管理员的电子邮件。"
+
+#: core/forms/views/modal-editor.php:206
+msgid " for multiple email addresses please use \",\" separator."
+msgstr "对于多个电子邮件地址，请使用\",\"分隔符。"
+
+#: core/forms/views/modal-editor.php:206
+msgid "Enter admin email where you want to send mail."
+msgstr "输入您要发送邮件的管理员电子邮件。"
+
+#: core/forms/views/modal-editor.php:192
+msgid "Notification mail to admin :"
+msgstr "通知管理员的邮件："
+
+#: core/forms/views/modal-editor.php:165
+msgid "Enter email where user can reply/ you want to get reply."
+msgstr "输入电子邮件，用户可以在其中回复/您想获得回复。"
+
+#: core/forms/views/modal-editor.php:163 core/forms/views/modal-editor.php:216
+msgid "Email Reply To:"
+msgstr "电子邮件回复至："
+
+#: core/forms/views/modal-editor.php:159
+msgid "Enter the email by which you want to send email to user."
+msgstr "输入您要用来向用户发送电子邮件的电子邮件。"
+
+#: core/forms/views/modal-editor.php:157 core/forms/views/modal-editor.php:210
+msgid "Email From:"
+msgstr "电子邮件发件人："
+
+#: core/forms/views/modal-editor.php:153 core/forms/views/modal-editor.php:200
+msgid "Enter here email subject."
+msgstr "在此处输入电子邮件主题。"
+
+#: core/forms/views/modal-editor.php:151 core/forms/views/modal-editor.php:198
+msgid "Email Subject:"
+msgstr "电子邮件主题："
+
+#: core/forms/views/modal-editor.php:145
+msgid "Confirmation mail to user :"
+msgstr "给用户的确认邮件："
+
+#: core/forms/views/modal-editor.php:128
+msgid "Users will be redirected to the this link after submission."
+msgstr "提交后，用户将被重定向到此链接。"
+
+#: core/forms/views/modal-editor.php:127
+msgid "Redirection link"
+msgstr "重定向链接"
+
+#: core/forms/views/modal-editor.php:126
+msgid "Redirect To:"
+msgstr "重定向到："
+
+#: core/forms/views/modal-editor.php:106
+msgid "Limit the total number of submissions for this form."
+msgstr "限制此表单的提交总数。"
+
+#: core/forms/views/modal-editor.php:87
+msgid "Save submitted form data to database."
+msgstr "将提交的表单数据保存到数据库。"
+
+#: core/forms/views/modal-editor.php:79
+msgid "After submission, hide the form for preventing multiple submission."
+msgstr "提交后，隐藏表单以防止多次提交。"
+
+#: core/forms/views/modal-editor.php:71
+msgid "Store user's browser data (ip, browser name, etc)"
+msgstr "存储用户的浏览器数据(IP,浏览器名称等）"
+
+#: core/forms/views/modal-editor.php:69
+msgid "Capture User Browser Data:"
+msgstr "捕获用户浏览器数据："
+
+#: core/forms/views/modal-editor.php:63
+msgid "Without login, users can't submit the form."
+msgstr "如果没有登录，用户将无法提交表单。"
+
+#: core/forms/cpt.php:486
+msgid "Form Attributes"
+msgstr "表单属性"
+
+#: core/entries/meta-data.php:286
+msgid "This file is not uploaded."
+msgstr "该文件未上传。"
+
+#: core/entries/meta-data.php:201
+msgid "Browser data not captured."
+msgstr "未捕获浏览器数据。"
+
+#: core/entries/cpt.php:36
+msgid "Insert into item"
+msgstr "插入项目"
+
+#: core/entries/action.php:896
+msgid "Admin mail not found to send email."
+msgstr "找不到管理员邮件来发送电子邮件。"
+
+#: core/entries/action.php:240
+msgid "You must be logged in to submit form."
+msgstr "您必须登录才能提交表单。"
+
+#: core/entries/action.php:80 core/entries/action.php:85
+#: core/entries/action.php:141
+msgid "Unauthorized submission."
+msgstr "未经授权的提交。"
+
+#: core/admin/views/settings.php:426 core/admin/views/settings.php:445
+msgid "Site key:"
+msgstr "网站密钥："
+
+#: widgets/listing-lname/listing-lname.php:16
+msgid "Last Name (Listing)"
+msgstr "姓氏（清单）"
+
+#: traits/quiz-control.php:265 traits/quiz-control.php:267
+#: traits/quiz-control.php:355 widgets/checkbox/checkbox.php:105
+#: widgets/radio/radio.php:109
+msgid "Option Text"
+msgstr "选项文本"
+
+#: widgets/checkbox/checkbox.php:103 widgets/gdpr-consent/gdpr-consent.php:81
+#: widgets/listing-optin/listing-optin.php:64
+msgid "Checkbox Option Text"
+msgstr "复选框选项文本"
+
+#: traits/common-controls.php:650 traits/common-controls.php:713
+#: traits/common-controls.php:772 widgets/rating/rating.php:167
+#: widgets/rating/rating.php:200
+msgid "Input Color"
+msgstr "输入框颜色"
+
+#: traits/common-controls.php:50 widgets/simple-captcha/simple-captcha.php:79
+msgid "Select label position. where you want to see it. top of the input or left of the input."
+msgstr "选择标签位置。您想看的地方。输入框顶部或左侧。"
+
+#. translators: MetForm plugin version requirement. %s is the required
+#. Elementor version.
+#: plugin.php:587 plugin.php:621
+msgid "MetForm requires Elementor version %1$s+, which is currently NOT RUNNING."
+msgstr "MetForm 需要 Elementor 版本%1$s+,目前尚未运行。"
+
+#: core/integrations/slack.php:46
+msgid "Your data inserted on slack."
+msgstr "您的数据已插入 slack。"
+
+#: core/forms/views/modal-editor.php:597
+msgid "Enter here zapier web hook."
+msgstr "在此处输入 zapier 网站挂钩。"
+
+#: core/forms/views/modal-editor.php:591
+msgid "Integrate zapier with this form."
+msgstr "将 zapier 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:381
+msgid "Enter here MailPoet list id. "
+msgstr "在此处输入 MailPoet 列表 ID."
+
+#: core/forms/views/modal-editor.php:315
+msgid "Mailchimp contact list id"
+msgstr "Mailchimp 联系人 列表 ID"
+
+#: core/forms/views/modal-editor.php:308
+msgid "MailChimp List ID:"
+msgstr "MailChimp 列表 ID:"
+
+#: core/forms/views/modal-editor.php:304
+msgid "Integrate mailchimp with this form."
+msgstr "将 mailchimp 与该表单集成。"
+
+#: core/forms/views/modal-editor.php:211
+msgid "Email from"
+msgstr "电子邮件发件人"
+
+#: core/forms/views/modal-editor.php:204
+msgid "Email To:"
+msgstr "收件人："
+
+#: core/forms/views/modal-editor.php:171
+msgid "Enter here your message to include it in email body. Which will be send to user."
+msgstr "在此处输入您的消息以将其包含在电子邮件正文中。将发送给用户。"
+
+#: core/forms/views/modal-editor.php:147 core/forms/views/modal-editor.php:591
+msgid "The form must have at least one Email widget and it should be required."
+msgstr "该表单必须至少具有一个\"电子邮件\"组件，并且是必需的。"
+
+#: core/entries/cpt.php:37
+msgid "Uploaded to this item"
+msgstr "上传到这个项目"
+
+#: core/entries/action.php:167 core/entries/action.php:197
+msgid "Please solve the recaptcha."
+msgstr "请完成 recaptcha."
+
+#: widgets/date/date.php:262
+msgid "MM.DD.YYYY"
+msgstr "MM.DD.YYYY"
+
+#: widgets/date/date.php:261
+msgid "DD.MM.YYYY"
+msgstr "DD.MM.YYYY"
+
+#: widgets/date/date.php:260
+msgid "YYYY.MM.DD"
+msgstr "YYYY.MM.DD"
+
+#: widgets/date/date.php:259
+msgid "MM-DD-YYYY"
+msgstr "MM-DD-YYYY"
+
+#: widgets/date/date.php:258
+msgid "DD-MM-YYYY"
+msgstr "DD-MM-YYYY"
+
+#: widgets/date/date.php:257
+msgid "YYYY-MM-DD"
+msgstr "YYYY-MM-DD"
+
+#: widgets/date/date.php:304
+msgid "MM-DD"
+msgstr "MM-DD"
+
+#: core/entries/form-data.php:407 core/entries/meta-data.php:283
+msgid "Download"
+msgstr "下载"
+
+#: core/entries/meta-data.php:215
+msgid "Files"
+msgstr "文件"
+
+#: core/entries/meta-data.php:169
+msgid "Browser Data"
+msgstr "浏览器数据"
+
+#: core/entries/meta-data.php:138
+msgid "Data"
+msgstr "数据"
+
+#: widgets/date/date.php:305
+msgid "DD-MM"
+msgstr "DD-MM"

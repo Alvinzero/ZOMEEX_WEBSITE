@@ -1,0 +1,17 @@
+# Production and local credentials
+/wp-config.php
+/localhost.sql
+/.local/
+
+# Hosting backups and generated logs
+/wp-content/ai1wm-backups/
+/wp-content/upgrade/
+/wp-content/upgrade-temp-backup/
+/php_errorlog
+
+# Local operating-system files
+.DS_Store
+
+# Runtime caches
+/wp-content/cache/
+/wp-content/uploads/cache/

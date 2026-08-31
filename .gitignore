@@ -7,7 +7,7 @@
 /wp-content/ai1wm-backups/
 /wp-content/upgrade/
 /wp-content/upgrade-temp-backup/
-/php_errorlog
+php_errorlog
 
 # Local operating-system files
 .DS_Store

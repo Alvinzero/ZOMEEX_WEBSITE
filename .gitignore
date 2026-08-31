@@ -7,6 +7,7 @@
 /wp-content/ai1wm-backups/
 /wp-content/upgrade/
 /wp-content/upgrade-temp-backup/
+/wp-content/uploads/wc-logs/
 php_errorlog
 
 # Local operating-system files
@@ -15,3 +16,8 @@ php_errorlog
 # Runtime caches
 /wp-content/cache/
 /wp-content/uploads/cache/
+
+# Local design review artifacts
+/.impeccable/
+/assets/
+/wp-content/themes/woodmart-child/assets/plates/

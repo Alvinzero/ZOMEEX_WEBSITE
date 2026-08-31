@@ -36,6 +36,9 @@ if ( ! is_front_page() ) {
 			</nav>
 			<div class="zomeex-header__actions">
 				<button class="zomeex-icon-button" type="button" data-search-toggle aria-expanded="false" aria-controls="zomeex-search-panel" aria-label="Open search"><span aria-hidden="true">⌕</span></button>
+				<div class="zomeex-language-switcher" aria-label="Language selector">
+					<?php echo zomeex_language_switcher(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+				</div>
 				<a class="zomeex-header__quote" href="<?php echo esc_url( zomeex_page_url( 'contact-us', '/contact-us/' ) ); ?>">Request a quote <span aria-hidden="true">↗</span></a>
 				<button class="zomeex-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="zomeex-mobile-nav" aria-label="Open menu"><span></span><span></span></button>
 			</div>

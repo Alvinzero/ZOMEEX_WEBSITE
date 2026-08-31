@@ -10,7 +10,7 @@ function woodmart_child_enqueue_styles() {
 			'zomeex-home',
 			get_stylesheet_directory_uri() . '/assets/zomeex-home.js',
 			array(),
-			'1.0.0',
+			'1.1.0',
 			true
 		);
 	}
@@ -73,4 +73,17 @@ function zomeex_upload_url( $filename ) {
 	$uploads = wp_upload_dir();
 
 	return trailingslashit( $uploads['baseurl'] ) . '2025/11/' . ltrim( $filename, '/' );
+}
+
+/**
+ * Render the configured GTranslate picker for the redesigned homepage.
+ * The plugin owns the language list and translation behavior; the child theme
+ * only chooses the searchable popup presentation used in the primary header.
+ */
+function zomeex_language_switcher() {
+	if ( ! shortcode_exists( 'gtranslate' ) ) {
+		return '';
+	}
+
+	return do_shortcode( '[gtranslate widget_look="popup_search"]' );
 }

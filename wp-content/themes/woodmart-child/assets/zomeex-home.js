@@ -9,7 +9,26 @@
   var searchButton = document.querySelector('[data-search-toggle]');
   var searchPanel = document.querySelector('[data-search-panel]');
   var searchInput = document.querySelector('#zomeex-search-input');
+  var languageRoot = document.querySelector('.zomeex-language-switcher');
   var lastFocusedElement = null;
+
+  var syncLanguageTrigger = function () {
+    var trigger = languageRoot?.querySelector('a.gt_switcher-popup');
+    var image = trigger?.querySelector('img');
+    var languageName = trigger?.querySelector('span:first-of-type')?.textContent?.trim();
+
+    if (!trigger || !image?.alt) return;
+
+    var languageCode = image.alt.toLowerCase();
+    var compactCodes = { 'zh-cn': 'ZH', 'zh-tw': 'ZH-TW', iw: 'HE' };
+    trigger.dataset.languageCode = compactCodes[languageCode] || languageCode.slice(0, 2).toUpperCase();
+    if (languageName) trigger.setAttribute('aria-label', 'Language: ' + languageName);
+  };
+
+  if (languageRoot) {
+    syncLanguageTrigger();
+    new MutationObserver(syncLanguageTrigger).observe(languageRoot, { childList: true, subtree: true });
+  }
 
   if (window.sessionStorage.getItem('zomeex-announcement-dismissed') === '1' && announcement) {
     announcement.hidden = true;

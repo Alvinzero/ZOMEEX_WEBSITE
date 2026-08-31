@@ -1,8 +1,8 @@
 # ZOMEEX 官网重构 PRD
 
-**版本**：0.1（评审稿）
+**版本**：0.3（第一阶段收尾稿）
 **日期**：2026-08-31
-**状态**：待确认范围、内容和技术路线
+**状态**：第一阶段首页信息架构与视觉实现已完成，正在做交互验收；旧站 proof 内容以占位方式进入页面，待业务确认
 **项目**：ZOMEEX / ZOMEE 官网
 
 ## 1. 文档目的
@@ -61,13 +61,13 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 
 ### 6.1 一级导航
 
-- Products：Vape、Pack、Switch、Boost，以及产品子分类。
+- Products：四个一级业务入口为 **VAPE、PACK、SWITCH、BOOST**，使用桌面 mega menu 和移动端可展开菜单展示子分类。
 - Solutions：OEM/ODM、包装与合规、硬件开发、生产与交付。
 - Insights：产品更新、技术、公司新闻、行业洞察。
 - About：公司、制造能力、质量体系、全球服务。
 - Contact：询价、样品、销售和支持。
 
-桌面端使用宽屏导航和可展开的 mega menu；移动端使用全屏或抽屉式菜单。导航中的每个分类都必须对应可访问的落地页，不能大量使用空链接 `#`。
+桌面端使用宽屏导航和可展开的 mega menu；移动端使用全屏或抽屉式菜单。导航中的每个分类都必须对应可访问的落地页，不能大量使用空链接 `#`。BOOST 是服务入口，直接指向 Contact/OEM-ODM 询盘路径，不创建空的 WooCommerce 产品分类页。
 
 ### 6.2 六个主要页面设计
 
@@ -82,12 +82,14 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 
 ### 6.3 产品数据映射
 
-现有产品分类先映射到四个业务入口：
+现有产品分类先按下表映射到四个业务入口。分类名称保留旧站可识别的英文 slug，便于迁移和 301；入口名称、描述和层级可在内容确认后微调。
 
-- **Vape**：LITZ、MELT、CORE、DRIP、TERPA。
-- **Pack**：PACK、MYLAR BAG、CIGAR BAG、Preroll / Wraps、VAPE BOX。
-- **Switch / Boost**：保留现有业务命名，需补充明确的产品定义和应用说明。
-- **Equipment / Manufacturing**：MACHINE、Labeling machine、oil injection machine 等设备。
+| 一级入口 | 业务定位 | 当前子分类/数据 | 入口行为 |
+| --- | --- | --- | --- |
+| **VAPE** | Canna vape devices | LITZ、MELT、CORE、DRIP、TERPA、CANNABIS VAPORIZER | 进入 VAPE 产品集合，并可继续进入系列分类 |
+| **PACK** | Packaging systems | MYLAR BAG、PREROLL / WRAPS、CIGAR BAG、VAPE BOX | 进入 PACK 产品集合，并可继续按包装形式筛选 |
+| **SWITCH** | Equipment integration | HNB DEVICES、NRT SOLUTIONS、GMO-BASED SYSTEMS、MACHINE | 进入硬件/设备集合，并可继续按应用筛选 |
+| **BOOST** | Business and compliance support | OEM/ODM、市场规划、合规支持（服务内容，不是商品分类） | 直接进入 Contact/OEM-ODM 询盘路径 |
 
 旧分类 slug 不直接删除。上线前建立 301 映射，并保留产品 SKU、媒体和文章内链，避免已有 SEO 地址失效。
 
@@ -119,6 +121,10 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 
 所有按钮、卡片、表单和产品图片设置稳定尺寸，避免加载、翻译或长标题造成布局跳动。
 
+### 7.4 多语言
+
+首轮上线支持五种可见语言：**English（EN）、中文（ZH）、Русский（RU）、Deutsch（DE）、Français（FR）**。Header 语言控件在桌面和移动端保持可见，当前选择写入 `googtrans` cookie；GTranslate 可用时即时切换，插件延迟或本地预览不可用时通过 cookie + reload 触发下一次加载。翻译后的产品名称、规格、合规措辞和表单字段仍需人工抽查，不能把机器翻译当作法务确认。
+
 ## 8. 页面功能需求
 
 ### 8.1 Homepage
@@ -127,7 +133,7 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 - Category rail：Vape、Pack、Switch、Boost 四个业务入口，使用真实产品图和一句用途说明。
 - Featured products：按业务目标配置精选产品，不默认堆叠全部 38 个产品。
 - Capability section：OEM/ODM、工程、包装、质量与交付，用事实和流程图标表达。
-- Proof section：认证/测试资料、产能、市场服务区域、客户或案例证据，未确认内容不发布。
+- Proof section：认证/测试资料、产能、市场服务区域、客户或案例证据。第一阶段允许先引用旧站已出现的业务描述作为占位，统一标注 **Legacy copy / verify**；拿到证书、测试报告、工厂资料或客户授权后，再替换为可公开的证据和准确措辞，不能把占位内容当成已验证承诺。
 - Insights：展示 3-6 篇与产品或合规相关的文章。
 - CTA：页中和页尾至少各有一次询价入口，带上当前浏览上下文。
 
@@ -219,9 +225,19 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 
 输出 sitemap、产品字段表、低保真流程、视觉规范、桌面/移动首页和产品模板设计；确认颜色、字体、摄影和 CTA 文案。
 
+**当前收尾状态**：首页已落地 Header、Products mega menu、Solutions 下拉、VAPE/PACK/SWITCH/BOOST 四入口、精选产品轨道、OEM/ODM 能力段、旧站 proof 占位段、Insights 和询价 CTA；已接入 English、中文、Русский、Deutsch、Français 五种语言控件。剩余工作是桌面/移动验收、旧站文案逐条确认、真实证据资料替换和最终业务签字。
+
 ### Phase 2：核心开发
 
-完成 Header、Footer、Products index、Product detail、Quote list/form、Homepage，以及 WordPress/WooCommerce 数据映射。
+完成 Header、Footer、Products index、Product detail、Quote list/form、Homepage，以及 WordPress/WooCommerce 数据映射。具体包括：
+
+1. 把四个门户和子分类接入 Products index，提供搜索、筛选、排序、结果状态和可分享 URL。
+2. 建立统一 Product detail 模板，补齐 SKU、规格、定制、MOQ、交期、合规状态、资料下载和相关产品。
+3. 实现 Quote list/form：可从产品卡加入清单，编辑数量和备注，提交后生成询盘编号并通知销售邮箱/CRM。
+4. 将 Header、Footer、语言控件、免责声明和 CTA 抽成可维护组件，保证桌面、平板、移动端状态一致。
+5. 将现有 WooCommerce 数据映射到门户、系列和字段，不删除旧 slug；同步处理缺图、缺字段和无结果状态。
+
+Phase 2 的进入条件是 Phase 1 的四个门户命名、五种语言首发范围、询价接收方式和 proof 占位文案已由业务确认。
 
 ### Phase 3：内容与 SEO
 
@@ -243,8 +259,16 @@ ZOMEEX 是面向全球受监管市场的 Cannabis Vape、包装和硬件产品�
 
 ## 15. 首轮评审需要的决定
 
-1. 确认 B2B 询价是否取代在线购物车作为首要转化目标。
-2. 确认四个一级业务入口和产品分类映射。
-3. 确认第一阶段必须上线的产品数量和资料完整度。
-4. 确认 WordPress 前台重构与 Framer/API 方案的优先级。
-5. 确认销售、合规、内容三方的验收负责人。
+已解决：
+
+1. **四个一级业务入口**：VAPE、PACK、SWITCH、BOOST；Products 使用桌面 mega menu，移动端可展开子分类。
+2. **首发语言**：English、中文、Русский、Deutsch、Français。
+3. **旧站内容策略**：旧站中已有的一站式供应链、半私模/OEM/ODM、审核工厂、EU/US 市场经验等信息先作为占位，页面明确标注 `Legacy copy / verify`，后续用证书、报告、工厂资料和案例替换。
+4. **技术路线**：第一阶段继续使用 WordPress/WooCommerce 数据和后台，前台采用子主题重构；Framer/API 保留为后续营销页或独立方案评估。
+
+仍需确认：
+
+1. B2B 询价是否正式取代在线购物车作为首要转化目标，以及销售接收邮箱/CRM。
+2. 第一阶段必须上线的产品数量、SKU 字段完整度、MOQ/交期和价格展示规则。
+3. 认证、测试报告、产能、客户 Logo/案例及其公开授权范围。
+4. 销售、合规、内容三方的验收负责人和上线时间。

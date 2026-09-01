@@ -3,7 +3,7 @@
  * Homepage header for the ZOMEEX catalogue direction.
  * Other routes continue to use Woodmart's original header.
  */
-if ( ! is_front_page() ) {
+if ( ! zomeex_is_modern_route() ) {
 	include get_template_directory() . '/header.php';
 	return;
 }
@@ -65,7 +65,7 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 				<div class="zomeex-language-switcher" aria-label="Language selector">
 					<?php echo zomeex_language_switcher(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
-				<a class="zomeex-header__quote" href="<?php echo esc_url( zomeex_page_url( 'contact-us', '/contact-us/' ) ); ?>">Request a quote <span aria-hidden="true">↗</span></a>
+				<a class="zomeex-header__quote" href="<?php echo esc_url( zomeex_quote_url() ); ?>"><span data-quote-count hidden>0</span>Quote list <span aria-hidden="true">↗</span></a>
 				<button class="zomeex-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="zomeex-mobile-nav" aria-label="Open menu"><span></span><span></span></button>
 			</div>
 		</div>
@@ -102,7 +102,8 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 				</div>
 				<a href="<?php echo esc_url( zomeex_page_url( 'news', '/news/' ) ); ?>">Insights <span aria-hidden="true">↗</span></a>
 				<a href="<?php echo esc_url( zomeex_page_url( 'about-us-3', '/about-us-3/' ) ); ?>">About <span aria-hidden="true">↗</span></a>
-				<a class="zomeex-mobile-nav__cta" href="<?php echo esc_url( zomeex_page_url( 'contact-us', '/contact-us/' ) ); ?>">Request a quote <span>↗</span></a>
+				<a class="zomeex-mobile-nav__cta" href="<?php echo esc_url( zomeex_quote_url() ); ?>"><span data-quote-count hidden>0</span>Open quote list <span>↗</span></a>
 			</div>
 		</nav>
 		</header>
+		<a class="zomeex-quote-float" href="<?php echo esc_url( zomeex_quote_url() ); ?>"><span data-quote-count hidden>0</span>Quote list <span aria-hidden="true">↗</span></a>

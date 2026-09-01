@@ -75,10 +75,21 @@ function zomeex_is_quote_request() {
 	return isset( $_GET['zomeex_quote'] ) || 'quote-request' === $request_path;
 }
 
-function zomeex_is_modern_route() {
-	$is_catalog = function_exists( 'is_shop' ) && ( is_shop() || is_product_category() || is_product() );
+function zomeex_is_content_route() {
+	$is_content_page = function_exists( 'is_page' ) && is_page( array( 'news', 'about-us-3', 'contact-us' ) );
+	$is_insight      = function_exists( 'is_singular' ) && is_singular( 'post' );
 
-	return is_front_page() || $is_catalog || zomeex_is_quote_request();
+	return $is_content_page || $is_insight;
+}
+
+function zomeex_is_modern_route() {
+	$is_catalog = function_exists( 'is_shop' ) && (
+		is_shop()
+		|| ( function_exists( 'is_product_category' ) && is_product_category() )
+		|| ( function_exists( 'is_product' ) && is_product() )
+	);
+
+	return is_front_page() || $is_catalog || zomeex_is_quote_request() || zomeex_is_content_route();
 }
 
 function zomeex_quote_url() {
@@ -90,11 +101,27 @@ function zomeex_route_template( $template ) {
 		return get_stylesheet_directory() . '/quote-request.php';
 	}
 
+	if ( function_exists( 'is_page' ) && is_page( 'news' ) ) {
+		return get_stylesheet_directory() . '/insights.php';
+	}
+
+	if ( function_exists( 'is_singular' ) && is_singular( 'post' ) ) {
+		return get_stylesheet_directory() . '/single-insight.php';
+	}
+
+	if ( function_exists( 'is_page' ) && is_page( 'about-us-3' ) ) {
+		return get_stylesheet_directory() . '/about.php';
+	}
+
+	if ( function_exists( 'is_page' ) && is_page( 'contact-us' ) ) {
+		return get_stylesheet_directory() . '/contact.php';
+	}
+
 	if ( function_exists( 'is_product' ) && is_product() ) {
 		return get_stylesheet_directory() . '/woocommerce/single-product.php';
 	}
 
-	if ( function_exists( 'is_shop' ) && ( is_shop() || is_product_category() ) ) {
+	if ( function_exists( 'is_shop' ) && ( is_shop() || ( function_exists( 'is_product_category' ) && is_product_category() ) ) ) {
 		return get_stylesheet_directory() . '/woocommerce/archive-product.php';
 	}
 
@@ -108,7 +135,7 @@ add_filter( 'template_include', 'zomeex_route_template', 998 );
  * catalogue routes so the child theme archive can render once.
  */
 function zomeex_disable_legacy_shop_archive_builder() {
-	if ( ! function_exists( 'is_shop' ) || ( ! is_shop() && ! is_product_taxonomy() ) ) {
+	if ( ! function_exists( 'is_shop' ) || ( ! is_shop() && ( ! function_exists( 'is_product_taxonomy' ) || ! is_product_taxonomy() ) ) ) {
 		return;
 	}
 
@@ -145,9 +172,271 @@ function zomeex_quote_route_status() {
 add_action( 'template_redirect', 'zomeex_quote_route_status', 1 );
 
 function zomeex_quote_document_title( $title ) {
-	return zomeex_is_quote_request() ? 'Request a quote - ZOMEEX' : $title;
+	if ( zomeex_is_quote_request() ) {
+		return 'Request a quote | ZOMEEX';
+	}
+
+	if ( is_front_page() ) {
+		return 'Vape Hardware, Packaging and OEM/ODM | ZOMEEX';
+	}
+
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$product = wc_get_product( get_the_ID() );
+		return $product ? $product->get_name() . ' | ZOMEEX' : $title;
+	}
+
+	if ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		$term = get_queried_object();
+		return $term && ! is_wp_error( $term ) ? $term->name . ' products | ZOMEEX' : $title;
+	}
+
+	if ( function_exists( 'is_shop' ) && is_shop() ) {
+		return 'Vape Hardware and Packaging Products | ZOMEEX';
+	}
+
+	if ( is_page( 'news' ) ) {
+		return 'Product and Manufacturing Insights | ZOMEEX';
+	}
+
+	if ( is_singular( 'post' ) ) {
+		return get_the_title() . ' | ZOMEEX Insights';
+	}
+
+	if ( is_page( 'about-us-3' ) ) {
+		return 'About ZOMEEX | Product and Supply Chain Partner';
+	}
+
+	if ( is_page( 'contact-us' ) ) {
+		return 'Contact ZOMEEX | OEM/ODM and Product Enquiries';
+	}
+
+	return $title;
 }
 add_filter( 'pre_get_document_title', 'zomeex_quote_document_title' );
+
+function zomeex_trim_text( $text, $limit = 155 ) {
+	$text = wp_strip_all_tags( strip_shortcodes( (string) $text ), true );
+	$text = preg_replace( '/\s+/', ' ', trim( $text ) );
+
+	if ( ! $text ) {
+		return '';
+	}
+
+	if ( function_exists( 'mb_strlen' ) && mb_strlen( $text ) > $limit ) {
+		return rtrim( mb_substr( $text, 0, $limit - 1 ) ) . '...';
+	}
+
+	return strlen( $text ) > $limit ? rtrim( substr( $text, 0, $limit - 1 ) ) . '...' : $text;
+}
+
+function zomeex_seo_description() {
+	$description = '';
+
+	if ( zomeex_is_quote_request() ) {
+		$description = 'Send ZOMEEX a product, market and volume brief for a tailored OEM/ODM quote.';
+	} elseif ( is_front_page() ) {
+		$description = 'Explore vape hardware, packaging systems and OEM/ODM support from ZOMEEX for teams building against a defined market brief.';
+	} elseif ( function_exists( 'is_product' ) && is_product() ) {
+		$product     = wc_get_product( get_the_ID() );
+		$description = $product ? ( $product->get_short_description() ?: $product->get_description() ) : '';
+		$description = $description ?: 'Review product media, attributes and a structured quote path for this ZOMEEX product.';
+	} elseif ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		$term        = get_queried_object();
+		$description = $term && ! is_wp_error( $term ) && $term->description ? $term->description : 'Browse ZOMEEX products in this collection and build a focused quote list for your target market.';
+	} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
+		$description = 'Browse ZOMEEX vape hardware, packaging and equipment products. Save products to a quote list without online checkout.';
+	} elseif ( is_page( 'news' ) ) {
+		$description = 'Product updates, technology notes and manufacturing insights from the ZOMEEX team.';
+	} elseif ( is_singular( 'post' ) ) {
+		$description = get_the_excerpt() ?: get_the_content();
+	} elseif ( is_page( 'about-us-3' ) ) {
+		$description = 'Learn how ZOMEEX connects private-mold product routes, global supply chain support and licensed solutions for cannabis brands.';
+	} elseif ( is_page( 'contact-us' ) ) {
+		$description = 'Contact ZOMEEX for product enquiries, OEM/ODM projects, samples and market-specific packaging or hardware support.';
+	} elseif ( is_page() ) {
+		$description = get_the_excerpt() ?: get_the_content();
+	}
+
+	return zomeex_trim_text( $description );
+}
+
+function zomeex_seo_image() {
+	$image = '';
+
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$product = wc_get_product( get_the_ID() );
+		$image   = $product ? wp_get_attachment_image_url( $product->get_image_id(), 'large' ) : '';
+	} elseif ( is_singular() && has_post_thumbnail() ) {
+		$image = get_the_post_thumbnail_url( get_the_ID(), 'large' );
+	}
+
+	return $image ?: zomeex_upload_url( 'zomee-core-pulse-510-battery-1-1170x536.jpg' );
+}
+
+/** Return a usable URL for SEO fields without leaking WP_Error values. */
+function zomeex_seo_url( $url, $fallback = '/' ) {
+	if ( is_wp_error( $url ) || ! is_string( $url ) || '' === $url ) {
+		return zomeex_home_url( $fallback );
+	}
+
+	return $url;
+}
+
+function zomeex_seo_breadcrumbs() {
+	$items = array(
+		array( '@type' => 'ListItem', 'position' => 1, 'name' => 'Home', 'item' => zomeex_home_url( '/' ) ),
+	);
+
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Products', 'item' => zomeex_home_url( '/shop/' ) );
+		$product  = wc_get_product( get_the_ID() );
+		$terms    = $product ? wp_get_post_terms( get_the_ID(), 'product_cat', array( 'orderby' => 'parent', 'order' => 'ASC' ) ) : array();
+		if ( $terms && ! is_wp_error( $terms ) ) {
+			$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => $terms[0]->name, 'item' => zomeex_seo_url( get_term_link( $terms[0] ), '/shop/' ) );
+			$items[] = array( '@type' => 'ListItem', 'position' => 4, 'name' => get_the_title(), 'item' => get_permalink() );
+		} else {
+			$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title(), 'item' => get_permalink() );
+		}
+	} elseif ( function_exists( 'is_product_category' ) && is_product_category() ) {
+		$term    = get_queried_object();
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Products', 'item' => zomeex_home_url( '/shop/' ) );
+		if ( $term && ! is_wp_error( $term ) ) {
+			$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => $term->name, 'item' => zomeex_seo_url( get_term_link( $term ), '/shop/' ) );
+		}
+	} elseif ( is_singular( 'post' ) ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Insights', 'item' => zomeex_page_url( 'news', '/news/' ) );
+		$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title(), 'item' => get_permalink() );
+	} elseif ( is_page( 'news' ) ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Insights', 'item' => get_permalink() );
+	} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Products', 'item' => zomeex_home_url( '/shop/' ) );
+	} elseif ( is_page() && ! is_front_page() ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => get_the_title(), 'item' => get_permalink() );
+	}
+
+	return $items;
+}
+
+function zomeex_seo_plugin_active() {
+	return defined( 'WPSEO_VERSION' ) || defined( 'RANK_MATH_VERSION' ) || defined( 'AIOSEO_VERSION' ) || defined( 'SEOPRESS_VERSION' );
+}
+
+function zomeex_output_schema() {
+	if ( zomeex_seo_plugin_active() ) {
+		return;
+	}
+
+	$graph = array(
+		array(
+			'@type' => 'Organization',
+			'@id'   => zomeex_home_url( '/#organization' ),
+			'name'  => 'ZOMEEX',
+			'url'   => zomeex_home_url( '/' ),
+			'email' => 'info@zomeeco.com',
+			'address' => array(
+				'@type'           => 'PostalAddress',
+				'streetAddress'   => '5th Floor, Fifth Zone, Ganghuaxing Industry Park, No. 118 YongFu Road',
+				'addressLocality' => 'Shenzhen',
+				'addressCountry'  => 'CN',
+			),
+		),
+		array(
+			'@type' => 'WebSite',
+			'@id'   => zomeex_home_url( '/#website' ),
+			'name'  => 'ZOMEEX',
+			'url'   => zomeex_home_url( '/' ),
+			'publisher' => array( '@id' => zomeex_home_url( '/#organization' ) ),
+		),
+	);
+	$is_product_category = function_exists( 'is_product_category' ) && is_product_category();
+	if ( zomeex_is_quote_request() ) {
+		$schema_url = zomeex_quote_url();
+	} elseif ( function_exists( 'is_product' ) && is_product() ) {
+		$schema_url = get_permalink( get_queried_object_id() );
+	} elseif ( $is_product_category ) {
+		$schema_url = get_term_link( get_queried_object() );
+	} elseif ( is_singular() || is_page() ) {
+		$schema_url = get_permalink( get_queried_object_id() );
+	} else {
+		$schema_url = zomeex_home_url( '/shop/' );
+	}
+	$schema_url = zomeex_seo_url( $schema_url, '/shop/' );
+
+	if ( function_exists( 'is_product' ) && is_product() ) {
+		$product = wc_get_product( get_the_ID() );
+		if ( $product ) {
+			$product_schema = array(
+				'@type'       => 'Product',
+				'@id'         => get_permalink() . '#product',
+				'name'        => $product->get_name(),
+				'url'         => get_permalink(),
+				'description' => zomeex_seo_description(),
+				'brand'       => array( '@type' => 'Brand', 'name' => 'ZOMEEX' ),
+			);
+			$image = wp_get_attachment_image_url( $product->get_image_id(), 'large' );
+			if ( $image ) {
+				$product_schema['image'] = array( $image );
+			}
+			if ( $product->get_sku() ) {
+				$product_schema['sku'] = $product->get_sku();
+			}
+			$graph[] = $product_schema;
+		}
+	}
+
+	if ( is_singular( 'post' ) ) {
+		$graph[] = array(
+			'@type'         => 'Article',
+			'@id'           => get_permalink() . '#article',
+			'headline'      => get_the_title(),
+			'description'   => zomeex_seo_description(),
+			'url'           => get_permalink(),
+			'datePublished' => get_the_date( DATE_W3C ),
+			'dateModified'  => get_the_modified_date( DATE_W3C ),
+			'author'        => array( '@type' => 'Person', 'name' => get_the_author() ?: 'ZOMEEX' ),
+			'publisher'     => array( '@id' => zomeex_home_url( '/#organization' ) ),
+			'image'         => array( zomeex_seo_image() ),
+		);
+	}
+
+	$graph[] = array( '@type' => 'BreadcrumbList', '@id' => $schema_url . '#breadcrumb', 'itemListElement' => zomeex_seo_breadcrumbs() );
+	printf( "<script type=\"application/ld+json\">%s</script>\n", wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
+}
+
+function zomeex_output_seo_head() {
+	if ( zomeex_seo_plugin_active() ) {
+		return;
+	}
+
+	$title       = wp_get_document_title();
+	$description = zomeex_seo_description();
+	$is_product_category = function_exists( 'is_product_category' ) && is_product_category();
+	$url         = zomeex_is_quote_request() ? zomeex_quote_url() : ( is_singular() || is_page() ? get_permalink() : ( $is_product_category ? get_term_link( get_queried_object() ) : zomeex_home_url( '/shop/' ) ) );
+	$url         = zomeex_seo_url( $url, '/shop/' );
+	$type        = is_singular( 'post' ) ? 'article' : 'website';
+	$image       = zomeex_seo_image();
+
+	if ( $description ) {
+		printf( "<meta name=\"description\" content=\"%s\">\n", esc_attr( $description ) );
+	}
+	if ( $url ) {
+		printf( "<link rel=\"canonical\" href=\"%s\">\n", esc_url( strtok( $url, '?' ) ) );
+	}
+	printf( "<meta property=\"og:type\" content=\"%s\">\n<meta property=\"og:title\" content=\"%s\">\n<meta property=\"og:description\" content=\"%s\">\n<meta property=\"og:url\" content=\"%s\">\n<meta property=\"og:site_name\" content=\"ZOMEEX\">\n<meta property=\"og:image\" content=\"%s\">\n", esc_attr( $type ), esc_attr( $title ), esc_attr( $description ), esc_url( $url ), esc_url( $image ) );
+	printf( "<meta name=\"twitter:card\" content=\"summary_large_image\">\n<meta name=\"twitter:title\" content=\"%s\">\n<meta name=\"twitter:description\" content=\"%s\">\n<meta name=\"twitter:image\" content=\"%s\">\n", esc_attr( $title ), esc_attr( $description ), esc_url( $image ) );
+}
+add_action( 'wp_head', 'zomeex_output_seo_head', 2 );
+add_action( 'wp_head', 'zomeex_output_schema', 3 );
+
+function zomeex_seo_robots( $robots ) {
+	if ( zomeex_is_quote_request() || is_search() || ( function_exists( 'is_shop' ) && is_shop() && get_search_query() ) ) {
+		$robots['noindex'] = true;
+		$robots['follow']  = true;
+	}
+
+	return $robots;
+}
+add_filter( 'wp_robots', 'zomeex_seo_robots' );
 
 /** Let the redesigned catalogue render while WooCommerce is in store-only mode. */
 function zomeex_exclude_modern_routes_from_coming_soon( $excluded ) {

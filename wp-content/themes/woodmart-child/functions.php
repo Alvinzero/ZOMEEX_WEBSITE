@@ -573,7 +573,7 @@ function zomeex_handle_quote_submit() {
 
 	if ( is_array( $raw_items ) ) {
 		foreach ( array_slice( $raw_items, 0, 30 ) as $item ) {
-			if ( ! is_array( $item ) || empty( $item['id'] ) || empty( $item['title'] ) ) {
+			if ( ! is_array( $item ) || ! is_scalar( $item['id'] ?? null ) || empty( $item['id'] ) || empty( $item['title'] ) ) {
 				continue;
 			}
 
@@ -584,6 +584,7 @@ function zomeex_handle_quote_submit() {
 			}
 			$id  = absint( $item['id'] );
 			$sku = zomeex_quote_field_limit( $item['sku'] ?? '', 80, $item_invalid );
+			$item_quantity = is_scalar( $item['quantity'] ?? null ) ? absint( $item['quantity'] ) : 1;
 			if ( ! $id || $item_invalid ) {
 				continue;
 			}
@@ -593,7 +594,7 @@ function zomeex_handle_quote_submit() {
 				'title'    => $title,
 				'url'      => zomeex_quote_safe_url( $item['url'] ?? '' ),
 				'sku'      => $sku,
-				'quantity' => max( 1, min( 999999, absint( $item['quantity'] ?? 1 ) ) ),
+				'quantity' => max( 1, min( 999999, $item_quantity ) ),
 			);
 		}
 	}

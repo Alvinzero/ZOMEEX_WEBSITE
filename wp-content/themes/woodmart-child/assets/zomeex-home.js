@@ -12,6 +12,14 @@
   var languageRoot = document.querySelector('[data-locale-switcher]');
   var lastFocusedElement = null;
 
+  var safeStorage = function (kind) {
+    try {
+      return window[kind];
+    } catch (error) {
+      return null;
+    }
+  };
+
   var setLanguageMenu = function (open) {
     if (!languageRoot) return;
     var trigger = languageRoot.querySelector('.zomeex-locale__trigger');
@@ -23,7 +31,12 @@
 
   var languageFromCookie = function () {
     var match = document.cookie.match(/(?:^|; )googtrans=\/[^/]+\/([^;]+)/);
-    return match ? decodeURIComponent(match[1]) : 'en';
+    if (!match) return 'en';
+    try {
+      return decodeURIComponent(match[1]);
+    } catch (error) {
+      return 'en';
+    }
   };
 
   var applyLanguage = function (language, code) {
@@ -45,7 +58,10 @@
 
   if (languageRoot) {
     var activeLanguage = languageFromCookie();
-    var activeOption = languageRoot.querySelector('[data-language="' + activeLanguage + '"]') || languageRoot.querySelector('[data-language="en"]');
+    var activeOption = languageRoot.querySelector('[data-language="en"]');
+    languageRoot.querySelectorAll('[data-language]').forEach(function (option) {
+      if (option.dataset.language === activeLanguage) activeOption = option;
+    });
     var current = languageRoot.querySelector('[data-locale-current]');
     if (current && activeOption) current.textContent = activeOption.dataset.languageCode || 'EN';
     languageRoot.querySelector('.zomeex-locale__trigger')?.addEventListener('click', function () {
@@ -59,13 +75,53 @@
     });
   }
 
-  if (window.sessionStorage.getItem('zomeex-announcement-dismissed') === '1' && announcement) {
-    announcement.hidden = true;
+  var sessionStorage = safeStorage('sessionStorage');
+  var announcementDismissed = false;
+  if (sessionStorage) {
+    try {
+      announcementDismissed = sessionStorage.getItem('zomeex-announcement-dismissed') === '1';
+    } catch (error) {
+      announcementDismissed = false;
+    }
   }
+  if (announcementDismissed && announcement) announcement.hidden = true;
 
   document.querySelector('[data-dismiss-announcement]')?.addEventListener('click', function () {
     if (announcement) announcement.hidden = true;
-    window.sessionStorage.setItem('zomeex-announcement-dismissed', '1');
+    if (sessionStorage) {
+      try {
+        sessionStorage.setItem('zomeex-announcement-dismissed', '1');
+      } catch (error) {
+        // Ignore storage failures in private browsing.
+      }
+    }
+  });
+
+  var updateQuoteCount = function () {
+    var count = 0;
+    var storage = safeStorage('localStorage');
+    if (storage) {
+      try {
+        var items = JSON.parse(storage.getItem('zomeex-quote-items') || '[]');
+        count = Array.isArray(items) ? items.filter(function (item) {
+          var id = Number(item?.id);
+          return item && typeof item === 'object' && isFinite(id) && id > 0 && Math.floor(id) === id && String(item.title || '').trim();
+        }).length : 0;
+      } catch (error) {
+        count = 0;
+      }
+    }
+    document.querySelectorAll('[data-quote-count]').forEach(function (element) {
+      element.textContent = String(count);
+      element.hidden = count === 0;
+    });
+  };
+  updateQuoteCount();
+  window.addEventListener('storage', function (event) {
+    if (!event.key || event.key === 'zomeex-quote-items') updateQuoteCount();
+  });
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) updateQuoteCount();
   });
 
   var syncHeader = function () {
@@ -158,6 +214,21 @@
   });
 
   document.addEventListener('keydown', function (event) {
+    if (menuButton?.getAttribute('aria-expanded') === 'true' && event.key === 'Tab') {
+      var focusable = mobileNav?.querySelectorAll('a[href], button:not([disabled])');
+      if (focusable && focusable.length) {
+        var first = focusable[0];
+        var last = focusable[focusable.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+      return;
+    }
     if (event.key !== 'Escape') return;
     if (menuButton?.getAttribute('aria-expanded') === 'true') setMenu(false);
     if (languageRoot?.querySelector('.zomeex-locale__trigger')?.getAttribute('aria-expanded') === 'true') setLanguageMenu(false);

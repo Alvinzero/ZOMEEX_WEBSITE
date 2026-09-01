@@ -49,6 +49,10 @@ function zomeex_home_body_class( $classes ) {
 		$classes[] = 'zomeex-home-page';
 	}
 
+	if ( function_exists( 'is_404' ) && is_404() ) {
+		$classes[] = 'zomeex-not-found-page';
+	}
+
 	return $classes;
 }
 add_filter( 'body_class', 'zomeex_home_body_class' );
@@ -88,8 +92,9 @@ function zomeex_is_modern_route() {
 		|| ( function_exists( 'is_product_category' ) && is_product_category() )
 		|| ( function_exists( 'is_product' ) && is_product() )
 	);
+	$is_404 = function_exists( 'is_404' ) && is_404();
 
-	return is_front_page() || $is_catalog || zomeex_is_quote_request() || zomeex_is_content_route();
+	return is_front_page() || $is_catalog || zomeex_is_quote_request() || zomeex_is_content_route() || $is_404;
 }
 
 function zomeex_quote_url() {
@@ -99,6 +104,10 @@ function zomeex_quote_url() {
 function zomeex_route_template( $template ) {
 	if ( zomeex_is_quote_request() ) {
 		return get_stylesheet_directory() . '/quote-request.php';
+	}
+
+	if ( function_exists( 'is_404' ) && is_404() ) {
+		return get_stylesheet_directory() . '/404.php';
 	}
 
 	if ( function_exists( 'is_page' ) && is_page( 'news' ) ) {
@@ -176,6 +185,10 @@ function zomeex_quote_document_title( $title ) {
 		return 'Request a quote | ZOMEEX';
 	}
 
+	if ( function_exists( 'is_404' ) && is_404() ) {
+		return 'Page not found | ZOMEEX';
+	}
+
 	if ( is_front_page() ) {
 		return 'Vape Hardware, Packaging and OEM/ODM | ZOMEEX';
 	}
@@ -234,6 +247,8 @@ function zomeex_seo_description() {
 
 	if ( zomeex_is_quote_request() ) {
 		$description = 'Send ZOMEEX a product, market and volume brief for a tailored OEM/ODM quote.';
+	} elseif ( function_exists( 'is_404' ) && is_404() ) {
+		$description = 'The requested ZOMEEX page could not be found. Browse products or start a focused project brief.';
 	} elseif ( is_front_page() ) {
 		$description = 'Explore vape hardware, packaging systems and OEM/ODM support from ZOMEEX for teams building against a defined market brief.';
 	} elseif ( function_exists( 'is_product' ) && is_product() ) {
@@ -429,9 +444,11 @@ add_action( 'wp_head', 'zomeex_output_seo_head', 2 );
 add_action( 'wp_head', 'zomeex_output_schema', 3 );
 
 function zomeex_seo_robots( $robots ) {
-	if ( zomeex_is_quote_request() || is_search() || ( function_exists( 'is_shop' ) && is_shop() && get_search_query() ) ) {
+	if ( ( function_exists( 'is_404' ) && is_404() ) || zomeex_is_quote_request() || is_search() || ( function_exists( 'is_shop' ) && is_shop() && get_search_query() ) ) {
 		$robots['noindex'] = true;
-		$robots['follow']  = true;
+		if ( empty( $robots['nofollow'] ) ) {
+			$robots['follow'] = true;
+		}
 	}
 
 	return $robots;
@@ -472,41 +489,110 @@ function zomeex_quote_redirect( $args ) {
 	exit;
 }
 
+function zomeex_quote_string_length( $value ) {
+	return function_exists( 'mb_strlen' ) ? mb_strlen( $value ) : strlen( $value );
+}
+
+/** Sanitize a scalar quote field and flag malformed or oversized input. */
+function zomeex_quote_field_limit( $value, $limit, &$invalid, $textarea = false ) {
+	if ( ! is_scalar( $value ) ) {
+		$invalid = true;
+		return '';
+	}
+
+	$value = wp_unslash( (string) $value );
+	$clean = $textarea ? sanitize_textarea_field( $value ) : sanitize_text_field( $value );
+	if ( zomeex_quote_string_length( $clean ) > $limit ) {
+		$invalid = true;
+		return '';
+	}
+
+	return trim( $clean );
+}
+
+/** Keep client-provided product links to web URLs only. */
+function zomeex_quote_safe_url( $url ) {
+	if ( ! is_scalar( $url ) ) {
+		return '';
+	}
+
+	$url    = esc_url_raw( wp_unslash( (string) $url ) );
+	$scheme = strtolower( (string) wp_parse_url( $url, PHP_URL_SCHEME ) );
+
+	return $url && in_array( $scheme, array( 'http', 'https' ), true ) ? $url : '';
+}
+
 function zomeex_handle_quote_submit() {
 	if ( ! isset( $_POST['zomeex_quote_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['zomeex_quote_nonce'] ) ), 'zomeex_quote_submit' ) ) {
 		zomeex_quote_redirect( array( 'quote_error' => 'security' ) );
 	}
 
-	$name          = sanitize_text_field( wp_unslash( $_POST['name'] ?? '' ) );
-	$company       = sanitize_text_field( wp_unslash( $_POST['company'] ?? '' ) );
-	$email         = sanitize_email( wp_unslash( $_POST['email'] ?? '' ) );
-	$country       = sanitize_text_field( wp_unslash( $_POST['country'] ?? '' ) );
-	$role          = sanitize_text_field( wp_unslash( $_POST['role'] ?? '' ) );
-	$target_market = sanitize_text_field( wp_unslash( $_POST['target_market'] ?? '' ) );
-	$quantity      = sanitize_text_field( wp_unslash( $_POST['quantity'] ?? '' ) );
-	$customization = sanitize_textarea_field( wp_unslash( $_POST['customization'] ?? '' ) );
-	$timeline      = sanitize_text_field( wp_unslash( $_POST['timeline'] ?? '' ) );
-	$samples       = sanitize_text_field( wp_unslash( $_POST['samples'] ?? '' ) );
-	$notes         = sanitize_textarea_field( wp_unslash( $_POST['notes'] ?? '' ) );
+	$invalid       = false;
+	$name          = zomeex_quote_field_limit( $_POST['name'] ?? '', 120, $invalid );
+	$company       = zomeex_quote_field_limit( $_POST['company'] ?? '', 160, $invalid );
+	$email         = sanitize_email( is_scalar( $_POST['email'] ?? '' ) ? wp_unslash( (string) $_POST['email'] ) : '' );
+	$country       = zomeex_quote_field_limit( $_POST['country'] ?? '', 120, $invalid );
+	$role          = zomeex_quote_field_limit( $_POST['role'] ?? '', 60, $invalid );
+	$target_market = zomeex_quote_field_limit( $_POST['target_market'] ?? '', 160, $invalid );
+	$quantity      = zomeex_quote_field_limit( $_POST['quantity'] ?? '', 32, $invalid );
+	$customization = zomeex_quote_field_limit( $_POST['customization'] ?? '', 3000, $invalid, true );
+	$timeline      = zomeex_quote_field_limit( $_POST['timeline'] ?? '', 30, $invalid );
+	$samples       = zomeex_quote_field_limit( $_POST['samples'] ?? '', 60, $invalid );
+	$notes         = zomeex_quote_field_limit( $_POST['notes'] ?? '', 3000, $invalid, true );
+	$honeypot      = zomeex_quote_field_limit( $_POST['zomeex_quote_honeypot'] ?? '', 120, $invalid );
+
+	if ( $honeypot ) {
+		zomeex_quote_redirect( array( 'quote_error' => 'spam' ) );
+	}
+
+	if ( $email && zomeex_quote_string_length( $email ) > 254 ) {
+		$invalid = true;
+	}
+
+	$allowed_roles     = array( '', 'Founder / owner', 'Procurement', 'Product / R&D', 'Brand / marketing', 'Compliance / legal', 'Distributor', 'Other' );
+	$allowed_timelines = array( '', 'Exploring options', '1-3 months', '3-6 months', '6+ months' );
+	$allowed_samples   = array( '', 'Yes, please advise', 'Not yet', 'Already have samples' );
+	if ( ! in_array( $role, $allowed_roles, true ) || ! in_array( $timeline, $allowed_timelines, true ) || ! in_array( $samples, $allowed_samples, true ) ) {
+		$invalid = true;
+	}
+	if ( $quantity && ! preg_match( '/^\d{1,9}$/', $quantity ) ) {
+		$invalid = true;
+	}
+
+	if ( $invalid ) {
+		zomeex_quote_redirect( array( 'quote_error' => 'invalid' ) );
+	}
 
 	if ( ! $name || ! $company || ! is_email( $email ) || ! $country || ! $target_market ) {
 		zomeex_quote_redirect( array( 'quote_error' => 'required' ) );
 	}
 
-	$raw_items = json_decode( wp_unslash( $_POST['quote_items'] ?? '[]' ), true );
+	$raw_json = is_scalar( $_POST['quote_items'] ?? '' ) ? wp_unslash( (string) $_POST['quote_items'] ) : '[]';
+	$raw_items = strlen( $raw_json ) <= 24000 ? json_decode( $raw_json, true ) : array();
 	$items     = array();
 
 	if ( is_array( $raw_items ) ) {
 		foreach ( array_slice( $raw_items, 0, 30 ) as $item ) {
-			if ( empty( $item['id'] ) || empty( $item['title'] ) ) {
+			if ( ! is_array( $item ) || empty( $item['id'] ) || empty( $item['title'] ) ) {
+				continue;
+			}
+
+			$item_invalid = false;
+			$title = zomeex_quote_field_limit( $item['title'], 200, $item_invalid );
+			if ( $item_invalid || ! $title ) {
+				continue;
+			}
+			$id  = absint( $item['id'] );
+			$sku = zomeex_quote_field_limit( $item['sku'] ?? '', 80, $item_invalid );
+			if ( ! $id || $item_invalid ) {
 				continue;
 			}
 
 			$items[] = array(
-				'id'       => absint( $item['id'] ),
-				'title'    => sanitize_text_field( $item['title'] ),
-				'url'      => esc_url_raw( $item['url'] ?? '' ),
-				'sku'      => sanitize_text_field( $item['sku'] ?? '' ),
+				'id'       => $id,
+				'title'    => $title,
+				'url'      => zomeex_quote_safe_url( $item['url'] ?? '' ),
+				'sku'      => $sku,
 				'quantity' => max( 1, min( 999999, absint( $item['quantity'] ?? 1 ) ) ),
 			);
 		}

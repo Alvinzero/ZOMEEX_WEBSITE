@@ -2294,6 +2294,146 @@ Text Domain:  woodmart
 	display: none !important;
 }
 
+.zomeex-modern-page :focus-visible {
+	outline: 2px solid var(--zomeex-accent);
+	outline-offset: 4px;
+}
+
+.zomeex-modern-page :focus:not(:focus-visible) {
+	outline: 0;
+}
+
+.zomeex-honeypot {
+	height: 1px;
+	left: -10000px;
+	overflow: hidden;
+	position: absolute;
+	top: auto;
+	width: 1px;
+}
+
+[data-quote-submit].is-submitting {
+	cursor: wait;
+	opacity: .72;
+}
+
+.zomeex-not-found {
+	background: var(--zomeex-paper);
+	color: var(--zomeex-ink);
+	min-height: 60vh;
+}
+
+.zomeex-not-found__masthead {
+	background: var(--zomeex-paper-deep);
+	border-bottom: 1px solid var(--zomeex-line);
+	padding: 90px 0 84px;
+}
+
+.zomeex-not-found__masthead h1 {
+	font-size: clamp(48px, 7vw, 92px);
+	line-height: .98;
+	margin: 0 0 24px;
+	max-width: 900px;
+}
+
+.zomeex-not-found__masthead p:not(.zomeex-kicker) {
+	color: var(--zomeex-ink-soft);
+	font-size: 16px;
+	line-height: 1.55;
+	margin: 0;
+	max-width: 620px;
+}
+
+.zomeex-not-found__actions {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 22px;
+	margin-top: 32px;
+}
+
+.zomeex-not-found__search {
+	background: var(--zomeex-dark);
+	color: #fff;
+	padding: 40px 0 46px;
+}
+
+.zomeex-not-found__search-form {
+	max-width: 760px;
+}
+
+.zomeex-not-found__search-form label {
+	color: #9ad9bf;
+}
+
+@media (max-width: 767px) {
+	.zomeex-menu-open {
+		overflow: hidden;
+	}
+
+	.zomeex-modern-page.zomeex-not-found-page .zomeex-quote-float {
+		display: none;
+	}
+
+	.zomeex-search-form input {
+		font-size: 16px;
+		min-width: 0;
+	}
+
+	.zomeex-search-form button {
+		padding-left: 14px;
+		padding-right: 14px;
+	}
+
+	.zomeex-form-grid input,
+	.zomeex-form-grid select,
+	.zomeex-form-grid textarea,
+	.zomeex-quote-line__quantity input {
+		font-size: 16px;
+	}
+
+	.zomeex-not-found__masthead {
+		padding: 58px 0 54px;
+	}
+
+	.zomeex-not-found__masthead h1 {
+		font-size: 45px;
+	}
+
+	.zomeex-not-found__actions {
+		align-items: flex-start;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.zomeex-not-found__actions .zomeex-button {
+		width: 100%;
+	}
+}
+
+@media (forced-colors: active) {
+	.zomeex-modern-page :focus-visible {
+		outline: 2px solid CanvasText;
+	}
+
+	.zomeex-modern-page .zomeex-button,
+	.zomeex-modern-page .zomeex-icon-button,
+	.zomeex-modern-page .zomeex-menu-toggle {
+		border: 1px solid ButtonText;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.zomeex-modern-page *,
+	.zomeex-modern-page *::before,
+	.zomeex-modern-page *::after {
+		animation-duration: .01ms !important;
+		animation-iteration-count: 1 !important;
+		scroll-behavior: auto !important;
+		transition-duration: .01ms !important;
+	}
+}
+
 .zomeex-modern-page .zomeex-quote-float {
 	align-items: center;
 	background: var(--zomeex-ink);

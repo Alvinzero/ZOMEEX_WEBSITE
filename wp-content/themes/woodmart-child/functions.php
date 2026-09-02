@@ -3,13 +3,23 @@
  * Enqueue script and styles for child theme
  */
 function woodmart_child_enqueue_styles() {
-	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'woodmart-style' ), woodmart_get_theme_info( 'Version' ) );
+	$child_style_path    = get_stylesheet_directory() . '/style.css';
+	$child_style_version = file_exists( $child_style_path ) ? filemtime( $child_style_path ) : woodmart_get_theme_info( 'Version' );
+	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'woodmart-style' ), $child_style_version );
 
 	if ( is_front_page() || zomeex_is_modern_route() ) {
 		wp_enqueue_script(
+			'zomeex-i18n',
+			get_stylesheet_directory_uri() . '/assets/zomeex-i18n.js',
+			array(),
+			'1.0.12',
+			true
+		);
+
+		wp_enqueue_script(
 			'zomeex-home',
 			get_stylesheet_directory_uri() . '/assets/zomeex-home.js',
-			array(),
+			array( 'zomeex-i18n' ),
 			'1.3.0',
 			true
 		);
@@ -19,7 +29,7 @@ function woodmart_child_enqueue_styles() {
 		wp_enqueue_script(
 			'zomeex-catalog',
 			get_stylesheet_directory_uri() . '/assets/zomeex-catalog.js',
-			array(),
+			array( 'zomeex-i18n' ),
 			'1.0.0',
 			true
 		);
@@ -86,22 +96,70 @@ function zomeex_is_content_route() {
 	return $is_content_page || $is_insight;
 }
 
+function zomeex_is_account_route() {
+	$request_path = trim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+
+	return ( function_exists( 'is_account_page' ) && is_account_page() ) || (bool) preg_match( '#^my-account(?:/|$)#', $request_path );
+}
+
+function zomeex_is_cart_route() {
+	$request_path = trim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+
+	return ( function_exists( 'is_cart' ) && is_cart() ) || 'cart' === $request_path;
+}
+
 function zomeex_is_modern_route() {
 	$is_catalog = function_exists( 'is_shop' ) && (
 		is_shop()
 		|| ( function_exists( 'is_product_category' ) && is_product_category() )
 		|| ( function_exists( 'is_product' ) && is_product() )
 	);
+	$is_account = zomeex_is_account_route();
+	$is_cart    = zomeex_is_cart_route();
 	$is_404 = function_exists( 'is_404' ) && is_404();
 
-	return is_front_page() || $is_catalog || zomeex_is_quote_request() || zomeex_is_content_route() || $is_404;
+	return is_front_page() || $is_catalog || $is_account || $is_cart || zomeex_is_quote_request() || zomeex_is_content_route() || $is_404;
 }
 
 function zomeex_quote_url() {
 	return zomeex_home_url( '/quote-request/' );
 }
 
+function zomeex_account_url() {
+	$url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'myaccount' ) : '';
+
+	return is_string( $url ) && '' !== $url && untrailingslashit( $url ) !== untrailingslashit( zomeex_home_url( '/' ) ) ? $url : zomeex_home_url( '/my-account/' );
+}
+
+function zomeex_cart_url() {
+	$url = function_exists( 'wc_get_cart_url' ) ? wc_get_cart_url() : '';
+
+	return is_string( $url ) && '' !== $url && untrailingslashit( $url ) !== untrailingslashit( zomeex_home_url( '/' ) ) ? $url : zomeex_home_url( '/cart/' );
+}
+
+/** Return the current WooCommerce cart item count for the shared header. */
+function zomeex_cart_count() {
+	if ( ! function_exists( 'WC' ) ) {
+		return 0;
+	}
+
+	$woocommerce = WC();
+	if ( ! $woocommerce || ! isset( $woocommerce->cart ) || ! $woocommerce->cart ) {
+		return 0;
+	}
+
+	return (int) $woocommerce->cart->get_cart_contents_count();
+}
+
 function zomeex_route_template( $template ) {
+	if ( zomeex_is_account_route() ) {
+		return get_stylesheet_directory() . '/account.php';
+	}
+
+	if ( zomeex_is_cart_route() ) {
+		return get_stylesheet_directory() . '/cart.php';
+	}
+
 	if ( zomeex_is_quote_request() ) {
 		return get_stylesheet_directory() . '/quote-request.php';
 	}
@@ -174,7 +232,7 @@ add_action( 'template_redirect', 'zomeex_disable_legacy_single_product_builder',
 
 /** Make the virtual quote route behave like a real public page. */
 function zomeex_quote_route_status() {
-	if ( zomeex_is_quote_request() ) {
+	if ( zomeex_is_quote_request() || zomeex_is_account_route() || zomeex_is_cart_route() ) {
 		status_header( 200 );
 	}
 }

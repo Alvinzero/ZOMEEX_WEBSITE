@@ -4,6 +4,20 @@
   var storageKey = 'zomeex-quote-items';
   var draftKey = 'zomeex-quote-draft';
   var maxQuantity = 999999;
+  var i18n = window.zomeexI18n || null;
+
+  var locale = function () {
+    return i18n && typeof i18n.getLocale === 'function' ? i18n.getLocale() : 'en';
+  };
+
+  var t = function (key, fallback) {
+    return i18n && typeof i18n.t === 'function' ? i18n.t(key, locale()) : fallback;
+  };
+
+  var productAddedMessage = function (title) {
+    var suffix = t('dynamic.productAdded', 'added to your quote list.');
+    return locale() === 'zh-CN' ? title + suffix : locale() === 'ru' ? title + ' ' + suffix : locale() === 'de' ? title + ' ' + suffix : locale() === 'fr' ? title + ' ' + suffix : title + ' ' + suffix;
+  };
 
   var getStorage = function (kind) {
     try {
@@ -131,12 +145,12 @@
     }
     writeItems(items);
     updateCount();
-    showFeedback(item.title + ' added to your quote list.');
+    showFeedback(productAddedMessage(item.title));
     button.classList.add('is-added');
     var label = button.querySelector('[data-quote-label]');
-    if (label) label.textContent = 'Added';
+    if (label) label.textContent = t('catalog.added', 'Added');
     window.setTimeout(function () { button.classList.remove('is-added'); }, 1200);
-    window.setTimeout(function () { if (label) label.textContent = 'Add to quote'; }, 1200);
+    window.setTimeout(function () { if (label) label.textContent = t('catalog.addToQuote', 'Add to quote'); }, 1200);
   };
 
   document.querySelectorAll('[data-quote-add]').forEach(function (button) {
@@ -167,9 +181,9 @@
       row.innerHTML = '<a class="zomeex-quote-line__media" href="' + escapeHtml(itemUrl) + '">' +
         (item.image ? '<img src="' + escapeHtml(item.image) + '" alt="' + escapeHtml(item.title) + '" loading="lazy" width="120" height="120">' : '') +
         '</a><div class="zomeex-quote-line__info"><a href="' + escapeHtml(itemUrl) + '"><strong>' + escapeHtml(item.title) + '</strong></a>' +
-        (item.sku ? '<small>SKU ' + escapeHtml(item.sku) + '</small>' : '<small>SKU to confirm</small>') +
-        '</div><label class="zomeex-quote-line__quantity"><span>Quantity</span><input type="number" min="1" max="999999" inputmode="numeric" value="' + escapeHtml(item.quantity) + '" data-quote-quantity></label>' +
-        '<button class="zomeex-quote-line__remove" type="button" data-quote-remove aria-label="Remove ' + escapeHtml(item.title) + '">Remove</button>';
+        (item.sku ? '<small>SKU ' + escapeHtml(item.sku) + '</small>' : '<small>' + escapeHtml(t('dynamic.skuConfirm', 'SKU to confirm')) + '</small>') +
+        '</div><label class="zomeex-quote-line__quantity"><span>' + escapeHtml(t('dynamic.quantity', 'Quantity')) + '</span><input type="number" min="1" max="999999" inputmode="numeric" value="' + escapeHtml(item.quantity) + '" data-quote-quantity></label>' +
+        '<button class="zomeex-quote-line__remove" type="button" data-quote-remove aria-label="' + escapeHtml(t('dynamic.remove', 'Remove') + ' ' + item.title) + '">' + escapeHtml(t('dynamic.remove', 'Remove')) + '</button>';
       list.appendChild(row);
     });
 
@@ -269,7 +283,7 @@
         submit.setAttribute('aria-busy', 'true');
         submit.classList.add('is-submitting');
         var submitLabel = submit.querySelector('[data-quote-submit-label]');
-        if (submitLabel) submitLabel.textContent = 'Sending...';
+        if (submitLabel) submitLabel.textContent = t('quote.sending', 'Sending...');
       }
     });
   }
@@ -286,7 +300,7 @@
       submit.removeAttribute('aria-busy');
       submit.classList.remove('is-submitting');
       var submitLabel = submit.querySelector('[data-quote-submit-label]');
-      if (submitLabel) submitLabel.textContent = 'Send quote request';
+      if (submitLabel) submitLabel.textContent = t('quote.send', 'Send quote request');
     }
   });
 
@@ -299,6 +313,13 @@
   });
   document.addEventListener('visibilitychange', function () {
     if (!document.hidden) refreshQuoteSurface();
+  });
+  window.addEventListener('zomeex:localechange', function () {
+    refreshQuoteSurface();
+    var submitLabel = document.querySelector('[data-quote-submit-label]');
+    if (submitLabel && document.querySelector('[data-quote-submit]')?.getAttribute('aria-busy') !== 'true') {
+      submitLabel.textContent = t('quote.send', 'Send quote request');
+    }
   });
 
   document.querySelectorAll('[data-product-gallery-image]').forEach(function (thumbnail) {

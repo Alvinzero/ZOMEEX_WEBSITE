@@ -19,6 +19,11 @@ Text Domain:  woodmart
 	--zomeex-dark: #10251e;
 	--zomeex-container: 1320px;
 	--zomeex-radius: 0;
+	--zomeex-nav-font-size: 11px;
+	--zomeex-nav-font-weight: 700;
+	--zomeex-nav-font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+	--zomeex-nav-letter-spacing: .1em;
+	--zomeex-nav-line-height: 1;
 }
 
 /* Phase 3 content surfaces: the same quiet industrial system as the catalogue. */
@@ -686,6 +691,112 @@ Text Domain:  woodmart
 	}
 }
 
+/* Locale-aware type tuning keeps the same visual system while making room for
+ * different word lengths and scripts. The copy itself is owned by zomeex-i18n. */
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell {
+	font-family: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", sans-serif;
+	--zomeex-nav-letter-spacing: .02em;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-announcement,
+html[data-zomeex-locale="zh-CN"] .zomeex-desktop-nav a,
+html[data-zomeex-locale="zh-CN"] .zomeex-nav-trigger,
+html[data-zomeex-locale="zh-CN"] .zomeex-header__quote,
+html[data-zomeex-locale="zh-CN"] .zomeex-button,
+html[data-zomeex-locale="zh-CN"] .zomeex-kicker {
+	letter-spacing: .02em;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-hero h1,
+html[data-zomeex-locale="zh-CN"] .zomeex-content-masthead h1,
+html[data-zomeex-locale="zh-CN"] .zomeex-about__hero h1 {
+	line-height: 1.12;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-lede,
+html[data-zomeex-locale="zh-CN"] .zomeex-content-masthead p:last-of-type,
+html[data-zomeex-locale="zh-CN"] .zomeex-catalog__lede,
+html[data-zomeex-locale="zh-CN"] .zomeex-quote__masthead p:last-child {
+	line-height: 1.8;
+}
+
+html[data-zomeex-locale="ru"] .zomeex-site-shell,
+html[data-zomeex-locale="de"] .zomeex-site-shell,
+html[data-zomeex-locale="fr"] .zomeex-site-shell {
+	font-family: "Avenir Next", Arial, sans-serif;
+	--zomeex-nav-font-size: 10px;
+	--zomeex-nav-letter-spacing: .045em;
+}
+
+html[data-zomeex-locale="ru"] .zomeex-desktop-nav,
+html[data-zomeex-locale="de"] .zomeex-desktop-nav,
+html[data-zomeex-locale="fr"] .zomeex-desktop-nav {
+	gap: 22px;
+}
+
+html[data-zomeex-locale="ru"] .zomeex-desktop-nav a,
+html[data-zomeex-locale="ru"] .zomeex-nav-trigger,
+html[data-zomeex-locale="ru"] .zomeex-header__quote,
+html[data-zomeex-locale="de"] .zomeex-desktop-nav a,
+html[data-zomeex-locale="de"] .zomeex-nav-trigger,
+html[data-zomeex-locale="de"] .zomeex-header__quote,
+html[data-zomeex-locale="fr"] .zomeex-desktop-nav a,
+html[data-zomeex-locale="fr"] .zomeex-nav-trigger,
+html[data-zomeex-locale="fr"] .zomeex-header__quote {
+	font-size: var(--zomeex-nav-font-size);
+	letter-spacing: var(--zomeex-nav-letter-spacing);
+}
+
+html[data-zomeex-locale="ru"] .zomeex-button,
+html[data-zomeex-locale="de"] .zomeex-button,
+html[data-zomeex-locale="fr"] .zomeex-button {
+	letter-spacing: .045em;
+	white-space: nowrap;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-button,
+html[data-zomeex-locale="zh-CN"] .zomeex-header__quote {
+	white-space: nowrap;
+}
+
+html[data-zomeex-locale="ru"] .zomeex-hero h1,
+html[data-zomeex-locale="de"] .zomeex-hero h1,
+html[data-zomeex-locale="fr"] .zomeex-hero h1,
+html[data-zomeex-locale="ru"] .zomeex-content-masthead h1,
+html[data-zomeex-locale="de"] .zomeex-content-masthead h1,
+html[data-zomeex-locale="fr"] .zomeex-content-masthead h1 {
+	line-height: 1.04;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-mobile-nav__group > button,
+html[data-zomeex-locale="zh-CN"] .zomeex-mobile-nav > .zomeex-container > a,
+html[data-zomeex-locale="ru"] .zomeex-mobile-nav__group > button,
+html[data-zomeex-locale="ru"] .zomeex-mobile-nav > .zomeex-container > a,
+html[data-zomeex-locale="de"] .zomeex-mobile-nav__group > button,
+html[data-zomeex-locale="de"] .zomeex-mobile-nav > .zomeex-container > a,
+html[data-zomeex-locale="fr"] .zomeex-mobile-nav__group > button,
+html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
+	letter-spacing: .04em;
+}
+
+@media (max-width: 767px) {
+	html[data-zomeex-locale="zh-CN"] .zomeex-announcement {
+		letter-spacing: 0;
+	}
+
+	html[data-zomeex-locale="ru"] .zomeex-hero h1,
+	html[data-zomeex-locale="de"] .zomeex-hero h1,
+	html[data-zomeex-locale="fr"] .zomeex-hero h1 {
+		font-size: 40px;
+	}
+
+	html[data-zomeex-locale="ru"] .zomeex-button,
+	html[data-zomeex-locale="de"] .zomeex-button,
+	html[data-zomeex-locale="fr"] .zomeex-button {
+		white-space: normal;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	.zomeex-insight-entry__media img {
 		transition: none;
@@ -702,6 +813,15 @@ Text Domain:  woodmart
 .zomeex-home-page *,
 .zomeex-home-page *::before,
 .zomeex-home-page *::after {
+	box-sizing: border-box;
+}
+
+/* The same header and commerce surfaces are rendered on non-home routes.
+ * Keep inherited theme styles from turning width plus padding into overflow. */
+.zomeex-site-shell,
+.zomeex-site-shell *,
+.zomeex-site-shell *::before,
+.zomeex-site-shell *::after {
 	box-sizing: border-box;
 }
 
@@ -791,19 +911,46 @@ Text Domain:  woodmart
 }
 
 .zomeex-desktop-nav a,
+.zomeex-nav-trigger,
 .zomeex-header__quote {
-	font-size: 11px;
-	letter-spacing: .11em;
+	font-family: var(--zomeex-nav-font-family);
+	font-size: var(--zomeex-nav-font-size);
+	font-weight: var(--zomeex-nav-font-weight);
+	letter-spacing: var(--zomeex-nav-letter-spacing);
+	line-height: var(--zomeex-nav-line-height);
+	text-transform: uppercase;
+}
+
+/* Woodmart's generic button reset is broader than the navigation token.
+ * Keep trigger buttons on the same type scale as the adjacent links. */
+.zomeex-header .zomeex-desktop-nav .zomeex-nav-trigger {
+	font-family: var(--zomeex-nav-font-family);
+	font-size: var(--zomeex-nav-font-size) !important;
+	font-weight: var(--zomeex-nav-font-weight) !important;
+	letter-spacing: var(--zomeex-nav-letter-spacing) !important;
+	line-height: var(--zomeex-nav-line-height) !important;
+}
+
+.zomeex-header .zomeex-language-switcher .zomeex-locale__trigger {
+	font-family: var(--zomeex-nav-font-family);
+	font-size: var(--zomeex-nav-font-size) !important;
+	font-weight: var(--zomeex-nav-font-weight) !important;
+	letter-spacing: var(--zomeex-nav-letter-spacing) !important;
+	line-height: var(--zomeex-nav-line-height) !important;
 	text-transform: uppercase;
 }
 
 .zomeex-desktop-nav a {
+	align-items: center;
+	display: inline-flex;
+	min-height: 44px;
 	position: relative;
+	white-space: nowrap;
 }
 
 .zomeex-desktop-nav a::after {
 	background: var(--zomeex-accent);
-	bottom: -9px;
+	bottom: 7px;
 	content: "";
 	height: 2px;
 	left: 0;
@@ -822,8 +969,73 @@ Text Domain:  woodmart
 .zomeex-header__actions {
 	align-items: center;
 	display: flex;
-	gap: 16px;
+	gap: 12px;
 	margin-left: 4px;
+}
+
+.zomeex-header__utility {
+	align-items: center;
+	border-left: 1px solid var(--zomeex-line);
+	border-right: 1px solid var(--zomeex-line);
+	display: inline-flex;
+	padding: 0 3px;
+}
+
+.zomeex-utility-link {
+	color: var(--zomeex-ink);
+	position: relative;
+	transition: background-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.zomeex-utility-link:hover,
+.zomeex-utility-link:focus-visible {
+	background: var(--zomeex-paper-deep);
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-utility-link:active {
+	transform: translateY(1px);
+}
+
+.zomeex-utility-link__icon {
+	display: inline-block;
+	font-size: 14px;
+	line-height: 1;
+}
+
+.zomeex-cart-count {
+	align-items: center;
+	background: var(--zomeex-accent);
+	border-radius: 10px;
+	color: #fff;
+	display: inline-flex;
+	font-size: 9px;
+	font-variant-numeric: tabular-nums;
+	height: 16px;
+	justify-content: center;
+	letter-spacing: 0;
+	line-height: 1;
+	min-width: 16px;
+	padding: 0 4px;
+	position: absolute;
+	right: 3px;
+	top: 5px;
+}
+
+.zomeex-cart-count[hidden] {
+	display: none;
+}
+
+.zomeex-visually-hidden {
+	border: 0;
+	clip: rect(0 0 0 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
 }
 
 .zomeex-language-switcher {
@@ -962,7 +1174,7 @@ Text Domain:  woodmart
 }
 
 .zomeex-locale__chevron {
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 1;
 	transform: translateY(-1px);
 }
@@ -1040,6 +1252,13 @@ Text Domain:  woodmart
 	position: relative;
 }
 
+/* Products is a full-width menu. Let it use the sticky header as its
+ * containing block instead of the narrow trigger button. Solutions keeps
+ * its local positioning context for the compact popover below. */
+.zomeex-desktop-nav > .zomeex-nav-dropdown:first-child {
+	position: static;
+}
+
 .zomeex-nav-trigger {
 	align-items: center;
 	background: transparent;
@@ -1047,9 +1266,11 @@ Text Domain:  woodmart
 	color: var(--zomeex-ink);
 	cursor: pointer;
 	display: inline-flex;
-	font-size: 11px;
+	font-size: var(--zomeex-nav-font-size);
+	font-weight: var(--zomeex-nav-font-weight);
 	gap: 6px;
-	letter-spacing: .11em;
+	letter-spacing: var(--zomeex-nav-letter-spacing);
+	line-height: var(--zomeex-nav-line-height);
 	min-height: 44px;
 	padding: 0;
 	position: relative;
@@ -1076,7 +1297,7 @@ Text Domain:  woodmart
 }
 
 .zomeex-nav-trigger > span {
-	font-size: 14px;
+	font-size: 12px;
 	line-height: 1;
 	transform: translateY(-1px);
 }
@@ -1092,15 +1313,22 @@ Text Domain:  woodmart
 }
 
 .zomeex-mega-menu {
-	left: 50%;
-	transform: translateX(-50%);
-	width: min(100vw, 1440px);
+	left: 0;
+	right: 0;
+	max-height: calc(100vh - 124px);
+	max-height: calc(100dvh - 124px);
+	overflow-x: hidden;
+	overflow-y: auto;
+	overscroll-behavior: contain;
+	transform: none;
+	width: auto;
 }
 
 .zomeex-mega-menu__inner {
 	display: grid;
 	gap: 54px;
 	grid-template-columns: minmax(190px, .7fr) minmax(0, 2.1fr);
+	min-width: 0;
 	padding-bottom: 38px;
 	padding-top: 36px;
 }
@@ -1157,6 +1385,8 @@ Text Domain:  woodmart
 .zomeex-mega-menu__portal-title strong {
 	font-size: 14px;
 	letter-spacing: .08em;
+	min-width: 0;
+	overflow-wrap: anywhere;
 }
 
 .zomeex-mega-menu__portal-title > span {
@@ -1183,6 +1413,8 @@ Text Domain:  woodmart
 	font-size: 10px !important;
 	letter-spacing: .08em !important;
 	line-height: 1.3;
+	max-width: 100%;
+	overflow-wrap: anywhere;
 	text-transform: uppercase;
 }
 
@@ -1197,9 +1429,10 @@ Text Domain:  woodmart
 }
 
 .zomeex-nav-popover {
-	right: -24px;
+	max-width: calc(100vw - 32px);
 	padding: 10px;
-	width: 300px;
+	right: 0;
+	width: min(300px, calc(100vw - 32px));
 }
 
 .zomeex-nav-popover a {
@@ -1236,6 +1469,15 @@ Text Domain:  woodmart
 	color: var(--zomeex-accent-dark);
 }
 
+.zomeex-header__quote {
+	align-items: center;
+	display: inline-flex;
+	gap: 8px;
+	line-height: 1;
+	min-height: 44px;
+	white-space: nowrap;
+}
+
 .zomeex-header__quote span,
 .zomeex-footer__link span,
 .zomeex-button span,
@@ -1254,6 +1496,19 @@ Text Domain:  woodmart
 	transform: translate(3px, -3px);
 }
 
+.zomeex-header__quote [data-quote-count] {
+	flex: 0 0 auto;
+	margin: 0;
+}
+
+.zomeex-header__quote > span:last-child {
+	font-size: 15px;
+	font-weight: 400;
+	line-height: 1;
+	letter-spacing: 0;
+	margin-left: 0;
+}
+
 .zomeex-icon-button,
 .zomeex-menu-toggle {
 	align-items: center;
@@ -1269,7 +1524,7 @@ Text Domain:  woodmart
 }
 
 .zomeex-icon-button {
-	font-size: 25px;
+	font-size: 16px;
 	line-height: 1;
 }
 
@@ -1312,6 +1567,7 @@ Text Domain:  woodmart
 .zomeex-search-form > div {
 	display: flex;
 	max-width: 780px;
+	min-width: 0;
 }
 
 .zomeex-search-form input {
@@ -1348,6 +1604,90 @@ Text Domain:  woodmart
 	background: var(--zomeex-paper);
 	border-bottom: 1px solid var(--zomeex-line);
 	padding: 10px 0 26px;
+}
+
+.zomeex-mobile-nav__utility {
+	border-bottom: 1px solid var(--zomeex-line);
+	display: grid;
+	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin-bottom: 6px;
+}
+
+.zomeex-mobile-nav__utility-link {
+	align-items: center;
+	border: 0 !important;
+	font-size: var(--zomeex-nav-font-size) !important;
+	font-weight: var(--zomeex-nav-font-weight);
+	gap: 10px;
+	letter-spacing: var(--zomeex-nav-letter-spacing);
+	line-height: var(--zomeex-nav-line-height);
+	min-height: 58px;
+	padding: 0 !important;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.zomeex-mobile-nav__utility-link + .zomeex-mobile-nav__utility-link {
+	border-left: 1px solid var(--zomeex-line) !important;
+	justify-content: center;
+}
+
+.zomeex-mobile-nav__utility-link:first-child {
+	justify-content: center;
+}
+
+.zomeex-mobile-nav__utility-link > span:first-child {
+	color: var(--zomeex-accent-dark);
+	font-size: 14px;
+}
+
+.zomeex-mobile-nav__utility-link .zomeex-cart-count {
+	position: static;
+}
+
+.zomeex-commerce-page {
+	background: var(--zomeex-paper);
+	color: var(--zomeex-ink);
+	min-height: 62vh;
+	padding: 82px 0 96px;
+}
+
+.zomeex-commerce-page__inner > h1 {
+	font-size: clamp(42px, 6vw, 76px);
+	line-height: .98;
+	margin: 0 0 16px;
+}
+
+.zomeex-commerce-page__lede {
+	color: var(--zomeex-ink-soft);
+	font-size: 17px;
+	line-height: 1.55;
+	margin: 0 0 42px;
+	max-width: 58ch;
+}
+
+.zomeex-commerce-page .woocommerce {
+	background: #fff;
+	border: 1px solid var(--zomeex-line);
+	padding: 28px;
+}
+
+.zomeex-commerce-page .woocommerce a:not(.button) {
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-commerce-page .woocommerce .button,
+.zomeex-commerce-page .woocommerce button.button {
+	background: var(--zomeex-dark);
+	border: 1px solid var(--zomeex-dark);
+	border-radius: 0;
+	color: #fff;
+	font-size: var(--zomeex-nav-font-size);
+	font-weight: var(--zomeex-nav-font-weight);
+	letter-spacing: var(--zomeex-nav-letter-spacing);
+	line-height: 1;
+	min-height: 44px;
+	text-transform: uppercase;
 }
 
 .zomeex-mobile-nav a {
@@ -1548,7 +1888,10 @@ Text Domain:  woodmart
 .zomeex-hero__media img {
 	display: block;
 	height: 100%;
+	inset: 0;
 	object-fit: cover;
+	object-position: right center;
+	position: absolute;
 	width: 100%;
 }
 
@@ -1594,7 +1937,44 @@ Text Domain:  woodmart
 	background: #fbfcfa;
 	border-bottom: 1px solid var(--zomeex-line);
 	border-top: 1px solid var(--zomeex-line);
-	padding: 34px 0 42px;
+	padding: 0;
+}
+
+.zomeex-family-rail__heading {
+	align-items: center;
+	border-bottom: 1px solid var(--zomeex-line);
+	display: flex;
+	justify-content: space-between;
+	padding: 23px 0 18px;
+}
+
+.zomeex-family-rail__heading h2 {
+	font-size: 24px;
+	font-weight: 700;
+	line-height: 1.1;
+	margin: 0;
+}
+
+.zomeex-family-rail__heading > a {
+	border-bottom: 1px solid currentColor;
+	color: var(--zomeex-accent-dark);
+	display: inline-flex;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+}
+
+.zomeex-family-rail__heading > a span {
+	display: inline-block;
+	margin-left: 8px;
+	transition: transform .2s ease;
+}
+
+.zomeex-family-rail__heading > a:hover span,
+.zomeex-family-rail__heading > a:focus-visible span {
+	transform: translateX(3px);
 }
 
 .zomeex-section-heading {
@@ -1624,7 +2004,6 @@ Text Domain:  woodmart
 	color: var(--zomeex-accent);
 }
 
-.zomeex-family-track,
 .zomeex-product-track {
 	display: grid;
 	gap: 16px;
@@ -1636,30 +2015,21 @@ Text Domain:  woodmart
 	scrollbar-width: thin;
 }
 
-.zomeex-family-track:focus-visible,
 .zomeex-product-track:focus-visible {
 	outline: 2px solid var(--zomeex-accent);
 	outline-offset: 6px;
 }
 
-.zomeex-family-card,
 .zomeex-product-card {
 	display: block;
 	scroll-snap-align: start;
 }
 
-.zomeex-family-card__image,
 .zomeex-product-card__image {
 	background: var(--zomeex-paper-deep);
 	display: block;
 	overflow: hidden;
 }
-
-.zomeex-family-card__image {
-	aspect-ratio: 1.48 / 1;
-}
-
-.zomeex-family-card__image img,
 .zomeex-product-card__image img {
 	display: block;
 	height: 100%;
@@ -1668,12 +2038,10 @@ Text Domain:  woodmart
 	width: 100%;
 }
 
-.zomeex-family-card:hover img,
 .zomeex-product-card:hover img {
 	transform: scale(1.035);
 }
 
-.zomeex-family-card__meta,
 .zomeex-product-card__meta {
 	align-items: flex-start;
 	border-bottom: 1px solid var(--zomeex-line);
@@ -1682,14 +2050,12 @@ Text Domain:  woodmart
 	padding: 13px 2px 12px;
 }
 
-.zomeex-family-card__meta strong,
 .zomeex-product-card__meta strong {
 	font-size: 14px;
 	font-weight: 700;
 	grid-column: 1;
 }
 
-.zomeex-family-card__meta small,
 .zomeex-product-card__meta small {
 	color: var(--zomeex-ink-soft);
 	font-size: 10px;
@@ -1699,12 +2065,312 @@ Text Domain:  woodmart
 	text-transform: uppercase;
 }
 
-.zomeex-family-card__meta > span,
 .zomeex-product-card__meta > span {
 	color: var(--zomeex-accent-dark);
 	font-size: 18px;
 	grid-column: 2;
 	grid-row: 1 / span 2;
+}
+
+.zomeex-family-track {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.zomeex-family-card {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	min-height: 126px;
+	padding: 21px 20px 18px;
+	transition: background-color .2s ease, color .2s ease;
+}
+
+.zomeex-family-card + .zomeex-family-card {
+	border-left: 1px solid var(--zomeex-line);
+}
+
+.zomeex-family-card:hover,
+.zomeex-family-card:focus-visible {
+	background: var(--zomeex-paper-deep);
+}
+
+.zomeex-family-card__meta strong,
+.zomeex-family-card__meta small,
+.zomeex-family-card__action {
+	display: block;
+}
+
+.zomeex-family-card__meta strong {
+	font-size: 15px;
+	letter-spacing: .08em;
+}
+
+.zomeex-family-card__meta small {
+	color: var(--zomeex-ink-soft);
+	font-size: 11px;
+	line-height: 1.35;
+	margin-top: 7px;
+}
+
+.zomeex-family-card__action {
+	color: var(--zomeex-accent-dark);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+.zomeex-family-card__action span {
+	display: inline-block;
+	margin-left: 6px;
+	transition: transform .2s ease;
+}
+
+.zomeex-family-card:hover .zomeex-family-card__action span,
+.zomeex-family-card:focus-visible .zomeex-family-card__action span {
+	transform: translateX(3px);
+}
+
+/* Phase 5: route a B2B buyer from a product family into a defined project. */
+.zomeex-solutions {
+	background: var(--zomeex-paper);
+	border-bottom: 1px solid var(--zomeex-line);
+	padding: 84px 0 88px;
+}
+
+.zomeex-solutions__grid {
+	display: grid;
+	gap: 18px;
+	grid-template-areas:
+		"intro intro vape vape"
+		"pack pack switch boost";
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.zomeex-solutions__intro {
+	align-self: end;
+	grid-area: intro;
+	max-width: 560px;
+	padding: 20px 42px 42px 0;
+}
+
+.zomeex-solutions__intro h2,
+.zomeex-procurement h2,
+.zomeex-quote-paths h2 {
+	color: var(--zomeex-ink);
+	font-size: 46px;
+	font-weight: 700;
+	line-height: 1.03;
+	margin: 0 0 18px;
+}
+
+.zomeex-solutions__intro > p,
+.zomeex-procurement__heading > p {
+	color: var(--zomeex-ink-soft);
+	font-size: 16px;
+	line-height: 1.58;
+	margin: 0;
+	max-width: 490px;
+}
+
+.zomeex-solution {
+	background: #fff;
+	border: 1px solid var(--zomeex-line);
+	display: grid;
+	grid-template-rows: minmax(154px, 1fr) auto;
+	min-height: 348px;
+	overflow: hidden;
+}
+
+.zomeex-solution--vape {
+	grid-area: vape;
+}
+
+.zomeex-solution--pack {
+	grid-area: pack;
+}
+
+.zomeex-solution--switch {
+	grid-area: switch;
+}
+
+.zomeex-solution--boost {
+	grid-area: boost;
+}
+
+.zomeex-solution__image {
+	background: var(--zomeex-paper-deep);
+	display: block;
+	min-height: 0;
+	overflow: hidden;
+	position: relative;
+}
+
+.zomeex-solution__image img {
+	display: block;
+	height: 100%;
+	inset: 0;
+	object-fit: cover;
+	position: absolute;
+	transition: transform .4s cubic-bezier(.16, 1, .3, 1);
+	width: 100%;
+}
+
+.zomeex-solution:hover .zomeex-solution__image img,
+.zomeex-solution:focus-within .zomeex-solution__image img {
+	transform: scale(1.035);
+}
+
+.zomeex-solution__copy {
+	border-top: 1px solid var(--zomeex-line);
+	padding: 20px 21px 21px;
+}
+
+.zomeex-solution__copy > p:first-child {
+	color: var(--zomeex-accent-dark);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .11em;
+	margin: 0 0 11px;
+	text-transform: uppercase;
+}
+
+.zomeex-solution h3 {
+	font-size: 23px;
+	line-height: 1.1;
+	margin: 0;
+}
+
+.zomeex-solution h3 a:hover,
+.zomeex-solution h3 a:focus-visible {
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-solution__copy > p:not(:first-child) {
+	color: var(--zomeex-ink-soft);
+	font-size: 13px;
+	line-height: 1.5;
+	margin: 11px 0 0;
+}
+
+.zomeex-solution__link {
+	border-bottom: 1px solid currentColor;
+	color: var(--zomeex-accent-dark);
+	display: inline-block;
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	margin-top: 18px;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+}
+
+.zomeex-procurement {
+	background: #fbfcfa;
+	border-bottom: 1px solid var(--zomeex-line);
+	padding: 78px 0 82px;
+}
+
+.zomeex-procurement__layout {
+	display: grid;
+	gap: 72px;
+	grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
+}
+
+.zomeex-procurement__heading {
+	padding-top: 8px;
+}
+
+.zomeex-procurement__list {
+	border-top: 1px solid var(--zomeex-line);
+}
+
+.zomeex-procurement__list article {
+	border-bottom: 1px solid var(--zomeex-line);
+	display: grid;
+	gap: 26px;
+	grid-template-columns: minmax(150px, .72fr) minmax(0, 1.28fr);
+	padding: 21px 0 22px;
+}
+
+.zomeex-procurement__list h3 {
+	font-size: 16px;
+	line-height: 1.28;
+	margin: 0;
+}
+
+.zomeex-procurement__list p {
+	color: var(--zomeex-ink-soft);
+	font-size: 14px;
+	line-height: 1.55;
+	margin: 0;
+}
+
+.zomeex-quote-paths {
+	background: var(--zomeex-paper);
+	padding: 78px 0 86px;
+}
+
+.zomeex-quote-paths__heading {
+	max-width: 760px;
+}
+
+.zomeex-quote-paths__grid {
+	display: grid;
+	grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+	margin-top: 42px;
+}
+
+.zomeex-quote-paths__grid article {
+	background: #fff;
+	border: 1px solid var(--zomeex-line);
+	display: flex;
+	flex-direction: column;
+	min-height: 286px;
+	padding: 34px;
+}
+
+.zomeex-quote-paths__grid article + article {
+	background: var(--zomeex-dark);
+	border-color: var(--zomeex-dark);
+	color: #fff;
+	margin-left: -1px;
+}
+
+.zomeex-quote-paths__grid h3 {
+	font-size: 27px;
+	line-height: 1.08;
+	margin: 0;
+	max-width: 370px;
+}
+
+.zomeex-quote-paths__grid p {
+	color: var(--zomeex-ink-soft);
+	font-size: 14px;
+	line-height: 1.58;
+	margin: 16px 0 0;
+	max-width: 450px;
+}
+
+.zomeex-quote-paths__grid article + article p {
+	color: #c6d4cc;
+}
+
+.zomeex-quote-paths__grid .zomeex-button {
+	align-self: flex-start;
+	margin-top: auto;
+	white-space: nowrap;
+}
+
+.zomeex-quote-paths__grid article + article .zomeex-button {
+	border-color: #fff;
+	color: #fff;
+}
+
+.zomeex-quote-paths__grid article + article .zomeex-button:hover {
+	background: #fff;
+	color: var(--zomeex-dark);
 }
 
 .zomeex-featured {
@@ -2030,8 +2696,16 @@ Text Domain:  woodmart
 		width: min(calc(100% - 64px), var(--zomeex-container));
 	}
 
-	.zomeex-desktop-nav {
+	.zomeex-header__inner {
 		gap: 20px;
+	}
+
+	.zomeex-desktop-nav {
+		gap: 16px;
+	}
+
+	.zomeex-header__actions {
+		gap: 8px;
 	}
 
 	.zomeex-hero {
@@ -2040,6 +2714,23 @@ Text Domain:  woodmart
 
 	.zomeex-hero h1 {
 		font-size: 58px;
+	}
+
+	.zomeex-solutions__grid {
+		grid-template-areas:
+			"intro intro"
+			"vape pack"
+			"switch boost";
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.zomeex-solution--vape,
+	.zomeex-solution--pack {
+		min-height: 420px;
+	}
+
+	.zomeex-procurement__layout {
+		gap: 48px;
 	}
 }
 
@@ -2082,7 +2773,13 @@ Text Domain:  woodmart
 	}
 
 	.zomeex-header__inner {
+	gap: 0;
 		min-height: 66px;
+	}
+
+	.zomeex-wordmark {
+		font-size: 18px;
+		letter-spacing: .12em;
 	}
 
 	.zomeex-desktop-nav,
@@ -2091,8 +2788,13 @@ Text Domain:  woodmart
 	}
 
 	.zomeex-header__actions {
-		gap: 4px;
+		flex-shrink: 0;
+		gap: 0;
 		margin-left: auto;
+	}
+
+	.zomeex-header__utility {
+		padding: 0;
 	}
 
 	.zomeex-menu-toggle {
@@ -2129,7 +2831,10 @@ Text Domain:  woodmart
 	}
 
 	.zomeex-locale__menu {
+		max-width: calc(100vw - 40px);
+		min-width: min(190px, calc(100vw - 40px));
 		right: -8px;
+		width: min(240px, calc(100vw - 40px));
 	}
 
 	.zomeex-hero {
@@ -2181,10 +2886,25 @@ Text Domain:  woodmart
 		padding: 11px 12px;
 	}
 
-	.zomeex-family-rail,
 	.zomeex-featured {
 		padding-bottom: 36px;
 		padding-top: 34px;
+	}
+
+	.zomeex-family-rail__heading {
+		align-items: flex-start;
+		gap: 14px;
+		padding: 18px 0 16px;
+	}
+
+	.zomeex-family-rail__heading h2 {
+		font-size: 22px;
+	}
+
+	.zomeex-family-rail__heading > a {
+		font-size: 9px;
+		padding-bottom: 4px;
+		white-space: nowrap;
 	}
 
 	.zomeex-section-heading {
@@ -2202,9 +2922,81 @@ Text Domain:  woodmart
 		font-size: 9px;
 	}
 
-	.zomeex-family-track,
 	.zomeex-product-track {
 		grid-auto-columns: 78vw;
+	}
+
+	.zomeex-family-track {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.zomeex-family-card {
+		min-height: 114px;
+		padding: 17px 14px 15px;
+	}
+
+	.zomeex-family-card:nth-child(odd) {
+		border-left: 0;
+	}
+
+	.zomeex-family-card:nth-child(n + 3) {
+		border-top: 1px solid var(--zomeex-line);
+	}
+
+	.zomeex-family-card__meta strong {
+		font-size: 13px;
+	}
+
+	.zomeex-family-card__meta small {
+		font-size: 10px;
+		margin-top: 5px;
+	}
+
+	.zomeex-family-card__action {
+		font-size: 9px;
+	}
+
+	.zomeex-solutions {
+		padding: 50px 0 54px;
+	}
+
+	.zomeex-solutions__grid {
+		gap: 14px;
+		grid-template-areas:
+			"intro"
+			"vape"
+			"pack"
+			"switch"
+			"boost";
+		grid-template-columns: 1fr;
+	}
+
+	.zomeex-solutions__intro {
+		padding: 0 0 18px;
+	}
+
+	.zomeex-solutions__intro h2,
+	.zomeex-procurement h2,
+	.zomeex-quote-paths h2 {
+		font-size: 34px;
+	}
+
+	.zomeex-solution,
+	.zomeex-solution--vape,
+	.zomeex-solution--pack {
+		min-height: 0;
+	}
+
+	.zomeex-solution__image {
+		min-height: 200px;
+	}
+
+	.zomeex-solution__copy {
+		padding: 18px;
+	}
+
+	.zomeex-solution h3 {
+		font-size: 22px;
 	}
 
 	.zomeex-capability {
@@ -2231,6 +3023,52 @@ Text Domain:  woodmart
 
 	.zomeex-proof__grid article {
 		min-height: 205px;
+	}
+
+	.zomeex-procurement {
+		padding: 52px 0 56px;
+	}
+
+	.zomeex-procurement__layout {
+		gap: 30px;
+		grid-template-columns: 1fr;
+	}
+
+	.zomeex-procurement__heading {
+		padding-top: 0;
+	}
+
+	.zomeex-procurement__list article {
+		gap: 9px;
+		grid-template-columns: 1fr;
+		padding: 18px 0 19px;
+	}
+
+	.zomeex-quote-paths {
+		padding: 52px 0 56px;
+	}
+
+	.zomeex-quote-paths__grid {
+		grid-template-columns: 1fr;
+		margin-top: 30px;
+	}
+
+	.zomeex-quote-paths__grid article {
+		min-height: 0;
+		padding: 27px 22px 28px;
+	}
+
+	.zomeex-quote-paths__grid article + article {
+		margin-left: 0;
+		margin-top: -1px;
+	}
+
+	.zomeex-quote-paths__grid h3 {
+		font-size: 24px;
+	}
+
+	.zomeex-quote-paths__grid .zomeex-button {
+		margin-top: 26px;
 	}
 
 	.zomeex-insights {
@@ -2277,6 +3115,18 @@ Text Domain:  woodmart
 		gap: 10px;
 		line-height: 1.4;
 		margin-top: 42px;
+	}
+}
+
+@media (max-width: 340px) {
+	/* Preserve five usable header controls on the narrowest supported phones. */
+	.zomeex-header__inner {
+		width: calc(100% - 12px);
+	}
+
+	.zomeex-wordmark {
+		font-size: 16px;
+		letter-spacing: .08em;
 	}
 }
 
@@ -2501,6 +3351,10 @@ Text Domain:  woodmart
 	margin: 0 3px 0 0;
 	min-width: 18px;
 	padding: 0 4px;
+}
+
+.zomeex-header__quote [data-quote-count] {
+	margin: 0;
 }
 
 .zomeex-catalog {

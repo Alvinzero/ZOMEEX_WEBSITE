@@ -7,7 +7,10 @@ if ( ! zomeex_is_modern_route() ) {
 	include get_template_directory() . '/header.php';
 	return;
 }
-$shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : zomeex_home_url( '/shop/' );
+$shop_url    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : zomeex_home_url( '/shop/' );
+$account_url = function_exists( 'zomeex_account_url' ) ? zomeex_account_url() : zomeex_home_url( '/my-account/' );
+$cart_url    = function_exists( 'zomeex_cart_url' ) ? zomeex_cart_url() : zomeex_home_url( '/cart/' );
+$cart_count  = function_exists( 'zomeex_cart_count' ) ? zomeex_cart_count() : 0;
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -19,7 +22,7 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 <body <?php body_class(); ?>>
 	<?php wp_body_open(); ?>
 	<?php do_action( 'woodmart_after_body_open' ); ?>
-	<div class="wd-page-wrapper website-wrapper zomeex-site-shell">
+	<div class="wd-page-wrapper website-wrapper zomeex-site-shell notranslate" translate="no" data-zomeex-i18n-root>
 		<div class="zomeex-announcement" data-announcement>
 			<div class="zomeex-container zomeex-announcement__inner">
 				<span>Samples and OEM/ODM support available</span>
@@ -61,7 +64,17 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 				<a href="<?php echo esc_url( zomeex_page_url( 'about-us-3', '/about-us-3/' ) ); ?>">About</a>
 			</nav>
 			<div class="zomeex-header__actions">
-				<button class="zomeex-icon-button" type="button" data-search-toggle aria-expanded="false" aria-controls="zomeex-search-panel" aria-label="Open search"><span aria-hidden="true">⌕</span></button>
+				<div class="zomeex-header__utility" aria-label="Account tools">
+					<button class="zomeex-icon-button zomeex-utility-link" type="button" data-search-toggle aria-expanded="false" aria-controls="zomeex-search-panel" aria-label="Open search" title="Search">
+						<span class="zomeex-utility-link__icon fas fa-search" aria-hidden="true"></span><span class="zomeex-visually-hidden">Search</span>
+					</button>
+					<a class="zomeex-icon-button zomeex-utility-link zomeex-account-link" href="<?php echo esc_url( $account_url ); ?>" aria-label="Account" title="Account">
+						<span class="zomeex-utility-link__icon fas fa-user" aria-hidden="true"></span><span class="zomeex-visually-hidden">Account</span>
+					</a>
+					<a class="zomeex-icon-button zomeex-utility-link zomeex-cart-link" href="<?php echo esc_url( $cart_url ); ?>" aria-label="Cart" title="Cart">
+						<span class="zomeex-utility-link__icon fas fa-shopping-cart" aria-hidden="true"></span><span class="zomeex-visually-hidden">Cart</span><span class="zomeex-cart-count" data-cart-count aria-label="<?php echo esc_attr( sprintf( '%d items in cart', $cart_count ) ); ?>"<?php echo $cart_count > 0 ? '' : ' hidden'; ?>><?php echo esc_html( $cart_count ); ?></span>
+					</a>
+				</div>
 				<div class="zomeex-language-switcher" aria-label="Language selector">
 					<?php echo zomeex_language_switcher(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
@@ -79,6 +92,10 @@ $shop_url = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 
 		</div>
 		<nav class="zomeex-mobile-nav" id="zomeex-mobile-nav" data-mobile-nav hidden aria-label="Mobile navigation">
 			<div class="zomeex-container">
+				<div class="zomeex-mobile-nav__utility" aria-label="Account tools">
+					<a class="zomeex-mobile-nav__utility-link" href="<?php echo esc_url( $account_url ); ?>"><span class="fas fa-user" aria-hidden="true"></span><strong>Account</strong></a>
+					<a class="zomeex-mobile-nav__utility-link" href="<?php echo esc_url( $cart_url ); ?>"><span class="fas fa-shopping-cart" aria-hidden="true"></span><strong>Cart</strong><span class="zomeex-cart-count" data-cart-count aria-label="<?php echo esc_attr( sprintf( '%d items in cart', $cart_count ) ); ?>"<?php echo $cart_count > 0 ? '' : ' hidden'; ?>><?php echo esc_html( $cart_count ); ?></span></a>
+				</div>
 				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
 					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-products">Products <span aria-hidden="true">+</span></button>
 					<div id="zomeex-mobile-products" data-mobile-nav-panel hidden>

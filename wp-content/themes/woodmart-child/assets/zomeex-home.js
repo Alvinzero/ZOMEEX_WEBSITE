@@ -11,6 +11,15 @@
   var searchInput = document.querySelector('#zomeex-search-input');
   var languageRoot = document.querySelector('[data-locale-switcher]');
   var lastFocusedElement = null;
+  var i18n = window.zomeexI18n || null;
+
+  var currentLocale = function () {
+    return i18n && typeof i18n.getLocale === 'function' ? i18n.getLocale() : 'en';
+  };
+
+  var interfaceText = function (key, fallback) {
+    return i18n && typeof i18n.t === 'function' ? i18n.t(key, currentLocale()) : fallback;
+  };
 
   var safeStorage = function (kind) {
     try {
@@ -30,6 +39,7 @@
   };
 
   var languageFromCookie = function () {
+    if (i18n && typeof i18n.getLocale === 'function') return i18n.getLocale();
     var match = document.cookie.match(/(?:^|; )googtrans=\/[^/]+\/([^;]+)/);
     if (!match) return 'en';
     try {
@@ -41,19 +51,11 @@
 
   var applyLanguage = function (language, code) {
     if (!languageRoot) return;
-    var source = languageRoot.dataset.sourceLanguage || 'en';
     var current = languageRoot.querySelector('[data-locale-current]');
     if (current) current.textContent = code;
     languageRoot.dataset.activeLanguage = language;
     setLanguageMenu(false);
-    document.cookie = 'googtrans=/' + source + '/' + language + ';path=/';
-    if (typeof window.doGTranslate === 'function') {
-      window.doGTranslate(source + '|' + language);
-    } else if (language !== source) {
-      // GTranslate may be injected after the first paint; reload lets it read
-      // the selected cookie during local previews and deferred script loads.
-      window.location.reload();
-    }
+    if (i18n && typeof i18n.setLocale === 'function') i18n.setLocale(language);
   };
 
   if (languageRoot) {
@@ -116,6 +118,38 @@
       element.hidden = count === 0;
     });
   };
+
+  var updateCartCount = function (count) {
+    count = Number(count);
+    if (!isFinite(count) || count < 0) count = 0;
+    count = Math.floor(count);
+    document.querySelectorAll('[data-cart-count]').forEach(function (element) {
+      element.textContent = String(count);
+      element.hidden = count === 0;
+      var locale = currentLocale();
+      var cartLabel = {
+        'zh-CN': count + ' 件商品在购物车中',
+        ru: count + ' товаров в корзине',
+        de: count + ' Artikel im Warenkorb',
+        fr: count + ' article(s) dans le panier'
+      }[locale] || count + ' items in cart';
+      element.setAttribute('aria-label', cartLabel);
+    });
+  };
+
+  var syncCartCount = function () {
+    var source = document.querySelector('.wd-cart-number');
+    var match = source && source.textContent ? source.textContent.match(/\d+/) : null;
+    if (match) updateCartCount(match[0]);
+  };
+
+  updateCartCount(document.querySelector('[data-cart-count]')?.textContent || 0);
+  document.addEventListener('wc_fragments_refreshed', syncCartCount);
+  document.addEventListener('added_to_cart', syncCartCount);
+  document.addEventListener('removed_from_cart', syncCartCount);
+  if (window.jQuery) {
+    window.jQuery(document.body).on('wc_fragments_refreshed added_to_cart removed_from_cart updated_wc_div', syncCartCount);
+  }
   updateQuoteCount();
   window.addEventListener('storage', function (event) {
     if (!event.key || event.key === 'zomeex-quote-items') updateQuoteCount();
@@ -140,7 +174,7 @@
     if (!menuButton || !mobileNav) return;
     if (open) lastFocusedElement = document.activeElement;
     menuButton.setAttribute('aria-expanded', String(open));
-    menuButton.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    menuButton.setAttribute('aria-label', open ? interfaceText('nav.closeMenu', 'Close menu') : interfaceText('nav.openMenu', 'Open menu'));
     mobileNav.hidden = !open;
     body.classList.toggle('zomeex-menu-open', open);
     if (open) mobileNav.querySelector('a')?.focus();
@@ -187,12 +221,22 @@
   var setSearch = function (open) {
     if (!searchButton || !searchPanel) return;
     searchButton.setAttribute('aria-expanded', String(open));
-    searchButton.setAttribute('aria-label', open ? 'Close search' : 'Open search');
+    searchButton.setAttribute('aria-label', open ? 'Close search' : interfaceText('nav.openSearch', 'Open search'));
     searchPanel.hidden = !open;
     if (open) window.requestAnimationFrame(function () { searchInput?.focus(); });
   };
   searchButton?.addEventListener('click', function () {
     setSearch(searchButton.getAttribute('aria-expanded') !== 'true');
+  });
+
+  window.addEventListener('zomeex:localechange', function () {
+    updateCartCount(document.querySelector('[data-cart-count]')?.textContent || 0);
+    if (menuButton?.getAttribute('aria-expanded') === 'true') {
+      menuButton.setAttribute('aria-label', interfaceText('nav.closeMenu', 'Close menu'));
+    }
+    if (searchButton?.getAttribute('aria-expanded') === 'true') {
+      searchButton.setAttribute('aria-label', 'Close search');
+    }
   });
 
   document.addEventListener('click', function (event) {

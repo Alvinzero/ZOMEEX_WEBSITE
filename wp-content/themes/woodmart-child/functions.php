@@ -7,6 +7,21 @@ function woodmart_child_enqueue_styles() {
 	$child_style_version = file_exists( $child_style_path ) ? filemtime( $child_style_path ) : woodmart_get_theme_info( 'Version' );
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'woodmart-style' ), $child_style_version );
 
+	/* Chaty builds its WhatsApp form after page load. Keep its small text
+	 * affordances in the child theme so plugin updates do not overwrite them.
+	 * This script also owns the age gate, so it must not depend on Chaty's
+	 * registration timing (which varies between cached and uncached pages). */
+	$chaty_fix_path = get_stylesheet_directory() . '/assets/zomeex-chaty-fixes.js';
+	if ( file_exists( $chaty_fix_path ) ) {
+		wp_enqueue_script(
+			'zomeex-chaty-fixes',
+			get_stylesheet_directory_uri() . '/assets/zomeex-chaty-fixes.js',
+			array(),
+			(string) filemtime( $chaty_fix_path ),
+			true
+		);
+	}
+
 	if ( is_front_page() || zomeex_is_modern_route() ) {
 		wp_enqueue_script(
 			'zomeex-i18n',
@@ -500,6 +515,52 @@ function zomeex_output_seo_head() {
 }
 add_action( 'wp_head', 'zomeex_output_seo_head', 2 );
 add_action( 'wp_head', 'zomeex_output_schema', 3 );
+
+/**
+ * Correct legacy age-gate content without editing the Woodmart parent theme.
+ * The imported option contained a remote logo and malformed copied markup.
+ */
+function zomeex_clean_age_verify_option( $value, $slug ) {
+	if ( 'age_verify_text' === $slug ) {
+		$logo_url = function_exists( 'zomeex_upload_url' )
+			? zomeex_upload_url( 'zomee-logo_画板-1.svg' )
+			: home_url( '/wp-content/uploads/2025/11/zomee-logo_画板-1.svg' );
+
+		return sprintf(
+			'<p class="zomeex-age-logo"><img src="%1$s" alt="ZOMEEX" width="133" height="44" /></p><h4 class="text-center">Are you 21 or older?</h4><p class="text-center">You look younger than your age.</p><p class="text-center">You must be 21 years old or older to access this website. Please verify your age.</p>',
+			esc_url( $logo_url )
+		);
+	}
+
+	if ( 'age_verify_text_error' === $slug ) {
+		return '<h4 class="text-center">Access denied</h4><p class="text-center">Access is restricted because of your age.</p>';
+	}
+
+	if ( 'age_verify_color_scheme' === $slug ) {
+		return 'light';
+	}
+
+	return $value;
+}
+add_filter( 'woodmart_option', 'zomeex_clean_age_verify_option', 20, 2 );
+
+/** Keep Woodmart's age buttons aligned with the 21+ gate copy above. */
+function zomeex_age_button_labels( $translated, $text, $domain ) {
+	if ( 'woodmart' !== $domain ) {
+		return $translated;
+	}
+
+	if ( 'I am 18 or Older' === $text ) {
+		return 'I am 21 or older';
+	}
+
+	if ( 'I am Under 18' === $text ) {
+		return 'I am under 21';
+	}
+
+	return $translated;
+}
+add_filter( 'gettext', 'zomeex_age_button_labels', 20, 3 );
 
 function zomeex_seo_robots( $robots ) {
 	if ( ( function_exists( 'is_404' ) && is_404() ) || zomeex_is_quote_request() || is_search() || ( function_exists( 'is_shop' ) && is_shop() && get_search_query() ) ) {

@@ -238,8 +238,8 @@
     if (!storage) return;
     var draft = {};
     form.querySelectorAll('[name]').forEach(function (field) {
-      if (field.type === 'hidden' || field.name === 'zomeex_quote_honeypot') return;
-      draft[field.name] = field.value;
+      if (field.type === 'hidden' || field.type === 'file' || field.name === 'zomeex_quote_honeypot' || field.name === 'privacy_consent') return;
+      draft[field.name] = field.type === 'checkbox' ? field.checked : field.value;
     });
     try {
       storage.setItem(draftKey, JSON.stringify(draft));
@@ -263,7 +263,7 @@
     var draft = readDraft();
     if (draft) {
       form.querySelectorAll('[name]').forEach(function (field) {
-        if (field.type !== 'hidden' && field.name !== 'zomeex_quote_honeypot' && Object.prototype.hasOwnProperty.call(draft, field.name)) {
+        if (field.type !== 'hidden' && field.type !== 'file' && field.name !== 'zomeex_quote_honeypot' && field.name !== 'privacy_consent' && Object.prototype.hasOwnProperty.call(draft, field.name)) {
           field.value = String(draft[field.name]).slice(0, field.maxLength > 0 ? field.maxLength : 3000);
         }
       });

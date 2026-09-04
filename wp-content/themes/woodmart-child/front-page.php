@@ -10,6 +10,18 @@ $contact_url = zomeex_page_url( 'contact-us', '/contact-us/' );
 $quote_url   = zomeex_quote_url();
 $hero_image  = zomeex_upload_url( 'zomee-core-pulse-510-battery-1-1170x536.jpg' );
 $portals     = zomeex_product_portals();
+$packaging_categories = function_exists( 'zomeex_packaging_categories' ) ? zomeex_packaging_categories() : array();
+$applications = function_exists( 'zomeex_application_scenarios' ) ? zomeex_application_scenarios() : array();
+$faq_url      = function_exists( 'zomeex_faq_url' ) ? zomeex_faq_url() : zomeex_home_url( '/faq/' );
+$resource_image = zomeex_upload_url( 'pack_0003_药丸包装-拷贝-2-768x768.jpg' );
+$category_images = array(
+	'zomee-core-pulse-510-battery-1-1170x536.jpg',
+	'pack_0003_药丸包装-拷贝-2-768x768.jpg',
+	'hot-knife-glass-cover_0000s_0003_矢量智能对象-768x768.jpg',
+	'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg',
+	'pack_0001_背卡盒子_0004_组-5-768x768.jpg',
+	'drip-box_0000_矢量智能对象-700x700.jpg',
+);
 
 $project_portals = array(
 	'vape' => array(
@@ -64,6 +76,12 @@ $insights = get_posts(
 		</div>
 	</section>
 
+	<section class="zomeex-trust-bar" aria-label="Project support">
+		<div class="zomeex-container zomeex-trust-bar__inner">
+			<span>Factory-direct project review</span><span>Market-specific documentation</span><span>Artwork and dieline guidance</span><span>Samples available to discuss</span>
+		</div>
+	</section>
+
 	<section class="zomeex-family-rail" aria-labelledby="zomeex-family-title">
 		<div class="zomeex-container">
 			<div class="zomeex-family-rail__heading"><h2 id="zomeex-family-title">Explore by product family</h2><a href="<?php echo esc_url( $shop_url ); ?>">View all products <span aria-hidden="true">&rarr;</span></a></div>
@@ -74,6 +92,37 @@ $insights = get_posts(
 						<span class="zomeex-family-card__action">Explore <span aria-hidden="true">&rarr;</span></span>
 					</a>
 				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+
+	<section class="zomeex-packaging" aria-labelledby="zomeex-packaging-title">
+		<div class="zomeex-container">
+			<div class="zomeex-section-heading"><h2 id="zomeex-packaging-title">Packaging formats for the next decision.</h2><a href="<?php echo esc_url( zomeex_portal_url( $portals['pack'] ) ); ?>">Explore PACK <span aria-hidden="true">↗</span></a></div>
+			<div class="zomeex-packaging__grid">
+				<?php foreach ( array_slice( $packaging_categories, 0, 6 ) as $index => $category ) : ?>
+					<?php $term = get_term_by( 'slug', $category['slug'], 'product_cat' ); $category_url = $term && ! is_wp_error( $term ) ? get_term_link( $term ) : zomeex_portal_url( $portals['pack'] ); $image_file = $category_images[ $index ] ?? $category_images[0]; ?>
+					<article class="zomeex-packaging-card"><a class="zomeex-packaging-card__media" href="<?php echo esc_url( $category_url ); ?>"><img src="<?php echo esc_url( zomeex_upload_url( $image_file ) ); ?>" alt="<?php echo esc_attr( $category['name'] ); ?>" loading="lazy" width="768" height="768"></a><div class="zomeex-packaging-card__body"><p><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></p><h3><a href="<?php echo esc_url( $category_url ); ?>"><?php echo esc_html( $category['name'] ); ?></a></h3><a class="zomeex-text-link" href="<?php echo esc_url( add_query_arg( 'interest', sanitize_title( $category['name'] ), $quote_url ) ); ?>">Request a dieline <span aria-hidden="true">↗</span></a></div></article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+
+	<section class="zomeex-resources" aria-labelledby="zomeex-resources-title">
+		<div class="zomeex-container zomeex-resources__grid">
+			<div class="zomeex-resource zomeex-resource--dieline"><div><p class="zomeex-kicker">Design resources</p><h2 id="zomeex-resources-title">Bring the artwork. We will help with the format.</h2><p>Share your dimensions, closure and target market. The team can review an existing dieline or advise on the next file to prepare.</p><a class="zomeex-button zomeex-button--solid" href="<?php echo esc_url( add_query_arg( 'resource', 'dieline', $quote_url ) ); ?>">Request dieline guidance <span aria-hidden="true">↗</span></a></div></div>
+			<div class="zomeex-resource zomeex-resource--sample"><div class="zomeex-resource__media"><img src="<?php echo esc_url( $resource_image ); ?>" alt="Packaging sample kit" loading="lazy" width="768" height="768"></div><div class="zomeex-resource__copy"><p class="zomeex-kicker">Physical reference</p><h2>Need to compare the feel?</h2><p>Ask about a sample kit for the formats and finishes relevant to your brief.</p><a class="zomeex-text-link" href="<?php echo esc_url( add_query_arg( 'resource', 'sample-kit', $quote_url ) ); ?>">Claim a sample kit <span aria-hidden="true">↗</span></a></div></div>
+		</div>
+	</section>
+
+	<section class="zomeex-applications" id="zomeex-applications" aria-labelledby="zomeex-applications-title">
+		<div class="zomeex-container">
+			<div class="zomeex-section-heading"><h2 id="zomeex-applications-title">Shop by application.</h2><span>Start with the product context</span></div>
+			<div class="zomeex-application-tabs" role="tablist" aria-label="Packaging applications">
+				<?php foreach ( $applications as $index => $application ) : ?><button type="button" role="tab" aria-selected="<?php echo 0 === $index ? 'true' : 'false'; ?>" aria-controls="zomeex-application-panel-<?php echo esc_attr( $application['slug'] ); ?>" id="zomeex-application-tab-<?php echo esc_attr( $application['slug'] ); ?>" data-application-tab="<?php echo esc_attr( $application['slug'] ); ?>"><?php echo esc_html( $application['name'] ); ?></button><?php endforeach; ?>
+			</div>
+			<div class="zomeex-application-panels">
+				<?php foreach ( $applications as $index => $application ) : ?><div class="zomeex-application-panel" id="zomeex-application-panel-<?php echo esc_attr( $application['slug'] ); ?>" role="tabpanel" aria-labelledby="zomeex-application-tab-<?php echo esc_attr( $application['slug'] ); ?>" data-application-panel="<?php echo esc_attr( $application['slug'] ); ?>"<?php echo 0 === $index ? '' : ' hidden'; ?>><div><p class="zomeex-kicker">Application route</p><h3><?php echo esc_html( $application['name'] ); ?></h3><p>Compare a focused set of formats for this use case, then send the market, volume and finish details with your brief.</p><a class="zomeex-text-link" href="<?php echo esc_url( add_query_arg( 'application', $application['slug'], $quote_url ) ); ?>">Discuss this application <span aria-hidden="true">↗</span></a></div><div class="zomeex-application-panel__media"><img src="<?php echo esc_url( zomeex_upload_url( $category_images[ $index % count( $category_images ) ] ) ); ?>" alt="<?php echo esc_attr( $application['name'] ); ?>" loading="lazy" width="768" height="768"></div></div><?php endforeach; ?>
 			</div>
 		</div>
 	</section>

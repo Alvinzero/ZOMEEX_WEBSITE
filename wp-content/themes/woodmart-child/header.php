@@ -11,6 +11,12 @@ $shop_url    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalin
 $account_url = function_exists( 'zomeex_account_url' ) ? zomeex_account_url() : zomeex_home_url( '/my-account/' );
 $cart_url    = function_exists( 'zomeex_cart_url' ) ? zomeex_cart_url() : zomeex_home_url( '/cart/' );
 $cart_count  = function_exists( 'zomeex_cart_count' ) ? zomeex_cart_count() : 0;
+$quote_url   = function_exists( 'zomeex_quote_url' ) ? zomeex_quote_url() : zomeex_home_url( '/quote-request/' );
+$pack_portal = isset( zomeex_product_portals()['pack'] ) ? zomeex_product_portals()['pack'] : array( 'name' => 'PACK', 'fallback' => $shop_url );
+$pack_url    = zomeex_portal_url( $pack_portal );
+$faq_url     = function_exists( 'zomeex_faq_url' ) ? zomeex_faq_url() : zomeex_home_url( '/faq/' );
+$packaging_types = function_exists( 'zomeex_packaging_categories' ) ? zomeex_packaging_categories() : array();
+$applications    = function_exists( 'zomeex_application_scenarios' ) ? zomeex_application_scenarios() : array();
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -36,18 +42,44 @@ $cart_count  = function_exists( 'zomeex_cart_count' ) ? zomeex_cart_count() : 0;
 				<div class="zomeex-nav-dropdown" data-nav-dropdown>
 					<button class="zomeex-nav-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="menu" aria-controls="zomeex-products-menu">Products <span aria-hidden="true">⌄</span></button>
 					<div class="zomeex-mega-menu" id="zomeex-products-menu" data-nav-dropdown-panel role="menu" hidden>
-							<div class="zomeex-mega-menu__inner zomeex-container">
-							<div class="zomeex-mega-menu__intro"><p>Product catalogue</p><h2>Choose the system<br>behind your brief.</h2><a href="<?php echo esc_url( $shop_url ); ?>">View all products <span aria-hidden="true">↗</span></a></div>
-							<div class="zomeex-mega-menu__portals">
-								<?php foreach ( zomeex_product_portals() as $portal ) : ?>
-									<?php $portal_url = zomeex_portal_url( $portal ); ?>
-									<div class="zomeex-mega-menu__portal">
-										<a class="zomeex-mega-menu__portal-title" href="<?php echo esc_url( $portal_url ); ?>"><strong><?php echo esc_html( $portal['name'] ); ?></strong><span aria-hidden="true">↗</span></a>
-										<p><?php echo esc_html( $portal['description'] ); ?></p>
-										<?php if ( $portal['children'] ) : ?><div class="zomeex-mega-menu__children"><?php foreach ( $portal['children'] as $child ) : ?><?php $child_term = get_term_by( 'slug', $child['slug'], 'product_cat' ); ?><a role="menuitem" href="<?php echo esc_url( $child_term && ! is_wp_error( $child_term ) ? get_term_link( $child_term ) : $portal_url ); ?>"><?php echo esc_html( $child['name'] ); ?></a><?php endforeach; ?></div><?php endif; ?>
+						<div class="zomeex-mega-menu__inner zomeex-container">
+							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--products">
+								<p class="zomeex-mega-menu__eyebrow">Shop by product</p>
+								<div class="zomeex-mega-menu__portal-list">
+									<?php foreach ( zomeex_product_portals() as $portal ) : ?>
+										<?php $portal_url = zomeex_portal_url( $portal ); ?>
+										<a class="zomeex-mega-menu__portal-link" role="menuitem" href="<?php echo esc_url( $portal_url ); ?>"><span><strong><?php echo esc_html( $portal['name'] ); ?></strong><small><?php echo esc_html( $portal['label'] ); ?></small></span><span aria-hidden="true">↗</span></a>
+									<?php endforeach; ?>
+								</div>
+								<div class="zomeex-mega-menu__subsection">
+									<p class="zomeex-mega-menu__eyebrow">Packaging types</p>
+									<div class="zomeex-mega-menu__link-list">
+										<?php foreach ( $packaging_types as $type ) : ?>
+											<?php $type_term = get_term_by( 'slug', $type['slug'], 'product_cat' ); $type_url = $type_term && ! is_wp_error( $type_term ) ? get_term_link( $type_term ) : $pack_url; ?>
+											<a role="menuitem" href="<?php echo esc_url( $type_url ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
+										<?php endforeach; ?>
 									</div>
-								<?php endforeach; ?>
+								</div>
 							</div>
+							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--applications">
+								<p class="zomeex-mega-menu__eyebrow">Shop by application</p>
+								<div class="zomeex-mega-menu__link-list zomeex-mega-menu__link-list--large">
+									<?php foreach ( $applications as $application ) : ?>
+										<a role="menuitem" href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><?php echo esc_html( $application['name'] ); ?><span aria-hidden="true">↗</span></a>
+									<?php endforeach; ?>
+								</div>
+								<div class="zomeex-mega-menu__subsection">
+									<p class="zomeex-mega-menu__eyebrow">Resources</p>
+									<div class="zomeex-mega-menu__link-list">
+										<a role="menuitem" href="<?php echo esc_url( add_query_arg( 'resource', 'dieline', $quote_url ) ); ?>">Free dieline guidance <span aria-hidden="true">↗</span></a>
+										<a role="menuitem" href="<?php echo esc_url( $faq_url ); ?>">Packaging FAQ <span aria-hidden="true">↗</span></a>
+									</div>
+								</div>
+							</div>
+							<aside class="zomeex-mega-menu__feature">
+								<div class="zomeex-mega-menu__feature-media"><img src="<?php echo esc_url( zomeex_upload_url( 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg' ) ); ?>" alt="Packaging sample kit" loading="lazy" width="768" height="768"></div>
+								<div class="zomeex-mega-menu__feature-copy"><p class="zomeex-mega-menu__eyebrow">Need a closer look?</p><h3>Request a physical sample kit.</h3><p>Share your target market and format. We will confirm the available pack and shipping route.</p><a href="<?php echo esc_url( add_query_arg( 'resource', 'sample-kit', $quote_url ) ); ?>">Request sample kit <span aria-hidden="true">↗</span></a></div>
+							</aside>
 						</div>
 					</div>
 				</div>
@@ -98,7 +130,7 @@ $cart_count  = function_exists( 'zomeex_cart_count' ) ? zomeex_cart_count() : 0;
 				</div>
 				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
 					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-products">Products <span aria-hidden="true">+</span></button>
-					<div id="zomeex-mobile-products" data-mobile-nav-panel hidden>
+								<div id="zomeex-mobile-products" data-mobile-nav-panel hidden>
 						<?php foreach ( zomeex_product_portals() as $portal ) : ?>
 							<?php $portal_url = zomeex_portal_url( $portal ); ?>
 							<a href="<?php echo esc_url( $portal_url ); ?>"><strong><?php echo esc_html( $portal['name'] ); ?></strong><small><?php echo esc_html( $portal['label'] ); ?></small><span aria-hidden="true">↗</span></a>
@@ -108,10 +140,25 @@ $cart_count  = function_exists( 'zomeex_cart_count' ) ? zomeex_cart_count() : 0;
 										<?php $child_term = get_term_by( 'slug', $child['slug'], 'product_cat' ); ?>
 										<a href="<?php echo esc_url( $child_term && ! is_wp_error( $child_term ) ? get_term_link( $child_term ) : $portal_url ); ?>"><?php echo esc_html( $child['name'] ); ?><span aria-hidden="true">↗</span></a>
 									<?php endforeach; ?>
-								</div>
-							<?php endif; ?>
-						<?php endforeach; ?>
-					</div>
+												</div>
+											<?php endif; ?>
+										<?php endforeach; ?>
+										<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
+											<strong class="zomeex-mobile-nav__label">Packaging types</strong>
+											<?php foreach ( $packaging_types as $type ) : ?>
+												<?php $type_term = get_term_by( 'slug', $type['slug'], 'product_cat' ); $type_url = $type_term && ! is_wp_error( $type_term ) ? get_term_link( $type_term ) : $pack_url; ?>
+												<a href="<?php echo esc_url( $type_url ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
+											<?php endforeach; ?>
+										</div>
+										<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
+											<strong class="zomeex-mobile-nav__label">Shop by application</strong>
+											<?php foreach ( $applications as $application ) : ?>
+												<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><?php echo esc_html( $application['name'] ); ?><span aria-hidden="true">↗</span></a>
+											<?php endforeach; ?>
+											<a href="<?php echo esc_url( add_query_arg( 'resource', 'dieline', $quote_url ) ); ?>">Free dieline guidance<span aria-hidden="true">↗</span></a>
+											<a href="<?php echo esc_url( $faq_url ); ?>">Packaging FAQ<span aria-hidden="true">↗</span></a>
+										</div>
+									</div>
 				</div>
 				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
 					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-solutions">Solutions <span aria-hidden="true">+</span></button>

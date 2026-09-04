@@ -26,6 +26,73 @@ Text Domain:  woodmart
 	--zomeex-nav-line-height: 1;
 }
 
+/* PRD follow-through: keep extended mobile navigation readable and RFQ
+ * uploads/consent aligned with the existing form tokens. */
+.zomeex-mobile-nav__children--section {
+	border-left: 0;
+	border-top: 1px solid var(--zomeex-line);
+	margin: 12px 0 0;
+	padding: 14px 0 8px !important;
+}
+
+.zomeex-mobile-nav__label {
+	color: var(--zomeex-accent-dark);
+	display: block;
+	font-size: 10px;
+	letter-spacing: .12em;
+	margin: 0 0 6px;
+	text-transform: uppercase;
+}
+
+.zomeex-file-field input[type="file"] {
+	background: var(--zomeex-paper-deep);
+	border: 1px solid var(--zomeex-line);
+	color: var(--zomeex-ink);
+	font-size: 13px;
+	min-height: 48px;
+	padding: 10px;
+	width: 100%;
+}
+
+.zomeex-file-field small {
+	color: var(--zomeex-ink-soft);
+	display: block;
+	font-size: 12px;
+	line-height: 1.45;
+	margin-top: 8px;
+}
+
+.zomeex-privacy-consent {
+	align-items: flex-start;
+	display: flex;
+	font-size: 12px;
+	gap: 10px;
+	line-height: 1.5;
+	margin: 22px 0 18px;
+}
+
+.zomeex-privacy-consent input {
+	accent-color: var(--zomeex-accent);
+	flex: 0 0 auto;
+	height: 18px;
+	margin: 1px 0 0;
+	width: 18px;
+}
+
+@media (max-width: 767px) {
+	.zomeex-mobile-nav__children--section a {
+		font-size: 14px !important;
+		letter-spacing: 0 !important;
+		line-height: 1.35;
+		padding: 9px 0 !important;
+		text-transform: none;
+	}
+
+	.zomeex-mobile-nav__children--section a span {
+		font-size: 10px;
+	}
+}
+
 /* Phase 3 content surfaces: the same quiet industrial system as the catalogue. */
 .zomeex-content {
 	background: var(--zomeex-paper);
@@ -74,6 +141,197 @@ Text Domain:  woodmart
 .zomeex-content-masthead .zomeex-button {
 	display: inline-flex;
 	margin-top: 32px;
+}
+
+/* FAQ surface: open reading rhythm, native details interaction and no nested cards. */
+.zomeex-faq {
+	background: var(--zomeex-paper);
+	color: var(--zomeex-ink);
+	overflow: hidden;
+}
+
+.zomeex-faq__body {
+	padding: 86px 0 96px;
+}
+
+.zomeex-faq__layout {
+	display: grid;
+	gap: 84px;
+	grid-template-columns: minmax(250px, .72fr) minmax(0, 1.28fr);
+}
+
+.zomeex-faq__intro {
+	align-self: start;
+	position: sticky;
+	top: 112px;
+}
+
+.zomeex-faq__intro h2 {
+	font-size: clamp(30px, 3.5vw, 48px);
+	letter-spacing: -.035em;
+	line-height: 1.02;
+	margin: 0 0 18px;
+}
+
+.zomeex-faq__intro > p:not(.zomeex-kicker) {
+	color: var(--zomeex-ink-soft);
+	font-size: 15px;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 36ch;
+}
+
+.zomeex-faq__intro .zomeex-button {
+	margin-top: 28px;
+}
+
+.zomeex-faq__list {
+	border-top: 1px solid var(--zomeex-ink);
+}
+
+.zomeex-faq__item {
+	border-bottom: 1px solid var(--zomeex-line);
+}
+
+.zomeex-faq__item summary {
+	align-items: center;
+	cursor: pointer;
+	display: flex;
+	font-size: 18px;
+	font-weight: 700;
+	gap: 20px;
+	justify-content: space-between;
+	list-style: none;
+	min-height: 78px;
+	padding: 20px 0;
+}
+
+.zomeex-faq__item summary::-webkit-details-marker {
+	display: none;
+}
+
+.zomeex-faq__item summary > span:first-child {
+	max-width: 58ch;
+}
+
+.zomeex-faq__icon {
+	align-items: center;
+	border: 1px solid var(--zomeex-line);
+	border-radius: 50%;
+	color: var(--zomeex-accent-dark);
+	display: inline-flex;
+	flex: 0 0 28px;
+	font-size: 20px;
+	height: 28px;
+	justify-content: center;
+	line-height: 1;
+	transition: transform .2s ease, background-color .2s ease;
+	width: 28px;
+}
+
+.zomeex-faq__item[open] .zomeex-faq__icon {
+	background: var(--zomeex-accent);
+	border-color: var(--zomeex-accent);
+	color: #fff;
+	transform: rotate(45deg);
+}
+
+.zomeex-faq__answer {
+	padding: 0 52px 23px 0;
+}
+
+.zomeex-faq__answer p {
+	color: var(--zomeex-ink-soft);
+	font-size: 15px;
+	line-height: 1.65;
+	margin: 0;
+	max-width: 66ch;
+}
+
+.zomeex-faq__cta {
+	background: var(--zomeex-dark);
+	color: #fff;
+	padding: 62px 0 68px;
+}
+
+.zomeex-faq__cta-inner {
+	align-items: center;
+	display: grid;
+	gap: 12px 30px;
+	grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.zomeex-faq__cta h2 {
+	font-size: clamp(28px, 4vw, 44px);
+	grid-column: 1;
+	line-height: 1.04;
+	margin: 0;
+}
+
+.zomeex-faq__cta p {
+	color: #c6d4cc;
+	font-size: 15px;
+	grid-column: 1;
+	line-height: 1.55;
+	margin: 0;
+	max-width: 52ch;
+}
+
+.zomeex-faq__cta .zomeex-button {
+	border-color: #fff;
+	color: #fff;
+	grid-column: 2;
+	grid-row: 1 / span 2;
+}
+
+.zomeex-faq__cta .zomeex-button:hover {
+	background: #fff;
+	color: var(--zomeex-dark);
+}
+
+@media (max-width: 900px) {
+	.zomeex-faq__layout {
+		gap: 48px;
+		grid-template-columns: 1fr;
+	}
+
+	.zomeex-faq__intro {
+		position: static;
+	}
+}
+
+@media (max-width: 767px) {
+	.zomeex-faq__body {
+		padding: 54px 0 62px;
+	}
+
+	.zomeex-faq__item summary {
+		font-size: 16px;
+		min-height: 70px;
+		padding: 17px 0;
+	}
+
+	.zomeex-faq__answer {
+		padding-right: 32px;
+	}
+
+	.zomeex-faq__answer p {
+		font-size: 14px;
+	}
+
+	.zomeex-faq__cta {
+		padding: 48px 0 54px;
+	}
+
+	.zomeex-faq__cta-inner {
+		display: flex;
+		align-items: flex-start;
+		flex-direction: column;
+	}
+
+	.zomeex-faq__cta .zomeex-button {
+		margin-top: 12px;
+	}
 }
 
 .zomeex-insights-page__body {
@@ -1929,6 +2187,189 @@ body.zomeex-age-gate-active::before {
 	color: var(--zomeex-accent-dark);
 }
 
+/* PRD navigation: a contained three-column catalogue panel. */
+.zomeex-mega-menu__inner {
+	align-items: stretch;
+	grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) minmax(230px, .8fr);
+	gap: 0;
+	padding: 30px 0 32px;
+}
+
+.zomeex-mega-menu__column {
+	min-width: 0;
+	padding: 0 28px;
+}
+
+.zomeex-mega-menu__column:first-child {
+	padding-left: 0;
+}
+
+.zomeex-mega-menu__column + .zomeex-mega-menu__column,
+.zomeex-mega-menu__feature {
+	border-left: 1px solid var(--zomeex-line);
+}
+
+.zomeex-mega-menu__feature {
+	display: grid;
+	grid-template-rows: 126px 1fr;
+	min-width: 0;
+	padding-left: 28px;
+}
+
+.zomeex-mega-menu__eyebrow {
+	color: var(--zomeex-accent-dark);
+	font-size: 10px;
+	font-weight: 700;
+	letter-spacing: .13em;
+	line-height: 1.2;
+	margin: 0 0 14px;
+	text-transform: uppercase;
+}
+
+.zomeex-mega-menu__portal-list,
+.zomeex-mega-menu__link-list {
+	display: grid;
+	gap: 1px;
+}
+
+.zomeex-mega-menu__portal-link,
+.zomeex-mega-menu__link-list a {
+	align-items: center;
+	color: var(--zomeex-ink);
+	display: flex;
+	justify-content: space-between;
+	min-width: 0;
+	padding: 8px 0;
+	text-transform: none;
+}
+
+.zomeex-mega-menu__portal-link:hover,
+.zomeex-mega-menu__portal-link:focus-visible,
+.zomeex-mega-menu__link-list a:hover,
+.zomeex-mega-menu__link-list a:focus-visible {
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-mega-menu__portal-link strong {
+	display: block;
+	font-size: 13px;
+	letter-spacing: .07em;
+	line-height: 1.2;
+}
+
+.zomeex-mega-menu__portal-link small {
+	color: var(--zomeex-ink-soft);
+	display: block;
+	font-size: 11px;
+	letter-spacing: 0;
+	line-height: 1.35;
+	margin-top: 3px;
+}
+
+.zomeex-mega-menu__portal-link > span:last-child,
+.zomeex-mega-menu__link-list a > span {
+	color: var(--zomeex-accent-dark);
+	flex: 0 0 auto;
+	font-size: 14px;
+	margin-left: 12px;
+}
+
+.zomeex-mega-menu__link-list a {
+	font-size: 12px !important;
+	letter-spacing: .01em !important;
+	line-height: 1.3;
+}
+
+.zomeex-mega-menu__link-list--large a {
+	font-size: 13px !important;
+	padding: 10px 0;
+}
+
+.zomeex-mega-menu__subsection {
+	border-top: 1px solid var(--zomeex-line);
+	margin-top: 20px;
+	padding-top: 18px;
+}
+
+.zomeex-mega-menu__subsection .zomeex-mega-menu__eyebrow {
+	margin-bottom: 7px;
+}
+
+.zomeex-mega-menu__feature-media {
+	background: var(--zomeex-paper-deep);
+	overflow: hidden;
+}
+
+.zomeex-mega-menu__feature-media img {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.zomeex-mega-menu__feature-copy {
+	padding-top: 20px;
+}
+
+.zomeex-mega-menu__feature-copy h3 {
+	font-size: 22px;
+	line-height: 1.08;
+	margin: 0 0 10px;
+}
+
+.zomeex-mega-menu__feature-copy > p:not(.zomeex-mega-menu__eyebrow) {
+	color: var(--zomeex-ink-soft);
+	font-size: 12px;
+	line-height: 1.5;
+	margin: 0;
+}
+
+.zomeex-mega-menu__feature-copy > a {
+	border-bottom: 1px solid currentColor;
+	color: var(--zomeex-accent-dark);
+	display: inline-block;
+	font-size: 10px !important;
+	font-weight: 700;
+	letter-spacing: .1em !important;
+	margin-top: 18px;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+}
+
+@media (max-width: 1100px) {
+	.zomeex-mega-menu__inner {
+		grid-template-columns: minmax(0, 1fr) minmax(0, .9fr) minmax(190px, .75fr);
+	}
+
+	.zomeex-mega-menu__column,
+	.zomeex-mega-menu__feature {
+		padding-left: 18px;
+		padding-right: 18px;
+	}
+
+	.zomeex-mega-menu__column:first-child {
+		padding-left: 0;
+	}
+}
+
+@media (max-width: 900px) {
+	.zomeex-mega-menu__inner {
+		grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+	}
+
+	.zomeex-mega-menu__feature {
+		grid-column: 1 / -1;
+		grid-template-columns: 150px 1fr;
+		grid-template-rows: 1fr;
+		margin-top: 24px;
+		padding: 24px 0 0;
+	}
+
+	.zomeex-mega-menu__feature-copy {
+		padding: 0 0 0 20px;
+	}
+}
+
 .zomeex-header__quote {
 	align-items: center;
 	display: inline-flex;
@@ -2590,6 +3031,237 @@ body.zomeex-age-gate-active::before {
 .zomeex-family-card:hover .zomeex-family-card__action span,
 .zomeex-family-card:focus-visible .zomeex-family-card__action span {
 	transform: translateX(3px);
+}
+
+.zomeex-trust-bar {
+	background: var(--zomeex-dark);
+	border-bottom: 1px solid rgba(255, 255, 255, .12);
+	color: #d9e6de;
+}
+
+.zomeex-trust-bar__inner {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.zomeex-trust-bar__inner span {
+	font-size: 10px;
+	letter-spacing: .1em;
+	line-height: 1.35;
+	min-height: 68px;
+	padding: 18px 18px 17px 0;
+	text-transform: uppercase;
+}
+
+.zomeex-trust-bar__inner span + span {
+	border-left: 1px solid rgba(255, 255, 255, .15);
+	padding-left: 18px;
+}
+
+.zomeex-packaging {
+	background: var(--zomeex-paper);
+	padding: 82px 0 90px;
+}
+
+.zomeex-packaging__grid {
+	display: grid;
+	gap: 26px 16px;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.zomeex-packaging-card {
+	min-width: 0;
+}
+
+.zomeex-packaging-card__media {
+	background: var(--zomeex-paper-deep);
+	display: block;
+	overflow: hidden;
+	aspect-ratio: 1 / .82;
+}
+
+.zomeex-packaging-card__media img {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	transition: transform .35s cubic-bezier(.16, 1, .3, 1);
+	width: 100%;
+}
+
+.zomeex-packaging-card:hover .zomeex-packaging-card__media img,
+.zomeex-packaging-card:focus-within .zomeex-packaging-card__media img {
+	transform: scale(1.04);
+}
+
+.zomeex-packaging-card__body {
+	border-bottom: 1px solid var(--zomeex-line);
+	padding: 15px 2px 18px;
+}
+
+.zomeex-packaging-card__body > p {
+	color: var(--zomeex-accent-dark);
+	font-size: 10px;
+	letter-spacing: .12em;
+	margin: 0 0 9px;
+}
+
+.zomeex-packaging-card__body h3 {
+	font-size: 21px;
+	line-height: 1.12;
+	margin: 0;
+	max-width: 18ch;
+}
+
+.zomeex-packaging-card__body .zomeex-text-link {
+	font-size: 9px;
+	margin-top: 17px;
+}
+
+.zomeex-resources {
+	background: #fbfcfa;
+	border-bottom: 1px solid var(--zomeex-line);
+	padding: 0;
+}
+
+.zomeex-resources__grid {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+}
+
+.zomeex-resource {
+	min-height: 390px;
+	padding: 56px 48px 60px 0;
+}
+
+.zomeex-resource--sample {
+	border-left: 1px solid var(--zomeex-line);
+	display: grid;
+	gap: 28px;
+	grid-template-columns: minmax(130px, .62fr) minmax(0, 1fr);
+	padding-left: 34px;
+}
+
+.zomeex-resource--dieline > div {
+	max-width: 540px;
+}
+
+.zomeex-resource h2 {
+	font-size: 36px;
+	letter-spacing: -.035em;
+	line-height: 1.03;
+	margin: 0 0 16px;
+}
+
+.zomeex-resource p:not(.zomeex-kicker) {
+	color: var(--zomeex-ink-soft);
+	font-size: 15px;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 48ch;
+}
+
+.zomeex-resource .zomeex-button {
+	margin-top: 28px;
+}
+
+.zomeex-resource__media {
+	background: var(--zomeex-paper-deep);
+	overflow: hidden;
+}
+
+.zomeex-resource__media img {
+	display: block;
+	height: 100%;
+	object-fit: cover;
+	width: 100%;
+}
+
+.zomeex-resource__copy h2 {
+	font-size: 28px;
+}
+
+.zomeex-resource__copy .zomeex-text-link {
+	font-size: 10px;
+	margin-top: 22px;
+}
+
+.zomeex-applications {
+	background: var(--zomeex-paper);
+	padding: 80px 0 90px;
+}
+
+.zomeex-application-tabs {
+	border-bottom: 1px solid var(--zomeex-line);
+	display: flex;
+	gap: 22px;
+	overflow-x: auto;
+	padding-bottom: 0;
+	scrollbar-width: thin;
+}
+
+.zomeex-application-tabs button {
+	background: transparent;
+	border: 0;
+	border-bottom: 2px solid transparent;
+	color: var(--zomeex-ink-soft);
+	cursor: pointer;
+	flex: 0 0 auto;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .04em;
+	min-height: 48px;
+	padding: 7px 0 12px;
+	text-align: left;
+}
+
+.zomeex-application-tabs button[aria-selected="true"],
+.zomeex-application-tabs button:hover,
+.zomeex-application-tabs button:focus-visible {
+	border-bottom-color: var(--zomeex-accent);
+	color: var(--zomeex-ink);
+}
+
+.zomeex-application-panel {
+	align-items: stretch;
+	display: grid;
+	gap: 52px;
+	grid-template-columns: minmax(0, 1fr) minmax(260px, .8fr);
+	padding-top: 38px;
+}
+
+.zomeex-application-panel h3 {
+	font-size: clamp(30px, 4vw, 52px);
+	letter-spacing: -.035em;
+	line-height: 1;
+	margin: 0 0 17px;
+	max-width: 12ch;
+}
+
+.zomeex-application-panel p:not(.zomeex-kicker) {
+	color: var(--zomeex-ink-soft);
+	font-size: 15px;
+	line-height: 1.6;
+	margin: 0;
+	max-width: 48ch;
+}
+
+.zomeex-application-panel .zomeex-text-link {
+	font-size: 10px;
+	margin-top: 26px;
+}
+
+.zomeex-application-panel__media {
+	background: var(--zomeex-paper-deep);
+	min-height: 250px;
+	overflow: hidden;
+}
+
+.zomeex-application-panel__media img {
+	display: block;
+	height: 100%;
+	min-height: 250px;
+	object-fit: cover;
+	width: 100%;
 }
 
 /* Phase 5: route a B2B buyer from a product family into a defined project. */
@@ -3746,12 +4418,12 @@ body.zomeex-age-gate-active::before {
 
 .zomeex-modern-page .zomeex-quote-float {
 	align-items: center;
-	background: var(--zomeex-paper-deep);
-	border: 1px solid rgba(20, 116, 81, .24);
-	border-radius: 4px;
+	background: var(--zomeex-accent);
+	border: 1px solid var(--zomeex-accent);
+	border-radius: 999px;
 	bottom: 22px;
 	box-shadow: 0 10px 24px rgba(17, 35, 29, .14), 0 2px 5px rgba(17, 35, 29, .08);
-	color: var(--zomeex-ink);
+	color: #fff;
 	display: inline-flex;
 	font-size: 10px;
 	font-weight: 700;
@@ -3777,8 +4449,8 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-quote-float:hover {
-	background: var(--zomeex-accent);
-	border-color: var(--zomeex-accent);
+	background: var(--zomeex-accent-dark);
+	border-color: var(--zomeex-accent-dark);
 	box-shadow: 0 12px 26px rgba(20, 116, 81, .24), 0 2px 6px rgba(17, 35, 29, .1);
 	color: #fff;
 	transform: translateY(-2px);
@@ -3795,7 +4467,7 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-quote-float > span:last-child {
-	color: var(--zomeex-accent);
+	color: #dff4e8;
 	font-size: 15px;
 	line-height: 1;
 }
@@ -4887,7 +5559,8 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-quote__success .zomeex-button {
-	margin-top: 28px;
+	margin-top: 0;
+	position: static;
 }
 
 @media (max-width: 1100px) {

@@ -35,7 +35,7 @@ function woodmart_child_enqueue_styles() {
 			'zomeex-home',
 			get_stylesheet_directory_uri() . '/assets/zomeex-home.js',
 			array( 'zomeex-i18n' ),
-			'1.3.0',
+			'1.3.1',
 			true
 		);
 	}
@@ -104,11 +104,36 @@ function zomeex_is_quote_request() {
 	return isset( $_GET['zomeex_quote'] ) || 'quote-request' === $request_path;
 }
 
+/** FAQ is a virtual route so it works even when no CMS page has been created. */
+function zomeex_is_faq_route() {
+	$request_path = trim( (string) parse_url( $_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH ), '/' );
+
+	return ( function_exists( 'is_page' ) && is_page( 'faq' ) ) || 'faq' === $request_path;
+}
+
+function zomeex_faq_url() {
+	return zomeex_page_url( 'faq', '/faq/' );
+}
+
+/** Initial FAQ content is intentionally practical and avoids unverified claims. */
+function zomeex_faq_items() {
+	return array(
+		array( 'question' => 'What packaging formats can ZOMEEX customize?', 'answer' => 'We can review bags and pouches, pre-roll formats, paper and rigid boxes, jars, tins, bottles, tubes and retail display pieces. The final format depends on the product, target market and available production route.' ),
+		array( 'question' => 'Can you provide child-resistant packaging?', 'answer' => 'Child-resistant structures can be discussed for suitable formats. The applicable test method, certification documents and market requirements must be confirmed for the exact product before a compliance claim is made.' ),
+		array( 'question' => 'What is the minimum order quantity?', 'answer' => 'MOQ varies by format, material, printing method and tooling. Share your estimated quantity and launch market in the quote brief and the team will confirm a practical starting quantity.' ),
+		array( 'question' => 'Can I order samples before production?', 'answer' => 'Yes. You can request a sample conversation through the quote form. The team will confirm available samples, shipping coverage and whether a custom pre-production proof is appropriate.' ),
+		array( 'question' => 'Do you offer custom printing and special finishes?', 'answer' => 'Available options may include CMYK or spot colour printing, foil, spot UV, soft-touch coatings and embossing. The achievable finish depends on the substrate, artwork and production method.' ),
+		array( 'question' => 'Can you share dielines or artwork guidance?', 'answer' => 'The team can review an existing dieline or help prepare a format-specific file. Request a dieline in your brief and include the product dimensions, closure and preferred material when known.' ),
+		array( 'question' => 'Which markets can you support?', 'answer' => 'We work with teams planning launches in different regions. Share the destination market and any known packaging, labelling or documentation requirements so the route can be reviewed accurately.' ),
+		array( 'question' => 'How do I start a packaging project?', 'answer' => 'Choose a product from the catalogue or send a general project brief. Include the format, target market, estimated volume, timing and artwork status. The team will respond with the next questions and a quote path.' ),
+	);
+}
+
 function zomeex_is_content_route() {
 	$is_content_page = function_exists( 'is_page' ) && is_page( array( 'news', 'about-us-3', 'contact-us' ) );
 	$is_insight      = function_exists( 'is_singular' ) && is_singular( 'post' );
 
-	return $is_content_page || $is_insight;
+	return $is_content_page || $is_insight || zomeex_is_faq_route();
 }
 
 function zomeex_is_account_route() {
@@ -133,7 +158,7 @@ function zomeex_is_modern_route() {
 	$is_cart    = zomeex_is_cart_route();
 	$is_404 = function_exists( 'is_404' ) && is_404();
 
-	return is_front_page() || $is_catalog || $is_account || $is_cart || zomeex_is_quote_request() || zomeex_is_content_route() || $is_404;
+	return is_front_page() || $is_catalog || $is_account || $is_cart || zomeex_is_quote_request() || zomeex_is_content_route() || zomeex_is_faq_route() || $is_404;
 }
 
 function zomeex_quote_url() {
@@ -177,6 +202,10 @@ function zomeex_route_template( $template ) {
 
 	if ( zomeex_is_quote_request() ) {
 		return get_stylesheet_directory() . '/quote-request.php';
+	}
+
+	if ( zomeex_is_faq_route() ) {
+		return get_stylesheet_directory() . '/faq.php';
 	}
 
 	if ( function_exists( 'is_404' ) && is_404() ) {
@@ -258,6 +287,10 @@ function zomeex_quote_document_title( $title ) {
 		return 'Request a quote | ZOMEEX';
 	}
 
+	if ( zomeex_is_faq_route() ) {
+		return 'Cannabis Packaging FAQ | ZOMEEX';
+	}
+
 	if ( function_exists( 'is_404' ) && is_404() ) {
 		return 'Page not found | ZOMEEX';
 	}
@@ -320,6 +353,8 @@ function zomeex_seo_description() {
 
 	if ( zomeex_is_quote_request() ) {
 		$description = 'Send ZOMEEX a product, market and volume brief for a tailored OEM/ODM quote.';
+	} elseif ( zomeex_is_faq_route() ) {
+		$description = 'Answers to common questions about custom cannabis packaging, child-resistant formats, materials, samples and wholesale orders.';
 	} elseif ( function_exists( 'is_404' ) && is_404() ) {
 		$description = 'The requested ZOMEEX page could not be found. Browse products or start a focused project brief.';
 	} elseif ( is_front_page() ) {
@@ -396,6 +431,8 @@ function zomeex_seo_breadcrumbs() {
 		$items[] = array( '@type' => 'ListItem', 'position' => 3, 'name' => get_the_title(), 'item' => get_permalink() );
 	} elseif ( is_page( 'news' ) ) {
 		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Insights', 'item' => get_permalink() );
+	} elseif ( zomeex_is_faq_route() ) {
+		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'FAQ', 'item' => zomeex_faq_url() );
 	} elseif ( function_exists( 'is_shop' ) && is_shop() ) {
 		$items[] = array( '@type' => 'ListItem', 'position' => 2, 'name' => 'Products', 'item' => zomeex_home_url( '/shop/' ) );
 	} elseif ( is_page() && ! is_front_page() ) {
@@ -439,6 +476,8 @@ function zomeex_output_schema() {
 	$is_product_category = function_exists( 'is_product_category' ) && is_product_category();
 	if ( zomeex_is_quote_request() ) {
 		$schema_url = zomeex_quote_url();
+	} elseif ( zomeex_is_faq_route() ) {
+		$schema_url = zomeex_faq_url();
 	} elseif ( function_exists( 'is_product' ) && is_product() ) {
 		$schema_url = get_permalink( get_queried_object_id() );
 	} elseif ( $is_product_category ) {
@@ -487,6 +526,21 @@ function zomeex_output_schema() {
 		);
 	}
 
+	if ( zomeex_is_faq_route() && function_exists( 'zomeex_faq_items' ) ) {
+		$entities = array();
+		foreach ( zomeex_faq_items() as $faq ) {
+			$entities[] = array(
+				'@type' => 'Question',
+				'name' => $faq['question'],
+				'acceptedAnswer' => array(
+					'@type' => 'Answer',
+					'text' => $faq['answer'],
+				),
+			);
+		}
+		$graph[] = array( '@type' => 'FAQPage', '@id' => $schema_url . '#faq', 'mainEntity' => $entities );
+	}
+
 	$graph[] = array( '@type' => 'BreadcrumbList', '@id' => $schema_url . '#breadcrumb', 'itemListElement' => zomeex_seo_breadcrumbs() );
 	printf( "<script type=\"application/ld+json\">%s</script>\n", wp_json_encode( array( '@context' => 'https://schema.org', '@graph' => $graph ), JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES ) );
 }
@@ -499,7 +553,7 @@ function zomeex_output_seo_head() {
 	$title       = wp_get_document_title();
 	$description = zomeex_seo_description();
 	$is_product_category = function_exists( 'is_product_category' ) && is_product_category();
-	$url         = zomeex_is_quote_request() ? zomeex_quote_url() : ( is_singular() || is_page() ? get_permalink() : ( $is_product_category ? get_term_link( get_queried_object() ) : zomeex_home_url( '/shop/' ) ) );
+	$url         = zomeex_is_quote_request() ? zomeex_quote_url() : ( zomeex_is_faq_route() ? zomeex_faq_url() : ( is_singular() || is_page() ? get_permalink() : ( $is_product_category ? get_term_link( get_queried_object() ) : zomeex_home_url( '/shop/' ) ) ) );
 	$url         = zomeex_seo_url( $url, '/shop/' );
 	$type        = is_singular( 'post' ) ? 'article' : 'website';
 	$image       = zomeex_seo_image();
@@ -641,6 +695,80 @@ function zomeex_quote_safe_url( $url ) {
 	return $url && in_array( $scheme, array( 'http', 'https' ), true ) ? $url : '';
 }
 
+/** Validate and move optional artwork files into the WordPress uploads area. */
+function zomeex_quote_upload_files( &$invalid ) {
+	$uploads = $_FILES['artwork_files'] ?? null;
+	if ( ! is_array( $uploads ) || empty( $uploads['name'] ) ) {
+		return array();
+	}
+
+	$allowed = array(
+		'pdf'  => 'application/pdf',
+		'ai'   => 'application/illustrator',
+		'eps'  => 'application/postscript',
+		'svg'  => 'image/svg+xml',
+		'png'  => 'image/png',
+		'jpg'  => 'image/jpeg',
+		'jpeg' => 'image/jpeg',
+		'webp' => 'image/webp',
+	);
+	$names       = is_array( $uploads['name'] ) ? $uploads['name'] : array( $uploads['name'] );
+	$tmp_names   = is_array( $uploads['tmp_name'] ) ? $uploads['tmp_name'] : array( $uploads['tmp_name'] );
+	$errors      = is_array( $uploads['error'] ) ? $uploads['error'] : array( $uploads['error'] );
+	$sizes       = is_array( $uploads['size'] ) ? $uploads['size'] : array( $uploads['size'] );
+	$file_count  = count( array_filter( $names, 'strlen' ) );
+	if ( $file_count > 3 ) {
+		$invalid = true;
+		return array();
+	}
+
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	$stored = array();
+	foreach ( $names as $index => $original_name ) {
+		if ( '' === trim( (string) $original_name ) ) {
+			continue;
+		}
+		$error = (int) ( $errors[ $index ] ?? UPLOAD_ERR_NO_FILE );
+		$size  = (int) ( $sizes[ $index ] ?? 0 );
+		$tmp   = $tmp_names[ $index ] ?? '';
+		$ext   = strtolower( pathinfo( (string) $original_name, PATHINFO_EXTENSION ) );
+		if ( UPLOAD_ERR_OK !== $error || ! isset( $allowed[ $ext ] ) || $size < 1 || $size > 10 * 1024 * 1024 || ! is_string( $tmp ) || ! is_uploaded_file( $tmp ) ) {
+			$invalid = true;
+			continue;
+		}
+		if ( 'svg' === $ext ) {
+			$svg_source = file_get_contents( $tmp );
+			if ( false === $svg_source || preg_match( '/<script|on[a-z]+\s*=/i', $svg_source ) ) {
+				$invalid = true;
+				continue;
+			}
+		}
+		$handled = wp_handle_upload(
+			array(
+			'name'     => sanitize_file_name( (string) $original_name ),
+			'type'     => $allowed[ $ext ],
+			'tmp_name' => $tmp,
+			'error'    => $error,
+			'size'     => $size,
+			),
+			array( 'test_form' => false, 'mimes' => $allowed )
+		);
+		if ( isset( $handled['error'] ) || empty( $handled['file'] ) ) {
+			$invalid = true;
+			continue;
+		}
+		$stored[] = array(
+			'name' => wp_basename( $handled['file'] ),
+			'url'  => esc_url_raw( $handled['url'] ),
+			'path' => $handled['file'],
+			'type' => sanitize_key( $handled['type'] ?? $allowed[ $ext ] ),
+			'size' => $size,
+		);
+	}
+
+	return $stored;
+}
+
 function zomeex_handle_quote_submit() {
 	if ( ! isset( $_POST['zomeex_quote_nonce'] ) || ! wp_verify_nonce( sanitize_text_field( wp_unslash( $_POST['zomeex_quote_nonce'] ) ), 'zomeex_quote_submit' ) ) {
 		zomeex_quote_redirect( array( 'quote_error' => 'security' ) );
@@ -653,12 +781,14 @@ function zomeex_handle_quote_submit() {
 	$country       = zomeex_quote_field_limit( $_POST['country'] ?? '', 120, $invalid );
 	$role          = zomeex_quote_field_limit( $_POST['role'] ?? '', 60, $invalid );
 	$target_market = zomeex_quote_field_limit( $_POST['target_market'] ?? '', 160, $invalid );
+	$product_interest = zomeex_quote_field_limit( $_POST['product_interest'] ?? '', 180, $invalid );
 	$quantity      = zomeex_quote_field_limit( $_POST['quantity'] ?? '', 32, $invalid );
 	$customization = zomeex_quote_field_limit( $_POST['customization'] ?? '', 3000, $invalid, true );
 	$timeline      = zomeex_quote_field_limit( $_POST['timeline'] ?? '', 30, $invalid );
 	$samples       = zomeex_quote_field_limit( $_POST['samples'] ?? '', 60, $invalid );
 	$notes         = zomeex_quote_field_limit( $_POST['notes'] ?? '', 3000, $invalid, true );
 	$honeypot      = zomeex_quote_field_limit( $_POST['zomeex_quote_honeypot'] ?? '', 120, $invalid );
+	$privacy_consent = isset( $_POST['privacy_consent'] ) && '1' === sanitize_text_field( wp_unslash( $_POST['privacy_consent'] ) );
 
 	if ( $honeypot ) {
 		zomeex_quote_redirect( array( 'quote_error' => 'spam' ) );
@@ -682,8 +812,13 @@ function zomeex_handle_quote_submit() {
 		zomeex_quote_redirect( array( 'quote_error' => 'invalid' ) );
 	}
 
-	if ( ! $name || ! $company || ! is_email( $email ) || ! $country || ! $target_market ) {
+	if ( ! $name || ! $company || ! is_email( $email ) || ! $country || ! $target_market || ! $privacy_consent ) {
 		zomeex_quote_redirect( array( 'quote_error' => 'required' ) );
+	}
+
+	$uploaded_files = zomeex_quote_upload_files( $invalid );
+	if ( $invalid ) {
+		zomeex_quote_redirect( array( 'quote_error' => 'invalid' ) );
 	}
 
 	$raw_json = is_scalar( $_POST['quote_items'] ?? '' ) ? wp_unslash( (string) $_POST['quote_items'] ) : '[]';
@@ -720,11 +855,17 @@ function zomeex_handle_quote_submit() {
 
 	$reference = 'ZX-' . gmdate( 'ymd-His' ) . '-' . wp_rand( 100, 999 );
 	$content   = "Reference: {$reference}\n\n";
-	$content  .= "Contact: {$name}\nCompany: {$company}\nEmail: {$email}\nCountry/region: {$country}\nRole: {$role}\nTarget market: {$target_market}\nEstimated quantity: {$quantity}\nTimeline: {$timeline}\nSamples: {$samples}\n\n";
+	$content  .= "Contact: {$name}\nCompany: {$company}\nEmail: {$email}\nCountry/region: {$country}\nRole: {$role}\nTarget market: {$target_market}\nProduct interest: {$product_interest}\nEstimated quantity: {$quantity}\nTimeline: {$timeline}\nSamples: {$samples}\n\n";
 	$content  .= "Customization:\n{$customization}\n\nNotes:\n{$notes}\n\nProducts:\n";
 
 	foreach ( $items as $item ) {
 		$content .= sprintf( "- %s%s x%s\n", $item['title'], $item['sku'] ? " ({$item['sku']})" : '', $item['quantity'] );
+	}
+	if ( $uploaded_files ) {
+		$content .= "\nArtwork / dieline files:\n";
+		foreach ( $uploaded_files as $file ) {
+			$content .= '- ' . $file['name'] . "\n";
+		}
 	}
 
 	$post_id = wp_insert_post(
@@ -744,10 +885,13 @@ function zomeex_handle_quote_submit() {
 	update_post_meta( $post_id, '_zomeex_quote_reference', $reference );
 	update_post_meta( $post_id, '_zomeex_quote_email', $email );
 	update_post_meta( $post_id, '_zomeex_quote_items', $items );
+	update_post_meta( $post_id, '_zomeex_quote_product_interest', $product_interest );
+	update_post_meta( $post_id, '_zomeex_quote_files', array_map( static function ( $file ) { unset( $file['path'] ); return $file; }, $uploaded_files ) );
 	update_post_meta( $post_id, '_zomeex_quote_source_url', esc_url_raw( wp_get_referer() ?: '' ) );
 
 	$recipient = apply_filters( 'zomeex_quote_recipient', get_option( 'admin_email' ) );
-	wp_mail( $recipient, 'ZOMEEX quote request ' . $reference, $content, array( 'Reply-To: ' . $email ) );
+	$attachments = array_values( array_filter( array_map( static function ( $file ) { return $file['path'] ?? ''; }, $uploaded_files ) ) );
+	wp_mail( $recipient, 'ZOMEEX quote request ' . $reference, $content, array( 'Reply-To: ' . $email ), $attachments );
 
 	zomeex_quote_redirect( array( 'submitted' => '1', 'ref' => rawurlencode( $reference ) ) );
 }
@@ -843,6 +987,30 @@ function zomeex_product_portals() {
 			'fallback'    => zomeex_page_url( 'contact-us', '/contact-us/' ),
 			'children'    => array(),
 		),
+	);
+}
+
+/** Shared information architecture for packaging navigation and homepage modules. */
+function zomeex_packaging_categories() {
+	return array(
+		array( 'name' => 'Custom Mylar Bags & Pouches', 'slug' => 'mylar-bag' ),
+		array( 'name' => 'Pre-Roll Packaging', 'slug' => 'preroll-wraps' ),
+		array( 'name' => 'Custom Printed Paper Boxes', 'slug' => 'vape-box' ),
+		array( 'name' => 'Jars & Glass Containers', 'slug' => 'jars-glass-containers' ),
+		array( 'name' => 'Tins & Metal Containers', 'slug' => 'tins-metal-containers' ),
+		array( 'name' => 'Bottles & Tubes', 'slug' => 'bottles-tubes' ),
+		array( 'name' => 'Retail Displays & Merch', 'slug' => 'retail-displays-merch' ),
+	);
+}
+
+function zomeex_application_scenarios() {
+	return array(
+		array( 'name' => 'Flower & Hemp Packaging', 'slug' => 'flower-hemp' ),
+		array( 'name' => 'Pre-Roll & Joint Packaging', 'slug' => 'pre-roll-joint' ),
+		array( 'name' => 'Edibles & Gummies Packaging', 'slug' => 'edibles-gummies' ),
+		array( 'name' => 'Vape & Cartridge Packaging', 'slug' => 'vape-cartridge' ),
+		array( 'name' => 'Concentrates & Wax Packaging', 'slug' => 'concentrates-wax' ),
+		array( 'name' => 'THC Beverages & Tincture Packaging', 'slug' => 'beverages-tincture' ),
 	);
 }
 

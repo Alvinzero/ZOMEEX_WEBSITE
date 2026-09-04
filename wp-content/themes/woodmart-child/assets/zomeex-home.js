@@ -295,4 +295,42 @@
       }
     }, { passive: false });
   });
+
+  /* Application tabs use native buttons and panels so the same interaction
+   * works with mouse, keyboard and touch without a dependency. */
+  var applicationTabs = document.querySelectorAll('[data-application-tab]');
+  var applicationPanels = document.querySelectorAll('[data-application-panel]');
+  var activateApplication = function (slug, focusTab) {
+    applicationTabs.forEach(function (tab) {
+      var active = tab.dataset.applicationTab === slug;
+      tab.setAttribute('aria-selected', String(active));
+      tab.tabIndex = active ? 0 : -1;
+      if (active && focusTab) tab.focus();
+    });
+    applicationPanels.forEach(function (panel) {
+      panel.hidden = panel.dataset.applicationPanel !== slug;
+    });
+  };
+  applicationTabs.forEach(function (tab, index) {
+    tab.addEventListener('click', function () { activateApplication(tab.dataset.applicationTab, false); });
+    tab.addEventListener('keydown', function (event) {
+      if (event.key !== 'ArrowRight' && event.key !== 'ArrowLeft' && event.key !== 'Home' && event.key !== 'End') return;
+      event.preventDefault();
+      var nextIndex = event.key === 'Home' ? 0 : event.key === 'End' ? applicationTabs.length - 1 : (index + (event.key === 'ArrowRight' ? 1 : -1) + applicationTabs.length) % applicationTabs.length;
+      activateApplication(applicationTabs[nextIndex].dataset.applicationTab, true);
+    });
+  });
+
+  /* Deep links from the Products menu open the matching application panel. */
+  var applicationHash = (window.location.hash || '').replace(/^#/, '');
+  if (applicationHash.indexOf('zomeex-application-panel-') === 0) {
+    var applicationSlug = applicationHash.replace('zomeex-application-panel-', '');
+    var matchingTab = document.querySelector('[data-application-tab="' + applicationSlug.replace(/"/g, '') + '"]');
+    if (matchingTab) {
+      activateApplication(matchingTab.dataset.applicationTab, false);
+      window.requestAnimationFrame(function () {
+        document.getElementById(applicationHash)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+  }
 }());

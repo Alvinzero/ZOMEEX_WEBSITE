@@ -989,7 +989,7 @@ html[data-zomeex-locale="fr"] .zomeex-site-shell {
 html[data-zomeex-locale="ru"] .zomeex-desktop-nav,
 html[data-zomeex-locale="de"] .zomeex-desktop-nav,
 html[data-zomeex-locale="fr"] .zomeex-desktop-nav {
-	gap: 22px;
+	gap: 10px;
 }
 
 html[data-zomeex-locale="ru"] .zomeex-desktop-nav a,
@@ -1624,8 +1624,10 @@ body.zomeex-age-gate-active::before {
 .zomeex-desktop-nav {
 	align-items: center;
 	display: flex;
-	gap: 30px;
+	flex: 1 1 auto;
+	gap: 16px;
 	margin-left: auto;
+	min-width: 0;
 }
 
 .zomeex-desktop-nav a,
@@ -1664,6 +1666,10 @@ body.zomeex-age-gate-active::before {
 	min-height: 44px;
 	position: relative;
 	white-space: nowrap;
+}
+
+.zomeex-nav-trigger__label {
+	font: inherit;
 }
 
 .zomeex-desktop-nav a::after {
@@ -1970,10 +1976,11 @@ body.zomeex-age-gate-active::before {
 	position: relative;
 }
 
-/* Products is a full-width menu. Let it use the sticky header as its
- * containing block instead of the narrow trigger button. Solutions keeps
- * its local positioning context for the compact popover below. */
-.zomeex-desktop-nav > .zomeex-nav-dropdown:first-child {
+/* The two catalogue menus are full-width panels. Let them use the sticky
+ * header as their containing block instead of the narrow trigger button;
+ * the four content menus keep their local positioning context. */
+.zomeex-desktop-nav > .zomeex-nav-dropdown:nth-child(1),
+.zomeex-desktop-nav > .zomeex-nav-dropdown:nth-child(2) {
 	position: static;
 }
 
@@ -2018,6 +2025,12 @@ body.zomeex-age-gate-active::before {
 	font-size: 12px;
 	line-height: 1;
 	transform: translateY(-1px);
+}
+
+.zomeex-nav-trigger > .zomeex-nav-trigger__label {
+	font-size: inherit;
+	line-height: inherit;
+	transform: none;
 }
 
 .zomeex-mega-menu,
@@ -2155,6 +2168,7 @@ body.zomeex-age-gate-active::before {
 
 .zomeex-nav-popover a {
 	display: block;
+	min-height: 44px;
 	padding: 13px 12px;
 }
 
@@ -2239,7 +2253,8 @@ body.zomeex-age-gate-active::before {
 	display: flex;
 	justify-content: space-between;
 	min-width: 0;
-	padding: 8px 0;
+	min-height: 44px;
+	padding: 10px 0;
 	text-transform: none;
 }
 
@@ -2349,6 +2364,45 @@ body.zomeex-age-gate-active::before {
 
 	.zomeex-mega-menu__column:first-child {
 		padding-left: 0;
+	}
+}
+
+@media (max-width: 1180px) and (min-width: 1041px) {
+	.zomeex-header__inner {
+		gap: 14px;
+	}
+
+	.zomeex-desktop-nav {
+		gap: 10px;
+	}
+
+	.zomeex-desktop-nav a,
+	.zomeex-nav-trigger,
+	.zomeex-header__quote {
+		font-size: 10px;
+		letter-spacing: .045em;
+	}
+
+	.zomeex-header__actions {
+		gap: 4px;
+	}
+}
+
+@media (max-width: 1040px) and (min-width: 768px) {
+	.zomeex-desktop-nav,
+	.zomeex-header__quote {
+		display: none;
+	}
+
+	.zomeex-menu-toggle {
+		display: inline-flex;
+	}
+
+	.zomeex-mobile-nav {
+		max-height: calc(100dvh - 112px);
+		overflow-y: auto;
+		overflow-x: hidden;
+		overscroll-behavior: contain;
 	}
 }
 
@@ -2625,6 +2679,19 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-mobile-nav__group > button span {
+	color: var(--zomeex-accent-dark);
+	font-size: 20px;
+	font-weight: 400;
+	line-height: 1;
+}
+
+.zomeex-mobile-nav__group > button > span[data-zomeex-i18n] {
+	color: inherit;
+	font: inherit;
+	line-height: inherit;
+}
+
+.zomeex-mobile-nav__group > button > span[aria-hidden="true"] {
 	color: var(--zomeex-accent-dark);
 	font-size: 20px;
 	font-weight: 400;

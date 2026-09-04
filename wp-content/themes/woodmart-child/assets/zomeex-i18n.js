@@ -479,6 +479,56 @@
       '登录': 'Se connecter', '用户名或电邮地址': 'Nom d’utilisateur ou e-mail', '必填': 'Obligatoire', '密码': 'Mot de passe', '记住我': 'Se souvenir de moi', '忘记密码?': 'Mot de passe oublié ?', '注册': 'S’inscrire', '邮箱地址': 'Adresse e-mail', '用于设置新密码的链接将发送至您的电子邮件地址。': 'Un lien pour définir un nouveau mot de passe sera envoyé à votre adresse e-mail.', '或者': 'Ou', '您的购物车目前是空的。': 'Votre panier est vide.', '返回商店': 'Retour au catalogue', '您的个人资料将用于在您体验本网站的整个过程中为您提供支持、管理对您帐户的访问，以及用于在我们的隐私政策中描述的其他用途。': 'Vos données servent à accompagner votre utilisation du site, gérer votre compte et d’autres finalités décrites dans notre politique de confidentialité.'
     }
   };
+
+  /* Navigation labels are explicit so the expanded menu keeps its hierarchy
+   * when a visitor switches locale; the product and editorial copy remains
+   * owned by WordPress content. */
+  var NAV_LABELS = {
+    en: {
+      'nav.products': 'Products',
+      'nav.childResistant': 'Child-resistant',
+      'nav.solutions': 'Solutions',
+      'nav.designTools': 'Design & Tools',
+      'nav.resourcesBlog': 'Resources & Blog',
+      'nav.aboutContact': 'About & Contact'
+    },
+    'zh-CN': {
+      'nav.products': '产品',
+      'nav.childResistant': '儿童安全',
+      'nav.solutions': '解决方案',
+      'nav.designTools': '设计与工具',
+      'nav.resourcesBlog': '资源与博客',
+      'nav.aboutContact': '关于与联系'
+    },
+    ru: {
+      'nav.products': 'Продукты',
+      'nav.childResistant': 'Защита от детей',
+      'nav.solutions': 'Решения',
+      'nav.designTools': 'Дизайн и инструменты',
+      'nav.resourcesBlog': 'Ресурсы и блог',
+      'nav.aboutContact': 'О компании и контакты'
+    },
+    de: {
+      'nav.products': 'Produkte',
+      'nav.childResistant': 'Kindersicher',
+      'nav.solutions': 'Lösungen',
+      'nav.designTools': 'Design & Tools',
+      'nav.resourcesBlog': 'Ressourcen & Blog',
+      'nav.aboutContact': 'Über uns & Kontakt'
+    },
+    fr: {
+      'nav.products': 'Produits',
+      'nav.childResistant': 'Sécurité enfant',
+      'nav.solutions': 'Solutions',
+      'nav.designTools': 'Design et outils',
+      'nav.resourcesBlog': 'Ressources et blog',
+      'nav.aboutContact': 'À propos et contact'
+    }
+  };
+  Object.keys(NAV_LABELS).forEach(function (locale) {
+    DICTIONARY[locale] = Object.assign(DICTIONARY[locale] || {}, NAV_LABELS[locale]);
+  });
+
   Object.keys(CN_WOOCOMMERCE_EXTRA_BY_SOURCE).forEach(function (locale) {
     EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, CN_WOOCOMMERCE_EXTRA_BY_SOURCE[locale]);
   });

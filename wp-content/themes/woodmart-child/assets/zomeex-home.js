@@ -204,6 +204,27 @@
       trigger.setAttribute('aria-expanded', String(open));
       panel.hidden = !open;
     });
+    trigger.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape') {
+        event.preventDefault();
+        trigger.setAttribute('aria-expanded', 'false');
+        panel.hidden = true;
+        trigger.focus();
+        return;
+      }
+      if (event.key === 'ArrowDown') {
+        event.preventDefault();
+        if (trigger.getAttribute('aria-expanded') !== 'true') trigger.click();
+        panel.querySelector('a[href]')?.focus();
+      }
+    });
+    panel.addEventListener('keydown', function (event) {
+      if (event.key !== 'Escape') return;
+      event.preventDefault();
+      trigger.setAttribute('aria-expanded', 'false');
+      panel.hidden = true;
+      trigger.focus();
+    });
   });
 
   document.querySelectorAll('[data-mobile-nav-toggle]').forEach(function (trigger) {

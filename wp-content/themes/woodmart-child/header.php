@@ -17,6 +17,23 @@ $pack_url    = zomeex_portal_url( $pack_portal );
 $faq_url     = function_exists( 'zomeex_faq_url' ) ? zomeex_faq_url() : zomeex_home_url( '/faq/' );
 $packaging_types = function_exists( 'zomeex_packaging_categories' ) ? zomeex_packaging_categories() : array();
 $applications    = function_exists( 'zomeex_application_scenarios' ) ? zomeex_application_scenarios() : array();
+$about_url       = zomeex_page_url( 'about-us-3', '/about-us-3/' );
+$contact_url     = zomeex_page_url( 'contact-us', '/contact-us/' );
+$news_url        = zomeex_page_url( 'news', '/news/' );
+$collection_url  = function ( $slug, $query = array() ) use ( $pack_url ) {
+	$term = get_term_by( 'slug', sanitize_title( $slug ), 'product_cat' );
+	$url  = $term && ! is_wp_error( $term ) ? get_term_link( $term ) : add_query_arg( 'collection', sanitize_title( $slug ), $pack_url );
+
+	return $query ? add_query_arg( $query, $url ) : $url;
+};
+$child_resistant_types = array(
+	array( 'name' => 'Child-Resistant Mylar Bags', 'slug' => 'mylar-bag' ),
+	array( 'name' => 'Child-Resistant Paper Boxes', 'slug' => 'vape-box' ),
+	array( 'name' => 'Child-Resistant Jars & Bottles', 'slug' => 'pack' ),
+	array( 'name' => 'Child-Resistant Tubes', 'slug' => 'pack' ),
+);
+$dieline_url = add_query_arg( 'resource', 'dieline', $quote_url );
+$artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 ?><!doctype html>
 <html <?php language_attributes(); ?>>
 <head>
@@ -40,60 +57,102 @@ $applications    = function_exists( 'zomeex_application_scenarios' ) ? zomeex_ap
 			<a class="zomeex-wordmark" href="<?php echo esc_url( zomeex_home_url() ); ?>" aria-label="ZOMEEX home">ZOMEEX</a>
 			<nav class="zomeex-desktop-nav" aria-label="Primary navigation">
 				<div class="zomeex-nav-dropdown" data-nav-dropdown>
-					<button class="zomeex-nav-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="menu" aria-controls="zomeex-products-menu">Products <span aria-hidden="true">⌄</span></button>
-					<div class="zomeex-mega-menu" id="zomeex-products-menu" data-nav-dropdown-panel role="menu" hidden>
+					<button class="zomeex-nav-trigger" id="zomeex-products-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-products-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.products">Products</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-mega-menu" id="zomeex-products-menu" data-nav-dropdown-panel aria-labelledby="zomeex-products-trigger" hidden>
 						<div class="zomeex-mega-menu__inner zomeex-container">
 							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--products">
-								<p class="zomeex-mega-menu__eyebrow">Shop by product</p>
-								<div class="zomeex-mega-menu__portal-list">
-									<?php foreach ( zomeex_product_portals() as $portal ) : ?>
-										<?php $portal_url = zomeex_portal_url( $portal ); ?>
-										<a class="zomeex-mega-menu__portal-link" role="menuitem" href="<?php echo esc_url( $portal_url ); ?>"><span><strong><?php echo esc_html( $portal['name'] ); ?></strong><small><?php echo esc_html( $portal['label'] ); ?></small></span><span aria-hidden="true">↗</span></a>
+								<p class="zomeex-mega-menu__eyebrow">Shop by product type</p>
+								<div class="zomeex-mega-menu__link-list zomeex-mega-menu__link-list--large">
+									<?php foreach ( $packaging_types as $type ) : ?>
+										<a href="<?php echo esc_url( $collection_url( $type['slug'] ) ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
 									<?php endforeach; ?>
-								</div>
-								<div class="zomeex-mega-menu__subsection">
-									<p class="zomeex-mega-menu__eyebrow">Packaging types</p>
-									<div class="zomeex-mega-menu__link-list">
-										<?php foreach ( $packaging_types as $type ) : ?>
-											<?php $type_term = get_term_by( 'slug', $type['slug'], 'product_cat' ); $type_url = $type_term && ! is_wp_error( $type_term ) ? get_term_link( $type_term ) : $pack_url; ?>
-											<a role="menuitem" href="<?php echo esc_url( $type_url ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
-										<?php endforeach; ?>
-									</div>
 								</div>
 							</div>
 							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--applications">
-								<p class="zomeex-mega-menu__eyebrow">Shop by application</p>
+								<p class="zomeex-mega-menu__eyebrow">Shop by size &amp; route</p>
 								<div class="zomeex-mega-menu__link-list zomeex-mega-menu__link-list--large">
-									<?php foreach ( $applications as $application ) : ?>
-										<a role="menuitem" href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><?php echo esc_html( $application['name'] ); ?><span aria-hidden="true">↗</span></a>
-									<?php endforeach; ?>
+									<a href="<?php echo esc_url( add_query_arg( 'view', 'size', $pack_url ) ); ?>">Shop by Size<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( zomeex_portal_url( zomeex_product_portals()['vape'] ) ); ?>">Vape Hardware<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( zomeex_portal_url( zomeex_product_portals()['switch'] ) ); ?>">Equipment &amp; Machinery<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( $contact_url ); ?>">OEM / ODM Projects<span aria-hidden="true">↗</span></a>
 								</div>
 								<div class="zomeex-mega-menu__subsection">
-									<p class="zomeex-mega-menu__eyebrow">Resources</p>
+									<p class="zomeex-mega-menu__eyebrow">Quick order</p>
 									<div class="zomeex-mega-menu__link-list">
-										<a role="menuitem" href="<?php echo esc_url( add_query_arg( 'resource', 'dieline', $quote_url ) ); ?>">Free dieline guidance <span aria-hidden="true">↗</span></a>
-										<a role="menuitem" href="<?php echo esc_url( $faq_url ); ?>">Packaging FAQ <span aria-hidden="true">↗</span></a>
+										<a href="<?php echo esc_url( $shop_url ); ?>">All Products<span aria-hidden="true">↗</span></a>
+										<a href="<?php echo esc_url( $quote_url ); ?>">Get a Quote<span aria-hidden="true">↗</span></a>
 									</div>
 								</div>
 							</div>
 							<aside class="zomeex-mega-menu__feature">
 								<div class="zomeex-mega-menu__feature-media"><img src="<?php echo esc_url( zomeex_upload_url( 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg' ) ); ?>" alt="Packaging sample kit" loading="lazy" width="768" height="768"></div>
-								<div class="zomeex-mega-menu__feature-copy"><p class="zomeex-mega-menu__eyebrow">Need a closer look?</p><h3>Request a physical sample kit.</h3><p>Share your target market and format. We will confirm the available pack and shipping route.</p><a href="<?php echo esc_url( add_query_arg( 'resource', 'sample-kit', $quote_url ) ); ?>">Request sample kit <span aria-hidden="true">↗</span></a></div>
+								<div class="zomeex-mega-menu__feature-copy"><p class="zomeex-mega-menu__eyebrow">Free sample pack</p><h3>See the formats before you commit.</h3><p>Compare bags, boxes, jars and finishes with a sample conversation.</p><a href="<?php echo esc_url( add_query_arg( 'resource', 'sample-kit', $quote_url ) ); ?>">Request sample pack <span aria-hidden="true">↗</span></a></div>
 							</aside>
 						</div>
 					</div>
 				</div>
 				<div class="zomeex-nav-dropdown" data-nav-dropdown>
-					<button class="zomeex-nav-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="menu" aria-controls="zomeex-solutions-menu">Solutions <span aria-hidden="true">⌄</span></button>
-					<div class="zomeex-nav-popover" id="zomeex-solutions-menu" data-nav-dropdown-panel role="menu" hidden>
-						<a role="menuitem" href="<?php echo esc_url( zomeex_home_url( '/#zomeex-capability-title' ) ); ?>"><strong>OEM / ODM projects</strong><small>From product concept to market-ready</small></a>
-						<a role="menuitem" href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>"><strong>Packaging and compliance</strong><small>Formats, documentation, and market context</small></a>
-						<a role="menuitem" href="<?php echo esc_url( zomeex_home_url( '/#zomeex-capability-title' ) ); ?>"><strong>Equipment integration</strong><small>Connect hardware and filling workflows</small></a>
-						<a role="menuitem" href="<?php echo esc_url( zomeex_page_url( 'contact-us', '/contact-us/' ) ); ?>"><strong>Talk through a brief</strong><small>Share target market and quantity</small></a>
+					<button class="zomeex-nav-trigger" id="zomeex-child-resistant-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-child-resistant-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.childResistant">Child-resistant</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-mega-menu" id="zomeex-child-resistant-menu" data-nav-dropdown-panel hidden>
+						<div class="zomeex-mega-menu__inner zomeex-container">
+							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--products">
+								<p class="zomeex-mega-menu__eyebrow">CR packaging formats</p>
+								<div class="zomeex-mega-menu__link-list zomeex-mega-menu__link-list--large">
+									<?php foreach ( $child_resistant_types as $type ) : ?>
+										<a href="<?php echo esc_url( $collection_url( $type['slug'], array( 'feature' => 'child-resistant' ) ) ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
+									<?php endforeach; ?>
+								</div>
+							</div>
+							<div class="zomeex-mega-menu__column zomeex-mega-menu__column--applications">
+								<p class="zomeex-mega-menu__eyebrow">Compliance &amp; guidance</p>
+								<div class="zomeex-mega-menu__link-list zomeex-mega-menu__link-list--large">
+									<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>">CR Documentation<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( $faq_url ); ?>">Child-Resistant FAQ<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( $dieline_url ); ?>">Request CR Dielines<span aria-hidden="true">↗</span></a>
+									<a href="<?php echo esc_url( $quote_url ); ?>">Discuss Your Market<span aria-hidden="true">↗</span></a>
+								</div>
+							</div>
+							<aside class="zomeex-mega-menu__feature">
+								<div class="zomeex-mega-menu__feature-media"><img src="<?php echo esc_url( zomeex_upload_url( 'pack_0003_药丸包装-拷贝-2-768x768.jpg' ) ); ?>" alt="Child-resistant packaging format" loading="lazy" width="768" height="768"></div>
+								<div class="zomeex-mega-menu__feature-copy"><p class="zomeex-mega-menu__eyebrow">Market-specific review</p><h3>Match the format to the market.</h3><p>Share your product, destination and documentation needs before selecting a CR route.</p><a href="<?php echo esc_url( $quote_url ); ?>">Start a CR brief <span aria-hidden="true">↗</span></a></div>
+							</aside>
+						</div>
 					</div>
 				</div>
-				<a href="<?php echo esc_url( zomeex_page_url( 'news', '/news/' ) ); ?>">Insights</a>
-				<a href="<?php echo esc_url( zomeex_page_url( 'about-us-3', '/about-us-3/' ) ); ?>">About</a>
+				<div class="zomeex-nav-dropdown" data-nav-dropdown>
+					<button class="zomeex-nav-trigger" id="zomeex-solutions-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-solutions-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.solutions">Solutions</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-nav-popover" id="zomeex-solutions-menu" data-nav-dropdown-panel hidden>
+						<?php foreach ( $applications as $application ) : ?><a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><strong><?php echo esc_html( $application['name'] ); ?></strong><small>Packaging for the product context</small></a><?php endforeach; ?>
+						<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-capability-title' ) ); ?>"><strong>OEM / ODM projects</strong><small>From product concept to market-ready</small></a>
+					</div>
+				</div>
+				<div class="zomeex-nav-dropdown" data-nav-dropdown>
+					<button class="zomeex-nav-trigger" id="zomeex-design-tools-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-design-tools-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.designTools">Design &amp; Tools</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-nav-popover" id="zomeex-design-tools-menu" data-nav-dropdown-panel hidden>
+						<a href="<?php echo esc_url( $dieline_url ); ?>"><strong>Free Dieline Templates</strong><small>Start with a format-ready file</small></a>
+						<a href="<?php echo esc_url( $artwork_url ); ?>"><strong>Upload Artwork</strong><small>Send files with your project brief</small></a>
+						<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>"><strong>Compliance Guides</strong><small>Review market and documentation context</small></a>
+						<a href="<?php echo esc_url( $faq_url ); ?>"><strong>Packaging FAQ</strong><small>Answers for the next decision</small></a>
+					</div>
+				</div>
+				<div class="zomeex-nav-dropdown" data-nav-dropdown>
+					<button class="zomeex-nav-trigger" id="zomeex-resources-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-resources-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.resourcesBlog">Resources &amp; Blog</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-nav-popover" id="zomeex-resources-menu" data-nav-dropdown-panel hidden>
+						<a href="<?php echo esc_url( $news_url ); ?>"><strong>Packaging Blog</strong><small>Product and manufacturing notes</small></a>
+						<a href="<?php echo esc_url( $news_url ); ?>#child-resistant"><strong>CR Laws &amp; Regulations</strong><small>Market context to discuss with your team</small></a>
+						<a href="<?php echo esc_url( $news_url ); ?>?type=case-study"><strong>Case Studies</strong><small>See how briefs become build paths</small></a>
+					</div>
+				</div>
+				<div class="zomeex-nav-dropdown" data-nav-dropdown>
+					<button class="zomeex-nav-trigger" id="zomeex-about-contact-trigger" type="button" data-nav-dropdown-toggle aria-expanded="false" aria-haspopup="true" aria-controls="zomeex-about-contact-menu"><span class="zomeex-nav-trigger__label" data-zomeex-i18n="nav.aboutContact">About &amp; Contact</span><span aria-hidden="true">⌄</span></button>
+					<div class="zomeex-nav-popover" id="zomeex-about-contact-menu" data-nav-dropdown-panel hidden>
+						<a href="<?php echo esc_url( $about_url ); ?>"><strong>About Us</strong><small>How ZOMEEX supports your brief</small></a>
+						<a href="<?php echo esc_url( $about_url ); ?>#factory-tour"><strong>Factory Tour</strong><small>Production context and capabilities</small></a>
+						<a href="<?php echo esc_url( $about_url ); ?>#certifications"><strong>Certifications</strong><small>Documents reviewed against the market</small></a>
+						<a href="<?php echo esc_url( $contact_url ); ?>"><strong>Contact Us</strong><small>Share your product and destination</small></a>
+						<a href="<?php echo esc_url( $faq_url ); ?>"><strong>FAQ</strong><small>Common packaging questions</small></a>
+					</div>
+				</div>
 			</nav>
 			<div class="zomeex-header__actions">
 				<div class="zomeex-header__utility" aria-label="Account tools">
@@ -129,44 +188,69 @@ $applications    = function_exists( 'zomeex_application_scenarios' ) ? zomeex_ap
 					<a class="zomeex-mobile-nav__utility-link" href="<?php echo esc_url( $cart_url ); ?>"><span class="fas fa-shopping-cart" aria-hidden="true"></span><strong>Cart</strong><span class="zomeex-cart-count" data-cart-count aria-label="<?php echo esc_attr( sprintf( '%d items in cart', $cart_count ) ); ?>"<?php echo $cart_count > 0 ? '' : ' hidden'; ?>><?php echo esc_html( $cart_count ); ?></span></a>
 				</div>
 				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
-					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-products">Products <span aria-hidden="true">+</span></button>
-								<div id="zomeex-mobile-products" data-mobile-nav-panel hidden>
-						<?php foreach ( zomeex_product_portals() as $portal ) : ?>
-							<?php $portal_url = zomeex_portal_url( $portal ); ?>
-							<a href="<?php echo esc_url( $portal_url ); ?>"><strong><?php echo esc_html( $portal['name'] ); ?></strong><small><?php echo esc_html( $portal['label'] ); ?></small><span aria-hidden="true">↗</span></a>
-							<?php if ( $portal['children'] ) : ?>
-								<div class="zomeex-mobile-nav__children">
-									<?php foreach ( $portal['children'] as $child ) : ?>
-										<?php $child_term = get_term_by( 'slug', $child['slug'], 'product_cat' ); ?>
-										<a href="<?php echo esc_url( $child_term && ! is_wp_error( $child_term ) ? get_term_link( $child_term ) : $portal_url ); ?>"><?php echo esc_html( $child['name'] ); ?><span aria-hidden="true">↗</span></a>
-									<?php endforeach; ?>
-												</div>
-											<?php endif; ?>
-										<?php endforeach; ?>
-										<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
-											<strong class="zomeex-mobile-nav__label">Packaging types</strong>
-											<?php foreach ( $packaging_types as $type ) : ?>
-												<?php $type_term = get_term_by( 'slug', $type['slug'], 'product_cat' ); $type_url = $type_term && ! is_wp_error( $type_term ) ? get_term_link( $type_term ) : $pack_url; ?>
-												<a href="<?php echo esc_url( $type_url ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
-											<?php endforeach; ?>
-										</div>
-										<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
-											<strong class="zomeex-mobile-nav__label">Shop by application</strong>
-											<?php foreach ( $applications as $application ) : ?>
-												<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><?php echo esc_html( $application['name'] ); ?><span aria-hidden="true">↗</span></a>
-											<?php endforeach; ?>
-											<a href="<?php echo esc_url( add_query_arg( 'resource', 'dieline', $quote_url ) ); ?>">Free dieline guidance<span aria-hidden="true">↗</span></a>
-											<a href="<?php echo esc_url( $faq_url ); ?>">Packaging FAQ<span aria-hidden="true">↗</span></a>
-										</div>
-									</div>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-products"><span data-zomeex-i18n="nav.products">Products</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-products" data-mobile-nav-panel hidden>
+						<strong class="zomeex-mobile-nav__label">Shop by product type</strong>
+						<?php foreach ( $packaging_types as $type ) : ?>
+							<a href="<?php echo esc_url( $collection_url( $type['slug'] ) ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
+						<?php endforeach; ?>
+						<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
+							<strong class="zomeex-mobile-nav__label">Shop by size &amp; route</strong>
+							<a href="<?php echo esc_url( add_query_arg( 'view', 'size', $pack_url ) ); ?>">Shop by Size<span aria-hidden="true">↗</span></a>
+							<a href="<?php echo esc_url( $shop_url ); ?>">All Products<span aria-hidden="true">↗</span></a>
+							<a href="<?php echo esc_url( $quote_url ); ?>">Get a Quote<span aria-hidden="true">↗</span></a>
+						</div>
+					</div>
 				</div>
 				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
-					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-solutions">Solutions <span aria-hidden="true">+</span></button>
-					<div id="zomeex-mobile-solutions" data-mobile-nav-panel hidden><a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-capability-title' ) ); ?>"><strong>OEM / ODM</strong><small>Projects and product development</small></a><a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>"><strong>Packaging and compliance</strong><small>Formats and market context</small></a><a href="<?php echo esc_url( zomeex_page_url( 'contact-us', '/contact-us/' ) ); ?>"><strong>Talk through a brief</strong><small>Share target market and quantity</small></a></div>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-child-resistant"><span data-zomeex-i18n="nav.childResistant">Child-resistant</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-child-resistant" data-mobile-nav-panel hidden>
+						<strong class="zomeex-mobile-nav__label">CR packaging formats</strong>
+						<?php foreach ( $child_resistant_types as $type ) : ?>
+							<a href="<?php echo esc_url( $collection_url( $type['slug'], array( 'feature' => 'child-resistant' ) ) ); ?>"><?php echo esc_html( $type['name'] ); ?><span aria-hidden="true">↗</span></a>
+						<?php endforeach; ?>
+						<div class="zomeex-mobile-nav__children zomeex-mobile-nav__children--section">
+							<strong class="zomeex-mobile-nav__label">Compliance &amp; guidance</strong>
+							<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>">CR Documentation<span aria-hidden="true">↗</span></a>
+							<a href="<?php echo esc_url( $faq_url ); ?>">Child-Resistant FAQ<span aria-hidden="true">↗</span></a>
+							<a href="<?php echo esc_url( $dieline_url ); ?>">Request CR Dielines<span aria-hidden="true">↗</span></a>
+						</div>
+					</div>
 				</div>
-				<a href="<?php echo esc_url( zomeex_page_url( 'news', '/news/' ) ); ?>">Insights <span aria-hidden="true">↗</span></a>
-				<a href="<?php echo esc_url( zomeex_page_url( 'about-us-3', '/about-us-3/' ) ); ?>">About <span aria-hidden="true">↗</span></a>
-				<a class="zomeex-mobile-nav__cta" href="<?php echo esc_url( zomeex_quote_url() ); ?>"><span data-quote-count hidden>0</span>Open quote list <span>↗</span></a>
+				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-solutions"><span data-zomeex-i18n="nav.solutions">Solutions</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-solutions" data-mobile-nav-panel hidden>
+						<?php foreach ( $applications as $application ) : ?><a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ) ); ?>"><strong><?php echo esc_html( $application['name'] ); ?></strong><small>Packaging for the product context</small></a><?php endforeach; ?>
+						<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-capability-title' ) ); ?>"><strong>OEM / ODM projects</strong><small>From product concept to market-ready</small></a>
+					</div>
+				</div>
+				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-design-tools"><span data-zomeex-i18n="nav.designTools">Design &amp; Tools</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-design-tools" data-mobile-nav-panel hidden>
+						<a href="<?php echo esc_url( $dieline_url ); ?>"><strong>Free Dieline Templates</strong><small>Start with a format-ready file</small></a>
+						<a href="<?php echo esc_url( $artwork_url ); ?>"><strong>Upload Artwork</strong><small>Send files with your project brief</small></a>
+						<a href="<?php echo esc_url( zomeex_home_url( '/#zomeex-proof-title' ) ); ?>"><strong>Compliance Guides</strong><small>Review market and documentation context</small></a>
+					</div>
+				</div>
+				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-resources"><span data-zomeex-i18n="nav.resourcesBlog">Resources &amp; Blog</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-resources" data-mobile-nav-panel hidden>
+						<a href="<?php echo esc_url( $news_url ); ?>"><strong>Packaging Blog</strong><small>Product and manufacturing notes</small></a>
+						<a href="<?php echo esc_url( $news_url ); ?>#child-resistant"><strong>CR Laws &amp; Regulations</strong><small>Market context to discuss with your team</small></a>
+						<a href="<?php echo esc_url( $news_url ); ?>?type=case-study"><strong>Case Studies</strong><small>See how briefs become build paths</small></a>
+					</div>
+				</div>
+				<div class="zomeex-mobile-nav__group" data-mobile-nav-group>
+					<button type="button" data-mobile-nav-toggle aria-expanded="false" aria-controls="zomeex-mobile-about-contact"><span data-zomeex-i18n="nav.aboutContact">About &amp; Contact</span> <span aria-hidden="true">+</span></button>
+					<div id="zomeex-mobile-about-contact" data-mobile-nav-panel hidden>
+						<a href="<?php echo esc_url( $about_url ); ?>"><strong>About Us</strong><small>How ZOMEEX supports your brief</small></a>
+						<a href="<?php echo esc_url( $about_url ); ?>#factory-tour"><strong>Factory Tour</strong><small>Production context and capabilities</small></a>
+						<a href="<?php echo esc_url( $about_url ); ?>#certifications"><strong>Certifications</strong><small>Documents reviewed against the market</small></a>
+						<a href="<?php echo esc_url( $contact_url ); ?>"><strong>Contact Us</strong><small>Share your product and destination</small></a>
+						<a href="<?php echo esc_url( $faq_url ); ?>"><strong>FAQ</strong><small>Common packaging questions</small></a>
+					</div>
+				</div>
+				<a class="zomeex-mobile-nav__cta" href="<?php echo esc_url( $quote_url ); ?>"><span data-quote-count hidden>0</span>Get a Quote <span>↗</span></a>
 			</div>
 		</nav>
 		</header>

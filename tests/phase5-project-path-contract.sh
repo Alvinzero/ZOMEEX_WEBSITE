@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+theme_root="$repo_root/wp-content/themes/woodmart-child"
 site_url="${1:-http://127.0.0.1:8080/}"
 page="$(curl --fail --silent --show-error "$site_url")"
-style_file="wp-content/themes/woodmart-child/style.css"
+style_file="$theme_root/assets/zomeex-home.css"
 style_sheet="$(<"$style_file")"
 
 assert_contains() {
@@ -30,6 +32,15 @@ assert_style_contains() {
 	fi
 }
 
+assert_file_contains() {
+	local file="$1"
+	local expected="$2"
+	if ! grep -Fq "$expected" "$file"; then
+		printf 'Expected %s to include: %s\n' "$file" "$expected" >&2
+		exit 1
+	fi
+}
+
 assert_css_block_contains() {
 	local selector="$1"
 	local expected="$2"
@@ -41,24 +52,25 @@ assert_css_block_contains() {
 	fi
 }
 
-assert_contains 'id="zomeex-solution-title"'
-assert_contains 'id="zomeex-process-title"'
-assert_contains 'id="zomeex-procurement-title"'
-assert_contains 'id="zomeex-quote-paths-title"'
-assert_contains 'Explore by product family'
-assert_contains 'Build a quote list'
-assert_contains 'Start a project brief'
-assert_not_contains 'Built for specification'
+assert_contains 'id="zx-hero-title"'
+assert_contains 'id="zx-categories-title"'
+assert_contains 'id="zomeex-applications"'
+assert_contains 'id="zx-finishes-title"'
+assert_contains 'id="zomeex-capability-title"'
+assert_contains 'id="zx-rfq"'
+assert_contains 'data-rfq-stepper'
+assert_contains 'name="quote_return" value="home"'
+assert_contains 'zomeex-packaging-hero.png'
+assert_not_contains 'id="zomeex-solution-title"'
 
-assert_style_contains '.zomeex-solutions__grid {'
-assert_style_contains '"intro intro vape vape"'
-assert_style_contains '"pack pack switch boost";'
-assert_style_contains '.zomeex-quote-paths__grid {'
-assert_style_contains '.zomeex-solutions__grid {'
-assert_style_contains 'grid-template-columns: 1fr;'
-assert_style_contains 'object-position: right center;'
-assert_css_block_contains '.zomeex-solution__image {' 'min-height: 0;'
-assert_css_block_contains '.zomeex-solution__image img {' 'position: absolute;'
+assert_style_contains '.zx-hero {'
+assert_style_contains '.zx-category-grid {'
+assert_style_contains '.zx-rfq-steps {'
+assert_style_contains 'grid-template-columns: 1fr !important;'
+assert_css_block_contains '.zomeex-home-page .zx-hero__product-media {' 'background: transparent;'
+assert_css_block_contains '.zomeex-home-page .zx-hero__product-media img {' 'object-fit: contain;'
 assert_style_contains '@media (prefers-reduced-motion: reduce)'
+assert_file_contains "$theme_root/functions.php" "'zomeex-home'"
+assert_file_contains "$theme_root/functions.php" "'/assets/zomeex-home.css'"
 
 printf 'Phase 5 project path contract: PASS\n'

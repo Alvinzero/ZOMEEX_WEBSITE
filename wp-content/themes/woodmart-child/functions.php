@@ -7,6 +7,16 @@ function woodmart_child_enqueue_styles() {
 	$child_style_version = file_exists( $child_style_path ) ? filemtime( $child_style_path ) : woodmart_get_theme_info( 'Version' );
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'woodmart-style' ), $child_style_version );
 
+	if ( is_front_page() ) {
+		$home_style_path = get_stylesheet_directory() . '/assets/zomeex-home.css';
+		wp_enqueue_style(
+			'zomeex-home',
+			get_stylesheet_directory_uri() . '/assets/zomeex-home.css',
+			array( 'child-style' ),
+			file_exists( $home_style_path ) ? (string) filemtime( $home_style_path ) : null
+		);
+	}
+
 	/* Chaty builds its WhatsApp form after page load. Keep its small text
 	 * affordances in the child theme so plugin updates do not overwrite them.
 	 * This script also owns the age gate, so it must not depend on Chaty's
@@ -59,7 +69,8 @@ function woodmart_child_enqueue_styles() {
 		);
 	}
 }
-add_action( 'wp_enqueue_scripts', 'woodmart_child_enqueue_styles', 10010 );
+/* Keep homepage overrides after Woodmart's page-specific styles. */
+add_action( 'wp_enqueue_scripts', 'woodmart_child_enqueue_styles', 99999 );
 
 /**
  * Keep the redesigned homepage independent from Elementor's page canvas.
@@ -310,7 +321,7 @@ function zomeex_quote_document_title( $title ) {
 	}
 
 	if ( is_front_page() ) {
-		return 'Vape Hardware, Packaging and OEM/ODM | ZOMEEX';
+		return 'Custom Cannabis Packaging Manufacturer | ZOMEEX';
 	}
 
 	if ( function_exists( 'is_product' ) && is_product() ) {
@@ -372,7 +383,7 @@ function zomeex_seo_description() {
 	} elseif ( function_exists( 'is_404' ) && is_404() ) {
 		$description = 'The requested ZOMEEX page could not be found. Browse products or start a focused project brief.';
 	} elseif ( is_front_page() ) {
-		$description = 'Explore vape hardware, packaging systems and OEM/ODM support from ZOMEEX for teams building against a defined market brief.';
+		$description = 'Custom cannabis packaging manufacturer for Mylar bags, boxes, jars and child-resistant formats, with factory-direct wholesale and OEM/ODM support.';
 	} elseif ( function_exists( 'is_product' ) && is_product() ) {
 		$product     = wc_get_product( get_the_ID() );
 		$description = $product ? ( $product->get_short_description() ?: $product->get_description() ) : '';
@@ -672,7 +683,15 @@ function zomeex_register_quote_post_type() {
 add_action( 'init', 'zomeex_register_quote_post_type' );
 
 function zomeex_quote_redirect( $args ) {
-	wp_safe_redirect( add_query_arg( $args, zomeex_quote_url() ) );
+	$target = zomeex_quote_url();
+	$is_home_return = isset( $_POST['quote_return'] ) && is_scalar( $_POST['quote_return'] ) && 'home' === sanitize_key( wp_unslash( $_POST['quote_return'] ) );
+	$is_submitted   = isset( $args['submitted'] ) && '1' === (string) $args['submitted'];
+	if ( $is_home_return && ! $is_submitted ) {
+		$target = zomeex_home_url( '/' );
+		$target .= '#zx-rfq';
+	}
+
+	wp_safe_redirect( add_query_arg( $args, $target ) );
 	exit;
 }
 
@@ -793,6 +812,7 @@ function zomeex_handle_quote_submit() {
 	$company       = zomeex_quote_field_limit( $_POST['company'] ?? '', 160, $invalid );
 	$email         = sanitize_email( is_scalar( $_POST['email'] ?? '' ) ? wp_unslash( (string) $_POST['email'] ) : '' );
 	$country       = zomeex_quote_field_limit( $_POST['country'] ?? '', 120, $invalid );
+	$phone         = zomeex_quote_field_limit( $_POST['phone'] ?? '', 60, $invalid );
 	$role          = zomeex_quote_field_limit( $_POST['role'] ?? '', 60, $invalid );
 	$target_market = zomeex_quote_field_limit( $_POST['target_market'] ?? '', 160, $invalid );
 	$product_interest = zomeex_quote_field_limit( $_POST['product_interest'] ?? '', 180, $invalid );
@@ -869,7 +889,7 @@ function zomeex_handle_quote_submit() {
 
 	$reference = 'ZX-' . gmdate( 'ymd-His' ) . '-' . wp_rand( 100, 999 );
 	$content   = "Reference: {$reference}\n\n";
-	$content  .= "Contact: {$name}\nCompany: {$company}\nEmail: {$email}\nCountry/region: {$country}\nRole: {$role}\nTarget market: {$target_market}\nProduct interest: {$product_interest}\nEstimated quantity: {$quantity}\nTimeline: {$timeline}\nSamples: {$samples}\n\n";
+	$content  .= "Contact: {$name}\nCompany: {$company}\nEmail: {$email}\nPhone: {$phone}\nCountry/region: {$country}\nRole: {$role}\nTarget market: {$target_market}\nProduct interest: {$product_interest}\nEstimated quantity: {$quantity}\nTimeline: {$timeline}\nSamples: {$samples}\n\n";
 	$content  .= "Customization:\n{$customization}\n\nNotes:\n{$notes}\n\nProducts:\n";
 
 	foreach ( $items as $item ) {
@@ -898,6 +918,7 @@ function zomeex_handle_quote_submit() {
 
 	update_post_meta( $post_id, '_zomeex_quote_reference', $reference );
 	update_post_meta( $post_id, '_zomeex_quote_email', $email );
+	update_post_meta( $post_id, '_zomeex_quote_phone', $phone );
 	update_post_meta( $post_id, '_zomeex_quote_items', $items );
 	update_post_meta( $post_id, '_zomeex_quote_product_interest', $product_interest );
 	update_post_meta( $post_id, '_zomeex_quote_files', array_map( static function ( $file ) { unset( $file['path'] ); return $file; }, $uploaded_files ) );

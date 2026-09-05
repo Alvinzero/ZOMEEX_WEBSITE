@@ -1817,7 +1817,9 @@ body.zomeex-age-gate-active::before {
 	align-items: center;
 	display: inline-flex;
 	flex: 0 1 auto;
+	max-width: 100%;
 	min-width: 0;
+	position: relative;
 }
 
 /* GTranslate supplies the interaction and language data. These rules keep
@@ -1833,6 +1835,7 @@ body.zomeex-age-gate-active::before {
 	line-height: 1;
 	max-width: 148px;
 	min-height: 44px;
+	overflow: hidden;
 	text-transform: uppercase;
 	white-space: nowrap;
 }
@@ -2604,6 +2607,16 @@ body.zomeex-age-gate-active::before {
 	height: 16px;
 	min-width: 16px;
 	padding: 0 3px;
+}
+
+/* Keep the generated language panel inside the viewport on narrow screens. */
+@media (max-width: 767px) {
+	.zomeex-home-page .zomeex-language-switcher .gt_white_content {
+		left: auto !important;
+		max-width: calc(100vw - 24px) !important;
+		right: 0 !important;
+		width: min(320px, calc(100vw - 24px)) !important;
+	}
 }
 
 .zomeex-icon-button,
@@ -4402,6 +4415,8 @@ body.zomeex-age-gate-active::before {
 		font-size: 0 !important;
 		gap: 0;
 		max-width: 48px;
+		overflow: hidden;
+		width: 48px !important;
 	}
 
 	.zomeex-home-page .zomeex-language-switcher .gt_switcher-popup[data-language-code]::before {
@@ -6281,5 +6296,158 @@ body.zomeex-age-gate-active::before {
 
 	.zomeex-quote__success h2 {
 		font-size: 34px;
+	}
+}
+
+/* Global footer for the 11-section homepage brief. */
+.zomeex-footer {
+	background: var(--zx-deep, #10251d);
+	color: #fff;
+	padding: 70px 0 25px;
+}
+
+.zomeex-footer__grid {
+	display: grid;
+	gap: 48px;
+	grid-template-columns: 1.35fr .8fr .8fr 1.1fr;
+}
+
+.zomeex-footer__brand {
+	max-width: 320px;
+}
+
+.zomeex-footer__logo {
+	display: inline-block;
+	max-width: 176px;
+}
+
+.zomeex-footer__logo img {
+	filter: brightness(0) invert(1);
+	height: auto;
+	width: 100%;
+}
+
+.zomeex-footer p {
+	color: #b8cbbf;
+	font-size: 12px;
+	line-height: 1.55;
+	margin: 17px 0 0;
+}
+
+.zomeex-footer__badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 7px;
+	margin-top: 24px;
+}
+
+.zomeex-footer__badges span {
+	border: 1px solid rgba(255, 255, 255, .35);
+	color: #d0e1d6;
+	font-size: 9px;
+	letter-spacing: .11em;
+	padding: 7px 8px;
+}
+
+.zomeex-footer__social {
+	display: flex;
+	gap: 8px;
+	margin-top: 21px;
+}
+
+.zomeex-footer__social a {
+	align-items: center;
+	border: 1px solid rgba(255, 255, 255, .3);
+	color: #fff;
+	display: inline-flex;
+	font-size: 10px;
+	height: 28px;
+	justify-content: center;
+	text-transform: uppercase;
+	width: 28px;
+}
+
+.zomeex-footer__label {
+	color: #9bdab9 !important;
+	font-size: 10px !important;
+	letter-spacing: .14em;
+	margin: 4px 0 18px !important;
+	text-transform: uppercase;
+}
+
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote) {
+	color: #f1f6f2;
+	display: block;
+	font-size: 12px;
+	line-height: 1.35;
+	margin: 0 0 12px;
+}
+
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:hover,
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:focus-visible {
+	color: #9bdab9;
+}
+
+.zomeex-footer__contact > p {
+	max-width: 290px;
+}
+
+.zomeex-footer__quote {
+	border-bottom: 1px solid #9bdab9;
+	color: #9bdab9;
+	display: inline-block;
+	font-size: 10px;
+	font-weight: 750;
+	letter-spacing: .12em;
+	margin-top: 22px;
+	padding-bottom: 6px;
+	text-transform: uppercase;
+}
+
+.zomeex-footer__quote span {
+	display: inline-block;
+	margin-left: 8px;
+	transition: transform .2s ease;
+}
+
+.zomeex-footer__quote:hover span,
+.zomeex-footer__quote:focus-visible span {
+	transform: translate(3px, -3px);
+}
+
+.zomeex-footer__base {
+	border-top: 1px solid rgba(255, 255, 255, .16);
+	color: #91a89a;
+	display: flex;
+	font-size: 9px;
+	gap: 20px;
+	justify-content: space-between;
+	letter-spacing: .08em;
+	line-height: 1.45;
+	margin-top: 58px;
+	padding-top: 18px;
+	text-transform: uppercase;
+}
+
+@media (max-width: 820px) {
+	.zomeex-footer__grid {
+	grid-template-columns: 1fr 1fr;
+	}
+}
+
+@media (max-width: 600px) {
+	.zomeex-footer {
+	padding-top: 52px;
+	}
+
+	.zomeex-footer__grid {
+	grid-template-columns: 1fr;
+	}
+
+	.zomeex-footer__base {
+	align-items: flex-start;
+	flex-direction: column;
+	gap: 9px;
+	margin-top: 42px;
 	}
 }

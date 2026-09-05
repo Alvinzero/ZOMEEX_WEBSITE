@@ -28,6 +28,7 @@
       return null;
     }
   };
+  var rfqStorage = safeStorage('sessionStorage');
 
   var setLanguageMenu = function (open) {
     if (!languageRoot) return;
@@ -126,6 +127,17 @@
     document.querySelectorAll('[data-quote-count]').forEach(function (element) {
       element.textContent = String(count);
       element.hidden = count === 0;
+    });
+    var locale = currentLocale();
+    var quoteLabels = {
+      'zh-CN': count + ' 个产品在询价清单中',
+      ru: count + ' товаров в списке запроса',
+      de: count + ' Produkte in der Angebotsliste',
+      fr: count + ' produit(s) dans la liste de devis'
+    };
+    var quoteLabel = count ? (quoteLabels[locale] || count + ' items in quote list') : (locale === 'zh-CN' ? '打开询价清单' : locale === 'ru' ? 'Открыть список запроса' : locale === 'de' ? 'Angebotsliste öffnen' : locale === 'fr' ? 'Ouvrir la liste de devis' : 'Open quote list');
+    document.querySelectorAll('[data-quote-link]').forEach(function (link) {
+      link.setAttribute('aria-label', quoteLabel);
     });
   };
 
@@ -397,6 +409,130 @@
       activateApplication(applicationTabs[nextIndex].dataset.applicationTab, true);
     });
   });
+
+  /* Keep the homepage's friendly checkbox UI compatible with the existing
+   * quote handler, which expects one scalar product_interest field. */
+  var interestValue = document.querySelector('[data-product-interest-value]');
+  if (interestValue) {
+    var syncProductInterest = function () {
+      interestValue.value = Array.prototype.slice.call(document.querySelectorAll('[data-product-interest]:checked')).map(function (option) {
+        return option.value;
+      }).join(', ');
+    };
+    document.querySelectorAll('[data-product-interest]').forEach(function (option) {
+      option.addEventListener('change', syncProductInterest);
+    });
+    syncProductInterest();
+  }
+
+  /* Homepage RFQ uses progressive disclosure while preserving the existing
+   * scalar field names consumed by the WordPress handler. */
+  var rfqStepper = document.querySelector('[data-rfq-stepper]');
+  if (rfqStepper) {
+    var rfqSteps = Array.prototype.slice.call(rfqStepper.querySelectorAll('[data-rfq-step]'));
+    var rfqProgress = Array.prototype.slice.call(rfqStepper.querySelectorAll('[data-rfq-progress-item]'));
+    var rfqDraftKey = 'zomeex-home-rfq-draft';
+    var rfqFieldSelector = 'input[name], select[name], textarea[name]';
+    var rfqIgnoredNames = { action: true, quote_return: true, quote_items: true, zomeex_quote_nonce: true, zomeex_quote_honeypot: true, privacy_consent: true };
+
+    var readRfqDraft = function () {
+      if (!rfqStorage) return {};
+      try {
+        var saved = JSON.parse(rfqStorage.getItem(rfqDraftKey) || '{}');
+        return saved && typeof saved === 'object' ? saved : {};
+      } catch (error) {
+        return {};
+      }
+    };
+    var writeRfqDraft = function () {
+      if (!rfqStorage) return;
+      var draft = {};
+      rfqStepper.querySelectorAll(rfqFieldSelector).forEach(function (field) {
+        /* Keep values from completed and hidden steps. Disabled controls are
+         * intentionally excluded from native validation, but their text is
+         * still safe to retain in this tab's draft. Files and consent are
+         * never persisted. */
+        if (rfqIgnoredNames[field.name] || field.type === 'file') return;
+        if (field.type === 'checkbox') return;
+        if (field.type === 'radio') {
+          if (field.checked) draft[field.name] = field.value;
+          return;
+        }
+        draft[field.name] = field.value;
+      });
+      try { rfqStorage.setItem(rfqDraftKey, JSON.stringify(draft)); } catch (error) { /* Ignore storage failures. */ }
+    };
+    var restoreRfqDraft = function () {
+      var draft = readRfqDraft();
+      Object.keys(draft).forEach(function (name) {
+        var fields = rfqStepper.querySelectorAll('[name="' + name.replace(/"/g, '\\"') + '"]');
+        fields.forEach(function (field) {
+          if (field.type === 'radio') field.checked = field.value === draft[name];
+          else field.value = draft[name];
+        });
+      });
+      if (interestValue && draft.product_interest) {
+        var selected = String(draft.product_interest).split(',').map(function (item) { return item.trim(); });
+        rfqStepper.querySelectorAll('[data-product-interest]').forEach(function (field) { field.checked = selected.indexOf(field.value) !== -1; });
+        interestValue.value = draft.product_interest;
+      }
+    };
+    var setRfqStep = function (stepNumber, focusHeading) {
+      var active = String(stepNumber);
+      rfqSteps.forEach(function (step) {
+        var isActive = step.dataset.rfqStep === active;
+        step.hidden = !isActive;
+        step.querySelectorAll('input, select, textarea').forEach(function (field) { field.disabled = !isActive; });
+      });
+      rfqProgress.forEach(function (item) {
+        var isActive = item.dataset.rfqProgressItem === active;
+        item.setAttribute('aria-current', isActive ? 'step' : 'false');
+        item.classList.toggle('is-active', isActive);
+      });
+      rfqStepper.dataset.rfqActiveStep = active;
+      if (focusHeading) {
+        var heading = rfqStepper.querySelector('[data-rfq-step="' + active + '"] h3');
+        if (heading) window.requestAnimationFrame(function () { heading.focus(); });
+      }
+    };
+    var currentRfqStep = function () { return Number(rfqStepper.dataset.rfqActiveStep || 1); };
+    restoreRfqDraft();
+    setRfqStep(1, false);
+    rfqStepper.addEventListener('input', writeRfqDraft);
+    rfqStepper.addEventListener('change', function () {
+      if (interestValue) {
+        interestValue.value = Array.prototype.slice.call(rfqStepper.querySelectorAll('[data-product-interest]:checked')).map(function (option) { return option.value; }).join(', ');
+      }
+      writeRfqDraft();
+    });
+    rfqStepper.querySelectorAll('[data-rfq-next]').forEach(function (button) {
+      button.addEventListener('click', function () {
+        var step = rfqStepper.querySelector('[data-rfq-step="' + currentRfqStep() + '"]');
+        if (!step || !step.querySelectorAll('input, select, textarea').length || step.querySelectorAll('input:invalid, select:invalid, textarea:invalid').length) {
+          step?.querySelector('input:invalid, select:invalid, textarea:invalid')?.reportValidity();
+          return;
+        }
+        writeRfqDraft();
+        setRfqStep(Number(button.dataset.rfqNext), true);
+      });
+    });
+    rfqStepper.querySelectorAll('[data-rfq-back]').forEach(function (button) {
+      button.addEventListener('click', function () { writeRfqDraft(); setRfqStep(Number(button.dataset.rfqBack), true); });
+    });
+    rfqStepper.addEventListener('submit', function (event) {
+      writeRfqDraft();
+      rfqStepper.querySelectorAll('input, select, textarea').forEach(function (field) { field.disabled = false; });
+      var quoteItems = rfqStepper.querySelector('[name="quote_items"]');
+      var storage = safeStorage('localStorage');
+      if (quoteItems && storage) {
+        try { quoteItems.value = storage.getItem('zomeex-quote-items') || '[]'; } catch (error) { quoteItems.value = '[]'; }
+      }
+    });
+  }
+
+  if (rfqStorage && /(?:^|[?&])submitted=1(?:&|$)/.test(window.location.search)) {
+    try { rfqStorage.removeItem('zomeex-home-rfq-draft'); } catch (error) { /* Ignore storage failures. */ }
+  }
 
   /* Deep links from the Products menu open the matching application panel. */
   var applicationHash = (window.location.hash || '').replace(/^#/, '');

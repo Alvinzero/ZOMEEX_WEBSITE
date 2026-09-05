@@ -1608,25 +1608,31 @@ body.zomeex-age-gate-active::before {
 
 .zomeex-header__inner {
 	align-items: center;
-	display: flex;
-	gap: 32px;
+	display: grid;
+	gap: clamp(20px, 2vw, 34px);
+	grid-template-columns: 176px minmax(0, 1fr) auto;
 	min-height: 78px;
 }
 
 .zomeex-wordmark {
-	font-size: 22px;
-	font-weight: 800;
-	letter-spacing: .17em;
-	line-height: 1;
+	align-items: center;
+	display: inline-flex;
+	line-height: 0;
 	white-space: nowrap;
+}
+
+.zomeex-wordmark img {
+	display: block;
+	height: auto;
+	max-width: 100%;
+	width: 176px;
 }
 
 .zomeex-desktop-nav {
 	align-items: center;
 	display: flex;
-	flex: 1 1 auto;
 	gap: 16px;
-	margin-left: auto;
+	justify-content: center;
 	min-width: 0;
 }
 
@@ -1694,27 +1700,38 @@ body.zomeex-age-gate-active::before {
 	align-items: center;
 	display: flex;
 	gap: 12px;
-	margin-left: 4px;
+	justify-self: end;
+	min-width: 0;
 }
 
 .zomeex-header__utility {
 	align-items: center;
-	border-left: 1px solid var(--zomeex-line);
-	border-right: 1px solid var(--zomeex-line);
 	display: inline-flex;
-	padding: 0 3px;
+	flex: 0 0 auto;
+	gap: 4px;
+	padding: 0;
 }
 
 .zomeex-utility-link {
+	align-items: center;
+	background: rgba(255, 255, 255, .42);
+	border: 1px solid var(--zomeex-line);
+	border-radius: 6px;
 	color: var(--zomeex-ink);
+	display: inline-flex;
+	height: 44px;
+	justify-content: center;
+	min-width: 44px;
 	position: relative;
-	transition: background-color .2s ease, color .2s ease, transform .2s ease;
+	transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
 }
 
 .zomeex-utility-link:hover,
 .zomeex-utility-link:focus-visible {
 	background: var(--zomeex-paper-deep);
+	border-color: var(--zomeex-accent);
 	color: var(--zomeex-accent-dark);
+	box-shadow: 0 5px 14px rgba(17, 35, 29, .08);
 }
 
 .zomeex-utility-link:active {
@@ -1722,9 +1739,43 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-utility-link__icon {
-	display: inline-block;
-	font-size: 14px;
+	align-items: center;
+	display: inline-flex;
+	font-family: "woodmart-font";
+	font-size: 17px;
+	font-style: normal;
+	font-weight: 400;
+	justify-content: center;
 	line-height: 1;
+}
+
+.zomeex-utility-link__icon::before {
+	display: block;
+}
+
+.zomeex-utility-link__icon--search::before {
+	content: "\f130";
+}
+
+.zomeex-utility-link[aria-expanded="true"] .zomeex-utility-link__icon--search::before {
+	content: "\f112";
+}
+
+.zomeex-utility-link__icon--account::before {
+	content: "\f124";
+}
+
+.zomeex-utility-link__icon--cart::before {
+	content: "\f105";
+}
+
+.zomeex-utility-link__icon--quote::before {
+	content: "\f138";
+	font-size: 19px;
+}
+
+.zomeex-utility-link__icon--quote::after {
+	content: none;
 }
 
 .zomeex-cart-count {
@@ -1886,10 +1937,10 @@ body.zomeex-age-gate-active::before {
 	display: inline-flex;
 	font-size: 10px;
 	font-weight: 700;
-	gap: 7px;
+	gap: 8px;
 	letter-spacing: .1em;
 	min-height: 44px;
-	padding: 0 2px;
+	padding: 0 6px;
 }
 
 .zomeex-locale__trigger:hover,
@@ -1901,6 +1952,24 @@ body.zomeex-age-gate-active::before {
 	font-size: 12px;
 	line-height: 1;
 	transform: translateY(-1px);
+}
+
+.zomeex-locale__flag {
+	border: 1px solid rgba(17, 35, 29, .14);
+	border-radius: 2px;
+	display: block !important;
+	flex: 0 0 24px;
+	height: 16px;
+	object-fit: cover;
+	opacity: 1 !important;
+	visibility: visible !important;
+	width: 24px;
+}
+
+.zomeex-locale__flag--current {
+	flex-basis: 22px;
+	height: 15px;
+	width: 22px;
 }
 
 .zomeex-locale__menu {
@@ -1938,7 +2007,7 @@ body.zomeex-age-gate-active::before {
 	cursor: pointer;
 	display: flex;
 	font-size: 13px;
-	justify-content: space-between;
+	gap: 11px;
 	min-height: 42px;
 	padding: 0 8px;
 	text-align: left;
@@ -1950,9 +2019,14 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-locale__option:hover,
-.zomeex-locale__option:focus-visible {
+.zomeex-locale__option:focus-visible,
+.zomeex-locale__option[data-active="true"] {
 	background: var(--zomeex-paper-deep);
 	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-locale__option > span:first-of-type {
+	flex: 1 1 auto;
 }
 
 .zomeex-locale__option > span:last-child {
@@ -2000,6 +2074,7 @@ body.zomeex-age-gate-active::before {
 	padding: 0;
 	position: relative;
 	text-transform: uppercase;
+	white-space: nowrap;
 }
 
 .zomeex-nav-trigger::after {
@@ -2031,6 +2106,14 @@ body.zomeex-age-gate-active::before {
 	font-size: inherit;
 	line-height: inherit;
 	transform: none;
+}
+
+@media (hover: hover) and (pointer: fine) {
+	.zomeex-nav-dropdown:hover .zomeex-nav-trigger,
+	.zomeex-nav-trigger:focus-visible,
+	.zomeex-nav-trigger[aria-expanded="true"] {
+		color: var(--zomeex-accent-dark);
+	}
 }
 
 .zomeex-mega-menu,
@@ -2201,6 +2284,38 @@ body.zomeex-age-gate-active::before {
 	color: var(--zomeex-accent-dark);
 }
 
+.zomeex-header__quote {
+	align-items: center;
+	background: transparent;
+	border: 1px solid transparent;
+	border-radius: 6px;
+	color: var(--zomeex-ink);
+	display: inline-flex;
+	height: 40px;
+	justify-content: center;
+	position: relative;
+	transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
+	width: 40px;
+}
+
+.zomeex-header__quote:hover,
+.zomeex-header__quote:focus-visible {
+	background: rgba(20, 116, 81, .14);
+	border-color: rgba(20, 116, 81, .38);
+	box-shadow: none;
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-header__quote:active {
+	transform: translateY(1px);
+}
+
+.zomeex-header__quote .zomeex-utility-link__icon {
+	height: auto;
+	position: static;
+	width: auto;
+}
+
 /* PRD navigation: a contained three-column catalogue panel. */
 .zomeex-mega-menu__inner {
 	align-items: stretch;
@@ -2367,9 +2482,12 @@ body.zomeex-age-gate-active::before {
 	}
 }
 
-@media (max-width: 1180px) and (min-width: 1041px) {
+/* Six client-approved navigation groups need the compact treatment before
+ * they begin displacing the utility actions at common laptop widths. */
+@media (max-width: 1300px) and (min-width: 1041px) {
 	.zomeex-header__inner {
-		gap: 14px;
+		gap: clamp(10px, 1.25vw, 16px);
+		grid-template-columns: clamp(118px, 10vw, 124px) minmax(0, 1fr) auto;
 	}
 
 	.zomeex-desktop-nav {
@@ -2384,14 +2502,44 @@ body.zomeex-age-gate-active::before {
 	}
 
 	.zomeex-header__actions {
-		gap: 4px;
+		gap: 2px;
+	}
+
+	.zomeex-wordmark {
+		width: 124px;
+	}
+
+	.zomeex-wordmark img {
+		width: 124px;
+	}
+
+	.zomeex-desktop-nav {
+		gap: 7px;
 	}
 }
 
-@media (max-width: 1040px) and (min-width: 768px) {
+/* Switch to the drawer before the six approved labels collide with the
+ * utility cluster. This breakpoint is driven by the actual header content. */
+@media (max-width: 1219px) and (min-width: 768px) {
+	.zomeex-header__inner {
+		display: flex;
+	}
+
+	.zomeex-wordmark {
+		flex-basis: 124px;
+	}
+
+	.zomeex-wordmark img {
+		width: 124px;
+	}
+
 	.zomeex-desktop-nav,
 	.zomeex-header__quote {
 		display: none;
+	}
+
+	.zomeex-header__actions {
+		margin-left: auto;
 	}
 
 	.zomeex-menu-toggle {
@@ -2425,15 +2573,9 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-header__quote {
-	align-items: center;
-	display: inline-flex;
-	gap: 8px;
 	line-height: 1;
-	min-height: 44px;
-	white-space: nowrap;
 }
 
-.zomeex-header__quote span,
 .zomeex-footer__link span,
 .zomeex-button span,
 .zomeex-cta a span,
@@ -2443,7 +2585,6 @@ body.zomeex-age-gate-active::before {
 	transition: transform .2s ease;
 }
 
-.zomeex-header__quote:hover span,
 .zomeex-footer__link:hover span,
 .zomeex-button:hover span,
 .zomeex-cta a:hover span,
@@ -2452,16 +2593,17 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-header__quote [data-quote-count] {
-	flex: 0 0 auto;
-	margin: 0;
+	position: absolute;
+	right: -2px;
+	top: 1px;
 }
 
-.zomeex-header__quote > span:last-child {
-	font-size: 15px;
-	font-weight: 400;
-	line-height: 1;
-	letter-spacing: 0;
-	margin-left: 0;
+.zomeex-header .zomeex-header__quote [data-quote-count] {
+	border: 2px solid var(--zomeex-paper);
+	font-size: 8px;
+	height: 16px;
+	min-width: 16px;
+	padding: 0 3px;
 }
 
 .zomeex-icon-button,
@@ -2505,37 +2647,62 @@ body.zomeex-age-gate-active::before {
 	transform: translateY(-3px) rotate(-45deg);
 }
 
+@media (min-width: 901px) and (max-width: 1219px) {
+	.zomeex-menu-toggle {
+		display: inline-flex;
+	}
+}
+
 .zomeex-search-panel {
 	background: var(--zomeex-dark);
+	border-top: 1px solid rgba(255, 255, 255, .12);
 	color: #fff;
-	padding: 24px 0 28px;
+	padding: 28px 0 32px;
+}
+
+.zomeex-search-form {
+	align-items: end;
+	display: grid;
+	gap: 16px 32px;
+	grid-template-columns: minmax(190px, .45fr) minmax(0, 1.55fr);
 }
 
 .zomeex-search-form label {
+	color: rgba(255, 255, 255, .92);
 	display: block;
-	font-size: 11px;
+	font-size: 12px;
+	font-weight: 700;
 	letter-spacing: .11em;
-	margin-bottom: 12px;
+	line-height: 1.35;
+	margin: 0;
 	text-transform: uppercase;
 }
 
 .zomeex-search-form > div {
 	display: flex;
-	max-width: 780px;
+	gap: 8px;
+	max-width: none;
 	min-width: 0;
 }
 
 .zomeex-search-form input {
-	background: transparent;
-	border: 0;
-	border-bottom: 1px solid rgba(255, 255, 255, .5);
-	border-radius: 0;
+	background: rgba(255, 255, 255, .1);
+	border: 1px solid rgba(255, 255, 255, .36);
+	border-radius: 6px;
+	box-sizing: border-box;
 	color: #fff;
 	flex: 1;
-	font-size: 24px;
+	font-size: 18px;
 	min-height: 52px;
 	outline: 0;
-	padding: 0;
+	padding: 0 16px;
+	transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease;
+}
+
+.zomeex-search-form input:focus {
+	background: rgba(255, 255, 255, .16);
+	border-color: #a9e6c4;
+	box-shadow: 0 0 0 3px rgba(169, 230, 196, .18);
 }
 
 .zomeex-search-form input::placeholder {
@@ -2544,15 +2711,94 @@ body.zomeex-age-gate-active::before {
 
 .zomeex-search-form button {
 	background: var(--zomeex-accent);
-	border: 0;
+	border: 1px solid var(--zomeex-accent);
+	border-radius: 6px;
 	color: #fff;
 	cursor: pointer;
 	font-size: 11px;
 	font-weight: 700;
 	letter-spacing: .11em;
 	min-height: 52px;
-	padding: 0 18px;
+	min-width: 120px;
+	padding: 0 20px;
 	text-transform: uppercase;
+	transition: background-color .2s ease, border-color .2s ease, transform .2s ease;
+}
+
+.zomeex-search-form button:hover,
+.zomeex-search-form button:focus-visible {
+	background: #1b8a61;
+	border-color: #1b8a61;
+}
+
+.zomeex-search-form button:active {
+	transform: translateY(1px);
+}
+
+@media (max-width: 767px) {
+	.zomeex-search-panel {
+		padding: 22px 0 24px;
+	}
+
+	.zomeex-search-form {
+		gap: 12px;
+		grid-template-columns: 1fr;
+	}
+
+	.zomeex-search-form label {
+		font-size: 10px;
+	}
+
+	.zomeex-search-form > div {
+		flex-direction: column;
+	}
+
+	.zomeex-search-form input,
+	.zomeex-search-form button {
+		box-sizing: border-box;
+		min-height: 48px;
+		width: 100%;
+	}
+
+	.zomeex-search-form button {
+		width: 100%;
+	}
+
+	.zomeex-commerce-page {
+		padding: 58px 0 72px;
+	}
+
+	.zomeex-commerce-page__lede {
+		font-size: 16px;
+		margin-bottom: 30px;
+	}
+
+	.zomeex-commerce-page .wd-registration-page {
+		padding: 22px 18px;
+	}
+
+	.zomeex-commerce-page .wd-grid-f-col {
+		display: block;
+	}
+
+	.zomeex-commerce-page .wd-grid-f-col > .wd-col {
+		padding: 0;
+	}
+
+	.zomeex-commerce-page .wd-grid-f-col > .wd-col + .wd-col {
+		border-left: 0;
+		border-top: 1px solid var(--zomeex-line);
+		margin-top: 30px;
+		padding-top: 30px;
+	}
+
+	.zomeex-commerce-page .wd-empty-page {
+		padding: 38px 20px;
+	}
+
+	.zomeex-commerce-page .cart-empty {
+		font-size: 25px;
+	}
 }
 
 .zomeex-mobile-nav {
@@ -2604,7 +2850,11 @@ body.zomeex-age-gate-active::before {
 	background: var(--zomeex-paper);
 	color: var(--zomeex-ink);
 	min-height: 62vh;
-	padding: 82px 0 96px;
+	padding: 88px 0 104px;
+}
+
+.zomeex-commerce-page__inner {
+	max-width: 1080px;
 }
 
 .zomeex-commerce-page__inner > h1 {
@@ -2622,9 +2872,153 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-commerce-page .woocommerce {
+	background: transparent;
+	border: 0;
+	padding: 0;
+}
+
+.zomeex-commerce-page .wd-registration-page,
+.zomeex-commerce-page .woocommerce-cart-form,
+.zomeex-commerce-page .cart-collaterals,
+.zomeex-commerce-page .wd-empty-page {
 	background: #fff;
 	border: 1px solid var(--zomeex-line);
-	padding: 28px;
+	border-radius: 8px;
+	box-shadow: 0 14px 34px rgba(17, 35, 29, .06);
+}
+
+.zomeex-commerce-page .wd-registration-page {
+	padding: clamp(22px, 4vw, 42px);
+	margin: 0;
+}
+
+.zomeex-commerce-page .wd-grid-f-col {
+	gap: 0;
+	margin: 0;
+}
+
+.zomeex-commerce-page .wd-grid-f-col > .wd-col {
+	margin: 0;
+	min-width: 0;
+	padding: 0 clamp(4px, 2.2vw, 28px);
+}
+
+.zomeex-commerce-page .wd-grid-f-col > .wd-col:first-child {
+	padding-left: 0;
+}
+
+.zomeex-commerce-page .wd-grid-f-col > .wd-col + .wd-col {
+	border-left: 1px solid var(--zomeex-line);
+}
+
+.zomeex-commerce-page .wd-login-title {
+	font-size: 24px;
+	letter-spacing: -.01em;
+	margin: 0 0 24px;
+}
+
+.zomeex-commerce-page .woocommerce form .form-row {
+	margin: 0 0 18px;
+	padding: 0;
+}
+
+.zomeex-commerce-page .woocommerce form label {
+	color: var(--zomeex-ink);
+	display: block;
+	font-size: 12px;
+	font-weight: 700;
+	line-height: 1.35;
+	margin-bottom: 7px;
+}
+
+.zomeex-commerce-page .woocommerce form input.input-text {
+	background: var(--zomeex-paper);
+	border: 1px solid var(--zomeex-line);
+	border-radius: 5px;
+	box-shadow: none;
+	box-sizing: border-box;
+	color: var(--zomeex-ink);
+	font-size: 16px;
+	min-height: 48px;
+	padding: 0 13px;
+	width: 100%;
+}
+
+.zomeex-commerce-page .woocommerce form input.input-text:focus {
+	background: #fff;
+	border-color: var(--zomeex-accent);
+	box-shadow: 0 0 0 3px rgba(20, 116, 81, .12);
+	outline: 0;
+}
+
+.zomeex-commerce-page .woocommerce .login-form-footer {
+	align-items: center;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px 20px;
+	justify-content: space-between;
+}
+
+.zomeex-commerce-page .woocommerce .login-form-footer label {
+	align-items: center;
+	display: inline-flex;
+	font-size: 12px;
+	font-weight: 400;
+	gap: 7px;
+	margin: 0;
+}
+
+.zomeex-commerce-page .woocommerce input[type="checkbox"] {
+	accent-color: var(--zomeex-accent);
+	margin: 0;
+}
+
+.zomeex-commerce-page .woocommerce .wd-col-register-text,
+.zomeex-commerce-page .woocommerce .col-register-text {
+	display: none;
+}
+
+.zomeex-commerce-page .woocommerce .wd-registration-page .col-register {
+	display: block;
+}
+
+.zomeex-commerce-page .woocommerce .woocommerce-privacy-policy-text,
+.zomeex-commerce-page .woocommerce .col-register > form > p:not(.form-row) {
+	color: var(--zomeex-ink-soft);
+	font-size: 13px;
+	line-height: 1.55;
+}
+
+.zomeex-commerce-page .woocommerce .woocommerce-privacy-policy-text a {
+	text-decoration: underline;
+}
+
+.zomeex-commerce-page .woocommerce .button:hover,
+.zomeex-commerce-page .woocommerce button.button:hover {
+	background: var(--zomeex-accent-dark);
+	border-color: var(--zomeex-accent-dark);
+}
+
+.zomeex-commerce-page .wd-empty-page {
+	margin: 0;
+	padding: clamp(32px, 6vw, 70px) clamp(22px, 6vw, 76px);
+	text-align: center;
+}
+
+.zomeex-commerce-page .cart-empty {
+	color: var(--zomeex-ink);
+	font-size: clamp(22px, 3vw, 32px);
+	font-weight: 700;
+	line-height: 1.15;
+	margin: 0 0 12px;
+}
+
+.zomeex-commerce-page .wd-empty-page-text {
+	color: var(--zomeex-ink-soft);
+	font-size: 15px;
+	line-height: 1.55;
+	margin: 0 auto 26px;
+	max-width: 52ch;
 }
 
 .zomeex-commerce-page .woocommerce a:not(.button) {
@@ -3895,18 +4289,6 @@ body.zomeex-age-gate-active::before {
 		width: min(calc(100% - 64px), var(--zomeex-container));
 	}
 
-	.zomeex-header__inner {
-		gap: 20px;
-	}
-
-	.zomeex-desktop-nav {
-		gap: 16px;
-	}
-
-	.zomeex-header__actions {
-		gap: 8px;
-	}
-
 	.zomeex-hero {
 		gap: 34px;
 	}
@@ -3972,13 +4354,17 @@ body.zomeex-age-gate-active::before {
 	}
 
 	.zomeex-header__inner {
-	gap: 0;
+		display: flex;
+		gap: 0;
 		min-height: 66px;
 	}
 
 	.zomeex-wordmark {
-		font-size: 18px;
-		letter-spacing: .12em;
+		flex-basis: 118px;
+	}
+
+	.zomeex-wordmark img {
+		width: 118px;
 	}
 
 	.zomeex-desktop-nav,
@@ -3993,7 +4379,13 @@ body.zomeex-age-gate-active::before {
 	}
 
 	.zomeex-header__utility {
+		border-right: 0;
 		padding: 0;
+	}
+
+	.zomeex-header__utility .zomeex-account-link,
+	.zomeex-header__utility .zomeex-cart-link {
+		display: none;
 	}
 
 	.zomeex-menu-toggle {
@@ -4512,6 +4904,13 @@ body.zomeex-age-gate-active::before {
 }
 
 .zomeex-modern-page .wd-side-hidden {
+	display: none !important;
+}
+
+/* The imported theme can open an empty promo shell on account/cart routes.
+ * It has no content but still leaves a blocking backdrop over the page. */
+.zomeex-modern-page:has(.mfp-wrap .wd-popup.wd-promo-popup) .mfp-bg,
+.zomeex-modern-page:has(.mfp-wrap .wd-popup.wd-promo-popup) .mfp-wrap {
 	display: none !important;
 }
 

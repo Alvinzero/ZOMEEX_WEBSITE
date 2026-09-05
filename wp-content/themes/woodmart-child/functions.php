@@ -35,7 +35,7 @@ function woodmart_child_enqueue_styles() {
 			'zomeex-home',
 			get_stylesheet_directory_uri() . '/assets/zomeex-home.js',
 			array( 'zomeex-i18n' ),
-			'1.3.1',
+			'1.3.2',
 			true
 		);
 	}
@@ -277,6 +277,12 @@ add_action( 'template_redirect', 'zomeex_disable_legacy_single_product_builder',
 /** Make the virtual quote route behave like a real public page. */
 function zomeex_quote_route_status() {
 	if ( zomeex_is_quote_request() || zomeex_is_account_route() || zomeex_is_cart_route() ) {
+		global $wp_query;
+
+		if ( $wp_query instanceof WP_Query ) {
+			$wp_query->is_404 = false;
+		}
+
 		status_header( 200 );
 	}
 }
@@ -289,6 +295,14 @@ function zomeex_quote_document_title( $title ) {
 
 	if ( zomeex_is_faq_route() ) {
 		return 'Cannabis Packaging FAQ | ZOMEEX';
+	}
+
+	if ( zomeex_is_account_route() ) {
+		return 'Customer account | ZOMEEX';
+	}
+
+	if ( zomeex_is_cart_route() ) {
+		return 'Shopping cart | ZOMEEX';
 	}
 
 	if ( function_exists( 'is_404' ) && is_404() ) {
@@ -925,10 +939,10 @@ function zomeex_page_url( $slug, $fallback = '/' ) {
 	return $page ? get_permalink( $page ) : zomeex_home_url( $fallback );
 }
 
-function zomeex_upload_url( $filename ) {
+function zomeex_upload_url( $filename, $subdirectory = '2025/11' ) {
 	$uploads = wp_upload_dir();
 
-	return trailingslashit( $uploads['baseurl'] ) . '2025/11/' . ltrim( $filename, '/' );
+	return trailingslashit( $uploads['baseurl'] ) . trim( $subdirectory, '/' ) . '/' . ltrim( $filename, '/' );
 }
 
 /**
@@ -1034,12 +1048,13 @@ function zomeex_portal_url( $portal ) {
  * even while the plugin widget is loading or unavailable in a local preview.
  */
 function zomeex_language_switcher() {
+	$flag_base = content_url( 'plugins/gtranslate/flags/24' );
 	$locales = array(
-		'en'    => array( 'code' => 'EN', 'label' => 'English' ),
-		'zh-CN' => array( 'code' => 'ZH', 'label' => '中文' ),
-		'ru'    => array( 'code' => 'RU', 'label' => 'Русский' ),
-		'de'    => array( 'code' => 'DE', 'label' => 'Deutsch' ),
-		'fr'    => array( 'code' => 'FR', 'label' => 'Français' ),
+		'en'    => array( 'code' => 'EN', 'label' => 'English', 'flag' => $flag_base . '/en.png' ),
+		'zh-CN' => array( 'code' => 'ZH', 'label' => '中文', 'flag' => $flag_base . '/zh-CN.png' ),
+		'ru'    => array( 'code' => 'RU', 'label' => 'Русский', 'flag' => $flag_base . '/ru.png' ),
+		'de'    => array( 'code' => 'DE', 'label' => 'Deutsch', 'flag' => $flag_base . '/de.png' ),
+		'fr'    => array( 'code' => 'FR', 'label' => 'Français', 'flag' => $flag_base . '/fr.png' ),
 	);
 	$native_widget = shortcode_exists( 'gtranslate' ) ? do_shortcode( '[gtranslate widget_look="popup_search"]' ) : '';
 
@@ -1047,12 +1062,14 @@ function zomeex_language_switcher() {
 	?>
 	<div class="zomeex-locale" data-locale-switcher data-source-language="en">
 		<button class="zomeex-locale__trigger" type="button" aria-expanded="false" aria-haspopup="menu" aria-controls="zomeex-locale-menu" aria-label="Select language">
+			<img class="zomeex-locale__flag zomeex-locale__flag--current" data-locale-current-flag src="<?php echo esc_url( $locales['en']['flag'] ); ?>" alt="" width="24" height="16">
 			<span data-locale-current>EN</span><span class="zomeex-locale__chevron" aria-hidden="true">⌄</span>
 		</button>
 		<div class="zomeex-locale__menu" id="zomeex-locale-menu" role="menu" hidden>
-			<p class="zomeex-locale__label">Choose language</p>
+			<p class="zomeex-locale__label" data-zomeex-i18n="nav.chooseLanguage">Choose language</p>
 			<?php foreach ( $locales as $locale => $data ) : ?>
-				<button class="zomeex-locale__option" type="button" role="menuitem" data-language="<?php echo esc_attr( $locale ); ?>" data-language-code="<?php echo esc_attr( $data['code'] ); ?>">
+				<button class="zomeex-locale__option" type="button" role="menuitem" data-language="<?php echo esc_attr( $locale ); ?>" data-language-code="<?php echo esc_attr( $data['code'] ); ?>" data-language-flag="<?php echo esc_url( $data['flag'] ); ?>">
+					<img class="zomeex-locale__flag" src="<?php echo esc_url( $data['flag'] ); ?>" alt="" width="24" height="16">
 					<span><?php echo esc_html( $data['label'] ); ?></span><span aria-hidden="true"><?php echo esc_html( $data['code'] ); ?></span>
 				</button>
 			<?php endforeach; ?>

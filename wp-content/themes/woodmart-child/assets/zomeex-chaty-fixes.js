@@ -103,7 +103,6 @@
       allowed.dataset.zomeexAgeBound = '1';
       allowed.addEventListener('click', function (event) {
         event.preventDefault();
-        event.stopImmediatePropagation();
         document.cookie = 'woodmart_age_verify=confirmed; path=/; max-age=2592000';
         gate.classList.add('zomeex-age-gate-hidden');
         document.body.classList.remove('zomeex-age-gate-active');

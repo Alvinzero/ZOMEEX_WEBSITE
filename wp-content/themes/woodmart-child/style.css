@@ -1072,7 +1072,7 @@ html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
 	position: fixed !important;
 	left: 50% !important;
 	top: 50% !important;
-	transform: translate(-50%, -50%);
+	transform: translate(-50%, -50%) !important;
 	visibility: hidden;
 	opacity: 0;
 	pointer-events: none;
@@ -1090,11 +1090,17 @@ body.zomeex-age-gate-active {
 }
 
 body.zomeex-age-gate-active::before {
-	background: rgba(16, 37, 30, .78);
-	content: '';
-	inset: 0;
-	position: fixed;
-	z-index: 10000;
+	content: none;
+}
+
+body.zomeex-age-gate-active > .mfp-bg {
+	background-color: rgba(16, 37, 30, .78) !important;
+	opacity: 1 !important;
+	z-index: 10000 !important;
+}
+
+body.zomeex-age-gate-active > .mfp-wrap {
+	z-index: 10001 !important;
 }
 
 .wd-age-verify.zomeex-age-gate-hidden {

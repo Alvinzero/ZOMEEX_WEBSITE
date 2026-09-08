@@ -2059,11 +2059,9 @@ body.zomeex-age-gate-active > .mfp-wrap {
 	position: relative;
 }
 
-/* The two catalogue menus are full-width panels. Let them use the sticky
- * header as their containing block instead of the narrow trigger button;
- * the four content menus keep their local positioning context. */
-.zomeex-desktop-nav > .zomeex-nav-dropdown:nth-child(1),
-.zomeex-desktop-nav > .zomeex-nav-dropdown:nth-child(2) {
+/* Every desktop menu uses the sticky header as its containing block so
+ * the panel can span the full header width, matching the catalogue reference. */
+.zomeex-desktop-nav > .zomeex-nav-dropdown {
 	position: static;
 }
 
@@ -2125,13 +2123,15 @@ body.zomeex-age-gate-active > .mfp-wrap {
 	}
 }
 
+/* Catalogue mega menu: a full-bleed sheet, not a local popover card. */
 .zomeex-mega-menu,
 .zomeex-nav-popover {
-	background: var(--zomeex-paper);
-	border: 1px solid var(--zomeex-line);
-	box-shadow: 0 22px 60px rgba(17, 35, 29, .18);
+	background: #fbfcfb;
+	border: 0;
+	border-top: 1px solid var(--zomeex-line);
+	box-shadow: 0 28px 54px rgba(17, 35, 29, .12);
 	position: absolute;
-	top: calc(100% + 1px);
+	top: 100%;
 	z-index: 50;
 }
 
@@ -2147,102 +2147,244 @@ body.zomeex-age-gate-active > .mfp-wrap {
 	width: auto;
 }
 
+.zomeex-mega-menu:not([hidden]) {
+	animation: zomeex-mega-in .22s cubic-bezier(.16, 1, .3, 1);
+}
+
+@keyframes zomeex-mega-in {
+	from {
+		opacity: 0;
+		transform: translateY(-8px);
+	}
+	to {
+		opacity: 1;
+		transform: none;
+	}
+}
+
 .zomeex-mega-menu__inner {
+	align-items: stretch;
 	display: grid;
-	gap: 54px;
-	grid-template-columns: minmax(190px, .7fr) minmax(0, 2.1fr);
+	gap: 0;
+	grid-template-columns: minmax(0, 1.82fr) minmax(280px, .84fr) minmax(196px, .48fr);
 	min-width: 0;
-	padding-bottom: 38px;
-	padding-top: 36px;
+	padding: 22px 0 26px;
 }
 
-.zomeex-mega-menu__intro {
+.zomeex-mega-menu__main {
 	border-right: 1px solid var(--zomeex-line);
-	padding-right: 38px;
-}
-
-.zomeex-mega-menu__intro p,
-.zomeex-mega-menu__portal > p {
-	color: var(--zomeex-ink-soft);
-	font-size: 10px;
-	letter-spacing: .12em;
-	margin: 0 0 16px;
-	text-transform: uppercase;
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-width: 0;
+	padding-right: 28px;
 }
 
 .zomeex-mega-menu__intro h2 {
-	font-size: 27px;
-	line-height: 1.08;
-	margin: 0 0 30px;
+	font-size: 20px;
+	font-weight: 700;
+	letter-spacing: -.03em;
+	line-height: 1.12;
+	margin: 0 0 10px;
+	max-width: 18ch;
+	text-wrap: balance;
 }
 
-.zomeex-mega-menu__intro > a {
+.zomeex-mega-menu__intro > a,
+.zomeex-mega-menu__feature-copy > a {
+	align-items: center;
 	border-bottom: 1px solid currentColor;
 	color: var(--zomeex-accent-dark);
-	display: inline-block;
+	display: inline-flex;
+	font-size: 11px !important;
+	font-weight: 700;
+	gap: 8px;
+	letter-spacing: .12em !important;
+	min-height: 0;
+	padding: 0 0 6px;
+	text-transform: uppercase;
+	white-space: nowrap;
+	width: fit-content;
+}
+
+.zomeex-mega-menu__label {
+	color: var(--zomeex-accent-dark);
 	font-size: 10px;
 	font-weight: 700;
-	letter-spacing: .1em;
-	padding-bottom: 6px;
+	letter-spacing: .16em;
+	line-height: 1.2;
+	margin: 0 0 12px;
 	text-transform: uppercase;
 }
 
-.zomeex-mega-menu__portals {
+.zomeex-mega-menu__catalog {
+	border-top: 1px solid var(--zomeex-line);
+	padding-top: 16px;
+}
+
+.zomeex-mega-menu__groups {
 	display: grid;
-	gap: 30px 24px;
+	gap: 18px 32px;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.zomeex-mega-menu__portal {
 	min-width: 0;
 }
 
-.zomeex-mega-menu__portal-title {
+.zomeex-mega-menu__catalog[data-group-count="1"] .zomeex-mega-menu__groups {
+	grid-template-columns: minmax(0, 1fr);
+}
+
+.zomeex-mega-menu__group {
+	min-width: 0;
+}
+
+.zomeex-mega-menu__group-title {
 	align-items: center;
-	border-bottom: 1px solid var(--zomeex-line);
+	color: var(--zomeex-ink);
 	display: flex;
-	justify-content: space-between;
-	padding-bottom: 9px;
-}
-
-.zomeex-mega-menu__portal-title strong {
-	font-size: 14px;
-	letter-spacing: .08em;
-	min-width: 0;
-	overflow-wrap: anywhere;
-}
-
-.zomeex-mega-menu__portal-title > span {
-	color: var(--zomeex-accent-dark);
-	font-size: 17px;
-}
-
-.zomeex-mega-menu__portal > p {
-	font-size: 11px;
-	letter-spacing: 0;
-	line-height: 1.45;
-	margin: 11px 0;
-	text-transform: none;
-}
-
-.zomeex-mega-menu__children {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 7px 13px;
-}
-
-.zomeex-mega-menu__children a {
-	color: var(--zomeex-ink-soft);
-	font-size: 10px !important;
-	letter-spacing: .08em !important;
-	line-height: 1.3;
+	gap: 10px;
+	letter-spacing: .01em;
+	margin-bottom: 2px;
+	min-height: 0;
+	padding: 0 0 4px;
+	white-space: normal;
+	width: fit-content;
 	max-width: 100%;
-	overflow-wrap: anywhere;
-	text-transform: uppercase;
 }
 
-.zomeex-mega-menu__children a:hover,
-.zomeex-mega-menu__children a:focus-visible {
+.zomeex-mega-menu__group-title strong {
+	color: var(--zomeex-ink);
+	flex: 1 1 auto;
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.3;
+	min-width: 0;
+	overflow-wrap: break-word;
+	white-space: normal;
+}
+
+.zomeex-mega-menu__mark {
+	align-items: center;
+	color: var(--zomeex-accent);
+	display: inline-flex;
+	flex: 0 0 auto;
+	height: 18px;
+	justify-content: center;
+	transition: color .2s ease;
+	width: 18px;
+}
+
+.zomeex-mega-menu__icon {
+	display: block;
+	height: 16px;
+	width: 16px;
+}
+
+.zomeex-mega-menu__arrow {
+	display: block;
+	flex: 0 0 auto;
+	height: 11px;
+	margin-left: 2px;
+	transition: transform .2s cubic-bezier(.16, 1, .3, 1);
+	width: 11px;
+}
+
+.zomeex-mega-menu__intro > a:hover .zomeex-mega-menu__arrow,
+.zomeex-mega-menu__intro > a:focus-visible .zomeex-mega-menu__arrow,
+.zomeex-mega-menu__feature-copy > a:hover .zomeex-mega-menu__arrow,
+.zomeex-mega-menu__feature-copy > a:focus-visible .zomeex-mega-menu__arrow {
+	transform: translate(2px, -2px);
+}
+
+.zomeex-mega-menu__group ul,
+.zomeex-mega-menu__rail ul {
+	display: grid;
+	gap: 0;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.zomeex-desktop-nav .zomeex-mega-menu__group ul a,
+.zomeex-desktop-nav .zomeex-mega-menu__rail a,
+.zomeex-desktop-nav .zomeex-mega-menu__help {
+	color: var(--zomeex-ink-soft);
+	font-family: "Avenir Next", "Helvetica Neue", Arial, sans-serif;
+	font-size: 13px !important;
+	font-weight: 500;
+	letter-spacing: 0 !important;
+	line-height: 1.45;
+	min-height: 0;
+	text-transform: none !important;
+	white-space: normal !important;
+}
+
+.zomeex-desktop-nav .zomeex-mega-menu__label {
+	letter-spacing: .16em !important;
+	text-transform: uppercase !important;
+}
+
+.zomeex-desktop-nav .zomeex-mega-menu__intro > a,
+.zomeex-desktop-nav .zomeex-mega-menu__feature-copy > a {
+	font-size: 11px !important;
+	font-weight: 700;
+	letter-spacing: .12em !important;
+	text-transform: uppercase !important;
+}
+
+.zomeex-desktop-nav .zomeex-mega-menu__group-title {
+	color: var(--zomeex-ink);
+	font-size: 13px !important;
+	font-weight: 700;
+	letter-spacing: .01em !important;
+	text-transform: none !important;
+}
+
+.zomeex-mega-menu__group ul {
+	grid-template-columns: minmax(0, 1fr);
+	min-width: 0;
+	padding-left: 28px;
+	width: 100%;
+}
+
+.zomeex-mega-menu__group ul li,
+.zomeex-mega-menu__group ul a {
+	max-width: 100%;
+	min-width: 0;
+}
+
+.zomeex-mega-menu__group ul a {
+	display: block;
+	overflow-wrap: break-word;
+	padding: 4px 0;
+	width: 100%;
+}
+
+.zomeex-mega-menu__group-title:hover,
+.zomeex-mega-menu__group-title:focus-visible,
+.zomeex-mega-menu__group ul a:hover,
+.zomeex-mega-menu__group ul a:focus-visible,
+.zomeex-mega-menu__rail a:hover,
+.zomeex-mega-menu__rail a:focus-visible,
+.zomeex-mega-menu__help:hover,
+.zomeex-mega-menu__help:focus-visible {
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-mega-menu__group-title:hover strong,
+.zomeex-mega-menu__group-title:focus-visible strong,
+.zomeex-mega-menu__rail a:hover > span,
+.zomeex-mega-menu__rail a:focus-visible > span,
+.zomeex-mega-menu__help:hover strong,
+.zomeex-mega-menu__help:focus-visible strong {
+	color: var(--zomeex-accent-dark);
+}
+
+.zomeex-mega-menu__group-title:hover .zomeex-mega-menu__mark,
+.zomeex-mega-menu__group-title:focus-visible .zomeex-mega-menu__mark,
+.zomeex-mega-menu__rail a:hover .zomeex-mega-menu__mark,
+.zomeex-mega-menu__rail a:focus-visible .zomeex-mega-menu__mark,
+.zomeex-mega-menu__help:hover .zomeex-mega-menu__mark,
+.zomeex-mega-menu__help:focus-visible .zomeex-mega-menu__mark {
 	color: var(--zomeex-accent-dark);
 }
 
@@ -2258,328 +2400,194 @@ body.zomeex-age-gate-active > .mfp-wrap {
 	width: min(300px, calc(100vw - 32px));
 }
 
-.zomeex-nav-popover a {
-	display: block;
-	min-height: 44px;
-	padding: 13px 12px;
-}
-
-.zomeex-nav-popover a:hover,
-.zomeex-nav-popover a:focus-visible {
-	background: var(--zomeex-paper-deep);
-}
-
-.zomeex-nav-popover strong,
-.zomeex-nav-popover small {
-	display: block;
-}
-
-.zomeex-nav-popover strong {
-	font-size: 12px;
-	letter-spacing: .03em;
-	text-transform: none;
-}
-
-.zomeex-nav-popover small {
-	color: var(--zomeex-ink-soft);
-	font-size: 11px;
-	letter-spacing: 0;
-	margin-top: 5px;
-	text-transform: none;
-}
-
-.zomeex-header__quote,
-.zomeex-footer__link {
-	color: var(--zomeex-accent-dark);
-}
-
-.zomeex-header__quote {
-	align-items: center;
-	background: transparent;
-	border: 1px solid transparent;
-	border-radius: 6px;
-	color: var(--zomeex-ink);
-	display: inline-flex;
-	height: 40px;
-	justify-content: center;
-	position: relative;
-	transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease, box-shadow .2s ease;
-	width: 40px;
-}
-
-.zomeex-header__quote:hover,
-.zomeex-header__quote:focus-visible {
-	background: rgba(20, 116, 81, .14);
-	border-color: rgba(20, 116, 81, .38);
-	box-shadow: none;
-	color: var(--zomeex-accent-dark);
-}
-
-.zomeex-header__quote:active {
-	transform: translateY(1px);
-}
-
-.zomeex-header__quote .zomeex-utility-link__icon {
-	height: auto;
-	position: static;
-	width: auto;
-}
-
-/* PRD navigation: a contained three-column catalogue panel. */
-.zomeex-mega-menu__inner {
-	align-items: stretch;
-	grid-template-columns: minmax(0, 1.15fr) minmax(0, .85fr) minmax(230px, .8fr);
-	gap: 0;
-	padding: 30px 0 32px;
-}
-
-.zomeex-mega-menu__column {
-	min-width: 0;
-	padding: 0 28px;
-}
-
-.zomeex-mega-menu__column:first-child {
-	padding-left: 0;
-}
-
-.zomeex-mega-menu__column + .zomeex-mega-menu__column,
-.zomeex-mega-menu__feature {
-	border-left: 1px solid var(--zomeex-line);
-}
-
-.zomeex-mega-menu__feature {
-	display: grid;
-	grid-template-rows: 126px 1fr;
-	min-width: 0;
-	padding-left: 28px;
-}
-
-.zomeex-mega-menu__eyebrow {
-	color: var(--zomeex-accent-dark);
-	font-size: 10px;
-	font-weight: 700;
-	letter-spacing: .13em;
-	line-height: 1.2;
-	margin: 0 0 14px;
-	text-transform: uppercase;
-}
-
-.zomeex-mega-menu__portal-list,
-.zomeex-mega-menu__link-list {
-	display: grid;
-	gap: 1px;
-}
-
-.zomeex-mega-menu__portal-link,
-.zomeex-mega-menu__link-list a {
-	align-items: center;
-	color: var(--zomeex-ink);
+.zomeex-mega-menu__rail {
+	border-right: 1px solid var(--zomeex-line);
 	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
+	gap: 22px;
 	min-width: 0;
-	min-height: 44px;
-	padding: 10px 0;
-	text-transform: none;
+	padding: 0 16px 0 20px;
 }
 
-.zomeex-mega-menu__portal-link:hover,
-.zomeex-mega-menu__portal-link:focus-visible,
-.zomeex-mega-menu__link-list a:hover,
-.zomeex-mega-menu__link-list a:focus-visible {
-	color: var(--zomeex-accent-dark);
-}
-
-.zomeex-mega-menu__portal-link strong {
-	display: block;
-	font-size: 13px;
-	letter-spacing: .07em;
-	line-height: 1.2;
-}
-
-.zomeex-mega-menu__portal-link small {
-	color: var(--zomeex-ink-soft);
-	display: block;
-	font-size: 11px;
-	letter-spacing: 0;
-	line-height: 1.35;
-	margin-top: 3px;
-}
-
-.zomeex-mega-menu__portal-link > span:last-child,
-.zomeex-mega-menu__link-list a > span {
-	color: var(--zomeex-accent-dark);
-	flex: 0 0 auto;
-	font-size: 14px;
-	margin-left: 12px;
-}
-
-.zomeex-mega-menu__link-list a {
-	font-size: 12px !important;
-	letter-spacing: .01em !important;
-	line-height: 1.3;
-}
-
-.zomeex-mega-menu__link-list--large a {
-	font-size: 13px !important;
-	padding: 10px 0;
-}
-
-.zomeex-mega-menu__subsection {
+.zomeex-mega-menu__rail-block + .zomeex-mega-menu__rail-block {
 	border-top: 1px solid var(--zomeex-line);
-	margin-top: 20px;
 	padding-top: 18px;
 }
 
-.zomeex-mega-menu__subsection .zomeex-mega-menu__eyebrow {
-	margin-bottom: 7px;
+.zomeex-mega-menu__rail a {
+	align-items: center;
+	display: flex;
+	gap: 10px;
+	min-height: 0;
+	padding: 7px 0;
+	width: fit-content;
+	max-width: 100%;
+}
+
+.zomeex-mega-menu__rail a > span {
+	color: var(--zomeex-ink);
+	flex: 1 1 auto;
+	font-size: 13px;
+	font-weight: 600;
+	line-height: 1.35;
+	min-width: 0;
+	overflow-wrap: break-word;
+}
+
+.zomeex-mega-menu__feature {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+	min-width: 0;
+	padding-left: 22px;
 }
 
 .zomeex-mega-menu__feature-media {
-	background: var(--zomeex-paper-deep);
+	aspect-ratio: 4 / 3;
+	background: #fff;
+	max-height: 168px;
 	overflow: hidden;
 }
 
 .zomeex-mega-menu__feature-media img {
 	display: block;
 	height: 100%;
-	object-fit: cover;
+	object-fit: contain;
+	object-position: center top;
 	width: 100%;
 }
 
-.zomeex-mega-menu__feature-copy {
-	padding-top: 20px;
-}
-
 .zomeex-mega-menu__feature-copy h3 {
-	font-size: 22px;
-	line-height: 1.08;
-	margin: 0 0 10px;
+	font-size: 16px;
+	font-weight: 700;
+	letter-spacing: -.02em;
+	line-height: 1.2;
+	margin: 0 0 8px;
+	text-wrap: balance;
 }
 
-.zomeex-mega-menu__feature-copy > p:not(.zomeex-mega-menu__eyebrow) {
+.zomeex-mega-menu__feature-copy > p:not(.zomeex-mega-menu__label) {
+	color: var(--zomeex-ink-soft);
+	font-size: 13px;
+	line-height: 1.5;
+	margin: 0 0 12px;
+	max-width: 32ch;
+	overflow-wrap: break-word;
+}
+
+.zomeex-mega-menu__help {
+	align-items: flex-start;
+	border-top: 1px solid var(--zomeex-line);
+	display: flex;
+	gap: 10px;
+	margin-top: auto;
+	min-height: 56px;
+	padding-top: 14px;
+}
+
+.zomeex-mega-menu__help > span {
+	min-width: 0;
+}
+
+.zomeex-mega-menu__help strong,
+.zomeex-mega-menu__help small {
+	display: block;
+}
+
+.zomeex-mega-menu__help strong {
+	color: var(--zomeex-ink);
+	font-size: 13px;
+	font-weight: 700;
+	line-height: 1.3;
+}
+
+.zomeex-mega-menu__help small {
 	color: var(--zomeex-ink-soft);
 	font-size: 12px;
-	line-height: 1.5;
-	margin: 0;
+	line-height: 1.4;
+	margin-top: 3px;
+	overflow-wrap: break-word;
 }
 
-.zomeex-mega-menu__feature-copy > a {
-	border-bottom: 1px solid currentColor;
-	color: var(--zomeex-accent-dark);
-	display: inline-block;
-	font-size: 10px !important;
-	font-weight: 700;
-	letter-spacing: .1em !important;
-	margin-top: 18px;
-	padding-bottom: 5px;
-	text-transform: uppercase;
+@media (min-width: 1400px) {
+	.zomeex-mega-menu__inner {
+		grid-template-columns: minmax(0, 1.9fr) minmax(292px, .8fr) minmax(216px, .5fr);
+	}
+
+	.zomeex-mega-menu__groups {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.zomeex-mega-menu__catalog[data-group-count="1"] .zomeex-mega-menu__groups,
+	.zomeex-mega-menu__catalog[data-group-count="2"] .zomeex-mega-menu__groups {
+		grid-template-columns: repeat(var(--zomeex-mega-groups, 2), minmax(0, 1fr));
+	}
+
+	.zomeex-mega-menu__catalog[data-group-count="1"] { --zomeex-mega-groups: 1; }
+	.zomeex-mega-menu__catalog[data-group-count="2"] { --zomeex-mega-groups: 2; }
 }
 
 @media (max-width: 1100px) {
 	.zomeex-mega-menu__inner {
-		grid-template-columns: minmax(0, 1fr) minmax(0, .9fr) minmax(190px, .75fr);
+		grid-template-columns: minmax(0, 1fr) minmax(200px, .7fr);
 	}
 
-	.zomeex-mega-menu__column,
 	.zomeex-mega-menu__feature {
-		padding-left: 18px;
-		padding-right: 18px;
+		grid-column: 1 / -1;
+		grid-template-columns: 160px minmax(0, 1fr);
+		display: grid;
+		margin-top: 22px;
+		padding: 22px 0 0;
+		border-top: 1px solid var(--zomeex-line);
 	}
 
-	.zomeex-mega-menu__column:first-child {
-		padding-left: 0;
-	}
-}
-
-/* Six client-approved navigation groups need the compact treatment before
- * they begin displacing the utility actions at common laptop widths. */
-@media (max-width: 1300px) and (min-width: 1041px) {
-	.zomeex-header__inner {
-		gap: clamp(10px, 1.25vw, 16px);
-		grid-template-columns: clamp(118px, 10vw, 124px) minmax(0, 1fr) auto;
+	.zomeex-mega-menu__rail {
+		border-right: 0;
 	}
 
-	.zomeex-desktop-nav {
-		gap: 10px;
-	}
-
-	.zomeex-desktop-nav a,
-	.zomeex-nav-trigger,
-	.zomeex-header__quote {
-		font-size: 10px;
-		letter-spacing: .045em;
-	}
-
-	.zomeex-header__actions {
-		gap: 2px;
-	}
-
-	.zomeex-wordmark {
-		width: 124px;
-	}
-
-	.zomeex-wordmark img {
-		width: 124px;
-	}
-
-	.zomeex-desktop-nav {
-		gap: 7px;
-	}
-}
-
-/* Switch to the drawer before the six approved labels collide with the
- * utility cluster. This breakpoint is driven by the actual header content. */
-@media (max-width: 1219px) and (min-width: 768px) {
-	.zomeex-header__inner {
-		display: flex;
-	}
-
-	.zomeex-wordmark {
-		flex-basis: 124px;
-	}
-
-	.zomeex-wordmark img {
-		width: 124px;
-	}
-
-	.zomeex-desktop-nav,
-	.zomeex-header__quote {
-		display: none;
-	}
-
-	.zomeex-header__actions {
-		margin-left: auto;
-	}
-
-	.zomeex-menu-toggle {
-		display: inline-flex;
-	}
-
-	.zomeex-mobile-nav {
-		max-height: calc(100dvh - 112px);
-		overflow-y: auto;
-		overflow-x: hidden;
-		overscroll-behavior: contain;
+	.zomeex-mega-menu__groups {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 	}
 }
 
 @media (max-width: 900px) {
 	.zomeex-mega-menu__inner {
-		grid-template-columns: minmax(0, 1fr) minmax(0, .9fr);
+		grid-template-columns: 1fr;
 	}
 
+	.zomeex-mega-menu__main,
+	.zomeex-mega-menu__rail,
 	.zomeex-mega-menu__feature {
-		grid-column: 1 / -1;
-		grid-template-columns: 150px 1fr;
-		grid-template-rows: 1fr;
-		margin-top: 24px;
-		padding: 24px 0 0;
+		border: 0;
+		padding: 0;
 	}
 
-	.zomeex-mega-menu__feature-copy {
-		padding: 0 0 0 20px;
+	.zomeex-mega-menu__rail,
+	.zomeex-mega-menu__feature {
+		border-top: 1px solid var(--zomeex-line);
+		margin-top: 22px;
+		padding-top: 22px;
 	}
 }
+
+@media (prefers-reduced-motion: reduce) {
+	.zomeex-mega-menu:not([hidden]) {
+		animation: none;
+	}
+
+	.zomeex-mega-menu__mark,
+	.zomeex-mega-menu__arrow {
+		transition: none;
+	}
+
+	.zomeex-mega-menu__intro > a:hover .zomeex-mega-menu__arrow,
+	.zomeex-mega-menu__intro > a:focus-visible .zomeex-mega-menu__arrow,
+	.zomeex-mega-menu__feature-copy > a:hover .zomeex-mega-menu__arrow,
+	.zomeex-mega-menu__feature-copy > a:focus-visible .zomeex-mega-menu__arrow {
+		transform: none;
+	}
+}
+
 
 .zomeex-header__quote {
 	line-height: 1;

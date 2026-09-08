@@ -1100,3 +1100,5 @@ function zomeex_language_switcher() {
 	<?php
 	return ob_get_clean();
 }
+
+require_once get_stylesheet_directory() . '/inc/mega-menu.php';

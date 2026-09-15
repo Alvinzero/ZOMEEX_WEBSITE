@@ -25,10 +25,16 @@ $category_data = array(
 );
 
 $application_data = array(
-	array( 'title' => 'Flower & Hemp', 'slug' => 'flower-hemp', 'image' => 'pack_0003_药丸包装-拷贝-2-768x768.jpg', 'copy' => 'Barrier bags, jars and compliant presentation formats for flower and hemp products.' ),
-	array( 'title' => 'Pre-Rolls & Joints', 'slug' => 'pre-roll-joint', 'image' => 'drip-box_0000_矢量智能对象-700x700.jpg', 'copy' => 'Protective tubes, wraps and secondary packaging for pre-roll programs.' ),
-	array( 'title' => 'Edibles & Gummies', 'slug' => 'edibles-gummies', 'image' => 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg', 'copy' => 'Printed boxes and pouches that keep edible ranges clear on shelf.' ),
-	array( 'title' => 'Vape & Concentrates', 'slug' => 'vape-cartridge', 'image' => 'hot-knife-glass-cover_0000s_0003_矢量智能对象.jpg', 'copy' => 'Vape hardware, concentrate containers and coordinated retail packaging.' ),
+	array( 'title' => 'Flower & Hemp', 'slug' => 'flower-hemp', 'image' => 'pack_0003_药丸包装-拷贝-2-396x360.jpg', 'copy' => 'Barrier bags, jars and compliant presentation formats for flower and hemp products.' ),
+	array( 'title' => 'Pre-Rolls & Joints', 'slug' => 'pre-roll-joint', 'image' => 'drip-box_0000_矢量智能对象-396x360.jpg', 'copy' => 'Protective tubes, wraps and secondary packaging for pre-roll programs.' ),
+	array( 'title' => 'Edibles & Gummies', 'slug' => 'edibles-gummies', 'image' => 'pack_0002_背卡盒子_0003_背卡-拷贝-396x360.jpg', 'copy' => 'Printed boxes and pouches that keep edible ranges clear on shelf.' ),
+	array( 'title' => 'Vape & Concentrates', 'slug' => 'vape-cartridge', 'image' => 'hot-knife-glass-cover_0000s_0003_矢量智能对象-1000x536.jpg', 'copy' => 'Vape hardware, concentrate containers and coordinated retail packaging.' ),
+);
+
+$transition_products = array(
+	array( 'title' => 'Flexible film', 'image' => 'pack_0003_药丸包装-拷贝-2-768x768.jpg' ),
+	array( 'title' => 'Rigid presentation', 'image' => 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg' ),
+	array( 'title' => 'Hardware fit', 'image' => 'hot-knife-glass-cover_0000s_0003_矢量智能对象.jpg' ),
 );
 
 $product_interest_options = array( 'Mylar bags', 'Paper boxes', 'Glass jars', 'Pre-roll packaging', 'Vape hardware', 'POP displays' );
@@ -117,10 +123,10 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 		<div class="zomeex-container">
 			<div class="zx-section-head"><h2 id="zx-advantages-title">A clearer route from packaging brief to production.</h2><p>Every touchpoint is designed for the decisions a procurement team needs to make.</p></div>
 			<div class="zx-advantage-grid">
-				<article><span class="zx-mark" aria-hidden="true">01</span><h3>Factory-Direct Pricing</h3><p>Keep the commercial conversation close to the production route and the actual format.</p></article>
-				<article data-evidence-status="demo"><span class="zx-mark" aria-hidden="true">02</span><h3>Market Documentation Review</h3><p>Review child-resistant structures and market documentation before a format is finalized.</p><span class="zx-demo-badge">DEMO DATA</span></article>
-				<article><span class="zx-mark" aria-hidden="true">03</span><h3>Bespoke Printing Crafts</h3><p>Choose materials, inks and special finishes that make the brand feel intentional.</p></article>
-				<article><span class="zx-mark" aria-hidden="true">04</span><h3>Free Pre-Press Support</h3><p>Start from an existing artwork file or get a dieline route for the next production step.</p></article>
+				<article><h3>Factory-Direct Pricing</h3><p>Keep the commercial conversation close to the production route and the actual format.</p></article>
+				<article data-evidence-status="demo"><h3>Market Documentation Review</h3><p>Review child-resistant structures and market documentation before a format is finalized.</p><span class="zx-demo-badge">DEMO DATA</span></article>
+				<article><h3>Bespoke Printing Crafts</h3><p>Choose materials, inks and special finishes that make the brand feel intentional.</p></article>
+				<article><h3>Free Pre-Press Support</h3><p>Start from an existing artwork file or get a dieline route for the next production step.</p></article>
 			</div>
 		</div>
 	</section>
@@ -129,12 +135,30 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 		<div class="zomeex-container">
 			<div class="zx-section-head zx-section-head--split"><div><h2 id="zx-categories-title">Choose the format first. Shape the details together.</h2></div><a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">View all products <span aria-hidden="true">↗</span></a></div>
 			<div class="zx-category-grid">
-				<?php foreach ( $category_data as $index => $category ) : ?>
+			<?php foreach ( $category_data as $category ) : ?>
 					<?php $url = $category_url( $category ); ?>
 					<article class="zx-category-card">
 						<a class="zx-category-card__media" href="<?php echo esc_url( $url ); ?>"><img src="<?php echo esc_url( zomeex_upload_url( $category['image'] ) ); ?>" alt="<?php echo esc_attr( $category['title'] ); ?>" loading="lazy" width="768" height="768"></a>
-						<div class="zx-category-card__body"><span class="zx-category-card__number"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span><h3><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $category['title'] ); ?></a></h3><p><?php echo esc_html( $category['copy'] ); ?></p><a class="zx-inline-link" href="<?php echo esc_url( add_query_arg( 'interest', sanitize_title( $category['title'] ), $quote_url ) ); ?>">Request a dieline <span aria-hidden="true">↗</span></a></div>
+						<div class="zx-category-card__body"><h3><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $category['title'] ); ?></a></h3><p><?php echo esc_html( $category['copy'] ); ?></p><a class="zx-inline-link" href="<?php echo esc_url( add_query_arg( 'interest', sanitize_title( $category['title'] ), $quote_url ) ); ?>">Request a dieline <span aria-hidden="true">↗</span></a></div>
 					</article>
+				<?php endforeach; ?>
+			</div>
+		</div>
+	</section>
+
+	<section class="zx-product-bridge" aria-labelledby="zx-product-bridge-title" data-product-bridge>
+		<div class="zomeex-container zx-product-bridge__layout">
+			<div class="zx-product-bridge__copy">
+				<h2 id="zx-product-bridge-title">See the format before the final brief.</h2>
+				<p>Compare flexible, rigid and hardware-led routes as one coordinated packaging system.</p>
+				<a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">Explore all products <span aria-hidden="true">↗</span></a>
+			</div>
+			<div class="zx-product-bridge__rail" role="list" aria-label="Packaging format examples">
+				<?php foreach ( $transition_products as $product ) : ?>
+					<figure class="zx-product-bridge__item" role="listitem">
+						<div class="zx-product-bridge__media"><img src="<?php echo esc_url( zomeex_upload_url( $product['image'] ) ); ?>" alt="<?php echo esc_attr( $product['title'] ); ?> packaging example" loading="lazy" width="768" height="768"></div>
+						<figcaption><?php echo esc_html( $product['title'] ); ?></figcaption>
+					</figure>
 				<?php endforeach; ?>
 			</div>
 		</div>
@@ -155,19 +179,22 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 			</div><span class="zx-tabs-wrap__hint" aria-hidden="true">Swipe to explore</span></div>
 			<div class="zx-application-panels">
 				<?php foreach ( $application_data as $index => $application ) : ?>
-					<div class="zx-application-panel" id="zomeex-application-panel-<?php echo esc_attr( $application['slug'] ); ?>" role="tabpanel" aria-labelledby="zomeex-application-tab-<?php echo esc_attr( $application['slug'] ); ?>" data-application-panel="<?php echo esc_attr( $application['slug'] ); ?>"<?php echo 0 === $index ? '' : ' hidden'; ?>><div class="zx-application-panel__copy"><span class="zx-mark" aria-hidden="true">0<?php echo esc_html( $index + 1 ); ?></span><h3><?php echo esc_html( $application['title'] ); ?></h3><p><?php echo esc_html( $application['copy'] ); ?></p><a class="zx-inline-link" href="<?php echo esc_url( add_query_arg( 'application', $application['slug'], $quote_url ) ); ?>">Discuss this application <span aria-hidden="true">↗</span></a></div><div class="zx-application-panel__media"><img src="<?php echo esc_url( zomeex_upload_url( $application['image'] ) ); ?>" alt="<?php echo esc_attr( $application['title'] ); ?>" loading="lazy" width="768" height="768"></div></div>
+					<div class="zx-application-panel" id="zomeex-application-panel-<?php echo esc_attr( $application['slug'] ); ?>" role="tabpanel" aria-labelledby="zomeex-application-tab-<?php echo esc_attr( $application['slug'] ); ?>" data-application-panel="<?php echo esc_attr( $application['slug'] ); ?>"<?php echo 0 === $index ? '' : ' hidden'; ?>><div class="zx-application-panel__copy"><h3><?php echo esc_html( $application['title'] ); ?></h3><p><?php echo esc_html( $application['copy'] ); ?></p><a class="zx-inline-link" href="<?php echo esc_url( add_query_arg( 'application', $application['slug'], $quote_url ) ); ?>">Discuss this application <span aria-hidden="true">↗</span></a></div><div class="zx-application-panel__media"><img src="<?php echo esc_url( zomeex_upload_url( $application['image'] ) ); ?>" alt="<?php echo esc_attr( $application['title'] ); ?>" loading="lazy" width="768" height="768"></div></div>
 				<?php endforeach; ?>
 			</div>
 		</div>
 	</section>
 
 	<section class="zx-finishes" aria-labelledby="zx-finishes-title">
-		<div class="zomeex-container">
-			<div class="zx-section-head zx-section-head--split"><div><h2 id="zx-finishes-title">Craft, material and closure are part of the brief.</h2></div><a class="zx-inline-link" href="<?php echo esc_url( $quote_url ); ?>">Talk through a finish <span aria-hidden="true">↗</span></a></div>
+		<div class="zomeex-container zx-finishes__layout">
+			<div class="zx-finishes__intro">
+				<div class="zx-section-head"><h2 id="zx-finishes-title">Craft, material and closure are part of the brief.</h2><p>Review the visible finish and the functional requirement in the same production conversation.</p></div>
+				<a class="zx-inline-link" href="<?php echo esc_url( $quote_url ); ?>">Talk through a finish <span aria-hidden="true">↗</span></a>
+			</div>
 			<div class="zx-finish-grid">
-				<article><div class="zx-finish-symbol" aria-hidden="true">✦</div><h3>Special Finishes</h3><p>Foil, spot UV, soft-touch coating and embossing can be explored against the substrate and artwork.</p><span>Foil / UV / emboss</span></article>
-				<article><div class="zx-finish-symbol" aria-hidden="true">◌</div><h3>Sustainable Materials</h3><p>Paper, board and recycled options can be reviewed alongside the intended shelf life and market.</p><span>Paper / FSC / recycled</span></article>
-				<article><div class="zx-finish-symbol" aria-hidden="true">⌁</div><h3>Child-Resistant Locks</h3><p>Discuss closures and test routes for the exact format before a compliance statement is published.</p><span>Closure / test route / market</span></article>
+				<article><h3>Special Finishes</h3><p>Foil, spot UV, soft-touch coating and embossing can be explored against the substrate and artwork.</p><span>Foil / UV / emboss</span></article>
+				<article><h3>Sustainable Materials</h3><p>Paper, board and recycled options can be reviewed alongside the intended shelf life and market.</p><span>Paper / FSC / recycled</span></article>
+				<article><h3>Child-Resistant Locks</h3><p>Discuss closures and test routes for the exact format before a compliance statement is published.</p><span>Closure / test route / market</span></article>
 			</div>
 		</div>
 	</section>

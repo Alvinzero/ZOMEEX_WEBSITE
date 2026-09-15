@@ -30,6 +30,16 @@ function zomeex_nav_arrow() {
 	return '<svg class="zomeex-mega-menu__arrow" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4.5 11.5 11.5 4.5"/><path d="M6.5 4.5h5v5"/></svg>';
 }
 
+function zomeex_mega_catalog_mode( $groups ) {
+	foreach ( $groups as $group ) {
+		if ( ! empty( $group['children'] ) && count( $group['children'] ) > 1 ) {
+			return 'tree';
+		}
+	}
+
+	return 'tiles';
+}
+
 function zomeex_render_mega_menu( $args ) {
 	$id          = isset( $args['id'] ) ? $args['id'] : '';
 	$labelledby  = isset( $args['labelledby'] ) ? $args['labelledby'] : '';
@@ -38,12 +48,14 @@ function zomeex_render_mega_menu( $args ) {
 	$rails       = isset( $args['rails'] ) ? $args['rails'] : array();
 	$feature     = isset( $args['feature'] ) ? $args['feature'] : array();
 	$groups      = isset( $catalog['groups'] ) ? $catalog['groups'] : array();
+	$path        = isset( $catalog['path'] ) ? $catalog['path'] : array();
 	$group_count = max( 1, count( $groups ) );
 	$group_mod   = $group_count < 4 ? $group_count : 4;
+	$mode        = zomeex_mega_catalog_mode( $groups );
 
 	ob_start();
 	?>
-	<div class="zomeex-mega-menu" id="<?php echo esc_attr( $id ); ?>" data-nav-dropdown-panel<?php echo $labelledby ? ' aria-labelledby="' . esc_attr( $labelledby ) . '"' : ''; ?> hidden>
+	<div class="zomeex-mega-menu" id="<?php echo esc_attr( $id ); ?>" data-nav-dropdown-panel data-catalog="<?php echo esc_attr( $mode ); ?>"<?php echo $labelledby ? ' aria-labelledby="' . esc_attr( $labelledby ) . '"' : ''; ?> hidden>
 		<div class="zomeex-mega-menu__inner zomeex-container">
 			<div class="zomeex-mega-menu__main">
 				<?php if ( ! empty( $intro ) ) : ?>
@@ -71,7 +83,10 @@ function zomeex_render_mega_menu( $args ) {
 										<?php echo zomeex_nav_icon( isset( $group['icon'] ) ? $group['icon'] : 'box' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 										<strong><?php echo esc_html( $group['name'] ); ?></strong>
 									</a>
-									<?php if ( ! empty( $group['children'] ) ) : ?>
+									<?php if ( ! empty( $group['summary'] ) ) : ?>
+										<p class="zomeex-mega-menu__summary"><?php echo esc_html( $group['summary'] ); ?></p>
+									<?php endif; ?>
+									<?php if ( ! empty( $group['children'] ) && 'tree' === $mode ) : ?>
 										<ul>
 											<?php foreach ( $group['children'] as $child ) : ?>
 												<li><a href="<?php echo esc_url( $child['url'] ); ?>"><?php echo esc_html( $child['name'] ); ?></a></li>
@@ -81,10 +96,39 @@ function zomeex_render_mega_menu( $args ) {
 								</section>
 							<?php endforeach; ?>
 						</div>
+						<?php if ( ! empty( $path['steps'] ) ) : ?>
+							<div class="zomeex-mega-menu__path">
+								<?php if ( ! empty( $path['label'] ) ) : ?>
+									<p class="zomeex-mega-menu__label"><?php echo esc_html( $path['label'] ); ?></p>
+								<?php endif; ?>
+								<ol>
+									<?php foreach ( $path['steps'] as $index => $step ) : ?>
+										<li>
+											<a href="<?php echo esc_url( $step['url'] ); ?>">
+												<span class="zomeex-mega-menu__path-index"><?php echo esc_html( str_pad( (string) ( $index + 1 ), 2, '0', STR_PAD_LEFT ) ); ?></span>
+												<span>
+													<strong><?php echo esc_html( $step['name'] ); ?></strong>
+													<?php if ( ! empty( $step['copy'] ) ) : ?>
+														<small><?php echo esc_html( $step['copy'] ); ?></small>
+													<?php endif; ?>
+												</span>
+											</a>
+										</li>
+									<?php endforeach; ?>
+								</ol>
+							</div>
+						<?php endif; ?>
 					</div>
 				<?php endif; ?>
 			</div>
-			<?php if ( $rails ) : ?>
+			<?php if ( 'tiles' === $mode ) : ?>
+				<div class="zomeex-mega-menu__aside">
+			<?php endif; ?>
+			<?php
+			$aside_blocks = ( 'tiles' === $mode ) ? array( 'feature', 'rail' ) : array( 'rail', 'feature' );
+			foreach ( $aside_blocks as $aside_block ) :
+				if ( 'rail' === $aside_block && $rails ) :
+					?>
 				<div class="zomeex-mega-menu__rail">
 					<?php foreach ( $rails as $rail ) : ?>
 						<section class="zomeex-mega-menu__rail-block">
@@ -96,7 +140,12 @@ function zomeex_render_mega_menu( $args ) {
 									<li>
 										<a href="<?php echo esc_url( $item['url'] ); ?>">
 											<?php echo zomeex_nav_icon( isset( $item['icon'] ) ? $item['icon'] : 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
-											<span><?php echo esc_html( $item['name'] ); ?></span>
+											<span>
+												<?php echo esc_html( $item['name'] ); ?>
+												<?php if ( ! empty( $item['copy'] ) ) : ?>
+													<small><?php echo esc_html( $item['copy'] ); ?></small>
+												<?php endif; ?>
+											</span>
 										</a>
 									</li>
 								<?php endforeach; ?>
@@ -104,8 +153,10 @@ function zomeex_render_mega_menu( $args ) {
 						</section>
 					<?php endforeach; ?>
 				</div>
-			<?php endif; ?>
-			<?php if ( ! empty( $feature ) ) : ?>
+					<?php
+				endif;
+				if ( 'feature' === $aside_block && ! empty( $feature ) ) :
+					?>
 				<aside class="zomeex-mega-menu__feature">
 					<?php if ( ! empty( $feature['image'] ) ) : ?>
 						<div class="zomeex-mega-menu__feature-media">
@@ -138,6 +189,12 @@ function zomeex_render_mega_menu( $args ) {
 						</a>
 					<?php endif; ?>
 				</aside>
+					<?php
+				endif;
+			endforeach;
+			?>
+			<?php if ( 'tiles' === $mode ) : ?>
+				</div>
 			<?php endif; ?>
 		</div>
 	</div>

@@ -420,6 +420,60 @@
     EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, HOMEPAGE_P0_P2_EXTRA_BY_SOURCE[locale]);
   });
 
+  var HOMEPAGE_LAYOUT_EXTRA_BY_SOURCE = {
+    'zh-CN': {
+      'See the format before the final brief.': '最终确认需求前，先看清包装形式。',
+      'Compare flexible, rigid and hardware-led routes as one coordinated packaging system.': '将软包装、硬质包装与硬件配套方案放在同一个包装体系中比较。',
+      'Explore all products': '浏览全部产品',
+      'Flexible film': '软包装薄膜',
+      'Rigid presentation': '硬质包装',
+      'Hardware fit': '硬件配套',
+      'Flexible film packaging example': '软包装薄膜示例',
+      'Rigid presentation packaging example': '硬质包装示例',
+      'Hardware fit packaging example': '硬件配套包装示例',
+      'Review the visible finish and the functional requirement in the same production conversation.': '在同一次生产沟通中，同步确认视觉工艺与功能要求。'
+    },
+    ru: {
+      'See the format before the final brief.': 'Увидьте формат до финального брифа.',
+      'Compare flexible, rigid and hardware-led routes as one coordinated packaging system.': 'Сравните гибкую, жесткую упаковку и решения для оборудования в рамках единой системы.',
+      'Explore all products': 'Все продукты',
+      'Flexible film': 'Гибкая упаковка',
+      'Rigid presentation': 'Жесткая упаковка',
+      'Hardware fit': 'Совместимость с оборудованием',
+      'Flexible film packaging example': 'Пример гибкой упаковки',
+      'Rigid presentation packaging example': 'Пример жесткой упаковки',
+      'Hardware fit packaging example': 'Пример упаковки для оборудования',
+      'Review the visible finish and the functional requirement in the same production conversation.': 'Обсудите визуальную отделку и функциональные требования в рамках одного производственного проекта.'
+    },
+    de: {
+      'See the format before the final brief.': 'Das Format vor dem finalen Brief sehen.',
+      'Compare flexible, rigid and hardware-led routes as one coordinated packaging system.': 'Vergleichen Sie flexible, starre und hardwarebezogene Lösungen als abgestimmtes Verpackungssystem.',
+      'Explore all products': 'Alle Produkte entdecken',
+      'Flexible film': 'Flexible Verpackung',
+      'Rigid presentation': 'Starre Präsentation',
+      'Hardware fit': 'Hardware-Abstimmung',
+      'Flexible film packaging example': 'Beispiel für flexible Verpackung',
+      'Rigid presentation packaging example': 'Beispiel für starre Verpackung',
+      'Hardware fit packaging example': 'Beispiel für Hardware-Abstimmung',
+      'Review the visible finish and the functional requirement in the same production conversation.': 'Stimmen Sie sichtbare Veredelung und funktionale Anforderungen in einem Produktionsgespräch ab.'
+    },
+    fr: {
+      'See the format before the final brief.': 'Visualisez le format avant de finaliser le brief.',
+      'Compare flexible, rigid and hardware-led routes as one coordinated packaging system.': 'Comparez les solutions souples, rigides et liées au matériel dans un système d’emballage cohérent.',
+      'Explore all products': 'Explorer tous les produits',
+      'Flexible film': 'Emballage souple',
+      'Rigid presentation': 'Présentation rigide',
+      'Hardware fit': 'Intégration du matériel',
+      'Flexible film packaging example': 'Exemple d’emballage souple',
+      'Rigid presentation packaging example': 'Exemple d’emballage rigide',
+      'Hardware fit packaging example': 'Exemple d’intégration du matériel',
+      'Review the visible finish and the functional requirement in the same production conversation.': 'Examinez la finition visible et les exigences fonctionnelles lors d’un même échange de production.'
+    }
+  };
+  Object.keys(HOMEPAGE_LAYOUT_EXTRA_BY_SOURCE).forEach(function (locale) {
+    EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, HOMEPAGE_LAYOUT_EXTRA_BY_SOURCE[locale]);
+  });
+
   var HOMEPAGE_MEDIA_EXTRA_BY_SOURCE = {
     'zh-CN': { 'DEMO MEDIA': '演示媒体', 'Client confirmation is required before launch.': '正式上线前需要甲方确认。' },
     ru: { 'DEMO MEDIA': 'ДЕМО-МЕДИА', 'Client confirmation is required before launch.': 'Перед запуском требуется подтверждение клиента.' },
@@ -558,6 +612,117 @@
   };
   Object.keys(NAV_LABELS).forEach(function (locale) {
     DICTIONARY[locale] = Object.assign(DICTIONARY[locale] || {}, NAV_LABELS[locale]);
+  });
+
+  var SUBSCRIBE_LABELS = {
+    en: {
+      'subscribe.close': 'Close subscription offer',
+      'subscribe.title': 'Make the next packaging decision with better context.',
+      'subscribe.copy': 'Get new formats, material updates and practical packaging guidance in one concise email.',
+      'subscribe.email': 'Business email',
+      'subscribe.placeholder': 'name@company.com',
+      'subscribe.submit': 'Get the brief',
+      'subscribe.loading': 'Joining...',
+      'subscribe.helper': 'Product releases and useful packaging notes. No inbox clutter.',
+      'subscribe.successTitle': 'You are on the list.',
+      'subscribe.successCopy': 'We will send the next useful product or packaging update to your inbox.',
+      'subscribe.continue': 'Continue browsing',
+      'subscribe.skip': 'Continue without subscribing',
+      'subscribe.consent': 'By subscribing, you agree to receive ZOMEEX email updates. You can unsubscribe at any time.',
+      'subscribe.privacy': 'Privacy policy',
+      'subscribe.visualCaption': 'New formats. Better material decisions. Fewer late-stage surprises.',
+      'subscribe.invalidEmail': 'Enter a valid business email to continue.',
+      'subscribe.securityError': 'This form has expired. Refresh the page and try again.',
+      'subscribe.rateError': 'Too many attempts. Please try again later.',
+      'subscribe.saveError': 'We could not save your subscription. Please try again.'
+    },
+    'zh-CN': {
+      'subscribe.close': '关闭订阅弹窗',
+      'subscribe.title': '让下一次包装决策有据可依。',
+      'subscribe.copy': '在一封简洁邮件中获取新品、材料更新与实用包装指南。',
+      'subscribe.email': '商务邮箱',
+      'subscribe.placeholder': 'name@company.com',
+      'subscribe.submit': '获取包装简报',
+      'subscribe.loading': '正在订阅...',
+      'subscribe.helper': '只发送新品与实用包装内容，不打扰你的收件箱。',
+      'subscribe.successTitle': '订阅成功。',
+      'subscribe.successCopy': '下一次有价值的产品或包装更新将发送到你的邮箱。',
+      'subscribe.continue': '继续浏览',
+      'subscribe.skip': '暂不订阅，继续浏览',
+      'subscribe.consent': '订阅即表示你同意接收 ZOMEEX 邮件更新。你可以随时退订。',
+      'subscribe.privacy': '隐私政策',
+      'subscribe.visualCaption': '掌握新品，读懂材料，减少后期返工。',
+      'subscribe.invalidEmail': '请输入有效的商务邮箱。',
+      'subscribe.securityError': '表单已过期，请刷新页面后重试。',
+      'subscribe.rateError': '尝试次数过多，请稍后再试。',
+      'subscribe.saveError': '暂时无法保存订阅，请重试。'
+    },
+    ru: {
+      'subscribe.close': 'Закрыть окно подписки',
+      'subscribe.title': 'Принимайте решения по упаковке с опорой на факты.',
+      'subscribe.copy': 'Получайте новые форматы, обновления по материалам и практические рекомендации в одном кратком письме.',
+      'subscribe.email': 'Рабочая почта',
+      'subscribe.placeholder': 'name@company.com',
+      'subscribe.submit': 'Получить обзор',
+      'subscribe.loading': 'Подписываем...',
+      'subscribe.helper': 'Только новинки и полезные заметки об упаковке. Никакого лишнего шума.',
+      'subscribe.successTitle': 'Вы в списке.',
+      'subscribe.successCopy': 'Следующее полезное обновление о продукте или упаковке придет на вашу почту.',
+      'subscribe.continue': 'Продолжить просмотр',
+      'subscribe.skip': 'Продолжить без подписки',
+      'subscribe.consent': 'Подписываясь, вы соглашаетесь получать письма ZOMEEX. Отписаться можно в любое время.',
+      'subscribe.privacy': 'Политика конфиденциальности',
+      'subscribe.visualCaption': 'Новые форматы. Лучший выбор материалов. Меньше поздних изменений.',
+      'subscribe.invalidEmail': 'Введите действующий рабочий адрес электронной почты.',
+      'subscribe.securityError': 'Срок действия формы истек. Обновите страницу и повторите попытку.',
+      'subscribe.rateError': 'Слишком много попыток. Повторите позже.',
+      'subscribe.saveError': 'Не удалось сохранить подписку. Попробуйте еще раз.'
+    },
+    de: {
+      'subscribe.close': 'Anmeldefenster schließen',
+      'subscribe.title': 'Treffen Sie Ihre nächste Verpackungsentscheidung auf besserer Grundlage.',
+      'subscribe.copy': 'Erhalten Sie neue Formate, Material-Updates und praktische Verpackungshinweise in einer kompakten E-Mail.',
+      'subscribe.email': 'Geschäftliche E-Mail',
+      'subscribe.placeholder': 'name@company.com',
+      'subscribe.submit': 'Brief erhalten',
+      'subscribe.loading': 'Anmeldung läuft...',
+      'subscribe.helper': 'Produktneuheiten und nützliche Verpackungshinweise. Keine unnötigen E-Mails.',
+      'subscribe.successTitle': 'Sie sind angemeldet.',
+      'subscribe.successCopy': 'Das nächste nützliche Produkt- oder Verpackungsupdate senden wir an Ihre E-Mail-Adresse.',
+      'subscribe.continue': 'Weiter ansehen',
+      'subscribe.skip': 'Ohne Anmeldung fortfahren',
+      'subscribe.consent': 'Mit der Anmeldung stimmen Sie E-Mail-Updates von ZOMEEX zu. Sie können sich jederzeit abmelden.',
+      'subscribe.privacy': 'Datenschutzerklärung',
+      'subscribe.visualCaption': 'Neue Formate. Bessere Materialentscheidungen. Weniger späte Änderungen.',
+      'subscribe.invalidEmail': 'Geben Sie eine gültige geschäftliche E-Mail-Adresse ein.',
+      'subscribe.securityError': 'Das Formular ist abgelaufen. Aktualisieren Sie die Seite und versuchen Sie es erneut.',
+      'subscribe.rateError': 'Zu viele Versuche. Bitte versuchen Sie es später erneut.',
+      'subscribe.saveError': 'Die Anmeldung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.'
+    },
+    fr: {
+      'subscribe.close': 'Fermer la fenêtre d’inscription',
+      'subscribe.title': 'Décidez de votre prochain emballage avec de meilleures informations.',
+      'subscribe.copy': 'Recevez les nouveaux formats, les matériaux récents et des conseils pratiques dans un e-mail concis.',
+      'subscribe.email': 'E-mail professionnel',
+      'subscribe.placeholder': 'name@company.com',
+      'subscribe.submit': 'Recevoir le brief',
+      'subscribe.loading': 'Inscription...',
+      'subscribe.helper': 'Des nouveautés et des conseils utiles sur l’emballage. Aucun e-mail superflu.',
+      'subscribe.successTitle': 'Vous êtes inscrit.',
+      'subscribe.successCopy': 'La prochaine mise à jour utile sur les produits ou l’emballage arrivera dans votre boîte mail.',
+      'subscribe.continue': 'Continuer la visite',
+      'subscribe.skip': 'Continuer sans s’inscrire',
+      'subscribe.consent': 'En vous inscrivant, vous acceptez de recevoir les e-mails de ZOMEEX. Vous pouvez vous désabonner à tout moment.',
+      'subscribe.privacy': 'Politique de confidentialité',
+      'subscribe.visualCaption': 'Nouveaux formats. Meilleurs choix de matériaux. Moins de changements tardifs.',
+      'subscribe.invalidEmail': 'Saisissez une adresse e-mail professionnelle valide.',
+      'subscribe.securityError': 'Ce formulaire a expiré. Actualisez la page et réessayez.',
+      'subscribe.rateError': 'Trop de tentatives. Veuillez réessayer plus tard.',
+      'subscribe.saveError': 'Impossible d’enregistrer votre inscription. Veuillez réessayer.'
+    }
+  };
+  Object.keys(SUBSCRIBE_LABELS).forEach(function (locale) {
+    DICTIONARY[locale] = Object.assign(DICTIONARY[locale] || {}, SUBSCRIBE_LABELS[locale]);
   });
 
   Object.keys(CN_WOOCOMMERCE_EXTRA_BY_SOURCE).forEach(function (locale) {

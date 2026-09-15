@@ -183,7 +183,7 @@
   var syncHeader = function () {
     if (header) header.classList.toggle('is-scrolled', window.scrollY > 18);
   };
-  var hero = document.querySelector('.zomeex-hero');
+  var hero = document.querySelector('.zx-hero');
   if ('IntersectionObserver' in window && hero) {
     var observer = new IntersectionObserver(function (entries) {
       if (entries[0]) header?.classList.toggle('is-scrolled', !entries[0].isIntersecting);
@@ -191,6 +191,18 @@
     observer.observe(hero);
   }
   syncHeader();
+
+  var productBridge = document.querySelector('[data-product-bridge]');
+  var motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (productBridge && motionAllowed && 'IntersectionObserver' in window) {
+    productBridge.classList.add('is-motion-ready');
+    var productBridgeObserver = new IntersectionObserver(function (entries) {
+      if (!entries[0]?.isIntersecting) return;
+      productBridge.classList.add('is-visible');
+      productBridgeObserver.disconnect();
+    }, { threshold: .22 });
+    productBridgeObserver.observe(productBridge);
+  }
 
   var setMenu = function (open) {
     if (!menuButton || !mobileNav) return;

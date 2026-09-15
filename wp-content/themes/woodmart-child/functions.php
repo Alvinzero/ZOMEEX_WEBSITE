@@ -6,6 +6,7 @@ function woodmart_child_enqueue_styles() {
 	$child_style_path    = get_stylesheet_directory() . '/style.css';
 	$child_style_version = file_exists( $child_style_path ) ? filemtime( $child_style_path ) : woodmart_get_theme_info( 'Version' );
 	wp_enqueue_style( 'child-style', get_stylesheet_directory_uri() . '/style.css', array( 'woodmart-style' ), $child_style_version );
+	wp_dequeue_style( 'wd-age-verify' );
 
 	if ( is_front_page() ) {
 		$home_style_path = get_stylesheet_directory() . '/assets/zomeex-home.css';
@@ -17,10 +18,18 @@ function woodmart_child_enqueue_styles() {
 		);
 	}
 
+	if ( zomeex_is_modern_route() ) {
+		$subscribe_style_path = get_stylesheet_directory() . '/assets/zomeex-subscribe.css';
+		wp_enqueue_style(
+			'zomeex-subscribe',
+			get_stylesheet_directory_uri() . '/assets/zomeex-subscribe.css',
+			array( 'child-style' ),
+			file_exists( $subscribe_style_path ) ? (string) filemtime( $subscribe_style_path ) : null
+		);
+	}
+
 	/* Chaty builds its WhatsApp form after page load. Keep its small text
-	 * affordances in the child theme so plugin updates do not overwrite them.
-	 * This script also owns the age gate, so it must not depend on Chaty's
-	 * registration timing (which varies between cached and uncached pages). */
+	 * affordances in the child theme so plugin updates do not overwrite them. */
 	$chaty_fix_path = get_stylesheet_directory() . '/assets/zomeex-chaty-fixes.js';
 	if ( file_exists( $chaty_fix_path ) ) {
 		wp_enqueue_script(
@@ -33,11 +42,13 @@ function woodmart_child_enqueue_styles() {
 	}
 
 	if ( is_front_page() || zomeex_is_modern_route() ) {
+		$i18n_script_path = get_stylesheet_directory() . '/assets/zomeex-i18n.js';
+		$home_script_path = get_stylesheet_directory() . '/assets/zomeex-home.js';
 		wp_enqueue_script(
 			'zomeex-i18n',
 			get_stylesheet_directory_uri() . '/assets/zomeex-i18n.js',
 			array(),
-			'1.0.12',
+			file_exists( $i18n_script_path ) ? (string) filemtime( $i18n_script_path ) : '1.0.12',
 			true
 		);
 
@@ -45,8 +56,26 @@ function woodmart_child_enqueue_styles() {
 			'zomeex-home',
 			get_stylesheet_directory_uri() . '/assets/zomeex-home.js',
 			array( 'zomeex-i18n' ),
-			'1.3.2',
+			file_exists( $home_script_path ) ? (string) filemtime( $home_script_path ) : '1.3.2',
 			true
+		);
+
+		$subscribe_script_path = get_stylesheet_directory() . '/assets/zomeex-subscribe.js';
+		wp_enqueue_script(
+			'zomeex-subscribe',
+			get_stylesheet_directory_uri() . '/assets/zomeex-subscribe.js',
+			array( 'zomeex-i18n' ),
+			file_exists( $subscribe_script_path ) ? (string) filemtime( $subscribe_script_path ) : null,
+			true
+		);
+		wp_localize_script(
+			'zomeex-subscribe',
+			'zomeexSubscribe',
+			array(
+				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+				'nonce'   => wp_create_nonce( 'zomeex_subscribe' ),
+				'preview' => isset( $_GET['subscribe-preview'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['subscribe-preview'] ) ),
+			)
 		);
 	}
 
@@ -595,51 +624,11 @@ function zomeex_output_seo_head() {
 add_action( 'wp_head', 'zomeex_output_seo_head', 2 );
 add_action( 'wp_head', 'zomeex_output_schema', 3 );
 
-/**
- * Correct legacy age-gate content without editing the Woodmart parent theme.
- * The imported option contained a remote logo and malformed copied markup.
- */
-function zomeex_clean_age_verify_option( $value, $slug ) {
-	if ( 'age_verify_text' === $slug ) {
-		$logo_url = function_exists( 'zomeex_upload_url' )
-			? zomeex_upload_url( 'zomee-logo_画板-1.svg' )
-			: home_url( '/wp-content/uploads/2025/11/zomee-logo_画板-1.svg' );
-
-		return sprintf(
-			'<p class="zomeex-age-logo"><img src="%1$s" alt="ZOMEEX" width="133" height="44" /></p><h4 class="text-center">Are you 21 or older?</h4><p class="text-center">You look younger than your age.</p><p class="text-center">You must be 21 years old or older to access this website. Please verify your age.</p>',
-			esc_url( $logo_url )
-		);
-	}
-
-	if ( 'age_verify_text_error' === $slug ) {
-		return '<h4 class="text-center">Access denied</h4><p class="text-center">Access is restricted because of your age.</p>';
-	}
-
-	if ( 'age_verify_color_scheme' === $slug ) {
-		return 'light';
-	}
-
-	return $value;
+/** The marketing subscription prompt replaces Woodmart's blocking age gate. */
+function zomeex_disable_legacy_age_gate( $value, $slug ) {
+	return 'age_verify' === $slug ? false : $value;
 }
-add_filter( 'woodmart_option', 'zomeex_clean_age_verify_option', 20, 2 );
-
-/** Keep Woodmart's age buttons aligned with the 21+ gate copy above. */
-function zomeex_age_button_labels( $translated, $text, $domain ) {
-	if ( 'woodmart' !== $domain ) {
-		return $translated;
-	}
-
-	if ( 'I am 18 or Older' === $text ) {
-		return 'I am 21 or older';
-	}
-
-	if ( 'I am Under 18' === $text ) {
-		return 'I am under 21';
-	}
-
-	return $translated;
-}
-add_filter( 'gettext', 'zomeex_age_button_labels', 20, 3 );
+add_filter( 'woodmart_option', 'zomeex_disable_legacy_age_gate', 20, 2 );
 
 function zomeex_seo_robots( $robots ) {
 	if ( ( function_exists( 'is_404' ) && is_404() ) || zomeex_is_quote_request() || is_search() || ( function_exists( 'is_shop' ) && is_shop() && get_search_query() ) ) {
@@ -681,6 +670,26 @@ function zomeex_register_quote_post_type() {
 	);
 }
 add_action( 'init', 'zomeex_register_quote_post_type' );
+
+/** Keep newsletter signups private while making them usable by site admins. */
+function zomeex_register_subscriber_post_type() {
+	register_post_type(
+		'zomeex_subscriber',
+		array(
+			'labels'       => array(
+				'name'          => 'Email subscribers',
+				'singular_name' => 'Email subscriber',
+			),
+			'public'       => false,
+			'show_ui'      => true,
+			'show_in_menu' => true,
+			'menu_icon'    => 'dashicons-email-alt',
+			'supports'     => array( 'title' ),
+			'capability_type' => 'post',
+		)
+	);
+}
+add_action( 'init', 'zomeex_register_subscriber_post_type' );
 
 function zomeex_quote_redirect( $args ) {
 	$target = zomeex_quote_url();
@@ -933,19 +942,154 @@ function zomeex_handle_quote_submit() {
 add_action( 'admin_post_nopriv_zomeex_quote_submit', 'zomeex_handle_quote_submit' );
 add_action( 'admin_post_zomeex_quote_submit', 'zomeex_handle_quote_submit' );
 
+/** Accept one-field newsletter subscriptions without exposing subscriber data. */
+function zomeex_handle_subscribe() {
+	if ( ! check_ajax_referer( 'zomeex_subscribe', 'nonce', false ) ) {
+		wp_send_json_error( array( 'code' => 'security' ), 403 );
+	}
+
+	$honeypot = isset( $_POST['company_website'] ) && is_scalar( $_POST['company_website'] )
+		? sanitize_text_field( wp_unslash( $_POST['company_website'] ) )
+		: '';
+	if ( $honeypot ) {
+		wp_send_json_success( array( 'status' => 'subscribed' ) );
+	}
+
+	$email = isset( $_POST['email'] ) && is_scalar( $_POST['email'] )
+		? strtolower( sanitize_email( wp_unslash( $_POST['email'] ) ) )
+		: '';
+	if ( ! $email || ! is_email( $email ) || zomeex_quote_string_length( $email ) > 254 ) {
+		wp_send_json_error( array( 'code' => 'invalid_email' ), 422 );
+	}
+
+	$remote_address = isset( $_SERVER['REMOTE_ADDR'] ) ? sanitize_text_field( wp_unslash( $_SERVER['REMOTE_ADDR'] ) ) : 'unknown';
+	$rate_key       = 'zx_sub_' . substr( hash_hmac( 'sha256', $remote_address, wp_salt( 'nonce' ) ), 0, 24 );
+	$attempts       = (int) get_transient( $rate_key );
+	if ( $attempts >= 8 ) {
+		wp_send_json_error( array( 'code' => 'rate_limit' ), 429 );
+	}
+	set_transient( $rate_key, $attempts + 1, HOUR_IN_SECONDS );
+
+	$existing = get_posts(
+		array(
+			'post_type'      => 'zomeex_subscriber',
+			'post_status'    => 'private',
+			'posts_per_page' => 1,
+			'fields'         => 'ids',
+			'meta_key'       => '_zomeex_subscriber_email',
+			'meta_value'     => $email,
+			'no_found_rows'  => true,
+		)
+	);
+	if ( $existing ) {
+		wp_send_json_success( array( 'status' => 'already_subscribed' ) );
+	}
+
+	$locale = isset( $_POST['locale'] ) && is_scalar( $_POST['locale'] )
+		? sanitize_text_field( wp_unslash( $_POST['locale'] ) )
+		: 'en';
+	$allowed_locales = array( 'en', 'zh-CN', 'ru', 'de', 'fr' );
+	if ( ! in_array( $locale, $allowed_locales, true ) ) {
+		$locale = 'en';
+	}
+
+	$source_url = isset( $_POST['source_url'] ) && is_scalar( $_POST['source_url'] )
+		? esc_url_raw( wp_unslash( $_POST['source_url'] ) )
+		: '';
+	if ( $source_url && wp_parse_url( $source_url, PHP_URL_HOST ) !== wp_parse_url( home_url(), PHP_URL_HOST ) ) {
+		$source_url = '';
+	}
+
+	$post_id = wp_insert_post(
+		array(
+			'post_type'   => 'zomeex_subscriber',
+			'post_status' => 'private',
+			'post_title'  => $email,
+		),
+		true
+	);
+	if ( is_wp_error( $post_id ) ) {
+		wp_send_json_error( array( 'code' => 'save_failed' ), 500 );
+	}
+
+	update_post_meta( $post_id, '_zomeex_subscriber_email', $email );
+	update_post_meta( $post_id, '_zomeex_subscriber_locale', $locale );
+	update_post_meta( $post_id, '_zomeex_subscriber_source_url', $source_url );
+	update_post_meta( $post_id, '_zomeex_subscriber_consent_time', current_time( 'mysql', true ) );
+
+	$recipient = apply_filters( 'zomeex_subscribe_recipient', get_option( 'admin_email' ) );
+	wp_mail(
+		$recipient,
+		'New ZOMEEX email subscriber',
+		"Email: {$email}\nLocale: {$locale}\nSource: {$source_url}"
+	);
+
+	wp_send_json_success( array( 'status' => 'subscribed' ) );
+}
+add_action( 'wp_ajax_nopriv_zomeex_subscribe', 'zomeex_handle_subscribe' );
+add_action( 'wp_ajax_zomeex_subscribe', 'zomeex_handle_subscribe' );
+
+/** Render the subscription prompt once, outside the page shell and above plugin popups. */
+function zomeex_subscribe_modal() {
+	if ( ! zomeex_is_modern_route() ) {
+		return;
+	}
+
+	$logo_url    = zomeex_upload_url( 'zomeex-logo_03.svg', '2026/05' );
+	$visual_url  = zomeex_upload_url( '867e165f24446709fc61b665f5fd4478-1536x864.jpg', '2025/11' );
+	$privacy_url = get_privacy_policy_url();
+	?>
+	<div class="zomeex-subscribe notranslate" data-zomeex-subscribe hidden aria-hidden="true" translate="no">
+		<div class="zomeex-subscribe__backdrop" data-subscribe-dismiss aria-hidden="true"></div>
+		<section class="zomeex-subscribe__dialog" role="dialog" aria-modal="true" aria-labelledby="zomeex-subscribe-title" aria-describedby="zomeex-subscribe-copy" tabindex="-1">
+			<button class="zomeex-subscribe__close" type="button" data-subscribe-dismiss aria-label="Close subscription offer">
+				<span aria-hidden="true"></span>
+			</button>
+			<div class="zomeex-subscribe__content">
+				<img class="zomeex-subscribe__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65">
+				<div class="zomeex-subscribe__message" data-subscribe-message>
+					<h2 id="zomeex-subscribe-title">Make the next packaging decision with better context.</h2>
+					<p id="zomeex-subscribe-copy">Get new formats, material updates and practical packaging guidance in one concise email.</p>
+				</div>
+				<form class="zomeex-subscribe__form" data-subscribe-form aria-busy="false" novalidate>
+					<label for="zomeex-subscribe-email">Business email</label>
+					<div class="zomeex-subscribe__field">
+						<input id="zomeex-subscribe-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" aria-describedby="zomeex-subscribe-status" required>
+						<button type="submit" data-subscribe-submit>Get the brief</button>
+					</div>
+					<input class="zomeex-subscribe__honeypot" name="company_website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
+					<p class="zomeex-subscribe__status" id="zomeex-subscribe-status" data-subscribe-status role="status" aria-live="polite">Product releases and useful packaging notes. No inbox clutter.</p>
+				</form>
+				<div class="zomeex-subscribe__success" data-subscribe-success hidden tabindex="-1">
+					<h3>You are on the list.</h3>
+					<p>We will send the next useful product or packaging update to your inbox.</p>
+					<button type="button" data-subscribe-dismiss>Continue browsing</button>
+				</div>
+				<button class="zomeex-subscribe__skip" type="button" data-subscribe-dismiss>Continue without subscribing</button>
+				<p class="zomeex-subscribe__consent"><span class="zomeex-subscribe__consent-text">By subscribing, you agree to receive ZOMEEX email updates. You can unsubscribe at any time.</span><?php if ( $privacy_url ) : ?> <a href="<?php echo esc_url( $privacy_url ); ?>">Privacy policy</a><?php endif; ?></p>
+			</div>
+			<figure class="zomeex-subscribe__visual">
+				<img src="<?php echo esc_url( $visual_url ); ?>" alt="ZOMEEX product development range" width="1536" height="864" loading="lazy">
+				<figcaption>New formats. Better material decisions. Fewer late-stage surprises.</figcaption>
+			</figure>
+		</section>
+	</div>
+	<?php
+}
+add_action( 'woodmart_before_wp_footer', 'zomeex_subscribe_modal', 350 );
+
 /**
- * The imported Woodmart options include an empty promo popup. Keep it off on
- * the redesigned homepage so the catalogue hero is not covered by a legacy
- * full-screen overlay; other routes retain their existing theme behaviour.
+ * The custom subscription component replaces Woodmart's imported promo shell
+ * across the redesigned routes, preventing two marketing dialogs from opening.
  */
-function zomeex_disable_home_promo_popup( $value, $slug ) {
-	if ( 'promo_popup' === $slug && is_front_page() ) {
+function zomeex_disable_legacy_promo_popup( $value, $slug ) {
+	if ( 'promo_popup' === $slug && zomeex_is_modern_route() ) {
 		return false;
 	}
 
 	return $value;
 }
-add_filter( 'woodmart_option', 'zomeex_disable_home_promo_popup', 20, 2 );
+add_filter( 'woodmart_option', 'zomeex_disable_legacy_promo_popup', 20, 2 );
 
 /**
  * Small URL helpers keep the homepage portable between local and production.

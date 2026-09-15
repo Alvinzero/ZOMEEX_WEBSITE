@@ -27,10 +27,27 @@ $collection_url  = function ( $slug, $query = array() ) use ( $pack_url ) {
 	return $query ? add_query_arg( $query, $url ) : $url;
 };
 $child_resistant_types = array(
-	array( 'name' => 'Child-Resistant Mylar Bags', 'slug' => 'mylar-bag' ),
-	array( 'name' => 'Child-Resistant Paper Boxes', 'slug' => 'vape-box' ),
-	array( 'name' => 'Child-Resistant Jars & Bottles', 'slug' => 'pack' ),
-	array( 'name' => 'Child-Resistant Tubes', 'slug' => 'pack' ),
+	array( 'name' => 'Child-Resistant Mylar Bags', 'slug' => 'mylar-bag', 'icon' => 'bag', 'summary' => 'Barrier pouches with a CR route for flower and edibles.' ),
+	array( 'name' => 'Child-Resistant Paper Boxes', 'slug' => 'vape-box', 'icon' => 'box', 'summary' => 'Printed cartons with a CR structure for retail presentation.' ),
+	array( 'name' => 'Child-Resistant Jars & Bottles', 'slug' => 'pack', 'icon' => 'bottle', 'summary' => 'Rigid formats for concentrates, capsules and liquid lines.' ),
+	array( 'name' => 'Child-Resistant Tubes', 'slug' => 'pack', 'icon' => 'flask', 'summary' => 'Unit-dose and pre-roll tubes with a CR closure path.' ),
+);
+$application_nav = array(
+	'flower-hemp'        => array( 'icon' => 'bag', 'summary' => 'Barrier bags, jars and compliant presentation formats for flower and hemp products.' ),
+	'pre-roll-joint'     => array( 'icon' => 'flask', 'summary' => 'Protective tubes, wraps and secondary packaging for pre-roll programs.' ),
+	'edibles-gummies'    => array( 'icon' => 'box', 'summary' => 'Printed boxes and pouches that keep edible ranges clear on shelf.' ),
+	'vape-cartridge'     => array( 'icon' => 'bottle', 'summary' => 'Vape hardware, concentrate containers and coordinated retail packaging.' ),
+	'concentrates-wax'   => array( 'icon' => 'tin', 'summary' => 'Glass, tins and secondary packs for wax and extract lines.' ),
+	'beverages-tincture' => array( 'icon' => 'leaf', 'summary' => 'Bottles, cartons and presentation formats for liquid products.' ),
+);
+$latest_notes = get_posts(
+	array(
+		'post_type'      => 'post',
+		'post_status'    => 'publish',
+		'posts_per_page' => 3,
+		'orderby'        => 'date',
+		'order'          => 'DESC',
+	)
 );
 $dieline_url = add_query_arg( 'resource', 'dieline', $quote_url );
 $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
@@ -135,7 +152,7 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 									'items' => array(
 										array( 'name' => 'Download Free Dielines', 'icon' => 'download', 'url' => $dieline_url ),
 										array( 'name' => 'Artwork Proof Checklist', 'icon' => 'file', 'url' => $artwork_url ),
-										array( 'name' => 'Compliance Guides', 'icon' => 'scale', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
+										array( 'name' => 'Compliance Guides', 'icon' => 'scale', 'copy' => 'Market and documentation context to review.', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
 									),
 								),
 							),
@@ -174,22 +191,43 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 									function ( $type ) use ( $collection_url ) {
 										return array(
 											'name'     => $type['name'],
-											'icon'     => 'flask',
+											'icon'     => isset( $type['icon'] ) ? $type['icon'] : 'flask',
 											'url'      => $collection_url( $type['slug'], array( 'feature' => 'child-resistant' ) ),
+											'summary'  => isset( $type['summary'] ) ? $type['summary'] : '',
 											'children' => array(),
 										);
 									},
 									$child_resistant_types
+								),
+								'path'   => array(
+									'label' => 'How a CR brief moves',
+									'steps' => array(
+										array(
+											'name' => 'Share the destination market',
+											'copy' => 'The review route depends on where the pack will sell.',
+											'url'  => $quote_url,
+										),
+										array(
+											'name' => 'Match bag, box, jar or tube',
+											'copy' => 'Choose the format first, then print and closure.',
+											'url'  => $collection_url( 'mylar-bag', array( 'feature' => 'child-resistant' ) ),
+										),
+										array(
+											'name' => 'Review documentation',
+											'copy' => 'Lock files against the market before production.',
+											'url'  => zomeex_home_url( '/#zomeex-proof-title' ),
+										),
+									),
 								),
 							),
 							'rails'      => array(
 								array(
 									'label' => 'Compliance & guidance',
 									'items' => array(
-										array( 'name' => 'CR Documentation', 'icon' => 'file', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
-										array( 'name' => 'Child-Resistant FAQ', 'icon' => 'book', 'url' => $faq_url ),
-										array( 'name' => 'Request CR Dielines', 'icon' => 'download', 'url' => $dieline_url ),
-										array( 'name' => 'Discuss Your Market', 'icon' => 'chat', 'url' => $quote_url ),
+										array( 'name' => 'CR Documentation', 'icon' => 'file', 'copy' => 'Review files against the destination market.', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
+										array( 'name' => 'Child-Resistant FAQ', 'icon' => 'book', 'copy' => 'Answers for closures, tests and next steps.', 'url' => $faq_url ),
+										array( 'name' => 'Request CR Dielines', 'icon' => 'download', 'copy' => 'Start from a format-ready AI or PDF file.', 'url' => $dieline_url ),
+										array( 'name' => 'Discuss Your Market', 'icon' => 'chat', 'copy' => 'Share destination before locking a CR route.', 'url' => $quote_url ),
 									),
 								),
 							),
@@ -225,24 +263,27 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 							'catalog'    => array(
 								'label'  => 'By application',
 								'groups' => array_map(
-									function ( $application ) {
+									function ( $application ) use ( $application_nav ) {
+										$meta = isset( $application_nav[ $application['slug'] ] ) ? $application_nav[ $application['slug'] ] : array();
 										return array(
 											'name'     => $application['name'],
-											'icon'     => 'leaf',
+											'icon'     => isset( $meta['icon'] ) ? $meta['icon'] : 'leaf',
 											'url'      => zomeex_home_url( '/#zomeex-application-panel-' . $application['slug'] ),
+											'summary'  => isset( $meta['summary'] ) ? $meta['summary'] : '',
 											'children' => array(),
 										);
 									},
 									$applications
 								),
+
 							),
 							'rails'      => array(
 								array(
 									'label' => 'Project routes',
 									'items' => array(
-										array( 'name' => 'OEM / ODM projects', 'icon' => 'building', 'url' => zomeex_home_url( '/#zomeex-capability-title' ) ),
-										array( 'name' => 'All products', 'icon' => 'box', 'url' => $shop_url ),
-										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'url' => $quote_url ),
+										array( 'name' => 'OEM / ODM projects', 'icon' => 'building', 'copy' => 'Map print, structure and volume around the brief.', 'url' => zomeex_home_url( '/#zomeex-capability-title' ) ),
+										array( 'name' => 'All products', 'icon' => 'box', 'copy' => 'Browse the full packaging catalogue.', 'url' => $shop_url ),
+										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'copy' => 'Share product, destination and quantity.', 'url' => $quote_url ),
 									),
 								),
 							),
@@ -282,32 +323,48 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 										'name'     => 'Free Dieline Templates',
 										'icon'     => 'download',
 										'url'      => $dieline_url,
-										'children' => array(
-											array( 'name' => 'Start with a format-ready file', 'url' => $dieline_url ),
-										),
+										'summary'  => 'Start with a format-ready file',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'Upload Artwork',
 										'icon'     => 'file',
 										'url'      => $artwork_url,
-										'children' => array(
-											array( 'name' => 'Send files with your project brief', 'url' => $artwork_url ),
-										),
+										'summary'  => 'Send files with your project brief',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'Compliance Guides',
 										'icon'     => 'scale',
 										'url'      => zomeex_home_url( '/#zomeex-proof-title' ),
-										'children' => array(
-											array( 'name' => 'Review market and documentation context', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
-										),
+										'summary'  => 'Review market and documentation context',
+										'children' => array(),
 									),
 									array(
 										'name'     => 'Packaging FAQ',
 										'icon'     => 'book',
 										'url'      => $faq_url,
-										'children' => array(
-											array( 'name' => 'Answers for the next decision', 'url' => $faq_url ),
+										'summary'  => 'Answers for the next decision',
+											'children' => array(),
+									),
+								),
+								'path'   => array(
+									'label' => 'From file to brief',
+									'steps' => array(
+										array(
+											'name' => 'Request a dieline',
+											'copy' => 'Start from a format-ready AI or PDF file.',
+											'url'  => $dieline_url,
+										),
+										array(
+											'name' => 'Send artwork',
+											'copy' => 'Attach the working files to the same project brief.',
+											'url'  => $artwork_url,
+										),
+										array(
+											'name' => 'Lock production notes',
+											'copy' => 'Market, quantity and finish travel with the file.',
+											'url'  => $quote_url,
 										),
 									),
 								),
@@ -316,8 +373,8 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 								array(
 									'label' => 'Next steps',
 									'items' => array(
-										array( 'name' => 'Request sample pack', 'icon' => 'box', 'url' => add_query_arg( 'resource', 'sample-kit', $quote_url ) ),
-										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'url' => $quote_url ),
+										array( 'name' => 'Request sample pack', 'icon' => 'box', 'copy' => 'Compare materials and closures before production.', 'url' => add_query_arg( 'resource', 'sample-kit', $quote_url ) ),
+										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'copy' => 'Share product, destination and quantity.', 'url' => $quote_url ),
 									),
 								),
 							),
@@ -352,40 +409,53 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 							),
 							'catalog'    => array(
 								'label'  => 'Resources',
-								'groups' => array(
+								'groups' => array_merge(
+								array(
 									array(
 										'name'     => 'Packaging Blog',
 										'icon'     => 'book',
 										'url'      => $news_url,
-										'children' => array(
-											array( 'name' => 'Product and manufacturing notes', 'url' => $news_url ),
-										),
+										'summary'  => 'Product and manufacturing notes',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'CR Laws & Regulations',
 										'icon'     => 'scale',
 										'url'      => $news_url . '#child-resistant',
-										'children' => array(
-											array( 'name' => 'Market context to discuss with your team', 'url' => $news_url . '#child-resistant' ),
-										),
+										'summary'  => 'Market context to discuss with your team',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'Case Studies',
 										'icon'     => 'file',
 										'url'      => add_query_arg( 'type', 'case-study', $news_url ),
-										'children' => array(
-											array( 'name' => 'See how briefs become build paths', 'url' => add_query_arg( 'type', 'case-study', $news_url ) ),
-										),
+										'summary'  => 'See how briefs become build paths',
+										'children' => array(),
 									),
 								),
+								array_map(
+									function ( $note ) {
+										$excerpt = $note->post_excerpt ? $note->post_excerpt : $note->post_content;
+										return array(
+											'name'     => get_the_title( $note ),
+											'icon'     => 'book',
+											'url'      => get_permalink( $note ),
+											'summary'  => wp_trim_words( wp_strip_all_tags( $excerpt ), 16 ),
+											'children' => array(),
+										);
+									},
+									$latest_notes
+								)
+								),
+
 							),
 							'rails'      => array(
 								array(
 									'label' => 'Keep going',
 									'items' => array(
-										array( 'name' => 'Packaging FAQ', 'icon' => 'book', 'url' => $faq_url ),
+										array( 'name' => 'Packaging FAQ', 'icon' => 'book', 'copy' => 'Short answers for the next packaging decision.', 'url' => $faq_url ),
 										array( 'name' => 'Compliance Guides', 'icon' => 'scale', 'url' => zomeex_home_url( '/#zomeex-proof-title' ) ),
-										array( 'name' => 'Contact the team', 'icon' => 'phone', 'url' => $contact_url ),
+										array( 'name' => 'Contact the team', 'icon' => 'phone', 'copy' => 'Talk through destination, volume and format.', 'url' => $contact_url ),
 									),
 								),
 							),
@@ -425,24 +495,48 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 										'name'     => 'About Us',
 										'icon'     => 'building',
 										'url'      => $about_url,
-										'children' => array(
-											array( 'name' => 'How ZOMEEX supports your brief', 'url' => $about_url ),
-										),
+										'summary'  => 'How ZOMEEX supports your brief',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'Factory Tour',
 										'icon'     => 'display',
 										'url'      => $about_url . '#factory-tour',
-										'children' => array(
-											array( 'name' => 'Production context and capabilities', 'url' => $about_url . '#factory-tour' ),
-										),
+										'summary'  => 'Production context and capabilities',
+											'children' => array(),
 									),
 									array(
 										'name'     => 'Certifications',
 										'icon'     => 'scale',
 										'url'      => $about_url . '#certifications',
-										'children' => array(
-											array( 'name' => 'Documents reviewed against the market', 'url' => $about_url . '#certifications' ),
+										'summary'  => 'Documents reviewed against the market',
+											'children' => array(),
+									),
+									array(
+										'name'     => 'Contact Us',
+										'icon'     => 'phone',
+										'url'      => $contact_url,
+										'summary'  => 'Talk through destination, volume and format',
+										'children' => array(),
+									),
+								),
+								'path'   => array(
+									'label' => 'A factory conversation',
+									'steps' => array(
+										array(
+											'name' => 'See how ZOMEEX works',
+											'copy' => 'Company context for the next packaging brief.',
+											'url'  => $about_url,
+										),
+										array(
+											'name' => 'Review production context',
+											'copy' => 'Factory tour and capability notes sit next to the catalogue.',
+											'url'  => $about_url . '#factory-tour',
+										),
+										array(
+											'name' => 'Talk to the team',
+											'copy' => 'Share destination, volume and the format you have in mind.',
+											'url'  => $contact_url,
 										),
 									),
 								),
@@ -451,9 +545,9 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 								array(
 									'label' => 'Talk to the team',
 									'items' => array(
-										array( 'name' => 'Contact Us', 'icon' => 'phone', 'url' => $contact_url ),
-										array( 'name' => 'FAQ', 'icon' => 'book', 'url' => $faq_url ),
-										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'url' => $quote_url ),
+										array( 'name' => 'Contact Us', 'icon' => 'phone', 'copy' => 'Reach the team with a live project.', 'url' => $contact_url ),
+										array( 'name' => 'FAQ', 'icon' => 'book', 'copy' => 'Practical answers before a production brief.', 'url' => $faq_url ),
+										array( 'name' => 'Get a quote', 'icon' => 'arrow', 'copy' => 'Share product, destination and quantity.', 'url' => $quote_url ),
 									),
 								),
 							),

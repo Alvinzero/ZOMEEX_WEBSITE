@@ -6517,3 +6517,260 @@ html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
 	margin-top: 42px;
 	}
 }
+
+/* ===== Footer redesign (matches the 8318 reference: deep green, airy type,
+ * social icon row, arrow links, icon-led contact lines) ===== */
+.zomeex-footer {
+	background: #07211a;
+	color: #fff;
+	padding: 76px 0 28px;
+}
+
+.zomeex-footer__grid {
+	display: grid;
+	gap: 56px;
+	grid-template-columns: 1.4fr .85fr .85fr 1.1fr;
+}
+
+.zomeex-footer__brand {
+	max-width: 330px;
+}
+
+.zomeex-footer__logo {
+	display: inline-block;
+	max-width: 196px;
+}
+
+.zomeex-footer__logo img {
+	filter: brightness(0) invert(1);
+	height: auto;
+	width: 100%;
+}
+
+.zomeex-footer__brand > p {
+	color: #b9cfc3;
+	font-size: 14px;
+	line-height: 1.65;
+	margin: 20px 0 0;
+	max-width: 310px;
+}
+
+.zomeex-footer__badges {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	margin-top: 26px;
+}
+
+.zomeex-footer__badges span {
+	border: 1px solid rgba(255, 255, 255, .28);
+	border-radius: 999px;
+	color: #cfe2d6;
+	font-size: 10px;
+	letter-spacing: .12em;
+	padding: 6px 12px;
+}
+
+.zomeex-footer__social {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 10px;
+	margin-top: 26px;
+}
+
+.zomeex-footer__social a {
+	align-items: center;
+	border: 1px solid rgba(255, 255, 255, .26);
+	border-radius: 50%;
+	color: #eaf4ee;
+	display: inline-flex;
+	height: 38px;
+	justify-content: center;
+	transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+	width: 38px;
+}
+
+.zomeex-footer__social a svg {
+	fill: currentColor;
+	height: 16px;
+	width: 16px;
+}
+
+.zomeex-footer__social a:hover,
+.zomeex-footer__social a:focus-visible {
+	background: #2de28c;
+	border-color: #2de28c;
+	color: #07211a;
+	transform: translateY(-2px);
+}
+
+.zomeex-footer__label {
+	color: #2de28c !important;
+	font-size: 11px !important;
+	font-weight: 700 !important;
+	letter-spacing: .16em;
+	margin: 6px 0 20px !important;
+	text-transform: uppercase;
+}
+
+/* Nav links with a permanent arrow, like the reference footer. */
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line) {
+	color: #e8f2ec;
+	display: block;
+	font-size: 14px;
+	line-height: 1.4;
+	margin: 0 0 13px;
+	transition: color .18s ease, transform .18s ease;
+}
+
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line)::after {
+	color: rgba(45, 226, 140, .55);
+	content: "↗";
+	display: inline-block;
+	font-size: 12px;
+	margin-left: 7px;
+	transition: color .18s ease, transform .18s ease;
+}
+
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line):hover,
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line):focus-visible {
+	color: #2de28c;
+	transform: translateX(2px);
+}
+
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line):hover::after,
+.zomeex-footer__grid > div:not(.zomeex-footer__brand) > a:not(.zomeex-footer__quote):not(.zomeex-footer__line):focus-visible::after {
+	color: #2de28c;
+	transform: translate(2px, -2px);
+}
+
+/* Contact lines with leading icons. */
+.zomeex-footer__contact > p {
+	max-width: none;
+}
+
+.zomeex-footer__line {
+	align-items: flex-start;
+	color: #e8f2ec !important;
+	display: flex !important;
+	font-size: 14px;
+	gap: 11px;
+	line-height: 1.5;
+	margin: 0 0 14px !important;
+}
+
+.zomeex-footer__line svg {
+	fill: #2de28c;
+	flex-shrink: 0;
+	height: 17px;
+	margin-top: 2px;
+	width: 17px;
+}
+
+.zomeex-footer__line span {
+	min-width: 0;
+}
+
+a.zomeex-footer__line {
+	transition: color .18s ease;
+}
+
+a.zomeex-footer__line:hover,
+a.zomeex-footer__line:focus-visible {
+	color: #2de28c !important;
+}
+
+/* Primary CTA inside the footer. */
+.zomeex-footer__quote {
+	align-items: center;
+	background: #2de28c;
+	border: 1px solid #2de28c !important;
+	border-radius: 999px;
+	color: #07211a !important;
+	display: inline-flex;
+	font-size: 13px;
+	font-weight: 700;
+	gap: 8px;
+	justify-content: center;
+	letter-spacing: .02em;
+	margin-top: 16px;
+	padding: 13px 26px;
+	text-transform: none;
+	transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
+}
+
+.zomeex-footer__quote:hover,
+.zomeex-footer__quote:focus-visible {
+	background: #25c87c;
+	border-color: #25c87c !important;
+	box-shadow: 0 8px 22px rgba(45, 226, 140, .3);
+	color: #07211a !important;
+	transform: translateY(-1px);
+}
+
+/* Bottom bar. */
+.zomeex-footer__base {
+	align-items: baseline;
+	border-top: 1px solid rgba(255, 255, 255, .14);
+	color: #8ea89a;
+	display: flex;
+	font-size: 12px;
+	gap: 18px;
+	justify-content: space-between;
+	letter-spacing: 0;
+	line-height: 1.5;
+	margin-top: 64px;
+	padding-top: 22px;
+	text-transform: none;
+}
+
+.zomeex-footer__base span:last-child {
+	max-width: 52ch;
+	text-align: right;
+}
+
+@media (max-width: 1024px) {
+	.zomeex-footer__grid {
+		gap: 44px;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.zomeex-footer__brand {
+		max-width: none;
+	}
+}
+
+@media (max-width: 640px) {
+	.zomeex-footer {
+		padding: 56px 0 24px;
+	}
+
+	.zomeex-footer__grid {
+		gap: 36px;
+		grid-template-columns: 1fr;
+	}
+
+	.zomeex-footer__base {
+		flex-direction: column;
+		gap: 8px;
+		margin-top: 48px;
+	}
+
+	.zomeex-footer__base span:last-child {
+		text-align: left;
+	}
+}
+
+/* The global wrapper inherits `text-transform: uppercase` from the theme layer
+ * and the footer must not inherit it — the reference design uses sentence case. */
+.zomeex-footer,
+.zomeex-footer a,
+.zomeex-footer p,
+.zomeex-footer span {
+	text-transform: none;
+}
+
+.zomeex-footer__label,
+.zomeex-footer__badges span {
+	text-transform: uppercase;
+}

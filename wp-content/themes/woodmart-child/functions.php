@@ -1208,9 +1208,10 @@ function zomeex_portal_url( $portal ) {
 }
 
 /**
- * Homepage language menu. GTranslate remains the translation engine when it is
- * active; this visible control ensures the five agreed locales are discoverable
- * even while the plugin widget is loading or unavailable in a local preview.
+ * Homepage language menu. Translation is fully owned by the theme's dictionary
+ * layer (zomeex-i18n.js); GTranslate machine translation was retired because it
+ * injected <font> wrappers, raced the dictionary, and broke layout. The plugin
+ * stays active only because its flag images are referenced below.
  */
 function zomeex_language_switcher() {
 	$flag_base = content_url( 'plugins/gtranslate/flags/24' );
@@ -1221,7 +1222,6 @@ function zomeex_language_switcher() {
 		'de'    => array( 'code' => 'DE', 'label' => 'Deutsch', 'flag' => $flag_base . '/de.png' ),
 		'fr'    => array( 'code' => 'FR', 'label' => 'Français', 'flag' => $flag_base . '/fr.png' ),
 	);
-	$native_widget = shortcode_exists( 'gtranslate' ) ? do_shortcode( '[gtranslate widget_look="popup_search"]' ) : '';
 
 	ob_start();
 	?>
@@ -1239,7 +1239,6 @@ function zomeex_language_switcher() {
 				</button>
 			<?php endforeach; ?>
 		</div>
-		<span class="zomeex-gtranslate-native" aria-hidden="true"><?php echo $native_widget; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
 	</div>
 	<?php
 	return ob_get_clean();

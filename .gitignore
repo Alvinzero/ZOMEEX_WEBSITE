@@ -21,3 +21,6 @@ php_errorlog
 /.impeccable/
 /assets/
 /wp-content/themes/woodmart-child/assets/plates/
+
+# Local QA screenshots and verify scripts
+/.codex-qa/

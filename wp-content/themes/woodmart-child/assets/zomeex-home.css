@@ -2326,3 +2326,31 @@
 	grid-column: 2;
 	}
 }
+
+/* ===== Locale typography =====
+ * Avenir Next ships no CJK glyphs, so without an explicit Chinese stack every
+ * element fell back to a different system face after translation — the mixed,
+ * "ugly" typeface symptom. zh-CN gets a single consistent stack; CJK also
+ * needs letter-spacing reset (Latin tracking crams hanzi together) and a
+ * slightly taller line-height for balanced CJK rhythm.
+ */
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell,
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell :where(h1, h2, h3, h4, h5, p, a, span, strong, small, em, button, label, input, select, option, textarea, li, td, th, figcaption, summary),
+html[data-zomeex-locale="zh-CN"] .zomeex-subscribe,
+html[data-zomeex-locale="zh-CN"] .zomeex-subscribe :where(h2, h3, p, button, label, input, span, a) {
+	font-family: "Avenir Next", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
+}
+
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell :where(h1, h2, h3, h4, h5),
+html[data-zomeex-locale="zh-CN"] .zomeex-subscribe :where(h2, h3) {
+	letter-spacing: 0;
+	line-height: 1.28;
+}
+
+/* Russian runs wider than English; keep Latin stack but allow slightly longer
+ * lines before wrapping in the mega menu so translated labels do not clip. */
+html[data-zomeex-locale="ru"] .zomeex-mega-menu__label,
+html[data-zomeex-locale="de"] .zomeex-mega-menu__label,
+html[data-zomeex-locale="fr"] .zomeex-mega-menu__label {
+	white-space: normal;
+}

@@ -420,6 +420,108 @@
     EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, HOMEPAGE_P0_P2_EXTRA_BY_SOURCE[locale]);
   });
 
+  var HOMEPAGE_RFQ_PATHS_EXTRA_BY_SOURCE = {
+    'zh-CN': {
+      'Start with the product you know.': '从你熟悉的产品开始。',
+      'Each route opens a focused catalogue. If your brief spans categories, use the project form below.': '每个入口都会打开对应的产品目录；如果需求涉及多个类别，请使用下方项目表单。',
+      'View full catalogue': '查看完整产品目录',
+      'Mylar Bags & Pouches': 'Mylar 袋与软包装',
+      'Barrier bags and retail pouches': '高阻隔袋与零售软包装',
+      'Pre-Roll Packaging': '预卷包装',
+      'Wraps and presentation packs': '卷材包装与展示包装',
+      'Printed Paper Boxes': '印刷纸盒',
+      'Cartons and rigid boxes': '折叠纸盒与硬盒',
+      'Vape Hardware': '雾化硬件',
+      'Devices and oil systems': '设备与油仓系统',
+      'Accessories': '配件',
+      'Parts and finishing details': '零部件与表面处理',
+      'Production Machines': '生产设备',
+      'Filling and production equipment': '灌装与生产设备',
+      'Tell us what you are building.': '告诉我们你正在开发什么。',
+      'Start with three useful details. Add the rest only when it helps the conversation.': '先提供三个关键信息，其余内容可按项目需要补充。',
+      'Choose a format, market and volume in about 30 seconds.': '约 30 秒即可选择产品形式、目标市场与预计数量。',
+      'Add artwork or timing when you are ready. Your text stays in this session.': '准备好后可补充设计稿或时间要求；文字草稿会保留在本次会话中。',
+      'These three details give the team a useful first direction.': '这三个信息可以帮助团队快速判断项目方向。',
+      'Optional details help us tailor the first reply.': '补充这些可选信息，有助于我们准备更有针对性的首次回复。',
+      'We use these details only to respond to your enquiry.': '这些信息仅用于回复你的询价。'
+    },
+    ru: {
+      'Start with the product you know.': 'Начните со знакомого продукта.',
+      'Each route opens a focused catalogue. If your brief spans categories, use the project form below.': 'Каждый пункт открывает отдельный каталог. Для комплексного проекта используйте форму ниже.',
+      'View full catalogue': 'Весь каталог',
+      'Mylar Bags & Pouches': 'Mylar-пакеты и паучи',
+      'Barrier bags and retail pouches': 'Барьерные и розничные пакеты',
+      'Pre-Roll Packaging': 'Упаковка для pre-roll',
+      'Wraps and presentation packs': 'Обертки и презентационные упаковки',
+      'Printed Paper Boxes': 'Печатные бумажные коробки',
+      'Cartons and rigid boxes': 'Картонные и жесткие коробки',
+      'Vape Hardware': 'Оборудование для вейпов',
+      'Devices and oil systems': 'Устройства и системы для масел',
+      'Accessories': 'Аксессуары',
+      'Parts and finishing details': 'Детали и варианты отделки',
+      'Production Machines': 'Производственное оборудование',
+      'Filling and production equipment': 'Оборудование для наполнения и производства',
+      'Tell us what you are building.': 'Расскажите, что вы разрабатываете.',
+      'Start with three useful details. Add the rest only when it helps the conversation.': 'Начните с трех ключевых деталей, а остальное добавьте по мере необходимости.',
+      'Choose a format, market and volume in about 30 seconds.': 'Выберите формат, рынок и объем примерно за 30 секунд.',
+      'Add artwork or timing when you are ready. Your text stays in this session.': 'Когда будете готовы, добавьте макет или сроки. Текст сохранится в этой сессии.',
+      'These three details give the team a useful first direction.': 'Эти три детали помогут команде определить направление проекта.',
+      'Optional details help us tailor the first reply.': 'Дополнительная информация поможет подготовить более точный первый ответ.',
+      'We use these details only to respond to your enquiry.': 'Эти данные используются только для ответа на ваш запрос.'
+    },
+    de: {
+      'Start with the product you know.': 'Starten Sie mit dem bekannten Produkt.',
+      'Each route opens a focused catalogue. If your brief spans categories, use the project form below.': 'Jeder Einstieg öffnet einen passenden Katalog. Für kategorieübergreifende Projekte nutzen Sie das Formular darunter.',
+      'View full catalogue': 'Gesamten Katalog ansehen',
+      'Mylar Bags & Pouches': 'Mylar-Beutel und Pouches',
+      'Barrier bags and retail pouches': 'Barrierebeutel und Retail-Pouches',
+      'Pre-Roll Packaging': 'Pre-Roll-Verpackung',
+      'Wraps and presentation packs': 'Wraps und Präsentationsverpackungen',
+      'Printed Paper Boxes': 'Bedruckte Papierboxen',
+      'Cartons and rigid boxes': 'Faltschachteln und starre Boxen',
+      'Vape Hardware': 'Vape-Hardware',
+      'Devices and oil systems': 'Geräte und Ölsysteme',
+      'Accessories': 'Zubehör',
+      'Parts and finishing details': 'Teile und Veredelungsdetails',
+      'Production Machines': 'Produktionsmaschinen',
+      'Filling and production equipment': 'Abfüll- und Produktionsanlagen',
+      'Tell us what you are building.': 'Erzählen Sie uns von Ihrem Projekt.',
+      'Start with three useful details. Add the rest only when it helps the conversation.': 'Beginnen Sie mit drei wichtigen Angaben und ergänzen Sie weitere Details nach Bedarf.',
+      'Choose a format, market and volume in about 30 seconds.': 'Wählen Sie Format, Zielmarkt und Menge in etwa 30 Sekunden.',
+      'Add artwork or timing when you are ready. Your text stays in this session.': 'Ergänzen Sie Artwork oder Zeitplan, sobald Sie bereit sind. Der Text bleibt in dieser Sitzung erhalten.',
+      'These three details give the team a useful first direction.': 'Diese drei Angaben geben dem Team eine klare erste Richtung.',
+      'Optional details help us tailor the first reply.': 'Optionale Angaben helfen uns, die erste Antwort gezielt vorzubereiten.',
+      'We use these details only to respond to your enquiry.': 'Wir verwenden diese Angaben nur zur Beantwortung Ihrer Anfrage.'
+    },
+    fr: {
+      'Start with the product you know.': 'Commencez par le produit que vous connaissez.',
+      'Each route opens a focused catalogue. If your brief spans categories, use the project form below.': 'Chaque entrée ouvre un catalogue ciblé. Pour un projet couvrant plusieurs catégories, utilisez le formulaire ci-dessous.',
+      'View full catalogue': 'Voir tout le catalogue',
+      'Mylar Bags & Pouches': 'Sachets et poches Mylar',
+      'Barrier bags and retail pouches': 'Sachets barrière et poches retail',
+      'Pre-Roll Packaging': 'Emballage pre-roll',
+      'Wraps and presentation packs': 'Étuis et emballages de présentation',
+      'Printed Paper Boxes': 'Boîtes papier imprimées',
+      'Cartons and rigid boxes': 'Étuis carton et boîtes rigides',
+      'Vape Hardware': 'Matériel de vape',
+      'Devices and oil systems': 'Appareils et systèmes pour huiles',
+      'Accessories': 'Accessoires',
+      'Parts and finishing details': 'Pièces et détails de finition',
+      'Production Machines': 'Machines de production',
+      'Filling and production equipment': 'Équipements de remplissage et production',
+      'Tell us what you are building.': 'Parlez-nous de votre projet.',
+      'Start with three useful details. Add the rest only when it helps the conversation.': 'Commencez par trois informations clés, puis ajoutez les détails utiles à votre projet.',
+      'Choose a format, market and volume in about 30 seconds.': 'Choisissez le format, le marché et le volume en une trentaine de secondes.',
+      'Add artwork or timing when you are ready. Your text stays in this session.': 'Ajoutez votre artwork ou vos délais quand vous le souhaitez. Le texte reste enregistré pendant cette session.',
+      'These three details give the team a useful first direction.': 'Ces trois informations donnent à l’équipe une première direction claire.',
+      'Optional details help us tailor the first reply.': 'Ces informations facultatives nous aident à personnaliser notre première réponse.',
+      'We use these details only to respond to your enquiry.': 'Ces informations servent uniquement à répondre à votre demande.'
+    }
+  };
+  Object.keys(HOMEPAGE_RFQ_PATHS_EXTRA_BY_SOURCE).forEach(function (locale) {
+    EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, HOMEPAGE_RFQ_PATHS_EXTRA_BY_SOURCE[locale]);
+  });
+
   var HOMEPAGE_LAYOUT_EXTRA_BY_SOURCE = {
     'zh-CN': {
       'See the format before the final brief.': '最终确认需求前，先看清包装形式。',

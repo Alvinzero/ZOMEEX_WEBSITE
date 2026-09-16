@@ -38,6 +38,14 @@ $transition_products = array(
 );
 
 $product_interest_options = array( 'Mylar bags', 'Paper boxes', 'Glass jars', 'Pre-roll packaging', 'Vape hardware', 'POP displays' );
+$rfq_product_paths = array(
+	array( 'title' => 'Mylar Bags & Pouches', 'copy' => 'Barrier bags and retail pouches', 'slug' => 'mylar-bag' ),
+	array( 'title' => 'Pre-Roll Packaging', 'copy' => 'Wraps and presentation packs', 'slug' => 'preroll-wraps' ),
+	array( 'title' => 'Printed Paper Boxes', 'copy' => 'Cartons and rigid boxes', 'slug' => 'vape-box' ),
+	array( 'title' => 'Vape Hardware', 'copy' => 'Devices and oil systems', 'slug' => 'terpa' ),
+	array( 'title' => 'Accessories', 'copy' => 'Parts and finishing details', 'slug' => 'accessories' ),
+	array( 'title' => 'Production Machines', 'copy' => 'Filling and production equipment', 'slug' => 'machine' ),
+);
 $proof_points = array(
 	array( 'value' => 'CPSC', 'label' => 'Documentation route', 'note' => 'Demo / verify scope' ),
 	array( 'value' => 'ASTM D3475', 'label' => 'Test standard', 'note' => 'Demo / verify report' ),
@@ -206,17 +214,31 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 		</div>
 	</section>
 
-	<section class="zx-rfq" id="zx-rfq" aria-labelledby="zx-rfq-title">
-		<div class="zomeex-container zx-rfq__grid">
-			<div class="zx-rfq__intro"><h2 id="zx-rfq-title">Tell us what you are building.</h2><p>Start with three useful details. Add the rest only when it helps the conversation.</p><div class="zx-rfq__promise"><span>01</span><p>Choose a format, market and volume in about 30 seconds.</p></div><div class="zx-rfq__promise"><span>02</span><p>Add artwork or timing when you are ready. Your text stays in this session.</p></div></div>
-			<form class="zx-rfq-form" data-rfq-stepper action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" enctype="multipart/form-data">
+	<section class="zx-rfq" id="zx-rfq" aria-labelledby="zx-rfq-paths-title">
+		<div class="zomeex-container">
+			<header class="zx-rfq__route-head">
+				<div><h2 id="zx-rfq-paths-title">Start with the product you know.</h2><p>Each route opens a focused catalogue. If your brief spans categories, use the project form below.</p></div>
+				<a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">View full catalogue <span aria-hidden="true">↗</span></a>
+			</header>
+			<nav class="zx-rfq-paths" aria-labelledby="zx-rfq-paths-title">
+				<?php foreach ( $rfq_product_paths as $path ) : ?>
+					<a class="zx-rfq-path" href="<?php echo esc_url( $category_url( $path ) ); ?>">
+						<span><strong><?php echo esc_html( $path['title'] ); ?></strong><small><?php echo esc_html( $path['copy'] ); ?></small></span>
+						<svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true" focusable="false"><path d="M5 15 15 5M7 5h8v8"/></svg>
+					</a>
+				<?php endforeach; ?>
+			</nav>
+			<div class="zx-rfq__grid">
+				<div class="zx-rfq__intro"><h3 id="zx-rfq-title">Tell us what you are building.</h3><p>Start with three useful details. Add the rest only when it helps the conversation.</p><div class="zx-rfq__promise"><span>01</span><p>Choose a format, market and volume in about 30 seconds.</p></div><div class="zx-rfq__promise"><span>02</span><p>Add artwork or timing when you are ready. Your text stays in this session.</p></div></div>
+				<form class="zx-rfq-form" data-rfq-stepper action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" enctype="multipart/form-data">
 				<?php if ( $quote_error && isset( $quote_errors[ $quote_error ] ) ) : ?><div class="zx-form-alert" role="alert"><?php echo esc_html( $quote_errors[ $quote_error ] ); ?></div><?php endif; ?>
 				<ol class="zx-rfq-steps" data-rfq-progress aria-label="Quote request steps"><li data-rfq-progress-item="1" aria-current="step"><span>1</span><strong>Project</strong></li><li data-rfq-progress-item="2"><span>2</span><strong>Requirements</strong></li><li data-rfq-progress-item="3"><span>3</span><strong>Contact</strong></li></ol>
 				<section class="zx-rfq-step" data-rfq-step="1" aria-labelledby="zx-rfq-step-1-title"><div class="zx-rfq-step__heading"><p class="zx-eyebrow">Step 1 / Project</p><h3 id="zx-rfq-step-1-title" tabindex="-1">What are you sourcing?</h3><p>These three details give the team a useful first direction.</p></div><div class="zx-form-grid"><fieldset class="zx-form-field--full"><legend>Product interest</legend><div class="zx-check-grid"><?php foreach ( $product_interest_options as $option ) : ?><label><input type="checkbox" value="<?php echo esc_attr( $option ); ?>" data-product-interest><span><?php echo esc_html( $option ); ?></span></label><?php endforeach; ?></div><input type="hidden" name="product_interest" value="" data-product-interest-value></fieldset><label><span>Target market <em>*</em></span><input type="text" name="target_market" placeholder="e.g. US, EU, Canada" maxlength="160" required></label><fieldset><legend>Estimated quantity</legend><div class="zx-choice-list"><label><input type="radio" name="quantity" value="10000"><span>10,000 units</span></label><label><input type="radio" name="quantity" value="50000"><span>50,000 units</span></label><label><input type="radio" name="quantity" value="100000"><span>100,000+ units</span></label><label><input type="radio" name="quantity" value=""><span>Not sure yet</span></label></div></fieldset></div><button class="zx-button zx-button--primary zx-rfq-next" type="button" data-rfq-next="2">Continue to requirements <span aria-hidden="true">↗</span></button></section>
 				<section class="zx-rfq-step" data-rfq-step="2" aria-labelledby="zx-rfq-step-2-title" hidden><div class="zx-rfq-step__heading"><p class="zx-eyebrow">Step 2 / Requirements</p><h3 id="zx-rfq-step-2-title" tabindex="-1">What should we prepare?</h3><p>Optional details help us tailor the first reply.</p></div><div class="zx-form-grid"><label><span>Role</span><select name="role"><option value="">Select one</option><option>Founder / owner</option><option>Procurement</option><option>Product / R&amp;D</option><option>Brand / marketing</option><option>Compliance / legal</option><option>Distributor</option><option>Other</option></select></label><label><span>WhatsApp / phone</span><input type="text" name="phone" autocomplete="tel" maxlength="60"></label><label class="zx-form-field--full"><span>Message</span><textarea name="notes" rows="4" maxlength="3000" placeholder="Dimensions, finish, timeline or any open question"></textarea></label><label class="zx-form-field--full zx-file-field"><span>Artwork / dieline upload</span><input type="file" name="artwork_files[]" multiple accept=".pdf,.ai,.eps,.svg,.png,.jpg,.jpeg,.webp"><small>Up to 3 files, 10 MB each. PDF, AI, EPS, SVG, PNG, JPG or WEBP.</small></label></div><div class="zx-rfq-step__actions"><button class="zx-button zx-button--secondary" type="button" data-rfq-back="1">Back</button><button class="zx-button zx-button--primary" type="button" data-rfq-next="3">Continue to contact <span aria-hidden="true">↗</span></button></div></section>
 				<section class="zx-rfq-step" data-rfq-step="3" aria-labelledby="zx-rfq-step-3-title" hidden><div class="zx-rfq-step__heading"><p class="zx-eyebrow">Step 3 / Contact</p><h3 id="zx-rfq-step-3-title" tabindex="-1">Where should we send the reply?</h3><p>We use these details only to respond to your enquiry.</p></div><div class="zx-form-grid"><label><span>Name <em>*</em></span><input type="text" name="name" autocomplete="name" maxlength="120" required></label><label><span>Company <em>*</em></span><input type="text" name="company" autocomplete="organization" maxlength="160" required></label><label><span>Business email <em>*</em></span><input type="email" name="email" autocomplete="email" maxlength="254" required></label><label><span>Country / region <em>*</em></span><input type="text" name="country" autocomplete="country-name" maxlength="120" required></label></div><label class="zx-consent"><input type="checkbox" name="privacy_consent" value="1" required><span>I agree that ZOMEEX may use these details and files to respond to this enquiry.</span></label><div class="zx-rfq-step__actions"><button class="zx-button zx-button--secondary" type="button" data-rfq-back="2">Back</button><button class="zx-button zx-button--primary zx-button--submit" type="submit">Submit inquiry <span aria-hidden="true">↗</span></button></div></section>
 				<div class="zx-honeypot" aria-hidden="true" hidden><label>Website<input type="text" name="zomeex_quote_honeypot" tabindex="-1" autocomplete="off"></label></div><input type="hidden" name="action" value="zomeex_quote_submit"><input type="hidden" name="quote_return" value="home"><input type="hidden" name="quote_items" value="[]"><?php wp_nonce_field( 'zomeex_quote_submit', 'zomeex_quote_nonce' ); ?>
-			</form>
+				</form>
+			</div>
 		</div>
 	</section>
 

@@ -1910,6 +1910,11 @@
 
   var translateSource = function (source, locale) {
     locale = normalizeLocale(locale || currentLocale);
+    /* Switching back to the default locale must restore the captured source
+     * itself — EXTRA_BY_SOURCE only exists for the four target locales, so
+     * without this early return anything translated via EXTRA stayed stuck in
+     * the last non-English language. */
+    if (locale === DEFAULT_LOCALE) return source;
     var extra = EXTRA_BY_SOURCE[locale] && EXTRA_BY_SOURCE[locale][source];
     if (extra) return extra;
     var key = textKey(source);

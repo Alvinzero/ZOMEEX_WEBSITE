@@ -2328,11 +2328,12 @@
 }
 
 /* ===== Locale typography =====
- * Avenir Next ships no CJK glyphs, so without an explicit Chinese stack every
- * element fell back to a different system face after translation — the mixed,
- * "ugly" typeface symptom. zh-CN gets a single consistent stack; CJK also
- * needs letter-spacing reset (Latin tracking crams hanzi together) and a
- * slightly taller line-height for balanced CJK rhythm.
+ * zh-CN gets one consistent CJK stack. Many components carry their own Latin
+ * font-family rule, so inheritance alone cannot reach them — a broad override
+ * is required. But that same override clobbers icon-font carriers
+ * (woodmart-font) and turns header/popup icons into tofu boxes, so every
+ * icon-font carrier is restored explicitly right below. Keep the restore list
+ * in sync when adding new icon-font elements.
  */
 html[data-zomeex-locale="zh-CN"] .zomeex-site-shell,
 html[data-zomeex-locale="zh-CN"] .zomeex-site-shell :where(h1, h2, h3, h4, h5, p, a, span, strong, small, em, button, label, input, select, option, textarea, li, td, th, figcaption, summary),
@@ -2341,10 +2342,25 @@ html[data-zomeex-locale="zh-CN"] .zomeex-subscribe :where(h2, h3, p, button, lab
 	font-family: "Avenir Next", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
 }
 
+/* Icon-font carriers must keep woodmart-font even under the zh-CN override. */
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell .zomeex-utility-link__icon,
+html[data-zomeex-locale="zh-CN"] .zomeex-site-shell [class*="wd-icon"],
+html[data-zomeex-locale="zh-CN"] .zomeex-subscribe .zomeex-subscribe__close span {
+	font-family: "woodmart-font";
+}
+
 html[data-zomeex-locale="zh-CN"] .zomeex-site-shell :where(h1, h2, h3, h4, h5),
 html[data-zomeex-locale="zh-CN"] .zomeex-subscribe :where(h2, h3) {
 	letter-spacing: 0;
 	line-height: 1.28;
+}
+
+/* Chinese nav labels run much shorter than English, so the flex nav collapses
+ * into a centered clump. Distribute the triggers across the full bar instead —
+ * same visual spread English gets from long labels. */
+html[data-zomeex-locale="zh-CN"] .zomeex-desktop-nav {
+	flex: 1;
+	justify-content: space-evenly;
 }
 
 /* Russian runs wider than English; keep Latin stack but allow slightly longer
@@ -2353,4 +2369,13 @@ html[data-zomeex-locale="ru"] .zomeex-mega-menu__label,
 html[data-zomeex-locale="de"] .zomeex-mega-menu__label,
 html[data-zomeex-locale="fr"] .zomeex-mega-menu__label {
 	white-space: normal;
+}
+
+/* The mega-menu group links carry a higher-specificity Latin rule
+ * (.zomeex-desktop-nav .zomeex-mega-menu__group ul a), so they need an equally
+ * specific zh-CN override. */
+html[data-zomeex-locale="zh-CN"] .zomeex-desktop-nav .zomeex-mega-menu__group ul a,
+html[data-zomeex-locale="zh-CN"] .zomeex-desktop-nav .zomeex-mega-menu__rail a,
+html[data-zomeex-locale="zh-CN"] .zomeex-desktop-nav .zomeex-mega-menu__path a {
+	font-family: "Avenir Next", "Helvetica Neue", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans SC", Arial, sans-serif;
 }

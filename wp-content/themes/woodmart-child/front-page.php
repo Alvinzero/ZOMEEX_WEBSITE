@@ -94,7 +94,7 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 			<div class="zomeex-container zx-hero__grid">
 				<div class="zx-hero__copy">
 					<p class="zx-eyebrow zx-hero__eyebrow">ZOMEEX / CUSTOM PACKAGING SYSTEM</p>
-					<h1 id="zx-hero-title">Packaging built for your next market.</h1>
+					<h1 id="zx-hero-title"><span class="zx-hero-title__main">Packaging built for your next</span><span class="zx-hero-title__accent">market.</span></h1>
 					<p class="zx-hero__lede">Factory-direct bags, boxes, jars and OEM/ODM support for regulated launches.</p>
 					<div class="zx-hero__trust" aria-label="Key service benefits">
 						<span data-evidence-status="demo">CPSC / ASTM review route <small>DEMO DATA</small></span><span data-evidence-status="demo">10-Day Fast Turnaround <small>DEMO DATA</small></span><span data-evidence-status="demo">Free Vector Dielines <small>DEMO DATA</small></span>
@@ -127,14 +127,42 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 		<p class="zx-trust__note"><strong>Demo evidence only.</strong> <span>Certificates, test reports, market scope and material claims must be confirmed by ZOMEEX before publication.</span> <span>Client confirmation is required before launch.</span></p>
 	</section>
 
-	<section class="zx-advantages" aria-labelledby="zx-advantages-title">
+	<section class="zx-advantages zx-advantages--eco" aria-labelledby="zx-advantages-title">
 		<div class="zomeex-container">
-			<div class="zx-section-head"><h2 id="zx-advantages-title">A clearer route from packaging brief to production.</h2><p>Every touchpoint is designed for the decisions a procurement team needs to make.</p></div>
+			<div class="zx-section-head">
+				<p class="zx-eyebrow zx-advantages__eyebrow">WHY ZOMEEX</p>
+				<h2 id="zx-advantages-title"><span class="zx-advantages-title__main">More Than Packaging.</span> <span class="zx-advantages-title__accent">Your Strategic Cannabis Sourcing Partner.</span></h2>
+				<p>We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.</p>
+			</div>
 			<div class="zx-advantage-grid">
-				<article><h3>Factory-Direct Pricing</h3><p>Keep the commercial conversation close to the production route and the actual format.</p></article>
-				<article data-evidence-status="demo"><h3>Market Documentation Review</h3><p>Review child-resistant structures and market documentation before a format is finalized.</p><span class="zx-demo-badge">DEMO DATA</span></article>
-				<article><h3>Bespoke Printing Crafts</h3><p>Choose materials, inks and special finishes that make the brand feel intentional.</p></article>
-				<article><h3>Free Pre-Press Support</h3><p>Start from an existing artwork file or get a dieline route for the next production step.</p></article>
+				<article class="zx-adv">
+					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--pine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></span><span class="zx-adv__index">01</span></div>
+					<h3 class="zx-adv__title">Precision-Engineered Product Fit</h3>
+					<p class="zx-adv__sub">Custom Structural Design &amp; Exact Dielines</p>
+					<p class="zx-adv__copy"><strong>The Fit:</strong> We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.</p>
+					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l10-10 3 3L7 20l-3-3z"/><path d="M14 7l3 3"/></svg><span>Custom Dielines</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/></svg><span>Barrier Materials</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M9 9h6v6H9z"/></svg><span>Precision Inserts</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20V9M12 20V4M18 20v-8"/></svg><span>Structural Integrity</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="4"/><circle cx="16" cy="12" r="4"/></svg><span>Product Compatibility</span></li></ul></div>
+				</article>
+				<article class="zx-adv">
+					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--olive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span><span class="zx-adv__index">02</span></div>
+					<h3 class="zx-adv__title">Compliance &amp; Market Readiness</h3>
+					<p class="zx-adv__sub">Child-Resistant &amp; Sustainable Solutions</p>
+					<p class="zx-adv__copy"><strong>The Protection:</strong> Stay launch-ready with fully certified Child-Resistant (CR) packaging and eco-friendly materials designed to seamlessly satisfy strict multi-state regulations.</p>
+					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="11" width="12" height="9" rx="1"/><path d="M9 11V8a3 3 0 0 1 6 0v3"/></svg><span>CR Certified Packaging</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c8-1 13-8 14-14-6 1-13 6-14 14z"/><path d="M8 16c2-3 5-6 9-8"/></svg><span>Sustainable &amp; Recyclable Options</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="10" r="5"/><path d="M9 14l-1.5 6L12 18l4.5 2L15 14"/><path d="M10 10l1.5 1.5L14 9"/></svg><span>ASTM Standards</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l6 2 6-2v12l-6 2-6-2-6 2V6l6-2z"/><path d="M9 4v12M15 6v12"/></svg><span>Multi-State Compliance</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="8" rx="1"/><path d="M8 12h8"/></svg><span>Tamper-Evident Seals</span></li></ul></div>
+				</article>
+				<article class="zx-adv">
+					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--pine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="zx-adv__index">03</span></div>
+					<h3 class="zx-adv__title">End-to-End Packaging Systems</h3>
+					<p class="zx-adv__sub">From Primary Packaging to Retail &amp; Shipping</p>
+					<p class="zx-adv__copy"><strong>The Supply Chain:</strong> Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers for brand consistency.</p>
+					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg><span>Pouches &amp; Jars</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16v12H4z"/><path d="M4 12h16"/><path d="M12 8v12"/></svg><span>Secondary Rigid Boxes</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H4z"/><path d="M9 20h6"/><path d="M12 16v4"/></svg><span>POP Dispensary Displays</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-4 9 4v8l-9 4-9-4V8z"/><path d="M3 8l9 4 9-4"/><path d="M12 12v8"/></svg><span>Rigid Master Cartons</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="14" r="4"/><path d="M11 11l8-8"/><path d="M16 6l2 2M18 4l2 2"/></svg><span>Turnkey Sourcing</span></li></ul></div>
+				</article>
+				<article class="zx-adv">
+					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--tan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="zx-adv__index">04</span></div>
+					<h3 class="zx-adv__title">Retail-Ready Brand Innovation</h3>
+					<p class="zx-adv__sub">Disruptive Finishes &amp; Market Trends</p>
+					<p class="zx-adv__copy"><strong>The Advantage:</strong> Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting unboxing experiences that drive repeat customer purchases.</p>
+					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg><span>Spot UV &amp; Foil Stamping</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12c2-5 10-5 12 0"/><path d="M4 16c3-6 13-6 16 0"/></svg><span>Soft-Touch Coating</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg><span>Anti-Counterfeiting Features</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16v8H4z"/><path d="M12 12V4"/><path d="M8 8l4 4 4-4"/></svg><span>Custom Unboxing Experience</span></li></ul></div>
+				</article>
 			</div>
 		</div>
 	</section>

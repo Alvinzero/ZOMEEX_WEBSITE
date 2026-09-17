@@ -20,6 +20,8 @@ function zomeex_nav_icon( $name ) {
 		'chat'     => '<path d="M5 6h14v9H8l-3 3z"/>',
 		'scale'    => '<path d="M12 4v16"/><path d="M6 8h12"/><path d="M6 8l-3 6h6z"/><path d="M18 8l-3 6h6z"/>',
 		'arrow'    => '<path d="M7 17L17 7"/><path d="M9 7h8v8"/>',
+		'tag'      => '<path d="M4 4h7l9 9-7 7-9-9V4z"/><circle cx="8.5" cy="8.5" r="1.4"/>',
+		'kit'      => '<path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/>',
 	);
 	$d = isset( $paths[ $name ] ) ? $paths[ $name ] : $paths['box'];
 
@@ -88,13 +90,28 @@ function zomeex_render_mega_menu( $args ) {
 									<?php endif; ?>
 									<?php if ( ! empty( $group['children'] ) && 'tree' === $mode ) : ?>
 										<ul>
-											<?php foreach ( $group['children'] as $child ) : ?>
+											<?php
+											$children      = $group['children'];
+											$max_children  = 3;
+											$visible       = array_slice( $children, 0, $max_children );
+											foreach ( $visible as $child ) :
+												?>
 												<li><a href="<?php echo esc_url( $child['url'] ); ?>"><?php echo esc_html( $child['name'] ); ?></a></li>
 											<?php endforeach; ?>
+											<?php if ( count( $children ) > $max_children ) : ?>
+												<li class="zomeex-mega-menu__more"><a href="<?php echo esc_url( $group['url'] ); ?>">View all <span aria-hidden="true"><?php echo esc_html( (string) count( $children ) ); ?></span> <?php echo zomeex_nav_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a></li>
+											<?php endif; ?>
 										</ul>
 									<?php endif; ?>
 								</section>
 							<?php endforeach; ?>
+							<?php if ( ! empty( $catalog['cta'] ) ) : ?>
+								<a class="zomeex-mega-menu__cta-card" href="<?php echo esc_url( $catalog['cta']['url'] ); ?>">
+									<span class="zomeex-mega-menu__cta-card-text"><?php echo esc_html( $catalog['cta']['title'] ); ?></span>
+									<span class="zomeex-mega-menu__cta-card-sub"><?php echo esc_html( isset( $catalog['cta']['copy'] ) ? $catalog['cta']['copy'] : '' ); ?></span>
+									<?php echo zomeex_nav_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+								</a>
+							<?php endif; ?>
 						</div>
 						<?php if ( ! empty( $path['steps'] ) ) : ?>
 							<div class="zomeex-mega-menu__path">

@@ -6774,3 +6774,745 @@ a.zomeex-footer__line:focus-visible {
 .zomeex-footer__badges span {
 	text-transform: uppercase;
 }
+
+/* ===== Mega menu catalog redesign: breathing card grid =====
+ * The old tree was a dense wall of text. Each category is now a white card
+ * with an icon badge, a generous sub-list, and a lift on hover; the eighth
+ * cell is a dark CTA card that anchors the grid.
+ */
+.zomeex-mega-menu__groups {
+	display: grid;
+	gap: 14px;
+	grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+}
+
+.zomeex-mega-menu__group {
+	background: #fff;
+	border: 1px solid rgba(17, 35, 29, .07);
+	border-radius: 14px;
+	box-shadow: 0 1px 2px rgba(4, 24, 16, .04);
+	padding: 16px 16px 12px;
+	transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
+}
+
+.zomeex-mega-menu__group:hover {
+	border-color: rgba(45, 226, 140, .55);
+	box-shadow: 0 12px 28px rgba(4, 24, 16, .1);
+	transform: translateY(-3px);
+}
+
+.zomeex-mega-menu__group-title {
+	align-items: center;
+	display: flex;
+	gap: 12px;
+	position: relative;
+}
+
+.zomeex-mega-menu__group-title .zomeex-mega-menu__mark {
+	align-items: center;
+	background: rgba(45, 226, 140, .13);
+	border-radius: 10px;
+	color: #147451;
+	display: inline-flex;
+	flex-shrink: 0;
+	height: 38px;
+	justify-content: center;
+	width: 38px;
+}
+
+.zomeex-mega-menu__group-title .zomeex-mega-menu__icon {
+	height: 20px;
+	width: 20px;
+}
+
+.zomeex-mega-menu__group-title strong {
+	color: #11231d;
+	font-size: 15px;
+	font-weight: 700;
+	letter-spacing: 0;
+	line-height: 1.25;
+	min-width: 0;
+}
+
+.zomeex-mega-menu__group-title::after {
+	color: rgba(20, 116, 81, .38);
+	content: "↗";
+	flex-shrink: 0;
+	font-size: 13px;
+	margin-left: auto;
+	transition: color .2s ease, transform .2s ease;
+}
+
+.zomeex-mega-menu__group:hover .zomeex-mega-menu__group-title::after {
+	color: #147451;
+	transform: translate(2px, -2px);
+}
+
+.zomeex-mega-menu__group > ul {
+	border-top: 1px solid rgba(17, 35, 29, .07);
+	list-style: none;
+	margin: 12px 0 0;
+	padding: 9px 0 0;
+}
+
+.zomeex-mega-menu__group > ul li {
+	margin: 0;
+}
+
+.zomeex-mega-menu__group > ul li a {
+	color: #4f6058;
+	display: block;
+	font-size: 13px;
+	line-height: 1.45;
+	padding: 4px 0;
+	transition: color .16s ease, transform .16s ease;
+}
+
+.zomeex-mega-menu__group > ul li a:hover,
+.zomeex-mega-menu__group > ul li a:focus-visible {
+	color: #147451;
+	transform: translateX(3px);
+}
+
+/* Eighth cell: dark CTA card. */
+.zomeex-mega-menu__cta-card {
+	background: #0e3127;
+	border: 1px solid #0e3127;
+	border-radius: 14px;
+	color: #e9f5ee;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	min-height: 100%;
+	padding: 18px;
+	position: relative;
+	transition: background-color .22s ease, border-color .22s ease, transform .22s ease;
+}
+
+.zomeex-mega-menu__cta-card-text {
+	color: #2de28c;
+	font-size: 16px;
+	font-weight: 750;
+	line-height: 1.3;
+}
+
+.zomeex-mega-menu__cta-card-sub {
+	color: #9db8ab;
+	font-size: 12.5px;
+	line-height: 1.5;
+	margin-top: 8px;
+}
+
+.zomeex-mega-menu__cta-card .zomeex-mega-menu__arrow {
+	color: #2de28c;
+	height: 16px;
+	margin-top: 14px;
+	width: 16px;
+}
+
+.zomeex-mega-menu__cta-card:hover,
+.zomeex-mega-menu__cta-card:focus-visible {
+	background: #2de28c;
+	border-color: #2de28c;
+	transform: translateY(-3px);
+}
+
+.zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-text,
+.zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-sub,
+.zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__arrow,
+.zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-text,
+.zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-sub,
+.zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__arrow {
+	color: #07211a;
+}
+
+/* Tall catalog: let the panel scroll inside the viewport instead of clipping. */
+.zomeex-mega-menu[data-catalog="tree"] .zomeex-mega-menu__inner {
+	max-height: calc(100vh - 110px);
+	overflow-y: auto;
+}
+
+/* Responsive: collapse the card grid gracefully. */
+@media (max-width: 1200px) {
+	.zomeex-mega-menu__groups {
+		grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+	}
+}
+
+@media (max-width: 860px) {
+	.zomeex-mega-menu__groups {
+		grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+	}
+}
+
+@media (max-width: 560px) {
+	.zomeex-mega-menu__groups {
+		grid-template-columns: minmax(0, 1fr) !important;
+	}
+}
+
+/* ===== Products mega menu: dark editorial redesign =====
+ * The white card grid was generic "AI template" — cards inside a card, weak
+ * contrast with the panel, and a CTA tile that belonged to a different world.
+ * This pass merges the menu into the ZOMEEX deep-green universe: open grid,
+ * hairline separators, serif-flavored hierarchy, one glowing CTA.
+ */
+#zomeex-products-menu {
+	background: linear-gradient(180deg, #0b251c 0%, #081e17 100%);
+	border-top: 2px solid #0f5f40;
+	color: #e8f2ec;
+}
+
+/* --- intro --- */
+#zomeex-products-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-products-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro h2 {
+	color: #f4faf6;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro a {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro a:hover {
+	color: #8ff5c4;
+}
+
+/* --- open grid: no cards, hairline column rules --- */
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	gap: 34px 28px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0 26px 0 0;
+	position: relative;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:not(:nth-child(4n)):not(:last-child)::after {
+	background: rgba(255, 255, 255, .07);
+	content: "";
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:hover {
+	border-color: transparent;
+	box-shadow: none;
+	transform: none;
+}
+
+/* --- group head: glowing badge + white serif-flavored name --- */
+#zomeex-products-menu .zomeex-mega-menu__group-title .zomeex-mega-menu__mark {
+	background: rgba(15, 95, 64, .1);
+	border: 1px solid rgba(15, 95, 64, .18);
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title strong {
+	color: #f2faf5;
+	font-size: 15.5px;
+	letter-spacing: .01em;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title::after {
+	color: rgba(15, 95, 64, .4);
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:hover .zomeex-mega-menu__group-title::after {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:hover .zomeex-mega-menu__group-title strong {
+	color: #8ff5c4;
+}
+
+/* --- sub list: airy, quiet green, bright on hover --- */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	border-top-color: rgba(255, 255, 255, .09);
+	margin-top: 14px;
+	padding-top: 11px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	color: #a9c5b7;
+	font-size: 13.5px;
+	padding: 4.5px 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:hover,
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:focus-visible {
+	color: #0f5f40;
+}
+
+/* --- CTA tile: the single glowing beacon --- */
+#zomeex-products-menu .zomeex-mega-menu__cta-card {
+	background: #0f5f40;
+	border-color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-text {
+	color: #07211a;
+	font-size: 17px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-sub {
+	color: rgba(7, 33, 26, .66);
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card .zomeex-mega-menu__arrow {
+	color: #07211a;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible {
+	background: #8ff5c4;
+	border-color: #8ff5c4;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-text,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-sub,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__arrow,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-text,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-sub,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__arrow {
+	color: #07211a;
+}
+
+/* --- rails --- */
+#zomeex-products-menu .zomeex-mega-menu__rail-block {
+	border-bottom-color: rgba(255, 255, 255, .08);
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a {
+	color: #e8f2ec;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a small {
+	color: #8fae9f;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a:hover {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail .zomeex-mega-menu__mark {
+	background: transparent;
+	color: #0f5f40;
+}
+
+/* --- feature tile --- */
+#zomeex-products-menu .zomeex-mega-menu__feature {
+	background: rgba(255, 255, 255, .045);
+	border-color: rgba(15, 95, 64, .18);
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature .zomeex-mega-menu__label {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature h3 {
+	color: #f4faf6;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > p {
+	color: #a9c5b7;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > a {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help {
+	color: #e8f2ec;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help small {
+	color: #8fae9f;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help .zomeex-mega-menu__mark {
+	color: #0f5f40;
+}
+
+/* Dark menu fixes: rail link spans carry an old ink color that vanishes on the
+ * dark panel; CTA title inherits uppercase from the body layer and overflows
+ * its tile. */
+#zomeex-products-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) {
+	color: #e8f2ec;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) small {
+	color: #8fae9f;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-text,
+#zomeex-products-menu .zomeex-mega-menu__cta-card-sub {
+	text-transform: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-text {
+	font-size: 16px;
+	line-height: 1.35;
+}
+
+/* Flex items refuse to wrap by default (min-width: auto) — let the CTA text
+ * shrink and wrap inside its tile. Feature copy also stops inheriting caps. */
+#zomeex-products-menu .zomeex-mega-menu__cta-card-text,
+#zomeex-products-menu .zomeex-mega-menu__cta-card-sub {
+	display: block;
+	min-width: 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > p {
+	text-transform: none;
+}
+
+/* Three columns breathe better: the main catalog column only gets ~742px of
+ * the panel, so 4 tracks squeezed every card to 166px. */
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:not(:nth-child(4n)):not(:last-child)::after {
+	display: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:not(:nth-child(3n)):not(:last-child)::after {
+	background: rgba(255, 255, 255, .07);
+	content: "";
+	display: block;
+	height: 100%;
+	position: absolute;
+	right: 0;
+	top: 0;
+	width: 1px;
+}
+
+/* ===== Products mega menu: light editorial (matches the house style) =====
+ * The dark panel broke visual continuity with the other dropdowns. This pass
+ * returns Products to the shared light system per spec: warm off-white
+ * #FAF8F5, pine ink #1E3A34, mint accent #3ECFB2, muted taupe #8A8A85,
+ * hairline separators, link-style CTA, thin-stroke icons.
+ */
+#zomeex-products-menu {
+	background: #fbfcfb;
+	border-top: 0;
+	box-shadow: 0 18px 44px rgba(17, 35, 29, .06);
+	color: #11231d;
+}
+
+/* --- eyebrow labels: mint, caps, wide tracking --- */
+#zomeex-products-menu .zomeex-mega-menu__label {
+	color: #0f5f40;
+	font-size: 11px;
+	letter-spacing: .1em;
+}
+
+/* --- intro --- */
+#zomeex-products-menu .zomeex-mega-menu__intro h2 {
+	color: #11231d;
+	font-size: 28px;
+	font-weight: 650;
+	letter-spacing: -.01em;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro a {
+	border-bottom: 1px solid rgba(15, 95, 64, .4);
+	color: #0f5f40;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro a:hover {
+	border-bottom-color: #0f5f40;
+	color: #11231d;
+}
+
+/* --- category grid: transparent cells, hairline column rules --- */
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	gap: 30px 32px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0 24px 0 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:hover {
+	border-color: transparent;
+	box-shadow: none;
+	transform: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:not(:nth-child(3n)):not(:last-child)::after {
+	background: rgba(17, 35, 29, .1);
+}
+
+/* --- group head: bare thin-stroke icon + bold pine title --- */
+#zomeex-products-menu .zomeex-mega-menu__group-title {
+	gap: 10px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title .zomeex-mega-menu__mark {
+	background: transparent;
+	border: 0;
+	color: #147451;
+	height: 18px;
+	width: 18px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title .zomeex-mega-menu__icon {
+	height: 18px;
+	stroke-width: 1.7;
+	width: 18px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title strong {
+	color: #11231d;
+	font-size: 13.5px;
+	font-weight: 700;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title::after {
+	display: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group:hover .zomeex-mega-menu__group-title strong {
+	color: #0f5f40;
+}
+
+/* --- sub links: muted taupe, airy rhythm, mint on hover --- */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	border-top: 0;
+	margin-top: 10px;
+	padding-top: 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	color: #4f6058;
+	font-size: 12.5px;
+	font-weight: 400;
+	padding: 4px 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:hover,
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:focus-visible {
+	color: #0f5f40;
+}
+
+/* "View all N" truncation link: mint, slightly emphasized. */
+#zomeex-products-menu .zomeex-mega-menu__more a {
+	align-items: center;
+	color: #0f5f40 !important;
+	display: inline-flex;
+	font-size: 11.5px;
+	font-weight: 650;
+	gap: 4px;
+	letter-spacing: .04em;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__more .zomeex-mega-menu__arrow {
+	height: 11px;
+	width: 11px;
+}
+
+/* --- CTA cell: link-style, no button chrome --- */
+#zomeex-products-menu .zomeex-mega-menu__cta-card {
+	background: transparent;
+	border: 0;
+	border-left: 1px solid rgba(17, 35, 29, .1);
+	border-radius: 0;
+	justify-content: flex-start;
+	padding: 0 0 0 24px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-text {
+	border-bottom: 1px solid rgba(15, 95, 64, .4);
+	color: #0f5f40;
+	display: inline-block;
+	font-size: 11.5px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	min-width: 0;
+	padding-bottom: 3px;
+	text-transform: uppercase;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card-sub {
+	color: #4f6058;
+	font-size: 12.5px;
+	margin-top: 12px;
+	text-transform: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card .zomeex-mega-menu__arrow {
+	color: #0f5f40;
+	height: 12px;
+	margin-top: 10px;
+	width: 12px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible {
+	background: transparent;
+	border-color: rgba(17, 35, 29, .1);
+	border-left-color: rgba(17, 35, 29, .1);
+	transform: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-text,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-text {
+	border-bottom-color: #0f5f40;
+	color: #11231d;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__cta-card-sub,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__cta-card-sub {
+	color: #4f6058;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__cta-card:hover .zomeex-mega-menu__arrow,
+#zomeex-products-menu .zomeex-mega-menu__cta-card:focus-visible .zomeex-mega-menu__arrow {
+	color: #11231d;
+}
+
+/* --- rails: pine names, taupe copy, bare icons, hairline dividers --- */
+#zomeex-products-menu .zomeex-mega-menu__rail-block {
+	border-bottom-color: rgba(17, 35, 29, .1);
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) {
+	color: #11231d;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) small {
+	color: #4f6058;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail a:hover > span:not(.zomeex-mega-menu__mark) {
+	color: #0f5f40;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__rail .zomeex-mega-menu__mark {
+	background: transparent;
+	border: 0;
+	color: #11231d;
+}
+
+/* --- feature tile: light, image-led, link CTA --- */
+#zomeex-products-menu .zomeex-mega-menu__feature {
+	background: transparent;
+	border: 0;
+	box-shadow: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature h3 {
+	color: #11231d;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > p {
+	color: #4f6058;
+	text-transform: none;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > a {
+	border-bottom: 1px solid rgba(15, 95, 64, .4);
+	color: #0f5f40;
+	font-size: 11px;
+	font-weight: 700;
+	letter-spacing: .1em;
+	text-transform: uppercase;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-copy > a:hover {
+	border-bottom-color: #0f5f40;
+	color: #11231d;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help {
+	border-top-color: rgba(17, 35, 29, .1);
+	color: #11231d;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help small {
+	color: #4f6058;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__help .zomeex-mega-menu__mark {
+	background: transparent;
+	color: #11231d;
+}
+
+/* --- panel chrome: inner spacing per spec --- */
+#zomeex-products-menu .zomeex-mega-menu__inner {
+	padding: 38px 0 40px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__main {
+	border-right-color: rgba(17, 35, 29, .1);
+}
+
+/* Fine-tune density so the seventh group fits the default desktop viewport
+ * without scrolling: slightly tighter grid gaps, link rhythm, panel padding. */
+#zomeex-products-menu .zomeex-mega-menu__inner {
+	padding: 32px 0 34px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	gap: 26px 32px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	padding: 3.5px 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro h2 {
+	font-size: 26px;
+	margin-bottom: 8px;
+}
+
+/* Second density pass: the seventh group still sits ~49px below the fold on a
+ * 900px-tall viewport. Trim the remaining slack without touching content. */
+#zomeex-products-menu .zomeex-mega-menu__inner {
+	padding: 28px 0 30px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro {
+	margin-bottom: 12px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__intro h2 {
+	font-size: 24px;
+	margin-bottom: 6px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label {
+	margin-bottom: 10px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	gap: 22px 32px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-top: 8px;
+}

@@ -7636,3 +7636,10 @@ a.zomeex-footer__line:focus-visible {
 .zomeex-mega-menu .zomeex-mega-menu__rail a small {
 	font-size: 12px;
 }
+
+/* Summaries in tile-mode menus (CR/Solutions/etc.) must share the Products
+ * alignment: indent past the badge (50px) so description text starts on the
+ * same left edge as the group title, with matching rhythm. */
+.zomeex-mega-menu .zomeex-mega-menu__summary {
+	margin: 10px 0 0 50px;
+}

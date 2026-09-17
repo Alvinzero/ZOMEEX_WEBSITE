@@ -7600,3 +7600,38 @@ a.zomeex-footer__line:focus-visible {
 #zomeex-products-menu .zomeex-mega-menu__group > ul li a:focus-visible {
 	transform: none;
 }
+
+/* Refine the centering: the LIST centers inside the card, the TEXT stays
+ * left-aligned so every link (and View all N) shares one clean left edge. */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-left: auto;
+	margin-right: auto;
+	width: fit-content;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	text-align: left;
+}
+
+/* fit-content centering made every column's list a different width, so the
+ * left edges wandered. Anchor instead: indent every list by badge+gap (50px)
+ * so all sub links share the title's left edge in EVERY column. */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-left: 50px;
+	margin-right: 0;
+	width: auto;
+}
+
+/* ===== Mega menu typography unification (all six dropdowns) =====
+ * Products set the pattern: sentence-case descriptions and 12px rail copy.
+ * The other five menus still shouted descriptions in ALL CAPS and Products'
+ * rail copy had drifted to 10.4px. One shared rule for every dropdown.
+ */
+.zomeex-mega-menu .zomeex-mega-menu__summary,
+.zomeex-mega-menu .zomeex-mega-menu__group > ul li a {
+	text-transform: none;
+}
+
+.zomeex-mega-menu .zomeex-mega-menu__rail a small {
+	font-size: 12px;
+}

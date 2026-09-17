@@ -7566,3 +7566,10 @@ a.zomeex-footer__line:focus-visible {
 	display: block;
 	margin-top: 3px;
 }
+
+/* Group titles read lighter than Child-resistant because they are 13.5px vs
+ * 15px — same ink and weight, but smaller stems look paler. Match the size. */
+#zomeex-products-menu .zomeex-mega-menu__group-title strong {
+	font-size: 15px;
+	letter-spacing: normal;
+}

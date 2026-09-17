@@ -7643,3 +7643,45 @@ a.zomeex-footer__line:focus-visible {
 .zomeex-mega-menu .zomeex-mega-menu__summary {
 	margin: 10px 0 0 50px;
 }
+
+/* ===== All dropdowns share the Products group pattern =====
+ * Products-only scoping left the other menus on the old white-card style.
+ * Promote the look to every mega menu: transparent group cells, sub links
+ * indented to the title's left edge, same link rhythm and hover color.
+ */
+.zomeex-mega-menu .zomeex-mega-menu__group {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+}
+
+.zomeex-mega-menu .zomeex-mega-menu__group > ul {
+	list-style: none;
+	margin: 10px 0 0 50px;
+	padding: 0;
+}
+
+.zomeex-mega-menu .zomeex-mega-menu__group > ul li {
+	margin: 0;
+}
+
+.zomeex-mega-menu .zomeex-mega-menu__group > ul li a {
+	color: #4f6058;
+	display: block;
+	font-size: 13px;
+	line-height: 1.45;
+	padding: 2.5px 0;
+	transition: color .16s ease;
+}
+
+.zomeex-mega-menu .zomeex-mega-menu__group > ul li a:hover,
+.zomeex-mega-menu .zomeex-mega-menu__group > ul li a:focus-visible {
+	color: #147451;
+}
+
+/* Rail item copy on its own line everywhere, not just Products. */
+.zomeex-mega-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) small {
+	display: block;
+	margin-top: 3px;
+}

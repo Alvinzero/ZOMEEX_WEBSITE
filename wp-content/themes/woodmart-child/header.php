@@ -27,10 +27,53 @@ $collection_url  = function ( $slug, $query = array() ) use ( $pack_url ) {
 	return $query ? add_query_arg( $query, $url ) : $url;
 };
 $child_resistant_types = array(
-	array( 'name' => 'Child-Resistant Mylar Bags', 'slug' => 'mylar-bag', 'icon' => 'bag', 'summary' => 'Barrier pouches with a CR route for flower and edibles.' ),
-	array( 'name' => 'Child-Resistant Paper Boxes', 'slug' => 'vape-box', 'icon' => 'box', 'summary' => 'Printed cartons with a CR structure for retail presentation.' ),
-	array( 'name' => 'Child-Resistant Jars & Bottles', 'slug' => 'pack', 'icon' => 'bottle', 'summary' => 'Rigid formats for concentrates, capsules and liquid lines.' ),
-	array( 'name' => 'Child-Resistant Tubes', 'slug' => 'pack', 'icon' => 'flask', 'summary' => 'Unit-dose and pre-roll tubes with a CR closure path.' ),
+	array(
+		'name'     => 'Child-Resistant Mylar Bags',
+		'slug'     => 'mylar-bag',
+		'icon'     => 'bag',
+		'summary'  => 'Barrier pouches with a CR route for flower and edibles.',
+		'children' => array(
+			array( 'name' => 'Child-Resistant Pouches', 'slug' => 'child-resistant-pouches' ),
+			array( 'name' => 'CR Zipper Bags', 'slug' => 'zipper-bags' ),
+			array( 'name' => 'CR Stand-Up Pouches', 'slug' => 'stand-up-pouches' ),
+			array( 'name' => 'CR Flat Pouches', 'slug' => 'flat-pouches' ),
+		),
+	),
+	array(
+		'name'     => 'Child-Resistant Paper Boxes',
+		'slug'     => 'vape-box',
+		'icon'     => 'box',
+		'summary'  => 'Printed cartons with a CR structure for retail presentation.',
+		'children' => array(
+			array( 'name' => 'Child-Resistant Boxes', 'slug' => 'child-resistant-boxes' ),
+			array( 'name' => 'CR Tuck-End Boxes', 'slug' => 'tuck-end-boxes' ),
+			array( 'name' => 'CR Pre-Roll Boxes', 'slug' => 'pre-roll-boxes' ),
+			array( 'name' => 'CR Cannabis Boxes', 'slug' => 'cannabis-boxes' ),
+		),
+	),
+	array(
+		'name'     => 'Child-Resistant Jars & Bottles',
+		'slug'     => 'pack',
+		'icon'     => 'bottle',
+		'summary'  => 'Rigid formats for concentrates, capsules and liquid lines.',
+		'children' => array(
+			array( 'name' => 'Child-Resistant Bottles', 'slug' => 'child-resistant-bottles' ),
+			array( 'name' => 'CR Glass Jars', 'slug' => 'glass-jars' ),
+			array( 'name' => 'CR Pop-Top Bottles', 'slug' => 'pop-top-bottles' ),
+			array( 'name' => 'CR Product Containers', 'slug' => 'product-containers' ),
+		),
+	),
+	array(
+		'name'     => 'Child-Resistant Tubes',
+		'slug'     => 'pack',
+		'icon'     => 'flask',
+		'summary'  => 'Unit-dose and pre-roll tubes with a CR closure path.',
+		'children' => array(
+			array( 'name' => 'CR Pop-Top Tubes', 'slug' => 'child-resistant-pop-top-tubes' ),
+			array( 'name' => 'CR Pre-Roll Tubes', 'slug' => 'preroll-wraps' ),
+			array( 'name' => 'CR Unit-Dose Tubes', 'slug' => 'pop-top-bottles' ),
+		),
+	),
 );
 $application_nav = array(
 	'flower-hemp'        => array( 'icon' => 'bag', 'summary' => 'Barrier bags, jars and compliant presentation formats for flower and hemp products.' ),
@@ -257,8 +300,16 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 											'name'     => $type['name'],
 											'icon'     => isset( $type['icon'] ) ? $type['icon'] : 'flask',
 											'url'      => $collection_url( $type['slug'], array( 'feature' => 'child-resistant' ) ),
-											'summary'  => isset( $type['summary'] ) ? $type['summary'] : '',
-											'children' => array(),
+											'summary'  => '',
+											'children' => array_map(
+												function ( $child ) {
+													return array(
+														'name' => $child['name'],
+														'url'  => zomeex_home_url( '/shop/?category=' . $child['slug'] ),
+													);
+												},
+												isset( $type['children'] ) ? $type['children'] : array()
+											),
 										);
 									},
 									$child_resistant_types

@@ -2266,6 +2266,65 @@
     EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, ADVANTAGES_EXTRA_BY_SOURCE[locale]);
   });
 
+  /* Child-resistant menu children (CR menu now mirrors Products structure). */
+  var CR_MENU_EXTRA_BY_SOURCE = {
+    'zh-CN': {
+      "CR Zipper Bags": "儿童防护拉链袋",
+      "CR Stand-Up Pouches": "儿童防护自立袋",
+      "CR Flat Pouches": "儿童防护平口袋",
+      "CR Tuck-End Boxes": "儿童防护插底纸盒",
+      "CR Pre-Roll Boxes": "儿童防护预卷盒",
+      "CR Cannabis Boxes": "儿童防护大麻盒",
+      "CR Glass Jars": "儿童防护玻璃罐",
+      "CR Pop-Top Bottles": "儿童防护弹跳瓶",
+      "CR Product Containers": "儿童防护产品容器",
+      "CR Pre-Roll Tubes": "儿童防护预卷管",
+      "CR Unit-Dose Tubes": "儿童防护单剂量管"
+    },
+    ru: {
+      "CR Zipper Bags": "CR-пакеты с зиплоком",
+      "CR Stand-Up Pouches": "CR дой-паки",
+      "CR Flat Pouches": "CR плоские пакеты",
+      "CR Tuck-End Boxes": "CR коробки с защелкой",
+      "CR Pre-Roll Boxes": "CR коробки для pre-roll",
+      "CR Cannabis Boxes": "CR коробки для cannabis",
+      "CR Glass Jars": "CR стеклянные банки",
+      "CR Pop-Top Bottles": "CR бутылки pop-top",
+      "CR Product Containers": "CR контейнеры",
+      "CR Pre-Roll Tubes": "CR тубы для pre-roll",
+      "CR Unit-Dose Tubes": "CR тубы для разовых доз"
+    },
+    de: {
+      "CR Zipper Bags": "CR-Reißverschlussbeutel",
+      "CR Stand-Up Pouches": "CR-Standbodenbeutel",
+      "CR Flat Pouches": "CR-Flachbeutel",
+      "CR Tuck-End Boxes": "CR-Stecklaschenkartons",
+      "CR Pre-Roll Boxes": "CR-Pre-Roll-Boxen",
+      "CR Cannabis Boxes": "CR-Cannabis-Boxen",
+      "CR Glass Jars": "CR-Glasgefäße",
+      "CR Pop-Top Bottles": "CR-Pop-Top-Flaschen",
+      "CR Product Containers": "CR-Produktbehälter",
+      "CR Pre-Roll Tubes": "CR-Pre-Roll-Tuben",
+      "CR Unit-Dose Tubes": "CR-Einzeldosis-Tuben"
+    },
+    fr: {
+      "CR Zipper Bags": "Sachets zip CR",
+      "CR Stand-Up Pouches": "Doypacks CR",
+      "CR Flat Pouches": "Poches plates CR",
+      "CR Tuck-End Boxes": "Boîtes à rabats CR",
+      "CR Pre-Roll Boxes": "Boîtes pre-roll CR",
+      "CR Cannabis Boxes": "Boîtes cannabis CR",
+      "CR Glass Jars": "Pots en verre CR",
+      "CR Pop-Top Bottles": "Bouteilles pop-top CR",
+      "CR Product Containers": "Contenants CR",
+      "CR Pre-Roll Tubes": "Tubes pre-roll CR",
+      "CR Unit-Dose Tubes": "Tubes unit-dose CR"
+    }
+  };
+  Object.keys(CR_MENU_EXTRA_BY_SOURCE).forEach(function (locale) {
+    EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, CR_MENU_EXTRA_BY_SOURCE[locale]);
+  });
+
   var SOURCE_TO_KEY = {};
   Object.keys(DICTIONARY.en).forEach(function (key) {
     SOURCE_TO_KEY[DICTIONARY.en[key]] = key;

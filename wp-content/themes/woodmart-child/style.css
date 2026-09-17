@@ -7516,3 +7516,53 @@ a.zomeex-footer__line:focus-visible {
 #zomeex-products-menu .zomeex-mega-menu__group > ul {
 	margin-top: 8px;
 }
+
+/* Align Products dropdown with the house pattern: badge-wrapped icons like
+ * Child-resistant, full-width feature image, tighter rhythm to offset the
+ * taller badge rows. */
+#zomeex-products-menu .zomeex-mega-menu__group-title .zomeex-mega-menu__mark {
+	align-items: center;
+	background: rgba(45, 226, 140, .13);
+	border: 0;
+	border-radius: 10px;
+	color: #147451;
+	display: inline-flex;
+	flex-shrink: 0;
+	height: 38px;
+	justify-content: center;
+	width: 38px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group-title .zomeex-mega-menu__icon {
+	height: 20px;
+	width: 20px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-top: 10px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__feature-media img {
+	display: block;
+	height: auto;
+	width: 100%;
+}
+
+/* Offset the +20px badge rows so the seventh group still fits the viewport. */
+#zomeex-products-menu .zomeex-mega-menu__groups {
+	gap: 18px 32px;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	padding: 3px 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__inner {
+	padding: 26px 0 28px;
+}
+
+/* Rail item copy on its own line, like the Child-resistant pattern. */
+#zomeex-products-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) small {
+	display: block;
+	margin-top: 3px;
+}

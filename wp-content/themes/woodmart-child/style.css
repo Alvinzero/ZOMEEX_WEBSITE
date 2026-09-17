@@ -7573,3 +7573,9 @@ a.zomeex-footer__line:focus-visible {
 	font-size: 15px;
 	letter-spacing: normal;
 }
+
+/* The +1.5px title size nudged the seventh group past the fold — reclaim the
+ * same pixels from the sub-link rhythm. */
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	padding: 2.5px 0;
+}

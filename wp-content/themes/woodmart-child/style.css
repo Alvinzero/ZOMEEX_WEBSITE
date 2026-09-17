@@ -7579,3 +7579,24 @@ a.zomeex-footer__line:focus-visible {
 #zomeex-products-menu .zomeex-mega-menu__group > ul li a {
 	padding: 2.5px 0;
 }
+
+/* Indent sub links to sit under the title text (badge width + gap), not flush
+ * to the card edge — the hierarchy reads much cleaner. */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-left: 50px;
+}
+
+/* User circled the sub links: they should sit centered under each group, not
+ * flush left. Center the text and drop the earlier left indent. */
+#zomeex-products-menu .zomeex-mega-menu__group > ul {
+	margin-left: 0;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a {
+	text-align: center;
+}
+
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:hover,
+#zomeex-products-menu .zomeex-mega-menu__group > ul li a:focus-visible {
+	transform: none;
+}

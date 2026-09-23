@@ -80,17 +80,53 @@
       button.setAttribute('aria-label', labels.send);
       button.setAttribute('title', labels.send);
     });
+
+    revealChatyWhenSafe();
+  }
+
+  /* Chaty's own initialize/label animation fires right after mount — exactly
+   * when the subscribe popup is visible — and reads as a dark
+   * expand-and-collapse flash through the scrim. Hold the reveal until the
+   * gate releases (popup closed), with a fallback so the widget can never be
+   * trapped if the gate script is blocked. */
+  var chatyRevealScheduled = false;
+
+  function revealChaty() {
+    var widget = document.querySelector('.chaty-widget');
+    if (widget && widget.querySelector('.chaty-channel a')) widget.classList.add('zomeex-chaty-ready');
+  }
+
+  function revealChatyWhenSafe() {
+    if (chatyRevealScheduled) return;
+    chatyRevealScheduled = true;
+    if (window.zomeexSubscribeGate === 'released' || !document.querySelector('[data-zomeex-startup-gate]')) {
+      revealChaty();
+      return;
+    }
+    window.addEventListener('zomeex:subscribe-gate', function handler(event) {
+      if ((event.detail && event.detail.state) === 'released') {
+        window.removeEventListener('zomeex:subscribe-gate', handler);
+        revealChaty();
+      }
+    });
+    window.setTimeout(revealChaty, 8000);
   }
 
   function boot() {
     repair(document);
 
+    var repairScheduled = false;
     var observer = new MutationObserver(function (mutations) {
-      mutations.forEach(function (mutation) {
-        mutation.addedNodes.forEach(function (node) {
-          if (node.nodeType === 1) repair(node);
-        });
-      });
+      var hasAddedNodes = mutations.some(function (mutation) { return mutation.addedNodes.length > 0; });
+      if (hasAddedNodes && !repairScheduled) {
+        repairScheduled = true;
+        var flush = function () {
+          repairScheduled = false;
+          repair(document);
+        };
+        if ('requestAnimationFrame' in window) window.requestAnimationFrame(flush);
+        else window.setTimeout(flush, 0);
+      }
     });
 
     observer.observe(document.body, { childList: true, subtree: true });

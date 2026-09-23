@@ -1072,6 +1072,37 @@ html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
 	bottom: 16px !important;
 	width: 54px;
 	z-index: 9998 !important;
+	opacity: 0;
+	pointer-events: none;
+	visibility: hidden;
+	transition: opacity .18s ease, visibility 0s linear .18s;
+}
+
+.zomeex-modern-page .chaty-widget.zomeex-chaty-ready {
+	opacity: 1;
+	pointer-events: auto;
+	visibility: visible;
+	transition-delay: 0s;
+}
+
+/* While the subscribe card is up, keep the chat widget fully hidden behind
+ * it — otherwise its initialize/label animation reads as a dark
+ * expand-and-collapse flash through the modal scrim. */
+.zomeex-modern-page.zomeex-subscribe-open .chaty-widget,
+body.zomeex-subscribe-open .chaty-widget {
+	opacity: 0 !important;
+	pointer-events: none !important;
+	visibility: hidden !important;
+	transition: opacity .18s ease, visibility 0s linear .18s;
+}
+
+/* Chaty applies a perpetual pulse class while it builds the widget. Keep the
+ * finished WhatsApp affordance steady so its first paint cannot read as a
+ * black expand-and-collapse flash. */
+.zomeex-modern-page .chaty-widget.zomeex-chaty-ready .chaty-animation-pulse,
+.zomeex-modern-page .chaty-widget.zomeex-chaty-ready .chaty-animation-pulse-icon {
+	-webkit-animation: none !important;
+	animation: none !important;
 }
 
 /* Chaty places the widget inside an inline-hidden wrapper. The homepage
@@ -2726,9 +2757,42 @@ html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
 	transform: translateY(-3px) rotate(-45deg);
 }
 
-@media (min-width: 901px) and (max-width: 1219px) {
+/* Switch to the drawer before the six approved labels collide with the
+ * utility cluster. This breakpoint is driven by the actual header content:
+ * below 1220px the wordmark + six dropdown labels + utility icons no longer
+ * fit on one row, so the desktop nav yields to the hamburger. */
+@media (min-width: 768px) and (max-width: 1219px) {
+	.zomeex-header__inner {
+		display: flex;
+		gap: 12px;
+	}
+
+	.zomeex-wordmark {
+		flex-basis: 140px;
+	}
+
+	.zomeex-wordmark img {
+		width: 140px;
+	}
+
+	.zomeex-desktop-nav,
+	.zomeex-header__quote {
+		display: none;
+	}
+
+	.zomeex-header__actions {
+		margin-left: auto;
+	}
+
 	.zomeex-menu-toggle {
 		display: inline-flex;
+	}
+
+	.zomeex-mobile-nav {
+		max-height: calc(100dvh - 112px);
+		overflow-y: auto;
+		overflow-x: hidden;
+		overscroll-behavior: contain;
 	}
 }
 
@@ -4395,15 +4459,6 @@ html[data-zomeex-locale="fr"] .zomeex-mobile-nav > .zomeex-container > a {
 }
 
 @media (min-width: 768px) and (max-width: 900px) {
-	.zomeex-desktop-nav,
-	.zomeex-header__quote {
-		display: none;
-	}
-
-	.zomeex-menu-toggle {
-		display: inline-flex;
-	}
-
 	.zomeex-hero {
 		gap: 28px;
 		grid-template-columns: minmax(0, .9fr) minmax(0, 1.1fr);
@@ -7319,21 +7374,198 @@ a.zomeex-footer__line:focus-visible {
 	color: #0f5f40;
 }
 
-/* "View all N" truncation link: mint, slightly emphasized. */
-#zomeex-products-menu .zomeex-mega-menu__more a {
+/* "View all N" truncation link: mint, slightly emphasized. Scoped to every
+ * mega menu so collapsed groups read the same across all nav panels. */
+.zomeex-mega-menu .zomeex-mega-menu__more a {
 	align-items: center;
 	color: #0f5f40 !important;
-	display: inline-flex;
+	display: inline-flex !important;
 	font-size: 11.5px;
 	font-weight: 650;
 	gap: 4px;
 	letter-spacing: .04em;
+	white-space: nowrap;
+	width: auto;
 }
 
-#zomeex-products-menu .zomeex-mega-menu__more .zomeex-mega-menu__arrow {
+.zomeex-mega-menu .zomeex-mega-menu__more .zomeex-mega-menu__arrow {
 	height: 11px;
 	width: 11px;
 }
+/* ===== Unify the four tiles panels with the Products menu typography =====
+ * Solutions, Design & Tools, Resources & Blog and About & Contact all use the
+ * tiles catalog mode, so none of the Products / CR panel rules reach them.
+ * Bring their intro, labels, grid and rail onto the same type scale and color
+ * system so every nav panel reads as one family. */
+#zomeex-solutions-menu .zomeex-mega-menu__intro h2,
+#zomeex-design-tools-menu .zomeex-mega-menu__intro h2,
+#zomeex-resources-menu .zomeex-mega-menu__intro h2,
+#zomeex-about-contact-menu .zomeex-mega-menu__intro h2 {
+	color: #11231d;
+	font-size: 24px;
+	font-weight: 650;
+	letter-spacing: -.01em;
+	line-height: 1.12;
+	margin-bottom: 6px;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__intro,
+#zomeex-design-tools-menu .zomeex-mega-menu__intro,
+#zomeex-resources-menu .zomeex-mega-menu__intro,
+#zomeex-about-contact-menu .zomeex-mega-menu__intro {
+	margin-bottom: 12px;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__intro > a,
+#zomeex-design-tools-menu .zomeex-mega-menu__intro > a,
+#zomeex-resources-menu .zomeex-mega-menu__intro > a,
+#zomeex-about-contact-menu .zomeex-mega-menu__intro > a {
+	border-bottom-color: rgba(15, 95, 64, .4);
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-design-tools-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-resources-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-about-contact-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-solutions-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-design-tools-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-resources-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-about-contact-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-solutions-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label,
+#zomeex-design-tools-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label,
+#zomeex-resources-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label,
+#zomeex-about-contact-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label {
+	font-size: 11px;
+	letter-spacing: .16em;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-design-tools-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-resources-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-about-contact-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label {
+	margin-bottom: 10px;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__groups,
+#zomeex-design-tools-menu .zomeex-mega-menu__groups,
+#zomeex-resources-menu .zomeex-mega-menu__groups,
+#zomeex-about-contact-menu .zomeex-mega-menu__groups {
+	gap: 18px 32px;
+	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__group,
+#zomeex-design-tools-menu .zomeex-mega-menu__group,
+#zomeex-resources-menu .zomeex-mega-menu__group,
+#zomeex-about-contact-menu .zomeex-mega-menu__group {
+	padding: 0 24px 0 0;
+}
+
+#zomeex-solutions-menu .zomeex-mega-menu__group-title,
+#zomeex-design-tools-menu .zomeex-mega-menu__group-title,
+#zomeex-resources-menu .zomeex-mega-menu__group-title,
+#zomeex-about-contact-menu .zomeex-mega-menu__group-title {
+	align-items: center;
+	align-self: flex-start;
+	display: inline-flex;
+	gap: 10px;
+	margin-bottom: 2px;
+	max-width: 100%;
+	padding: 0 0 4px;
+	white-space: normal;
+	width: fit-content;
+}
+
+/* Give the CR rail a little more air so the block fills roughly half of the
+ * column instead of stopping at two-fifths. Only nudge the row padding; the
+ * rhythm stays compact and the column keeps its top-aligned shape. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__rail a {
+	padding-bottom: 17px;
+	padding-top: 17px;
+}
+
+/* Match the Products intro link treatment: translucent underline and the same
+ * breathing room between the CTA and the catalog divider below it. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__intro {
+	margin-bottom: 12px;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__intro > a {
+	border-bottom-color: rgba(15, 95, 64, .4);
+}
+
+/* Match the Products catalog rhythm: label margin and group-title gap. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label {
+	margin-bottom: 10px;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__group-title {
+	gap: 10px;
+}
+
+/* Match the Products intro colors and type scale: brand ink for the heading,
+ * the same accent green and 11px tracking for the eyebrow and section labels. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__intro h2 {
+	color: #11231d;
+	font-size: 24px;
+	font-weight: 650;
+	letter-spacing: -.01em;
+	margin-bottom: 6px;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__intro .zomeex-mega-menu__label,
+#zomeex-child-resistant-menu .zomeex-mega-menu__catalog > .zomeex-mega-menu__label,
+#zomeex-child-resistant-menu .zomeex-mega-menu__rail .zomeex-mega-menu__label {
+	color: #0f5f40;
+	font-size: 11px;
+	letter-spacing: .16em;
+}
+
+/* CR has four groups with long titles. Use a two-column grid so each group
+ * gets enough width for the "Child-Resistant ..." titles to sit on one line. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__groups {
+	gap: 18px 32px;
+	grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+}
+
+/* Align the Child-Resistant panel with the Products panel: drop the card
+ * chrome, restore the lighter sub-link weight, and let group titles sit on
+ * one line where space allows. */
+#zomeex-child-resistant-menu .zomeex-mega-menu__group {
+	background: transparent;
+	border: 0;
+	border-radius: 0;
+	box-shadow: none;
+	padding: 0 24px 0 0;
+	transition: none;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__group:hover {
+	border-color: transparent;
+	box-shadow: none;
+	transform: none;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__group > ul {
+	border-top: 0;
+	margin-top: 10px;
+	padding-top: 0;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__group > ul li a {
+	font-weight: 400;
+	transition: color .16s ease;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__group > ul li a:hover,
+#zomeex-child-resistant-menu .zomeex-mega-menu__group > ul li a:focus-visible {
+	transform: none;
+}
+
+#zomeex-child-resistant-menu .zomeex-mega-menu__more a {
+	font-weight: 400;
+}
+
 
 /* --- CTA cell: link-style, no button chrome --- */
 #zomeex-products-menu .zomeex-mega-menu__cta-card {
@@ -7684,4 +7916,46 @@ a.zomeex-footer__line:focus-visible {
 .zomeex-mega-menu .zomeex-mega-menu__rail a > span:not(.zomeex-mega-menu__mark) small {
 	display: block;
 	margin-top: 3px;
+}
+
+/* ===== Tiles panels: group title alignment with the Products menu =====
+ * The card-redesign block earlier in this sheet re-declares the group title
+ * as a full-width flex row with a 12px gap, which stretches the link across
+ * the column and wraps the longer titles. Re-assert the Products treatment
+ * for the four tiles panels so every nav panel shares the same title row.
+ */
+#zomeex-solutions-menu .zomeex-mega-menu__group-title,
+#zomeex-design-tools-menu .zomeex-mega-menu__group-title,
+#zomeex-resources-menu .zomeex-mega-menu__group-title,
+#zomeex-about-contact-menu .zomeex-mega-menu__group-title {
+	align-items: center;
+	align-self: flex-start;
+	display: inline-flex;
+	gap: 10px;
+	margin-bottom: 2px;
+	max-width: 100%;
+	padding: 0 0 4px;
+	position: static;
+	white-space: normal;
+	width: fit-content;
+}
+
+/* Keep the tiles summaries at a readable measure. The two-column grid gives
+ * each group ~377px, which lets a summary run almost 60 characters per line;
+ * cap the measure so it folds into short, scannable lines like the Products
+ * sub-link rows. */
+#zomeex-solutions-menu .zomeex-mega-menu__summary,
+#zomeex-design-tools-menu .zomeex-mega-menu__summary,
+#zomeex-resources-menu .zomeex-mega-menu__summary,
+#zomeex-about-contact-menu .zomeex-mega-menu__summary {
+	max-width: 32ch;
+}
+
+/* The 50px left margin already aligns summary text with the title after its
+ * badge. Remove the tile rule's extra padding so the text is not double-indented. */
+#zomeex-solutions-menu .zomeex-mega-menu__summary,
+#zomeex-design-tools-menu .zomeex-mega-menu__summary,
+#zomeex-resources-menu .zomeex-mega-menu__summary,
+#zomeex-about-contact-menu .zomeex-mega-menu__summary {
+	padding-left: 0;
 }

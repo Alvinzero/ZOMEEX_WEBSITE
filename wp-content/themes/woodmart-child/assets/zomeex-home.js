@@ -194,6 +194,103 @@
 
   var productBridge = document.querySelector('[data-product-bridge]');
   var motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* The subscription prompt is a startup gate. Keep hero media out of the
+   * request waterfall until it is dismissed, then hydrate the still image
+   * immediately and bring in the MP4 during the next idle window. */
+  var heroVideo = document.querySelector('[data-zomeex-hero-video]');
+  var heroBackdrop = document.querySelector('[data-zomeex-hero-backdrop]');
+  var heroPicture = document.querySelector('[data-zomeex-hero-picture]');
+  var startupGate = document.querySelector('[data-zomeex-startup-gate]');
+  var heroMediaReleased = false;
+
+  var releaseHeroImage = function () {
+    if (heroBackdrop && heroBackdrop.dataset.bgImage) {
+      heroBackdrop.style.backgroundImage = "url('" + heroBackdrop.dataset.bgImage + "')";
+      heroBackdrop.removeAttribute('data-bg-image');
+    }
+    if (!heroPicture) return;
+    var source = heroPicture.querySelector('source[data-srcset]');
+    var image = heroPicture.querySelector('img[data-src]');
+    if (source) {
+      source.srcset = source.dataset.srcset;
+      source.removeAttribute('data-srcset');
+    }
+    if (image) {
+      image.fetchPriority = 'high';
+      image.loading = 'eager';
+      image.src = image.dataset.src;
+      image.removeAttribute('data-src');
+      image.removeAttribute('data-zomeex-deferred-image');
+    }
+  };
+
+  var releaseHeroVideo = function () {
+    if (!heroVideo || !motionAllowed) return;
+    var videoSource = heroVideo.querySelector('source[data-src]');
+    var connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
+    var isSmallScreen = window.matchMedia('(max-width: 767px)').matches;
+    var isConstrainedConnection = connection && (connection.saveData || /(^|-)2g$/.test(connection.effectiveType || ''));
+    if (!videoSource || isSmallScreen || isConstrainedConnection) return;
+
+    var hydrateHeroVideo = function () {
+      if (heroVideo.dataset.loaded === 'true' || heroVideo.dataset.loading === 'true' || document.hidden) return;
+      heroVideo.dataset.loading = 'true';
+      if (heroVideo.dataset.poster) {
+        heroVideo.poster = heroVideo.dataset.poster;
+        heroVideo.removeAttribute('data-poster');
+      }
+      videoSource.src = videoSource.dataset.src;
+      videoSource.removeAttribute('data-src');
+      heroVideo.load();
+      var playPromise = heroVideo.play();
+      if (playPromise && typeof playPromise.catch === 'function') playPromise.catch(function () {});
+      heroVideo.dataset.loaded = 'true';
+      heroVideo.removeAttribute('data-loading');
+    };
+    var deferAfterClose = function () {
+      window.setTimeout(function () {
+        if ('requestIdleCallback' in window) window.requestIdleCallback(hydrateHeroVideo, { timeout: 1600 });
+        else window.setTimeout(hydrateHeroVideo, 700);
+      }, 450);
+    };
+    deferAfterClose();
+  };
+
+  var releaseHeroMedia = function () {
+    if (heroMediaReleased) return;
+    heroMediaReleased = true;
+    releaseHeroImage();
+    releaseHeroVideo();
+  };
+
+  /* Media hydrates DURING the subscribe gate, not after it: the popup is
+   * lightweight, so the hero image loads right away and the MP4 downloads in
+   * an idle window behind it. When the visitor closes the card, hero media is
+   * already playing — no post-dismissal loading stall. The gate listener and
+   * script-blocker fallback stay as safety nets. */
+  var scheduleIdle = function (fn, timeout) {
+    if ('requestIdleCallback' in window) window.requestIdleCallback(fn, { timeout: timeout });
+    else window.setTimeout(fn, Math.min(timeout, 900));
+  };
+
+  scheduleIdle(releaseHeroImage, 900);
+  scheduleIdle(releaseHeroVideo, 1800);
+
+  if (startupGate) {
+    var onSubscribeGate = function (event) {
+      var state = event.detail && event.detail.state;
+      if (state === 'released') releaseHeroMedia();
+    };
+    window.addEventListener('zomeex:subscribe-gate', onSubscribeGate);
+    if (window.zomeexSubscribeGate === 'released') releaseHeroMedia();
+    /* If an extension or script blocker prevents the gate script from
+     * starting, do not leave the page permanently on its neutral placeholder. */
+		window.setTimeout(function () {
+			if (!window.zomeexSubscribeGate) releaseHeroMedia();
+		}, 6000);
+	}
+
   if (productBridge && motionAllowed && 'IntersectionObserver' in window) {
     productBridge.classList.add('is-motion-ready');
     var productBridgeObserver = new IntersectionObserver(function (entries) {

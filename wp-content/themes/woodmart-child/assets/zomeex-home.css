@@ -713,7 +713,7 @@
 	font-size: 37px;
 	line-height: 1.02;
 	margin-bottom: 15px;
-	max-width: 15ch;
+	max-width: 16ch;
 }
 
 .zx-lead-card p:not(.zx-eyebrow) {
@@ -1053,20 +1053,23 @@
 	background: var(--zx-paper-alt);
 	border-bottom: 1px solid var(--zx-line);
 	padding: 96px 0 102px;
+	scroll-margin-top: 84px;
 }
 
 .zx-rfq__route-head {
-	align-items: flex-end;
+	align-items: center;
 	display: flex;
-	gap: 40px;
-	justify-content: space-between;
-	margin-bottom: 30px;
+	flex-direction: column;
+	gap: 0;
+	margin: 0 auto 30px;
+	max-width: 720px;
+	text-align: center;
 }
 
 .zx-rfq__route-head h2 {
-	font-size: 40px;
+	font-size: 36px;
 	line-height: 1.02;
-	margin: 0 0 12px;
+	margin: 0 0 13px;
 }
 
 .zx-rfq__route-head p {
@@ -1074,36 +1077,35 @@
 	font-size: 14px;
 	line-height: 1.55;
 	margin: 0;
-	max-width: 64ch;
+	max-width: 58ch;
 }
 
-.zx-rfq__route-head .zx-inline-link {
-	flex: 0 0 auto;
-	margin-bottom: 3px;
+.zx-rfq__route-footer {
+	margin: 18px 0 64px;
+	text-align: center;
 }
 
 .zx-rfq-paths {
-	border-bottom: 1px solid var(--zx-line);
 	display: grid;
+	gap: 12px 14px;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
-	margin-bottom: 64px;
+	margin: 0 auto;
+	max-width: 1180px;
 }
 
 .zx-rfq-path {
 	align-items: center;
-	border-top: 1px solid var(--zx-line);
+	background: rgba(255, 255, 255, .58);
+	border: 1px solid #b9cbbf;
+	border-radius: 999px;
 	color: var(--zx-ink);
 	display: flex;
-	gap: 18px;
+	gap: 14px;
 	justify-content: space-between;
-	min-height: 82px;
-	padding: 15px 20px;
+	min-height: 58px;
+	padding: 7px 9px 7px 20px;
 	text-transform: none;
-	transition: background-color .22s ease, color .22s ease;
-}
-
-.zx-rfq-path:not(:nth-child(3n + 1)) {
-	border-left: 1px solid var(--zx-line);
+	transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
 }
 
 .zx-rfq-path > span {
@@ -1117,43 +1119,49 @@
 }
 
 .zx-rfq-path strong {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 750;
-	line-height: 1.25;
+	line-height: 1.2;
 	text-transform: none;
 }
 
 .zx-rfq-path small {
-	color: var(--zx-soft);
-	font-size: 11px;
-	line-height: 1.35;
-	margin-top: 5px;
-	text-transform: none;
+	clip-path: inset(50%);
+	height: 1px;
+	overflow: hidden;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
 }
 
 .zx-rfq-path svg {
+	background: #dfeae3;
+	border-radius: 50%;
+	box-sizing: border-box;
 	fill: none;
 	flex: 0 0 auto;
+	height: 40px;
+	padding: 10px;
 	stroke: currentColor;
 	stroke-linecap: round;
 	stroke-linejoin: round;
 	stroke-width: 1.5;
-	transition: transform .22s ease;
+	transition: background-color .2s ease, color .2s ease, transform .2s ease;
+	width: 40px;
 }
 
 .zx-rfq-path:hover,
 .zx-rfq-path:focus-visible {
-	background: var(--zx-accent-dark);
-	color: #fff;
-}
-
-.zx-rfq-path:hover small,
-.zx-rfq-path:focus-visible small {
-	color: #d4ece0;
+	background: #fff;
+	border-color: var(--zx-accent);
+	color: var(--zx-accent-dark);
+	transform: translateY(-1px);
 }
 
 .zx-rfq-path:hover svg,
 .zx-rfq-path:focus-visible svg {
+	background: var(--zx-accent-dark);
+	color: #fff;
 	transform: translate(2px, -2px);
 }
 
@@ -1578,9 +1586,8 @@
 	}
 
 	.zx-rfq__route-head {
-		align-items: flex-start;
-		flex-direction: column;
-		gap: 18px;
+		align-items: center;
+		text-align: center;
 	}
 
 	.zx-rfq__route-head h2 {
@@ -1589,16 +1596,10 @@
 
 	.zx-rfq-paths {
 		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	.zx-rfq__route-footer {
 		margin-bottom: 48px;
-	}
-
-	.zx-rfq-path,
-	.zx-rfq-path:not(:nth-child(3n + 1)) {
-		border-left: 0;
-	}
-
-	.zx-rfq-path:nth-child(even) {
-		border-left: 1px solid var(--zx-line);
 	}
 
 	.zx-hero__grid {
@@ -1697,29 +1698,28 @@
 
 @media (max-width: 560px) {
 	.zx-rfq-paths {
-		border-bottom: 0;
 		display: grid;
-		grid-auto-columns: minmax(248px, 78vw);
+		gap: 10px;
+		grid-auto-columns: minmax(252px, 78vw);
 		grid-auto-flow: column;
 		grid-template-columns: none;
-		margin: 0 calc((100vw - 100%) / -2) 48px;
+		margin: 0 calc((100vw - 100%) / -2);
 		overflow-x: auto;
 		padding: 0 calc((100vw - 100%) / 2) 10px;
 		scroll-padding-inline: calc((100vw - 100%) / 2);
 		scroll-snap-type: x proximity;
-		scrollbar-width: thin;
+		scrollbar-width: none;
+	}
+
+	.zx-rfq-paths::-webkit-scrollbar {
+		display: none;
 	}
 
 	.zx-rfq-path,
 	.zx-rfq-path:not(:nth-child(3n + 1)),
 	.zx-rfq-path:nth-child(even) {
-		border-bottom: 1px solid var(--zx-line);
-		border-left: 1px solid var(--zx-line);
+		border: 1px solid #b9cbbf;
 		scroll-snap-align: start;
-	}
-
-	.zx-rfq-path:first-child {
-		border-left: 0;
 	}
 }
 
@@ -1803,6 +1803,10 @@
 	.zx-applications,
 	.zx-rfq {
 	padding: 52px 0 56px;
+	}
+
+	.zx-rfq {
+	padding-top: 78px;
 	}
 
 	.zx-section-head,
@@ -2540,347 +2544,470 @@ html[data-zomeex-locale="zh-CN"] .zx-hero h1 {
 	line-height: 1.18;
 }
 
-/* ===== Advantages section redesign (WHY ZOMEEX) =====
- * 2×2 cards with an editorial index rule, green subtitle, and spec capsules.
- * Replaces the old hairline-table 4-up that had no room for real copy.
- */
-.zx-advantage-grid {
-	border-top: 0;
-	display: grid;
-	gap: 20px;
-	grid-template-columns: repeat(2, minmax(0, 1fr));
-}
-
-.zx-advantage-card,
-.zx-advantage-grid article.zx-advantage-card {
-	background: #fff;
-	border: 1px solid rgba(17, 35, 29, .08);
-	border-bottom: 1px solid rgba(17, 35, 29, .08);
-	border-left: 1px solid rgba(17, 35, 29, .08);
-	border-radius: 16px;
-	box-shadow: 0 1px 2px rgba(4, 24, 16, .04);
-	min-height: 0;
-	padding: 26px 28px 24px;
-	position: relative;
-	transition: border-color .22s ease, box-shadow .22s ease, transform .22s ease;
-}
-
-.zx-advantage-card::before {
-	background: linear-gradient(90deg, #2de28c, rgba(45, 226, 140, 0));
-	border-radius: 16px 16px 0 0;
-	content: "";
-	height: 3px;
-	left: 0;
-	position: absolute;
-	right: 0;
-	top: 0;
-}
-
-.zx-advantage-card:hover {
-	border-color: rgba(45, 226, 140, .5);
-	box-shadow: 0 14px 34px rgba(4, 24, 16, .09);
-	transform: translateY(-3px);
-}
-
-/* Index with a hairline that runs to the card edge — editorial register. */
-.zx-advantage-card__index {
-	align-items: center;
-	color: #147451;
-	display: flex;
-	font-size: 13px;
-	font-weight: 750;
-	gap: 12px;
-	letter-spacing: .1em;
-	margin-bottom: 16px;
-}
-
-.zx-advantage-card__index::after {
-	background: rgba(20, 116, 81, .22);
-	content: "";
-	flex: 1;
-	height: 1px;
-}
-
-.zx-advantage-card h3 {
-	color: #11231d;
-	font-size: 22px;
-	font-weight: 700;
-	letter-spacing: -.01em;
-	line-height: 1.18;
-	margin: 0 0 8px;
-	max-width: none;
-}
-
-.zx-advantage-card__sub {
-	color: #147451;
-	font-size: 13.5px;
-	font-weight: 650;
-	letter-spacing: .01em;
-	line-height: 1.4;
-	margin: 0 0 14px;
-}
-
-.zx-advantage-card__copy {
-	color: #4f6058;
-	font-size: 14.5px;
-	line-height: 1.7;
-	margin: 0 0 18px;
-	max-width: 58ch;
-}
-
-.zx-advantage-card__specs {
-	display: flex;
-	flex-wrap: wrap;
-	gap: 8px;
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.zx-advantage-card__specs li {
-	background: rgba(45, 226, 140, .08);
-	border: 1px solid rgba(20, 116, 81, .18);
-	border-radius: 999px;
-	color: #2c5546;
-	font-size: 11.5px;
-	font-weight: 600;
-	line-height: 1.3;
-	padding: 5px 12px;
-}
-
-/* Section head: eyebrow with green tick + accent second line. */
-.zx-advantages__eyebrow {
-	align-items: center;
-	color: #147451;
-	display: flex;
-	font-size: 11px;
-	gap: 12px;
-	letter-spacing: .22em;
-}
-
-.zx-advantages__eyebrow::before {
-	background: #2de28c;
-	border-radius: 2px;
-	content: "";
-	display: inline-block;
-	height: 13px;
-	width: 3px;
-}
-
-#zx-advantages-title .zx-advantages-title__accent {
-	color: #147451;
-	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-	font-style: italic;
-	font-weight: 500;
-}
-
-@media (max-width: 860px) {
-	.zx-advantage-grid {
-		grid-template-columns: minmax(0, 1fr);
-	}
-}
-
-/* Long-form copy must not inherit the global uppercase — the reference content
- * is written in sentence/title case and ALL-CAPS paragraphs are unreadable. */
-.zx-advantages .zx-section-head > p,
-.zx-advantage-card__sub,
-.zx-advantage-card__copy,
-.zx-advantage-card__specs li {
-	text-transform: none;
-}
-
-/* CJK has no true italic serif — zh-CN accent falls back to a heavier sans cut,
- * same treatment as the hero title accent. */
-html[data-zomeex-locale="zh-CN"] .zx-advantages-title__accent {
-	font-family: inherit;
+/* ===== WHY ZOMEEX: editable frontend from the supplied reference ===== */
+@font-face {
+	font-family: "Zomeex Figtree";
 	font-style: normal;
-	font-weight: 700;
+	font-weight: 300 900;
+	font-display: swap;
+	src: url("why-zomeex/fonts/figtree-variable.ttf") format("truetype");
 }
 
-/* ===== Advantages: eco-luxury compact redesign =====
- * Brief: warm off-white canvas, deep pine ink, olive & tan accents, generous
- * whitespace, zero card chrome. Four equal columns so the whole section fits
- * in one viewport — no scrolling required.
- */
-.zx-advantages--eco {
-	background: #f7faf8;
-	padding: 56px 0 60px;
-}
-
-.zx-advantages--eco .zx-section-head {
-	margin-bottom: 34px;
-	max-width: 780px;
-}
-
-/* Four equal columns, separated by whitespace only. */
-.zx-advantages--eco .zx-advantage-grid {
-	border-top: 0;
-	display: grid;
-	gap: 24px;
-	grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.zx-advantages--eco .zx-adv {
-	background: transparent;
-	border: 0;
-	border-radius: 0;
-	box-shadow: none;
-	min-height: 0;
+.zx-advantages {
+	--why-ink: #08291d;
+	--why-body: #254e50;
+	--why-green: #07634d;
+	--why-ground: #f4f7f1;
+	background: #fafcf8;
+	border-bottom: 1px solid var(--zx-line);
+	color: var(--why-body);
+	font-family: "Zomeex Figtree", "Avenir Next", sans-serif;
 	padding: 0;
+	scroll-margin-top: 88px;
 }
 
-/* Icon row: 48px filled circle + thin oversized index with a dash. */
-.zx-adv__head {
-	align-items: center;
-	display: flex;
-	gap: 14px;
-	margin-bottom: 20px;
+.zx-advantages ::selection {
+	background: #c9ded1;
+	color: var(--why-ink);
 }
 
-.zx-adv__icon {
-	align-items: center;
-	border-radius: 50%;
-	color: #fff;
-	display: inline-flex;
-	flex-shrink: 0;
-	height: 48px;
-	justify-content: center;
-	width: 48px;
-}
-
-.zx-adv__icon svg {
-	height: 22px;
-	width: 22px;
-}
-
-.zx-adv__icon--pine { background: #147451; }
-.zx-adv__icon--olive { background: #2de28c; color: #07211a; }
-.zx-adv__icon--tan { background: #7ce8b0; color: #07211a; }
-
-.zx-adv__index {
-	align-items: center;
-	color: #11231d;
-	display: flex;
-	flex: 1;
-	font-size: 28px;
-	font-weight: 300;
-	letter-spacing: .04em;
-	line-height: 1;
-}
-
-.zx-adv__index::after {
-	background: rgba(17, 35, 29, .18);
-	content: "";
-	flex: 1;
-	height: 1px;
-	margin-left: 14px;
-}
-
-/* Serif title, deep pine, wraps to two lines. */
-.zx-adv__title {
-	color: #11231d;
-	font-family: "Playfair Display", Georgia, "Times New Roman", serif;
-	font-size: 22px;
-	font-weight: 600;
-	letter-spacing: 0;
-	line-height: 1.22;
-	margin: 0 0 10px;
-	max-width: 15ch;
-	min-height: 2.44em; /* keep card tops aligned across uneven title lengths */
-}
-
-/* Small hook line in olive. */
-.zx-adv__sub {
-	color: #147451;
-	font-size: 12.5px;
-	font-weight: 650;
-	letter-spacing: .02em;
-	line-height: 1.4;
-	margin: 0 0 12px;
+.zx-advantages :is(h2, h3, p, li, a) {
 	text-transform: none;
 }
 
-/* Body: quiet gray-green, bold lead phrase in pine. */
-.zx-adv__copy {
-	color: #6a7a72;
-	font-size: 13.5px;
-	line-height: 1.66;
-	margin: 0 0 18px;
-	text-transform: none;
-}
-
-.zx-adv__copy strong {
-	color: #11231d;
-	font-weight: 650;
-}
-
-/* Key Specs: hairline + tan label + 2-col icon grid. */
-.zx-adv__specs {
-	border-top: 1px solid rgba(17, 35, 29, .1);
-	padding-top: 13px;
-}
-
-.zx-adv__specs-title {
-	color: #147451;
-	font-size: 10.5px;
-	font-weight: 700;
-	letter-spacing: .14em;
-	margin: 0 0 10px;
+.zx-advantages .zx-why-label,
+.zx-advantages .zx-why-benefits li,
+.zx-advantages .zx-why-signoff {
 	text-transform: uppercase;
 }
 
-.zx-adv__specs ul {
+.zx-why-hero {
+	background: var(--why-ground);
+	isolation: isolate;
+	overflow: hidden;
+	position: relative;
+}
+
+.zx-why-hero__landscape {
+	bottom: 0;
+	height: auto;
+	left: 0;
+	object-fit: cover;
+	object-position: right bottom;
+	position: absolute;
+	width: 100%;
+	z-index: -1;
+}
+
+.zx-why-hero__inner {
 	display: grid;
-	gap: 8px 14px;
+	gap: 38px;
 	grid-template-columns: repeat(2, minmax(0, 1fr));
+	margin: 0 auto;
+	min-height: clamp(400px, 29vw, 452px);
+	padding: 60px 0 40px;
+	width: min(calc(100% - 88px), 1488px);
+}
+
+.zx-why-label {
+	align-items: center;
+	color: var(--why-green);
+	display: flex;
+	font-size: 14px;
+	font-weight: 650;
+	gap: 22px;
+	letter-spacing: .22em;
+	line-height: 1.25;
+	margin: 0 0 14px;
+}
+
+.zx-why-label::after {
+	background: currentColor;
+	content: "";
+	height: 1px;
+	width: 42px;
+}
+
+.zx-advantages h2 {
+	color: var(--why-ink);
+	font-family: "Zomeex Figtree", "Avenir Next", sans-serif;
+	font-size: clamp(42px, 4vw, 66px);
+	font-weight: 900;
+	letter-spacing: -.035em;
+	line-height: 1.04;
+	margin: 0;
+	max-width: 790px;
+}
+
+.zx-why-hero h2 span {
+	display: block;
+}
+
+.zx-why-hero__rule {
+	background: var(--why-green);
+	border-radius: 3px;
+	height: 4px;
+	margin: 22px 0 28px;
+	width: 42px;
+}
+
+.zx-why-benefits {
+	align-items: center;
+	display: flex;
+	gap: 28px;
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.zx-adv__specs li {
+.zx-why-benefits li {
 	align-items: center;
-	color: #4f6058;
+	color: var(--why-green);
 	display: flex;
-	font-size: 11.8px;
-	font-weight: 550;
-	gap: 8px;
-	line-height: 1.3;
-	min-width: 0;
+	font-size: 10px;
+	font-weight: 650;
+	gap: 12px;
+	letter-spacing: .13em;
+	line-height: 1.45;
+	max-width: 162px;
+	text-transform: uppercase;
+}
+
+.zx-why-benefits li + li {
+	border-left: 1px solid #b9d0c5;
+	padding-left: 26px;
+}
+
+.zx-advantages .zomeex-mega-menu__mark {
+	background: none;
+	border: 0;
+	border-radius: 0;
+	color: inherit;
+	display: inline-flex;
+	flex: 0 0 auto;
+	height: auto;
+	margin: 0;
 	padding: 0;
-	text-transform: none;
+	width: auto;
 }
 
-.zx-adv__specs li svg {
-	color: #11231d;
-	flex-shrink: 0;
-	height: 15px;
-	width: 15px;
+.zx-advantages .zomeex-mega-menu__icon {
+	height: 30px;
+	width: 30px;
 }
 
-/* Eco palette also retunes the section-head accent to pine. */
-.zx-advantages--eco .zx-advantages__eyebrow {
-	color: #11231d;
+.zx-why-hero__intro {
+	align-self: start;
+	border-left: 1px solid #8cafa0;
+	margin-top: 30px;
+	max-width: 370px;
+	padding-left: 28px;
 }
 
-#zx-advantages-title .zx-advantages-title__accent {
-	color: #147451;
+.zx-why-hero__intro p {
+	font-size: clamp(15px, 1.15vw, 18px);
+	font-weight: 350;
+	line-height: 1.65;
+	margin: 0 0 16px;
 }
 
-/* Collapse gracefully: 2×2 on tablets, single column on phones. */
+.zx-why-hero__signature {
+	align-items: center;
+	display: flex;
+	gap: 8px;
+}
+
+.zx-why-hero__signature i {
+	background: var(--why-green);
+	border-radius: 50%;
+	height: 7px;
+	width: 7px;
+}
+
+.zx-why-hero__signature i:first-child {
+	border-radius: 3px;
+	height: 3px;
+	width: 38px;
+}
+
+.zx-why-hero__signature i:nth-child(3) { opacity: .3; }
+.zx-why-hero__signature i:nth-child(4) { opacity: .2; }
+
+.zx-why-content {
+	margin: 0 auto;
+	max-width: 1576px;
+	padding: 30px 36px 30px;
+	position: relative;
+}
+
+.zx-why-content::before {
+	background: url("why-zomeex/why-contours.webp") left bottom / auto 66px no-repeat;
+	bottom: 0;
+	content: "";
+	height: 66px;
+	left: 0;
+	max-width: 100%;
+	pointer-events: none;
+	position: absolute;
+	width: 650px;
+}
+
+.zx-why-grid {
+	display: grid;
+	gap: 22px;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.zx-why-card {
+	background: #f0f6f0;
+	border: 1px solid #e1ece4;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	min-width: 0;
+	overflow: hidden;
+	position: relative;
+	transition: border-color .24s ease, box-shadow .24s ease;
+}
+
+.zx-why-card:hover,
+.zx-why-card:focus-within {
+	border-color: #aacaba;
+	box-shadow: 0 8px 24px rgba(8, 41, 29, .07);
+}
+
+.zx-why-card__media {
+	aspect-ratio: 2.03;
+	background: #e9f0e7;
+	overflow: hidden;
+	position: relative;
+}
+
+.zx-why-card__media img {
+	height: 100%;
+	margin-left: auto;
+	object-fit: cover;
+	object-position: right center;
+	width: 75%;
+}
+
+.zx-why-card__number {
+	color: #8da696;
+	font-size: clamp(40px, 3.6vw, 56px);
+	font-weight: 850;
+	left: 15px;
+	letter-spacing: -.05em;
+	line-height: 1;
+	position: absolute;
+	top: 11px;
+}
+
+.zx-why-card__icon {
+	align-items: center;
+	background: #254d3b;
+	border: 1px solid rgba(255, 255, 255, .14);
+	border-radius: 50%;
+	bottom: 20px;
+	color: #fff;
+	display: flex;
+	height: 64px;
+	justify-content: center;
+	left: 15px;
+	position: absolute;
+	width: 64px;
+}
+
+.zx-why-card--02 .zx-why-card__icon { background: #68783d; }
+.zx-why-card--03 .zx-why-card__icon { background: #16553e; }
+.zx-why-card--04 .zx-why-card__icon { background: #ae7c25; }
+
+.zx-why-card__body {
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 10px 19px 25px;
+	position: relative;
+}
+
+.zx-advantages .zx-why-card h3 {
+	color: #0c3933;
+	font-family: "Zomeex Figtree", "Avenir Next", sans-serif;
+	font-size: clamp(20px, 1.6vw, 25px);
+	font-weight: 900;
+	letter-spacing: -.025em;
+	line-height: 1.08;
+	margin: 0 0 12px;
+	min-height: 2.16em;
+}
+
+.zx-why-card h3 a {
+	text-decoration: none;
+}
+
+.zx-why-card__sub {
+	color: var(--why-green);
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0 0 20px;
+	min-height: 1.4em;
+}
+
+.zx-why-card__description {
+	font-size: 14px;
+	font-weight: 350;
+	line-height: 1.48;
+	margin: 0 0 18px;
+}
+
+.zx-why-card__description strong {
+	font-weight: 750;
+}
+
+.zx-why-card__footer {
+	border-top: 1px solid #cadfd3;
+	margin-top: auto;
+	min-height: 102px;
+	padding: 6px 28px 0 0;
+}
+
+.zx-why-card__spec-label {
+	color: #00523e;
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 1.4;
+	margin: 0 0 7px;
+}
+
+.zx-why-card__specs {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 5px 7px;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	position: relative;
+	z-index: 1;
+}
+
+.zx-why-card__specs li {
+	background: #e5f0e8;
+	border: 1px solid #c1dbcd;
+	border-radius: 20px;
+	color: #004a39;
+	font-size: 10px;
+	line-height: 1.3;
+	margin: 0;
+	padding: 4px 10px;
+}
+
+.zx-advantages .zx-why-card__action {
+	align-items: center;
+	background: #164c36;
+	border-radius: 50%;
+	bottom: 18px;
+	color: #fff;
+	display: flex;
+	height: 44px;
+	justify-content: center;
+	position: absolute;
+	right: 15px;
+	width: 44px;
+	z-index: 2;
+}
+
+.zx-why-card__action svg {
+	height: 20px;
+	margin: 0;
+	transform: rotate(45deg);
+	transition: transform .24s ease;
+	width: 20px;
+}
+
+.zx-why-card:hover .zx-why-card__action svg { transform: rotate(45deg) translate(2px, -2px); }
+
+.zx-why-card__action:focus-visible,
+.zx-why-card h3 a:focus-visible {
+	outline: 2px solid var(--why-green);
+	outline-offset: 4px;
+}
+
+.zx-why-signoff {
+	align-items: center;
+	color: var(--why-green);
+	display: flex;
+	font-size: 9px;
+	font-weight: 550;
+	gap: 20px;
+	justify-content: flex-end;
+	letter-spacing: .35em;
+	line-height: 1.5;
+	margin: 24px 0 0;
+	position: relative;
+	text-transform: uppercase;
+}
+
+.zx-why-signoff::after {
+	background: currentColor;
+	content: "";
+	height: 1px;
+	width: 25px;
+}
+
 @media (max-width: 1100px) {
-	.zx-advantages--eco .zx-advantage-grid {
-		gap: 28px 24px;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-	}
-
-	.zx-adv__title {
-		min-height: 0;
-	}
+	.zx-why-hero__inner { gap: 24px; padding-top: 42px; width: calc(100% - 48px); }
+	.zx-why-benefits { gap: 14px; }
+	.zx-why-benefits li { gap: 8px; }
+	.zx-why-benefits li + li { padding-left: 14px; }
+	.zx-why-hero__intro { max-width: 330px; padding-left: 18px; }
+	.zx-why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+	.zx-why-content { padding: 26px 24px; }
+	.zx-why-card__media { aspect-ratio: 2.1; }
+	.zx-why-card__number { font-size: 56px; }
+	.zx-advantages .zx-why-card h3 { font-size: 26px; }
+	.zx-why-card__sub { min-height: 0; }
+	.zx-why-card__description { font-size: 15px; }
+	.zx-why-card__specs li { font-size: 11px; }
 }
 
-@media (max-width: 640px) {
-	.zx-advantages--eco .zx-advantage-grid {
-		grid-template-columns: minmax(0, 1fr);
-	}
+@media (max-width: 820px) {
+	.zx-why-hero { display: flex; flex-direction: column; }
+	.zx-why-hero__inner { display: block; min-height: 0; padding: 40px 0 0; }
+	.zx-advantages h2 { font-size: clamp(38px, 6.2vw, 50px); max-width: 690px; }
+	.zx-why-hero__rule { margin: 22px 0; }
+	.zx-why-hero__intro { border: 0; margin: 26px 0 0; max-width: 560px; padding: 0; }
+	.zx-why-hero__intro p { font-size: 16px; }
+	.zx-why-hero__signature { display: none; }
+	.zx-why-hero__landscape { aspect-ratio: 2.2; height: auto; inset: auto; object-fit: cover; object-position: right; order: 2; position: relative; width: 100%; z-index: 0; }
+	.zx-why-benefits li { max-width: 170px; }
+}
+
+@media (max-width: 560px) {
+	.zx-why-hero__inner { padding-top: 32px; width: calc(100% - 36px); }
+	.zx-why-label { font-size: 11px; gap: 16px; margin-bottom: 15px; }
+	.zx-advantages h2 { font-size: clamp(34px, 9.6vw, 48px); letter-spacing: -.03em; }
+	.zx-why-benefits { align-items: start; gap: 12px; }
+	.zx-why-benefits li { flex-direction: column; align-items: start; font-size: 10px; gap: 8px; letter-spacing: .08em; width: 33.333%; }
+	.zx-why-benefits li + li { padding-left: 12px; }
+	.zx-why-benefits .zomeex-mega-menu__icon { height: 25px; width: 25px; }
+	.zx-why-hero__intro { margin-top: 24px; }
+	.zx-why-hero__intro p { font-size: 15px; line-height: 1.6; margin-bottom: 0; }
+	.zx-why-hero__landscape { aspect-ratio: 1.65; margin-top: 10px; object-fit: cover; width: 100%; }
+	.zx-why-grid { gap: 20px; grid-template-columns: minmax(0, 1fr); }
+	.zx-why-content { padding: 22px 18px 30px; }
+	.zx-why-card__media { aspect-ratio: 2.05; }
+	.zx-why-card__body { padding: 18px 20px 24px; }
+	.zx-advantages .zx-why-card h3 { font-size: 27px; min-height: 0; }
+	.zx-why-card__sub { font-size: 15px; margin-bottom: 20px; }
+	.zx-why-card__description { font-size: 15px; line-height: 1.55; }
+	.zx-why-card__footer { padding-right: 35px; }
+	.zx-why-signoff { font-size: 8px; gap: 12px; letter-spacing: .2em; }
+}
+
+html[data-zomeex-locale="zh-CN"] .zx-advantages h2 { font-size: clamp(34px, 3.8vw, 60px); line-height: 1.15; }
+html[data-zomeex-locale="zh-CN"] .zx-advantages .zx-why-card h3 { line-height: 1.2; }
+
+@media (prefers-reduced-motion: reduce) {
+	.zx-why-card,
+	.zx-why-card__action svg { transition: none; }
 }

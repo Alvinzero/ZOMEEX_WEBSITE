@@ -100,6 +100,12 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 	<meta charset="<?php bloginfo( 'charset' ); ?>">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="profile" href="https://gmpg.org/xfn/11">
+	<style id="zomeex-critical-gate">
+		/* CRITICAL: Hide Chaty immediately on page load, before any script runs. */
+		.chaty-widget{opacity:0!important;pointer-events:none!important;visibility:hidden!important;transition:opacity .3s ease-in-out!important}
+		.chaty-widget *,.chaty-widget .chaty-channels,.chaty-widget .chaty-channel{animation:none!important;-webkit-animation:none!important}
+		.chaty-widget.zomeex-chaty-ready{opacity:1!important;pointer-events:auto!important;visibility:visible!important}
+	</style>
 	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>

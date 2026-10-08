@@ -18,6 +18,13 @@
   var SUBSCRIBED_KEY = 'zomeex-subscribe-complete';
   var dismissFor = 14 * 24 * 60 * 60 * 1000;
 
+  function publishGateState(state) {
+    window.zomeexSubscribeGate = state;
+    document.documentElement.dataset.zomeexSubscribeGate = state;
+    document.documentElement.setAttribute('data-zomeex-subscribe-gate', state);
+    window.dispatchEvent(new CustomEvent('zomeex:subscribe-gate', { detail: { state: state } }));
+  }
+
   function storage() {
     try {
       var target = window.localStorage;
@@ -93,6 +100,7 @@
     modal.hidden = true;
     modal.setAttribute('aria-hidden', 'true');
     document.body.classList.remove('zomeex-subscribe-open');
+    publishGateState('released');
     if (options.remember !== false) rememberDismissal();
     if (previousFocus && typeof previousFocus.focus === 'function') previousFocus.focus({ preventScroll: true });
   }
@@ -104,6 +112,7 @@
     modal.hidden = false;
     modal.setAttribute('aria-hidden', 'false');
     document.body.classList.add('zomeex-subscribe-open');
+    publishGateState('open');
     localize();
     window.requestAnimationFrame(function () { dialog.focus({ preventScroll: true }); });
   }
@@ -220,5 +229,10 @@
 
   window.addEventListener('zomeex:localechange', localize);
   localize();
-  if (shouldShow()) window.setTimeout(showModal, config.preview ? 80 : 950);
+
+  /* The subscription prompt is the startup gate. Show it as soon as the
+   * deferred scripts run, before hero media is released. Returning visitors
+   * that already dismissed it release the page immediately instead. */
+  if (shouldShow()) showModal();
+  else publishGateState('released');
 }());

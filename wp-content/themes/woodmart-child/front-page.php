@@ -10,10 +10,13 @@ get_header();
 $shop_url    = function_exists( 'wc_get_page_permalink' ) ? wc_get_page_permalink( 'shop' ) : zomeex_home_url( '/shop/' );
 $quote_url   = zomeex_quote_url();
 $news_url    = zomeex_page_url( 'news', '/news/' );
+$about_url   = zomeex_page_url( 'about-us-3', '/about-us-3/' );
 
 $hero_image        = zomeex_upload_url( 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg' );
 $hero_video        = zomeex_upload_url( 'ed54e97bc6b48b1910bf39c76dfe4f51.mp4', '2025/12' );
 $hero_product_image = get_stylesheet_directory_uri() . '/assets/zomeex-packaging-hero.png';
+$hero_product_webp  = get_stylesheet_directory_uri() . '/assets/zomeex-packaging-hero.webp';
+$deferred_media_placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
 
 $category_data = array(
 	array( 'title' => 'Custom Mylar Bags & Pouches', 'slug' => 'mylar-bag', 'image' => 'pack_0003_药丸包装-拷贝-2-768x768.jpg', 'copy' => 'Barrier films, stand-up pouches and retail-ready formats.' ),
@@ -82,12 +85,51 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 	$term = get_term_by( 'slug', $category['slug'], 'product_cat' );
 	return $term && ! is_wp_error( $term ) ? get_term_link( $term ) : add_query_arg( 'collection', $category['slug'], $shop_url );
 };
+
+$advantage_routes = array(
+	array(
+		'title' => 'Precision-Engineered Product Fit',
+		'sub'   => 'Custom Structural Design & Exact Dielines',
+		'lead'  => 'The Fit:',
+		'copy'  => 'We custom-engineer dielines, dimensions, and barrier materials around your exact product specs, ensuring a precise fit for flower, edibles, vapes, and concentrates.',
+		'specs' => array( 'Custom Dielines', 'Barrier Materials', 'Precision Inserts', 'Structural Integrity', 'Product Compatibility' ),
+		'icon'  => 'box',
+		'url'   => $shop_url,
+	),
+	array(
+		'title' => 'Compliance & Market Readiness',
+		'sub'   => 'Child-Resistant & Sustainable Solutions',
+		'lead'  => 'The Protection:',
+		'copy'  => 'Stay launch-ready with fully certified Child-Resistant (CR) packaging and eco-friendly materials designed to seamlessly satisfy strict multi-state regulations.',
+		'specs' => array( 'CR Certified', 'Sustainable Materials', 'Multi-State Compliant', 'Eco-Friendly' ),
+		'icon'  => 'scale',
+		'url'   => add_query_arg( 'feature', 'child-resistant', $shop_url ),
+	),
+	array(
+		'title' => 'End-to-End Packaging Systems',
+		'sub'   => 'From Primary Packaging to Retail & Shipping',
+		'lead'  => 'The Supply Chain:',
+		'copy'  => 'Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers.',
+		'specs' => array( 'Primary Packaging', 'Secondary Packaging', 'POP Displays', 'Master Shippers' ),
+		'icon'  => 'kit',
+		'url'   => $about_url,
+	),
+	array(
+		'title' => 'Retail-Ready Brand Innovation',
+		'sub'   => 'Disruptive Finishes & Market Trends',
+		'lead'  => 'The Advantage:',
+		'copy'  => 'Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting visual designs that drive repeat purchases.',
+		'specs' => array( 'Premium Finishes', 'Tactile Textures', 'Trend-Forward Designs', 'Shelf Impact' ),
+		'icon'  => 'tag',
+		'url'   => zomeex_home_url( '/#zx-finishes-title' ),
+	),
+);
 ?>
 <main class="zomeex-home zx-home" id="main-content">
 		<section class="zx-hero" aria-labelledby="zx-hero-title">
-			<div class="zx-hero__backdrop" style="background-image: url('<?php echo esc_url( $hero_image ); ?>');" aria-hidden="true">
-				<video class="zx-hero__video" autoplay loop muted playsinline preload="auto" poster="<?php echo esc_url( $hero_image ); ?>" aria-hidden="true">
-					<source src="<?php echo esc_url( $hero_video ); ?>" type="video/mp4">
+			<div class="zx-hero__backdrop" data-zomeex-hero-backdrop data-bg-image="<?php echo esc_url( $hero_image ); ?>" aria-hidden="true">
+				<video class="zx-hero__video" loop muted playsinline preload="none" data-poster="<?php echo esc_url( $hero_image ); ?>" data-zomeex-hero-video aria-hidden="true">
+					<source data-src="<?php echo esc_url( $hero_video ); ?>" type="video/mp4">
 				</video>
 				<div class="zx-hero__backdrop-scrim"></div>
 			</div>
@@ -108,7 +150,7 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 					<div class="zx-hero__visual-stage">
 						<div class="zx-hero__visual-topline"><span>FACTORY FILM / 00:27</span><span aria-hidden="true">LIVE LOOP</span></div>
 						<figure class="zx-hero__product zx-hero__product--primary">
-							<div class="zx-hero__product-media"><img src="<?php echo esc_url( $hero_product_image ); ?>" alt="Printed ZOMEEX packaging formats" fetchpriority="high" width="1536" height="1024"></div>
+							<div class="zx-hero__product-media"><picture data-zomeex-hero-picture><source data-srcset="<?php echo esc_url( $hero_product_webp ); ?>" type="image/webp"><img src="<?php echo esc_attr( $deferred_media_placeholder ); ?>" data-src="<?php echo esc_url( $hero_product_image ); ?>" data-zomeex-deferred-image alt="Printed ZOMEEX packaging formats" width="1536" height="1024" decoding="async"></picture></div>
 							<figcaption><span>01</span><strong>Rigid packaging systems</strong><small>Print, structure and shelf presence in one route.</small></figcaption>
 						</figure>
 						<div class="zx-hero__product-meta"><span class="zx-hero__product-meta-dot" aria-hidden="true"></span><strong>Built around your brief</strong><span>Material, format and market in one conversation.</span></div>
@@ -127,43 +169,58 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 		<p class="zx-trust__note"><strong>Demo evidence only.</strong> <span>Certificates, test reports, market scope and material claims must be confirmed by ZOMEEX before publication.</span> <span>Client confirmation is required before launch.</span></p>
 	</section>
 
-	<section class="zx-advantages zx-advantages--eco" aria-labelledby="zx-advantages-title">
-		<div class="zomeex-container">
-			<div class="zx-section-head">
-				<p class="zx-eyebrow zx-advantages__eyebrow">WHY ZOMEEX</p>
-				<h2 id="zx-advantages-title"><span class="zx-advantages-title__main">More Than Packaging.</span> <span class="zx-advantages-title__accent">Your Strategic Cannabis Sourcing Partner.</span></h2>
-				<p>We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.</p>
+	<section class="zx-advantages" id="zx-advantages-title" aria-labelledby="zx-advantages-heading">
+		<!-- WHY ZOMEEX: native components from the supplied final reference.
+		THESIS: editable type and packaging photography in one coherent capability section.
+		OWN-WORLD: ivory/sage grounds, forest-green Figtree lettering, four illustrated cards.
+		STORY: product fit, compliance, sourcing and shelf impact lead to four existing routes.
+		FIRST VIEWPORT: large headline left, introduction above photography right, four cards below.
+		FORM: supplied reference; desktop four columns, tablet two, phone one. Images contain no UI.
+		FINISH: verify readable native text, independent imagery, responsive layout and working routes. -->
+		<div class="zx-why-hero">
+			<img class="zx-why-hero__landscape" src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/why-zomeex/why-landscape.webp' ); ?>" alt="" width="1536" height="421" loading="lazy" decoding="async" aria-hidden="true">
+			<div class="zx-why-hero__inner">
+				<div class="zx-why-hero__heading">
+					<p class="zx-why-label">WHY ZOMEEX</p>
+					<h2 id="zx-advantages-heading"><span>More Than Packaging.</span> <span>Your Strategic Cannabis Sourcing Partner.</span></h2>
+					<div class="zx-why-hero__rule" aria-hidden="true"></div>
+					<ul class="zx-why-benefits" aria-label="Key service benefits">
+						<li><?php echo zomeex_nav_icon( 'scale' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span>Compliant Solutions</span></li>
+						<li><?php echo zomeex_nav_icon( 'leaf' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span>Supply Chain Efficiency</span></li>
+						<li><?php echo zomeex_nav_icon( 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?><span>Brand Growth</span></li>
+					</ul>
+				</div>
+				<div class="zx-why-hero__intro">
+					<p>We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.</p>
+					<div class="zx-why-hero__signature" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+				</div>
 			</div>
-			<div class="zx-advantage-grid">
-				<article class="zx-adv">
-					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--pine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></svg></span><span class="zx-adv__index">01</span></div>
-					<h3 class="zx-adv__title">Precision-Engineered Product Fit</h3>
-					<p class="zx-adv__sub">Custom Structural Design &amp; Exact Dielines</p>
-					<p class="zx-adv__copy"><strong>The Fit:</strong> We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.</p>
-					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 17l10-10 3 3L7 20l-3-3z"/><path d="M14 7l3 3"/></svg><span>Custom Dielines</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12l9 5 9-5"/></svg><span>Barrier Materials</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="1"/><path d="M9 9h6v6H9z"/></svg><span>Precision Inserts</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 20V9M12 20V4M18 20v-8"/></svg><span>Structural Integrity</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="12" r="4"/><circle cx="16" cy="12" r="4"/></svg><span>Product Compatibility</span></li></ul></div>
-				</article>
-				<article class="zx-adv">
-					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--olive"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg></span><span class="zx-adv__index">02</span></div>
-					<h3 class="zx-adv__title">Compliance &amp; Market Readiness</h3>
-					<p class="zx-adv__sub">Child-Resistant &amp; Sustainable Solutions</p>
-					<p class="zx-adv__copy"><strong>The Protection:</strong> Stay launch-ready with fully certified Child-Resistant (CR) packaging and eco-friendly materials designed to seamlessly satisfy strict multi-state regulations.</p>
-					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="6" y="11" width="12" height="9" rx="1"/><path d="M9 11V8a3 3 0 0 1 6 0v3"/></svg><span>CR Certified Packaging</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 19c8-1 13-8 14-14-6 1-13 6-14 14z"/><path d="M8 16c2-3 5-6 9-8"/></svg><span>Sustainable &amp; Recyclable Options</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="10" r="5"/><path d="M9 14l-1.5 6L12 18l4.5 2L15 14"/><path d="M10 10l1.5 1.5L14 9"/></svg><span>ASTM Standards</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4l6 2 6-2v12l-6 2-6-2-6 2V6l6-2z"/><path d="M9 4v12M15 6v12"/></svg><span>Multi-State Compliance</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="8" width="16" height="8" rx="1"/><path d="M8 12h8"/></svg><span>Tamper-Evident Seals</span></li></ul></div>
-				</article>
-				<article class="zx-adv">
-					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--pine"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg></span><span class="zx-adv__index">03</span></div>
-					<h3 class="zx-adv__title">End-to-End Packaging Systems</h3>
-					<p class="zx-adv__sub">From Primary Packaging to Retail &amp; Shipping</p>
-					<p class="zx-adv__copy"><strong>The Supply Chain:</strong> Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers for brand consistency.</p>
-					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 8h12l-1 12H7L6 8z"/><path d="M9 8V7a3 3 0 0 1 6 0v1"/></svg><span>Pouches &amp; Jars</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16v12H4z"/><path d="M4 12h16"/><path d="M12 8v12"/></svg><span>Secondary Rigid Boxes</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16v10H4z"/><path d="M9 20h6"/><path d="M12 16v4"/></svg><span>POP Dispensary Displays</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 8l9-4 9 4v8l-9 4-9-4V8z"/><path d="M3 8l9 4 9-4"/><path d="M12 12v8"/></svg><span>Rigid Master Cartons</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="8" cy="14" r="4"/><path d="M11 11l8-8"/><path d="M16 6l2 2M18 4l2 2"/></svg><span>Turnkey Sourcing</span></li></ul></div>
-				</article>
-				<article class="zx-adv">
-					<div class="zx-adv__head"><span class="zx-adv__icon zx-adv__icon--tan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 18h6"/><path d="M10 21h4"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2h5c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg></span><span class="zx-adv__index">04</span></div>
-					<h3 class="zx-adv__title">Retail-Ready Brand Innovation</h3>
-					<p class="zx-adv__sub">Disruptive Finishes &amp; Market Trends</p>
-					<p class="zx-adv__copy"><strong>The Advantage:</strong> Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting unboxing experiences that drive repeat customer purchases.</p>
-					<div class="zx-adv__specs"><p class="zx-adv__specs-title">Key Specs</p><ul><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3z"/></svg><span>Spot UV &amp; Foil Stamping</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 12c2-5 10-5 12 0"/><path d="M4 16c3-6 13-6 16 0"/></svg><span>Soft-Touch Coating</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v6c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6l7-3z"/><path d="M9.5 12l2 2 3.5-4"/></svg><span>Anti-Counterfeiting Features</span></li><li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 12h16v8H4z"/><path d="M12 12V4"/><path d="M8 8l4 4 4-4"/></svg><span>Custom Unboxing Experience</span></li></ul></div>
-				</article>
+		</div>
+		<div class="zx-why-content">
+			<div class="zx-why-grid">
+				<?php foreach ( $advantage_routes as $index => $route ) : ?>
+					<article class="zx-why-card zx-why-card--<?php echo esc_attr( sprintf( '%02d', $index + 1 ) ); ?>">
+						<div class="zx-why-card__media">
+							<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/why-zomeex/why-capability-' . sprintf( '%02d', $index + 1 ) . '.webp' ); ?>" alt="" width="260" height="171" loading="lazy" decoding="async">
+							<span class="zx-why-card__number" aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?></span>
+							<span class="zx-why-card__icon" aria-hidden="true"><?php echo zomeex_nav_icon( $route['icon'] ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+						</div>
+						<div class="zx-why-card__body">
+							<h3><a href="<?php echo esc_url( $route['url'] ); ?>"><?php echo esc_html( $route['title'] ); ?></a></h3>
+							<p class="zx-why-card__sub"><?php echo esc_html( $route['sub'] ); ?></p>
+							<p class="zx-why-card__description"><strong><?php echo esc_html( $route['lead'] ); ?></strong> <span><?php echo esc_html( $route['copy'] ); ?></span></p>
+							<div class="zx-why-card__footer">
+								<p class="zx-why-card__spec-label">Key Specs</p>
+								<ul class="zx-why-card__specs">
+									<?php foreach ( $route['specs'] as $spec ) : ?><li><?php echo esc_html( $spec ); ?></li><?php endforeach; ?>
+								</ul>
+							</div>
+							<a class="zx-why-card__action" href="<?php echo esc_url( $route['url'] ); ?>" aria-label="<?php echo esc_attr( $route['title'] ); ?>"><?php echo zomeex_nav_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a>
+						</div>
+					</article>
+				<?php endforeach; ?>
 			</div>
+			<p class="zx-why-signoff"><span>Partner</span><b aria-hidden="true">/</b><span>Package</span><b aria-hidden="true">/</b><span>Grow</span></p>
 		</div>
 	</section>
 
@@ -245,8 +302,8 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 	<section class="zx-rfq" id="zx-rfq" aria-labelledby="zx-rfq-paths-title">
 		<div class="zomeex-container">
 			<header class="zx-rfq__route-head">
-				<div><h2 id="zx-rfq-paths-title">Start with the product you know.</h2><p>Each route opens a focused catalogue. If your brief spans categories, use the project form below.</p></div>
-				<a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">View full catalogue <span aria-hidden="true">↗</span></a>
+				<h2 id="zx-rfq-paths-title">Start with the product you know.</h2>
+				<p>Each route opens a focused catalogue. If your brief spans categories, use the project form below.</p>
 			</header>
 			<nav class="zx-rfq-paths" aria-labelledby="zx-rfq-paths-title">
 				<?php foreach ( $rfq_product_paths as $path ) : ?>
@@ -256,6 +313,7 @@ $category_url = static function ( $category ) use ( $shop_url ) {
 					</a>
 				<?php endforeach; ?>
 			</nav>
+			<div class="zx-rfq__route-footer"><a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">View full catalogue <span aria-hidden="true">↗</span></a></div>
 			<div class="zx-rfq__grid">
 				<div class="zx-rfq__intro"><h3 id="zx-rfq-title">Tell us what you are building.</h3><p>Start with three useful details. Add the rest only when it helps the conversation.</p><div class="zx-rfq__promise"><span>01</span><p>Choose a format, market and volume in about 30 seconds.</p></div><div class="zx-rfq__promise"><span>02</span><p>Add artwork or timing when you are ready. Your text stays in this session.</p></div></div>
 				<form class="zx-rfq-form" data-rfq-stepper action="<?php echo esc_url( admin_url( 'admin-post.php' ) ); ?>" method="post" enctype="multipart/form-data">

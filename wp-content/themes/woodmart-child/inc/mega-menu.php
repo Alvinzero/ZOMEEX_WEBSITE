@@ -89,17 +89,17 @@ function zomeex_render_mega_menu( $args ) {
 										<p class="zomeex-mega-menu__summary"><?php echo esc_html( $group['summary'] ); ?></p>
 									<?php endif; ?>
 									<?php if ( ! empty( $group['children'] ) && 'tree' === $mode ) : ?>
+										<?php
+										$child_total = count( $group['children'] );
+										$child_limit = 3;
+										$child_items = array_slice( $group['children'], 0, $child_limit );
+										?>
 										<ul>
-											<?php
-											$children      = $group['children'];
-											$max_children  = 3;
-											$visible       = array_slice( $children, 0, $max_children );
-											foreach ( $visible as $child ) :
-												?>
+											<?php foreach ( $child_items as $child ) : ?>
 												<li><a href="<?php echo esc_url( $child['url'] ); ?>"><?php echo esc_html( $child['name'] ); ?></a></li>
 											<?php endforeach; ?>
-											<?php if ( count( $children ) > $max_children ) : ?>
-												<li class="zomeex-mega-menu__more"><a href="<?php echo esc_url( $group['url'] ); ?>">View all <span aria-hidden="true"><?php echo esc_html( (string) count( $children ) ); ?></span> <?php echo zomeex_nav_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a></li>
+											<?php if ( $child_total > $child_limit ) : ?>
+												<li class="zomeex-mega-menu__more"><a href="<?php echo esc_url( $group['url'] ); ?>">View all <?php echo esc_html( (string) $child_total ); ?> <?php echo zomeex_nav_arrow(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></a></li>
 											<?php endif; ?>
 										</ul>
 									<?php endif; ?>

@@ -93,7 +93,10 @@
 
   function revealChaty() {
     var widget = document.querySelector('.chaty-widget');
-    if (widget && widget.querySelector('.chaty-channel a')) widget.classList.add('zomeex-chaty-ready');
+    if (!widget) return;
+
+    // Add ready class immediately - no delay
+    widget.classList.add('zomeex-chaty-ready');
   }
 
   function revealChatyWhenSafe() {

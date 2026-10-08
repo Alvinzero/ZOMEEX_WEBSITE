@@ -2110,14 +2110,15 @@
   /* WHY ZOMEEX advantages section (front page section 3). */
   var ADVANTAGES_EXTRA_BY_SOURCE = {
     'zh-CN': {
-      "View all": "查看全部", "WHY ZOMEEX": "为什么选择 ZOMEEX",
+      "View all": "查看全部", "View capability": "查看能力", "WHY ZOMEEX": "为什么选择 ZOMEEX",
+      "View full-size image": "查看完整大图",
       "More Than Packaging.": "不止是包装。",
       "Your Strategic Cannabis Sourcing Partner.": "您的大麻采购战略伙伴。",
       "We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.": "我们打造完全合规、可直接上架的包装体系，保护你的产品、简化供应链，并助力大麻品牌规模化发展。",
-      "The Fit:": "适配：", "The Protection:": "合规保障：", "The Supply Chain:": "供应链：", "The Advantage:": "品牌优势：", "Key Specs": "关键规格",
+      "The Fit:": "适配：", "The Protection:": "合规保障：", "The Supply Chain:": "供应链：", "The Advantage:": "品牌优势：", "Key Specs": "关键规格", "Shelf Impact": "货架表现", "Trend-Led Finishes": "趋势工艺",
       "Precision-Engineered Product Fit": "精密工程化产品适配",
       "Custom Structural Design & Exact Dielines": "定制结构设计与精准刀模",
-      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.": "我们围绕你的精确产品规格定制刀模、尺寸与阻隔材料，确保花材、食品、雾化器与浓缩物的完美贴合。",
+      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs, ensuring a precise fit for flower, edibles, vapes, and concentrates.": "我们围绕你的精确产品规格定制刀模、尺寸与阻隔材料，确保花材、食品、雾化器与浓缩物的精准适配。",
       "Custom Dielines": "定制刀模",
       "Barrier Materials": "阻隔材料",
       "Precision Inserts": "精密内托",
@@ -2148,14 +2149,15 @@
       "Custom Unboxing Experience": "定制开箱体验"
     },
     ru: {
-      "View all": "Смотреть все", "WHY ZOMEEX": "ПОЧЕМУ ZOMEEX",
+      "View all": "Смотреть все", "View capability": "Смотреть направление", "WHY ZOMEEX": "ПОЧЕМУ ZOMEEX",
+      "View full-size image": "Посмотреть изображение в полном размере",
       "More Than Packaging.": "Больше, чем упаковка.",
       "Your Strategic Cannabis Sourcing Partner.": "Ваш стратегический партнер по закупкам cannabis.",
       "We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.": "Мы создаем полностью compliant упаковочные системы, готовые к ритейлу: защищаем продукт, упрощаем цепочку поставок и масштабируем ваш cannabis-бренд.",
-      "The Fit:": "Посадка:", "The Protection:": "Защита:", "The Supply Chain:": "Цепочка поставок:", "The Advantage:": "Преимущество:", "Key Specs": "Ключевые характеристики",
+      "The Fit:": "Посадка:", "The Protection:": "Защита:", "The Supply Chain:": "Цепочка поставок:", "The Advantage:": "Преимущество:", "Key Specs": "Ключевые характеристики", "Shelf Impact": "Эффект на полке", "Trend-Led Finishes": "Трендовая отделка",
       "Precision-Engineered Product Fit": "Точная инженерная подгонка продукта",
       "Custom Structural Design & Exact Dielines": "Индивидуальный конструктив и точные высечки",
-      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.": "Мы проектируем высечки, размеры и барьерные материалы под ваши точные спецификации — идеальная посадка для flower, edibles, вейпов и концентратов.",
+      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs, ensuring a precise fit for flower, edibles, vapes, and concentrates.": "Мы проектируем высечки, размеры и барьерные материалы под ваши точные спецификации, обеспечивая точную посадку для flower, edibles, вейпов и концентратов.",
       "Custom Dielines": "Индивидуальные высечки",
       "Barrier Materials": "Барьерные материалы",
       "Precision Inserts": "Прецизионные вкладыши",
@@ -2186,14 +2188,15 @@
       "Custom Unboxing Experience": "Индивидуальный unboxing-опыт"
     },
     de: {
-      "View all": "Alle ansehen", "WHY ZOMEEX": "WARUM ZOMEEX",
+      "View all": "Alle ansehen", "View capability": "Route ansehen", "WHY ZOMEEX": "WARUM ZOMEEX",
+      "View full-size image": "Bild in voller Größe ansehen",
       "More Than Packaging.": "Mehr als Verpackung.",
       "Your Strategic Cannabis Sourcing Partner.": "Ihr strategischer Cannabis-Beschaffungspartner.",
       "We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.": "Wir entwickeln vollständig konforme, verkaufsfertige Verpackungssysteme, die Ihr Produkt schützen, Ihre Lieferkette vereinfachen und Ihre Cannabis-Marke skalieren.",
-      "The Fit:": "Die Passform:", "The Protection:": "Der Schutz:", "The Supply Chain:": "Die Lieferkette:", "The Advantage:": "Der Vorteil:", "Key Specs": "Kerndaten",
+      "The Fit:": "Die Passform:", "The Protection:": "Der Schutz:", "The Supply Chain:": "Die Lieferkette:", "The Advantage:": "Der Vorteil:", "Key Specs": "Kerndaten", "Shelf Impact": "Regalwirkung", "Trend-Led Finishes": "Trend-Finishes",
       "Precision-Engineered Product Fit": "Präzisionsgefertigte Produktpassform",
       "Custom Structural Design & Exact Dielines": "Individuelles Strukturdesign & exakte Stanzlinien",
-      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.": "Wir entwickeln Stanzlinien, Maße und Barrierematerialien exakt nach Ihren Produktspezifikationen — für eine perfekte Passform für Flower, Edibles, Vapes und Konzentrate.",
+      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs, ensuring a precise fit for flower, edibles, vapes, and concentrates.": "Wir entwickeln Stanzlinien, Maße und Barrierematerialien exakt nach Ihren Produktspezifikationen, für eine präzise Passform bei Flower, Edibles, Vapes und Konzentraten.",
       "Custom Dielines": "Individuelle Stanzlinien",
       "Barrier Materials": "Barrierematerialien",
       "Precision Inserts": "Präzisionseinlagen",
@@ -2224,14 +2227,15 @@
       "Custom Unboxing Experience": "Individuelles Unboxing-Erlebnis"
     },
     fr: {
-      "View all": "Voir tout", "WHY ZOMEEX": "POURQUOI ZOMEEX",
+      "View all": "Voir tout", "View capability": "Voir la capacité", "WHY ZOMEEX": "POURQUOI ZOMEEX",
+      "View full-size image": "Voir l'image en taille réelle",
       "More Than Packaging.": "Bien plus qu'un emballage.",
       "Your Strategic Cannabis Sourcing Partner.": "Votre partenaire stratégique en sourcing cannabis.",
       "We engineer fully compliant, retail-ready packaging systems that protect your product, simplify your supply chain, and scale your cannabis brand.": "Nous concevons des systèmes d'emballage conformes et prêts pour le retail qui protègent votre produit, simplifient votre chaîne d'approvisionnement et font évoluer votre marque de cannabis.",
-      "The Fit:": "L’ajustement :", "The Protection:": "La protection :", "The Supply Chain:": "La chaîne :", "The Advantage:": "L’avantage :", "Key Specs": "Specs clés",
+      "The Fit:": "L’ajustement :", "The Protection:": "La protection :", "The Supply Chain:": "La chaîne :", "The Advantage:": "L’avantage :", "Key Specs": "Specs clés", "Shelf Impact": "Impact en rayon", "Trend-Led Finishes": "Finitions tendance",
       "Precision-Engineered Product Fit": "Ajustement produit de précision",
       "Custom Structural Design & Exact Dielines": "Design structurel sur mesure et tracés exacts",
-      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs—ensuring a flawless fit for flower, edibles, vapes, and concentrates.": "Nous concevons tracés, dimensions et matériaux barrière selon vos spécifications exactes — pour un ajustement parfait pour flower, edibles, vapes et concentrés.",
+      "We custom-engineer dielines, dimensions, and barrier materials around your exact product specs, ensuring a precise fit for flower, edibles, vapes, and concentrates.": "Nous concevons les tracés, les dimensions et les matériaux barrière selon vos spécifications exactes, pour un ajustement précis des flower, edibles, vapes et concentrés.",
       "Custom Dielines": "Tracés sur mesure",
       "Barrier Materials": "Matériaux barrière",
       "Precision Inserts": "Inserts de précision",
@@ -2264,6 +2268,49 @@
   };
   Object.keys(ADVANTAGES_EXTRA_BY_SOURCE).forEach(function (locale) {
     EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, ADVANTAGES_EXTRA_BY_SOURCE[locale]);
+  });
+
+  /* Native copy and specification labels from the user's final WHY reference. */
+  var WHY_NATIVE_EXTRA_BY_SOURCE = {
+    'zh-CN': {
+      "Compliant Solutions": "合规方案", "Supply Chain Efficiency": "供应链效率", "Brand Growth": "品牌增长",
+      "CR Certified": "CR 认证", "Sustainable Materials": "可持续材料", "Multi-State Compliant": "多州合规", "Eco-Friendly": "环保",
+      "Primary Packaging": "主包装", "Secondary Packaging": "配套包装", "POP Displays": "POP 展示", "Master Shippers": "运输外箱",
+      "Premium Finishes": "高级工艺", "Tactile Textures": "触感纹理", "Trend-Forward Designs": "前沿设计",
+      "Partner": "合作", "Package": "包装", "Grow": "成长",
+      "Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers.": "一站式整合采购。我们将主容器与配套包装盒、POP 展示架及运输外箱无缝衔接。",
+      "Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting visual designs that drive repeat purchases.": "以高级工艺、触感纹理和引领潮流的视觉设计，提升药房货架表现并推动复购。"
+    },
+    ru: {
+      "Compliant Solutions": "Соответствие нормам", "Supply Chain Efficiency": "Эффективные поставки", "Brand Growth": "Рост бренда",
+      "CR Certified": "Сертификация CR", "Sustainable Materials": "Экологичные материалы", "Multi-State Compliant": "Нормы разных штатов", "Eco-Friendly": "Экологичность",
+      "Primary Packaging": "Первичная упаковка", "Secondary Packaging": "Вторичная упаковка", "POP Displays": "POP-дисплеи", "Master Shippers": "Транспортные короба",
+      "Premium Finishes": "Премиальная отделка", "Tactile Textures": "Тактильные текстуры", "Trend-Forward Designs": "Актуальный дизайн",
+      "Partner": "Партнёрство", "Package": "Упаковка", "Grow": "Рост",
+      "Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers.": "Объедините закупки у одного поставщика. Мы согласуем первичную тару, вторичные коробки, POP-дисплеи и транспортные короба.",
+      "Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting visual designs that drive repeat purchases.": "Выделяйтесь на полках благодаря премиальной отделке, тактильным текстурам и актуальному дизайну, стимулирующему повторные покупки."
+    },
+    de: {
+      "Compliant Solutions": "Konforme Lösungen", "Supply Chain Efficiency": "Effiziente Lieferketten", "Brand Growth": "Markenwachstum",
+      "CR Certified": "CR-zertifiziert", "Sustainable Materials": "Nachhaltige Materialien", "Multi-State Compliant": "Überregional konform", "Eco-Friendly": "Umweltfreundlich",
+      "Primary Packaging": "Primärverpackung", "Secondary Packaging": "Sekundärverpackung", "POP Displays": "POP-Displays", "Master Shippers": "Versandkartons",
+      "Premium Finishes": "Premium-Veredelung", "Tactile Textures": "Taktile Oberflächen", "Trend-Forward Designs": "Trendweisendes Design",
+      "Partner": "Partnerschaft", "Package": "Verpackung", "Grow": "Wachstum",
+      "Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers.": "Bündeln Sie Ihre Beschaffung bei einem Partner. Wir verbinden Primärbehälter, Sekundärverpackungen, POP-Displays und Versandkartons.",
+      "Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting visual designs that drive repeat purchases.": "Stärken Sie Ihre Regalpräsenz mit Premium-Veredelung, taktilen Oberflächen und trendweisendem Design, das Wiederkäufe fördert."
+    },
+    fr: {
+      "Compliant Solutions": "Solutions conformes", "Supply Chain Efficiency": "Approvisionnement efficace", "Brand Growth": "Croissance de marque",
+      "CR Certified": "Certifié CR", "Sustainable Materials": "Matériaux durables", "Multi-State Compliant": "Conformité multi-États", "Eco-Friendly": "Écoresponsable",
+      "Primary Packaging": "Emballage primaire", "Secondary Packaging": "Emballage secondaire", "POP Displays": "Présentoirs POP", "Master Shippers": "Cartons d’expédition",
+      "Premium Finishes": "Finitions premium", "Tactile Textures": "Textures tactiles", "Trend-Forward Designs": "Designs avant-gardistes",
+      "Partner": "Partenariat", "Package": "Emballage", "Grow": "Croissance",
+      "Consolidate your sourcing under one roof. We seamlessly pair primary containers with secondary boxes, POP displays, and master shippers.": "Centralisez vos achats auprès d’un partenaire. Nous associons contenants primaires, boîtes secondaires, présentoirs POP et cartons d’expédition.",
+      "Dominate dispensary shelf space with premium finishes, tactile textures, and trend-setting visual designs that drive repeat purchases.": "Renforcez votre présence en rayon grâce aux finitions premium, textures tactiles et designs avant-gardistes qui encouragent le réachat."
+    }
+  };
+  Object.keys(WHY_NATIVE_EXTRA_BY_SOURCE).forEach(function (locale) {
+    EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, WHY_NATIVE_EXTRA_BY_SOURCE[locale]);
   });
 
   /* Child-resistant menu children (CR menu now mirrors Products structure). */

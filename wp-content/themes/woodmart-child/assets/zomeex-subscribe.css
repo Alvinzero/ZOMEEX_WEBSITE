@@ -9,7 +9,7 @@
 	--subscribe-paper: #f7f9f6;
 	--subscribe-line: #cbd6ce;
 	align-items: center;
-	background: rgba(9, 27, 21, .62);
+	background: rgba(9, 27, 21, .92);
 	display: flex;
 	inset: 0;
 	justify-content: center;
@@ -30,6 +30,30 @@
 
 body.zomeex-subscribe-open {
 	overflow: hidden !important;
+}
+
+/* Keep the third-party chat launcher completely hidden until explicitly shown.
+ * Simple approach: hide by default, show only when ready class is added. */
+.chaty-widget {
+	opacity: 0 !important;
+	pointer-events: none !important;
+	visibility: hidden !important;
+	transition: opacity 0.3s ease-in-out !important;
+}
+
+/* Disable all Chaty animations to prevent any flash */
+.chaty-widget *,
+.chaty-widget .chaty-channels,
+.chaty-widget .chaty-channel {
+	animation: none !important;
+	-webkit-animation: none !important;
+}
+
+/* Only show when explicitly marked as ready */
+.chaty-widget.zomeex-chaty-ready {
+	opacity: 1 !important;
+	pointer-events: auto !important;
+	visibility: visible !important;
 }
 
 .zomeex-subscribe__dialog {
@@ -371,8 +395,6 @@ body.zomeex-subscribe-open {
 @media (prefers-reduced-motion: no-preference) {
 	.zomeex-subscribe {
 		animation: zomeex-subscribe-fade .28s ease-out both;
-		backdrop-filter: blur(7px);
-		-webkit-backdrop-filter: blur(7px);
 	}
 
 	.zomeex-subscribe__dialog {

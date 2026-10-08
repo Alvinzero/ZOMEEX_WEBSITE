@@ -264,13 +264,12 @@
     releaseHeroVideo();
   };
 
-  /* Media hydrates DURING the subscribe gate, not after it. The still image
-   * loads immediately (it is the hero's visual floor — the gate must never
-   * sit on an empty backdrop), and the MP4 starts downloading right away in
-   * the background: downloads are async and do not block the lightweight
-   * popup, so by the time the visitor closes the card the video is ready. */
-  releaseHeroImage();
-  releaseHeroVideo();
+  /* Hero media is FULLY DEFERRED until the subscribe gate is released.
+   * The gate appears instantly on a neutral backdrop, keeping the startup
+   * paint lightweight. Once the visitor closes the card, the still image
+   * loads immediately and the MP4 follows during the next idle window. */
+  // releaseHeroImage();
+  // releaseHeroVideo();
 
   if (startupGate) {
     var onSubscribeGate = function (event) {

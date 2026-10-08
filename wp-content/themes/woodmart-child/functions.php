@@ -39,6 +39,7 @@ function woodmart_child_enqueue_styles() {
 			(string) filemtime( $chaty_fix_path ),
 			true
 		);
+		wp_script_add_data( 'zomeex-chaty-fixes', 'strategy', 'defer' );
 	}
 
 	if ( is_front_page() || zomeex_is_modern_route() ) {
@@ -51,6 +52,7 @@ function woodmart_child_enqueue_styles() {
 			file_exists( $i18n_script_path ) ? (string) filemtime( $i18n_script_path ) : '1.0.12',
 			true
 		);
+		wp_script_add_data( 'zomeex-i18n', 'strategy', 'defer' );
 
 		wp_enqueue_script(
 			'zomeex-home',
@@ -59,6 +61,7 @@ function woodmart_child_enqueue_styles() {
 			file_exists( $home_script_path ) ? (string) filemtime( $home_script_path ) : '1.3.2',
 			true
 		);
+		wp_script_add_data( 'zomeex-home', 'strategy', 'defer' );
 
 		$subscribe_script_path = get_stylesheet_directory() . '/assets/zomeex-subscribe.js';
 		wp_enqueue_script(
@@ -68,6 +71,7 @@ function woodmart_child_enqueue_styles() {
 			file_exists( $subscribe_script_path ) ? (string) filemtime( $subscribe_script_path ) : null,
 			true
 		);
+		wp_script_add_data( 'zomeex-subscribe', 'strategy', 'defer' );
 		wp_localize_script(
 			'zomeex-subscribe',
 			'zomeexSubscribe',
@@ -1039,14 +1043,14 @@ function zomeex_subscribe_modal() {
 	$visual_url  = zomeex_upload_url( '867e165f24446709fc61b665f5fd4478-1536x864.jpg', '2025/11' );
 	$privacy_url = get_privacy_policy_url();
 	?>
-	<div class="zomeex-subscribe notranslate" data-zomeex-subscribe hidden aria-hidden="true" translate="no">
+	<div class="zomeex-subscribe notranslate" data-zomeex-subscribe data-zomeex-startup-gate hidden aria-hidden="true" translate="no">
 		<div class="zomeex-subscribe__backdrop" data-subscribe-dismiss aria-hidden="true"></div>
 		<section class="zomeex-subscribe__dialog" role="dialog" aria-modal="true" aria-labelledby="zomeex-subscribe-title" aria-describedby="zomeex-subscribe-copy" tabindex="-1">
 			<button class="zomeex-subscribe__close" type="button" data-subscribe-dismiss aria-label="Close subscription offer">
 				<span aria-hidden="true"></span>
 			</button>
 			<div class="zomeex-subscribe__content">
-				<img class="zomeex-subscribe__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65">
+			<img class="zomeex-subscribe__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65" fetchpriority="high">
 				<div class="zomeex-subscribe__message" data-subscribe-message>
 					<h2 id="zomeex-subscribe-title">Make the next packaging decision with better context.</h2>
 					<p id="zomeex-subscribe-copy">Get new formats, material updates and practical packaging guidance in one concise email.</p>
@@ -1069,7 +1073,7 @@ function zomeex_subscribe_modal() {
 				<p class="zomeex-subscribe__consent"><span class="zomeex-subscribe__consent-text">By subscribing, you agree to receive ZOMEEX email updates. You can unsubscribe at any time.</span><?php if ( $privacy_url ) : ?> <a href="<?php echo esc_url( $privacy_url ); ?>">Privacy policy</a><?php endif; ?></p>
 			</div>
 			<figure class="zomeex-subscribe__visual">
-				<img src="<?php echo esc_url( $visual_url ); ?>" alt="ZOMEEX product development range" width="1536" height="864" loading="lazy">
+				<img src="<?php echo esc_url( $visual_url ); ?>" alt="ZOMEEX product development range" width="1536" height="864" loading="eager" fetchpriority="high" decoding="async">
 				<figcaption>New formats. Better material decisions. Fewer late-stage surprises.</figcaption>
 			</figure>
 		</section>

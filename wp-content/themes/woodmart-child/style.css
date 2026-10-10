@@ -1659,6 +1659,12 @@ body.zomeex-subscribe-open .chaty-widget {
 	width: 48px;
 }
 
+/* Chaty's configured count badge gets clipped into a dark fleck by the
+ * circular WhatsApp button. Keep this contact affordance free of that badge. */
+.zomeex-modern-page .chaty-widget .Whatsapp-channel .ch-pending-msg {
+	display: none !important;
+}
+
 .zomeex-modern-page .chaty-widget .on-hover-text {
 	border: 0;
 	clip: rect(0 0 0 0);

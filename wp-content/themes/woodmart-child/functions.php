@@ -76,7 +76,7 @@ function woodmart_child_enqueue_styles() {
 			'zomeex-subscribe',
 			'zomeexSubscribe',
 			array(
-				'ajaxUrl' => admin_url( 'admin-ajax.php' ),
+			'ajaxUrl' => admin_url( 'admin-ajax.php' ),
 				'nonce'   => wp_create_nonce( 'zomeex_subscribe' ),
 				'preview' => isset( $_GET['subscribe-preview'] ) && '1' === sanitize_text_field( wp_unslash( $_GET['subscribe-preview'] ) ),
 			)
@@ -100,6 +100,18 @@ function woodmart_child_enqueue_styles() {
 				'locale'   => get_locale(),
 			)
 		);
+	}
+
+	if ( is_page( 'news' ) ) {
+		$insights_script_path = get_stylesheet_directory() . '/assets/zomeex-insights.js';
+		wp_enqueue_script(
+			'zomeex-insights',
+			get_stylesheet_directory_uri() . '/assets/zomeex-insights.js',
+			array( 'zomeex-i18n' ),
+			(string) filemtime( $insights_script_path ),
+			true
+		);
+		wp_script_add_data( 'zomeex-insights', 'strategy', 'defer' );
 	}
 }
 /* Keep homepage overrides after Woodmart's page-specific styles. */
@@ -675,14 +687,14 @@ function zomeex_register_quote_post_type() {
 }
 add_action( 'init', 'zomeex_register_quote_post_type' );
 
-/** Keep newsletter signups private while making them usable by site admins. */
+/** Keep sample-kit requests private while making them usable by site admins. */
 function zomeex_register_subscriber_post_type() {
 	register_post_type(
 		'zomeex_subscriber',
 		array(
 			'labels'       => array(
-				'name'          => 'Email subscribers',
-				'singular_name' => 'Email subscriber',
+				'name'          => 'Sample kit requests',
+				'singular_name' => 'Sample kit request',
 			),
 			'public'       => false,
 			'show_ui'      => true,
@@ -946,7 +958,7 @@ function zomeex_handle_quote_submit() {
 add_action( 'admin_post_nopriv_zomeex_quote_submit', 'zomeex_handle_quote_submit' );
 add_action( 'admin_post_zomeex_quote_submit', 'zomeex_handle_quote_submit' );
 
-/** Accept one-field newsletter subscriptions without exposing subscriber data. */
+/** Accept one-field sample-kit requests without exposing contact data. */
 function zomeex_handle_subscribe() {
 	if ( ! check_ajax_referer( 'zomeex_subscribe', 'nonce', false ) ) {
 		wp_send_json_error( array( 'code' => 'security' ), 403 );
@@ -956,7 +968,7 @@ function zomeex_handle_subscribe() {
 		? sanitize_text_field( wp_unslash( $_POST['company_website'] ) )
 		: '';
 	if ( $honeypot ) {
-		wp_send_json_success( array( 'status' => 'subscribed' ) );
+		wp_send_json_success( array( 'status' => 'requested' ) );
 	}
 
 	$email = isset( $_POST['email'] ) && is_scalar( $_POST['email'] )
@@ -980,13 +992,15 @@ function zomeex_handle_subscribe() {
 			'post_status'    => 'private',
 			'posts_per_page' => 1,
 			'fields'         => 'ids',
-			'meta_key'       => '_zomeex_subscriber_email',
-			'meta_value'     => $email,
+			'meta_query'     => array(
+				array( 'key' => '_zomeex_subscriber_email', 'value' => $email ),
+				array( 'key' => '_zomeex_request_kind', 'value' => 'sample-kit' ),
+			),
 			'no_found_rows'  => true,
 		)
 	);
 	if ( $existing ) {
-		wp_send_json_success( array( 'status' => 'already_subscribed' ) );
+		wp_send_json_success( array( 'status' => 'already_requested' ) );
 	}
 
 	$locale = isset( $_POST['locale'] ) && is_scalar( $_POST['locale'] )
@@ -1017,64 +1031,97 @@ function zomeex_handle_subscribe() {
 	}
 
 	update_post_meta( $post_id, '_zomeex_subscriber_email', $email );
+	update_post_meta( $post_id, '_zomeex_request_kind', 'sample-kit' );
+	update_post_meta( $post_id, '_zomeex_sample_requested_at', current_time( 'mysql', true ) );
 	update_post_meta( $post_id, '_zomeex_subscriber_locale', $locale );
 	update_post_meta( $post_id, '_zomeex_subscriber_source_url', $source_url );
 	update_post_meta( $post_id, '_zomeex_subscriber_consent_time', current_time( 'mysql', true ) );
 
 	$recipient = apply_filters( 'zomeex_subscribe_recipient', get_option( 'admin_email' ) );
-	wp_mail(
+	$notification_sent = wp_mail(
 		$recipient,
-		'New ZOMEEX email subscriber',
+		'New ZOMEEX sample kit request',
 		"Email: {$email}\nLocale: {$locale}\nSource: {$source_url}"
 	);
+	update_post_meta( $post_id, '_zomeex_sample_notification_sent', $notification_sent ? '1' : '0' );
 
-	wp_send_json_success( array( 'status' => 'subscribed' ) );
+	wp_send_json_success( array( 'status' => 'requested' ) );
 }
 add_action( 'wp_ajax_nopriv_zomeex_subscribe', 'zomeex_handle_subscribe' );
 add_action( 'wp_ajax_zomeex_subscribe', 'zomeex_handle_subscribe' );
 
-/** Render the subscription prompt once, outside the page shell and above plugin popups. */
+/** Small inline icon set for the sample-kit conversion prompt. */
+function zomeex_sample_icon( $name ) {
+	$paths = array(
+		'email'     => '<rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 7 8 6 8-6"/>',
+		'lock'      => '<rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/>',
+		'materials' => '<path d="m12 3 8 4-8 4-8-4 8-4Z"/><path d="m4 11 8 4 8-4"/><path d="m4 15 8 4 8-4"/>',
+		'structures' => '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3.2"/><path d="M12 1.5v2M12 20.5v2M1.5 12h2m17 0h2M4.6 4.6 6 6m12 12 1.4 1.4m0-14.8L18 6M6 18l-1.4 1.4"/>',
+		'shield'    => '<path d="M12 3 20 6v5c0 5-3.2 8.2-8 10-4.8-1.8-8-5-8-10V6l8-3Z"/><path d="m8.5 11 2.2 2.2 4.8-5"/>',
+		'arrow'     => '<path d="M5 12h13"/><path d="m13 6 6 6-6 6"/>',
+	);
+	$path = isset( $paths[ $name ] ) ? $paths[ $name ] : $paths['arrow'];
+
+	return '<svg class="zomeex-subscribe__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.55" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">' . $path . '</svg>';
+}
+
+/** Render the sample-kit prompt once, outside the page shell and above plugin popups. */
 function zomeex_subscribe_modal() {
 	if ( ! zomeex_is_modern_route() ) {
 		return;
 	}
 
-	$logo_url    = zomeex_upload_url( 'zomeex-logo_03.svg', '2026/05' );
-	$visual_url  = zomeex_upload_url( '867e165f24446709fc61b665f5fd4478-1536x864.jpg', '2025/11' );
+	$logo_url    = get_stylesheet_directory_uri() . '/assets/sample-kit/zomeex-logo-light.svg';
+	$visual_url  = get_stylesheet_directory_uri() . '/assets/sample-kit/packaging-development.png';
 	$privacy_url = get_privacy_policy_url();
 	?>
 	<div class="zomeex-subscribe notranslate" data-zomeex-subscribe data-zomeex-startup-gate hidden aria-hidden="true" translate="no">
 		<div class="zomeex-subscribe__backdrop" data-subscribe-dismiss aria-hidden="true"></div>
 		<section class="zomeex-subscribe__dialog" role="dialog" aria-modal="true" aria-labelledby="zomeex-subscribe-title" aria-describedby="zomeex-subscribe-copy" tabindex="-1">
-			<button class="zomeex-subscribe__close" type="button" data-subscribe-dismiss aria-label="Close subscription offer">
-				<span aria-hidden="true"></span>
-			</button>
+			<div class="zomeex-subscribe__toolbar">
+				<img class="zomeex-subscribe__mobile-logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65">
+				<button class="zomeex-subscribe__close" type="button" data-subscribe-dismiss aria-label="Close sample request offer">
+					<span aria-hidden="true"></span>
+				</button>
+			</div>
 			<div class="zomeex-subscribe__content">
-			<img class="zomeex-subscribe__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65" fetchpriority="high">
+				<div class="zomeex-subscribe__brand">
+					<img class="zomeex-subscribe__logo" src="<?php echo esc_url( $logo_url ); ?>" alt="ZOMEEX" width="260" height="65" fetchpriority="high">
+					<p class="zomeex-subscribe__eyebrow" data-subscribe-text="eyebrow">Exclusive B2B offer</p>
+				</div>
 				<div class="zomeex-subscribe__message" data-subscribe-message>
-					<h2 id="zomeex-subscribe-title">Make the next packaging decision with better context.</h2>
-					<p id="zomeex-subscribe-copy">Get new formats, material updates and practical packaging guidance in one concise email.</p>
+					<h2 id="zomeex-subscribe-title"><span data-subscribe-text="title">Get Free Cannabis</span><strong data-subscribe-text="titleAccent">Packaging Samples</strong></h2>
+					<p class="zomeex-subscribe__subhead" data-subscribe-text="subhead">Custom dielines included</p>
+					<p id="zomeex-subscribe-copy" data-subscribe-text="copy">Explore materials, structures, finishes and child-resistant options before you order. Request a curated packaging sample kit with matching dielines — at no cost.</p>
 				</div>
 				<form class="zomeex-subscribe__form" data-subscribe-form aria-busy="false" novalidate>
 					<label for="zomeex-subscribe-email">Business email</label>
 					<div class="zomeex-subscribe__field">
-						<input id="zomeex-subscribe-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="name@company.com" aria-describedby="zomeex-subscribe-status" required>
-						<button type="submit" data-subscribe-submit>Get the brief</button>
+						<div class="zomeex-subscribe__email-row">
+							<span class="zomeex-subscribe__field-icon" aria-hidden="true"><?php echo zomeex_sample_icon( 'email' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span>
+							<input id="zomeex-subscribe-email" name="email" type="email" inputmode="email" autocomplete="email" placeholder="Enter your business email" aria-describedby="zomeex-subscribe-status" required>
+						</div>
+						<button type="submit" data-subscribe-submit><span data-subscribe-submit-label>Request free sample kit</span><span aria-hidden="true"><?php echo zomeex_sample_icon( 'arrow' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span></button>
 					</div>
 					<input class="zomeex-subscribe__honeypot" name="company_website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true">
-					<p class="zomeex-subscribe__status" id="zomeex-subscribe-status" data-subscribe-status role="status" aria-live="polite">Product releases and useful packaging notes. No inbox clutter.</p>
+					<p class="zomeex-subscribe__status" id="zomeex-subscribe-status" data-subscribe-status role="status" aria-live="polite"><span aria-hidden="true"><?php echo zomeex_sample_icon( 'lock' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span><span data-subscribe-text="helper">We respect your privacy. No spam.</span></p>
 				</form>
 				<div class="zomeex-subscribe__success" data-subscribe-success hidden tabindex="-1">
-					<h3>You are on the list.</h3>
-					<p>We will send the next useful product or packaging update to your inbox.</p>
+					<h3>Sample request received.</h3>
+					<p>Our packaging team will follow up to confirm your sample kit and dieline needs.</p>
 					<button type="button" data-subscribe-dismiss>Continue browsing</button>
 				</div>
-				<button class="zomeex-subscribe__skip" type="button" data-subscribe-dismiss>Continue without subscribing</button>
-				<p class="zomeex-subscribe__consent"><span class="zomeex-subscribe__consent-text">By subscribing, you agree to receive ZOMEEX email updates. You can unsubscribe at any time.</span><?php if ( $privacy_url ) : ?> <a href="<?php echo esc_url( $privacy_url ); ?>">Privacy policy</a><?php endif; ?></p>
+				<button class="zomeex-subscribe__skip" type="button" data-subscribe-dismiss>No thanks, continue browsing</button>
+				<p class="zomeex-subscribe__consent"><span aria-hidden="true"><?php echo zomeex_sample_icon( 'shield' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></span><span class="zomeex-subscribe__consent-text">For licensed cannabis businesses and packaging professionals. By continuing, you confirm that you meet applicable age and business requirements.</span><?php if ( $privacy_url ) : ?> <a href="<?php echo esc_url( $privacy_url ); ?>">Privacy policy</a><?php endif; ?></p>
 			</div>
 			<figure class="zomeex-subscribe__visual">
-				<img src="<?php echo esc_url( $visual_url ); ?>" alt="ZOMEEX product development range" width="1536" height="864" loading="eager" fetchpriority="high" decoding="async">
-				<figcaption>New formats. Better material decisions. Fewer late-stage surprises.</figcaption>
+				<div class="zomeex-subscribe__visual-head"><span data-subscribe-text="visualTitle">Custom packaging development</span><i aria-hidden="true"></i></div>
+				<img src="<?php echo esc_url( $visual_url ); ?>" alt="A packaging dieline beside finished ZOMEEX sample boxes, pouch and jar" width="1341" height="1173" loading="eager" fetchpriority="high" decoding="async">
+				<figcaption class="zomeex-subscribe__facts">
+					<span><b><?php echo zomeex_sample_icon( 'materials' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></b><strong data-subscribe-text="materials">Material options</strong><small data-subscribe-text="materialNote">Paperboard &amp; more</small></span>
+					<span><b><?php echo zomeex_sample_icon( 'structures' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></b><strong data-subscribe-text="structures">Custom structures</strong><small data-subscribe-text="structuresNote">Styles &amp; exact dielines</small></span>
+					<span><b><?php echo zomeex_sample_icon( 'shield' ); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?></b><strong data-subscribe-text="childResistant">Child-resistant options</strong><small data-subscribe-text="childResistantNote">For your market</small></span>
+				</figcaption>
 			</figure>
 		</section>
 	</div>

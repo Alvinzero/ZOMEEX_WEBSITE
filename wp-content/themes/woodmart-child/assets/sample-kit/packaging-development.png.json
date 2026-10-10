@@ -1,0 +1,19 @@
+{
+  "provider": "https://tokenskingdom.com/v1",
+  "model": "gpt-image-2.5-sunburst",
+  "workflow": "final",
+  "elapsed_seconds": 56.54,
+  "prompt": "Create a premium photorealistic commercial packaging-development still life for ZOMEEX. This image is an independent product photograph for the RIGHT HALF of a website modal, NOT a screenshot, NOT a full web design. Canvas 2048 by 1792, landscape-ish 8:7. Muted charcoal studio background, warm gray stone tabletop, soft architectural side lighting and realistic material texture. Use the supplied image only as lighting/material context; do not copy its brands or package artwork.\n\nComposition: on the left 30 percent, a vertical transparent smoky acrylic sheet displays a precise white thin-line technical unfolded tuck-end box dieline. Show one coherent structurally plausible dieline with panels, glue flap, dust flaps and folding lines, no measurement numbers. A small elegant white right-pointing arrow connects this engineering stage to finished packaging. On the right 70 percent, three immaculate realistic empty packaging samples: a tall matte-black folding carton with one restrained turquoise side panel and subtle botanical linework; a tall matte-black resealable stand-up pouch behind at the far right; a low black opaque glass jar in the foreground with a matte black screw cap. A small paper material swatch lies on the table. Brand printing on the finished carton, pouch and jar may contain only the exact word 'ZOMEEX' in small white letters with a turquoise X, and fine turquoise abstract botanical linework. No other lettering, amounts, measurements, claims, certification marks or copy. Every product should be fully visible, uncut, physically convincing, with a breathing margin. Finished packaging fills about 60 percent of the composition; engineering sheet about 30 percent; negative space 10 percent. Keep top 10 percent subdued and empty for a real HTML heading placed outside the image. No UI controls, no buttons, no form, no captions, no footer badges, no logo header, no outer frame, no neon glow. Camera just above eye level with a measured 3/4 angle, sharp forms and beautifully detailed paper/film/glass textures. Overall dark black and mineral gray, restrained turquoise only on actual packaging.\n",
+  "references": [
+    "outputs/popup-reference/image11.jpeg"
+  ],
+  "requested_size": "2048x1792",
+  "actual_size": [
+    1341,
+    1173
+  ],
+  "quality": "high",
+  "native_2k": false,
+  "reference_origin": "/Users/mac/Downloads/弹窗内容调整.docx#word/media/image11.jpeg",
+  "asset_role": "Independent packaging-development concept visualization; text, form and labels are HTML"
+}

@@ -10,12 +10,13 @@
   var email = modal.querySelector('input[name="email"]');
   var honeypot = modal.querySelector('input[name="company_website"]');
   var submit = modal.querySelector('[data-subscribe-submit]');
+  var submitLabel = modal.querySelector('[data-subscribe-submit-label]');
   var status = modal.querySelector('[data-subscribe-status]');
   var success = modal.querySelector('[data-subscribe-success]');
   var previousFocus = null;
   var open = false;
   var DISMISSED_KEY = 'zomeex-subscribe-dismissed-until';
-  var SUBSCRIBED_KEY = 'zomeex-subscribe-complete';
+  var SUBSCRIBED_KEY = 'zomeex-sample-kit-complete';
   var dismissFor = 14 * 24 * 60 * 60 * 1000;
 
   function publishGateState(state) {
@@ -56,27 +57,45 @@
     if (element) element.textContent = translate(key);
   }
 
+  function setSubmitText(key) {
+    if (submitLabel) submitLabel.textContent = translate(key);
+    else submit.textContent = translate(key);
+  }
+
   function setStatus(key, type) {
     status.dataset.messageKey = key;
     status.dataset.status = type || 'neutral';
-    status.textContent = translate(key);
+    var message = status.querySelector('[data-subscribe-text="helper"]');
+    if (message) message.textContent = translate(key);
+    else status.textContent = translate(key);
   }
 
   function localize() {
     var close = modal.querySelector('.zomeex-subscribe__close');
     if (close) close.setAttribute('aria-label', translate('subscribe.close'));
-    setText('#zomeex-subscribe-title', 'subscribe.title');
+    setText('[data-subscribe-text="eyebrow"]', 'subscribe.eyebrow');
+    setText('[data-subscribe-text="title"]', 'subscribe.title');
+    setText('[data-subscribe-text="titleAccent"]', 'subscribe.titleAccent');
     setText('#zomeex-subscribe-copy', 'subscribe.copy');
+    setText('[data-subscribe-text="subhead"]', 'subscribe.subhead');
     setText('label[for="zomeex-subscribe-email"]', 'subscribe.email');
     if (email) email.setAttribute('placeholder', translate('subscribe.placeholder'));
-    submit.textContent = submit.disabled ? translate('subscribe.loading') : translate('subscribe.submit');
+    setSubmitText(submit.disabled ? 'subscribe.loading' : 'subscribe.submit');
     setText('[data-subscribe-success] h3', 'subscribe.successTitle');
     setText('[data-subscribe-success] p', 'subscribe.successCopy');
     setText('[data-subscribe-success] button', 'subscribe.continue');
     setText('.zomeex-subscribe__skip', 'subscribe.skip');
     setText('.zomeex-subscribe__consent-text', 'subscribe.consent');
     setText('.zomeex-subscribe__consent a', 'subscribe.privacy');
-    setText('.zomeex-subscribe__visual figcaption', 'subscribe.visualCaption');
+    setText('[data-subscribe-text="visualTitle"]', 'subscribe.visualTitle');
+    setText('[data-subscribe-text="materials"]', 'subscribe.materials');
+    setText('[data-subscribe-text="materialNote"]', 'subscribe.materialNote');
+    setText('[data-subscribe-text="structures"]', 'subscribe.structures');
+    setText('[data-subscribe-text="structuresNote"]', 'subscribe.structuresNote');
+    setText('[data-subscribe-text="childResistant"]', 'subscribe.childResistant');
+    setText('[data-subscribe-text="childResistantNote"]', 'subscribe.childResistantNote');
+    var visual = modal.querySelector('.zomeex-subscribe__visual > img');
+    if (visual) visual.setAttribute('alt', translate('subscribe.visualAlt'));
     setStatus(status.dataset.messageKey || 'subscribe.helper', status.dataset.status || 'neutral');
   }
 
@@ -144,8 +163,8 @@
   function errorKey(code) {
     if (code === 'security') return 'subscribe.securityError';
     if (code === 'rate_limit') return 'subscribe.rateError';
-    if (code === 'save_failed') return 'subscribe.saveError';
-    return 'subscribe.invalidEmail';
+    if (code === 'invalid_email') return 'subscribe.invalidEmail';
+    return 'subscribe.saveError';
   }
 
   function submitForm(event) {
@@ -160,7 +179,7 @@
 
     submit.disabled = true;
     form.setAttribute('aria-busy', 'true');
-    submit.textContent = translate('subscribe.loading');
+    setSubmitText('subscribe.loading');
     setStatus('subscribe.loading', 'neutral');
 
     var body = new URLSearchParams();
@@ -189,7 +208,7 @@
       setStatus(errorKey(code), 'error');
       submit.disabled = false;
       form.setAttribute('aria-busy', 'false');
-      submit.textContent = translate('subscribe.submit');
+      setSubmitText('subscribe.submit');
     });
   }
 

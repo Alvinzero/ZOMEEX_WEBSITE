@@ -1,559 +1,452 @@
+/* The sample offer is a local studio surface, independent of Woodmart controls. */
 .zomeex-subscribe {
-	--subscribe-accent: #147451;
-	--subscribe-accent-strong: #0f5f40;
-	--subscribe-cta: #2de28c;
-	--subscribe-cta-hover: #25c87c;
-	--subscribe-cta-ink: #0b2b1e;
-	--subscribe-ink: #11231d;
-	--subscribe-muted: #52625b;
-	--subscribe-paper: #f7f9f6;
-	--subscribe-line: #cbd6ce;
-	align-items: center;
-	background: rgba(9, 27, 21, .92);
-	display: flex;
-	inset: 0;
-	justify-content: center;
-	overflow: hidden;
-	padding: 20px;
-	position: fixed;
-	z-index: 10050;
+  --sample-ink: #f3f7f4;
+  --sample-muted: #b0c2ba;
+  --sample-panel: #0a211c;
+  --sample-accent: #75ddcb;
+  --sample-action: #63d1bd;
+  --sample-action-hover: #83e4d1;
+  --sample-line: rgba(196, 225, 211, .18);
+  align-items: center;
+  background: rgba(3, 16, 13, .72);
+  display: flex;
+  font-family: "Zomeex Figtree", "PingFang SC", "Microsoft YaHei", sans-serif;
+  font-weight: 400;
+  inset: 0;
+  justify-content: center;
+  overflow: auto;
+  padding: 24px;
+  position: fixed;
+  z-index: 10050;
 }
-
-.zomeex-subscribe[hidden] {
-	display: none !important;
+.zomeex-subscribe[hidden] { display: none !important; }
+.zomeex-subscribe ::selection { background: var(--sample-accent); color: #09291f; }
+.zomeex-subscribe__backdrop { inset: 0; position: absolute; }
+body.zomeex-subscribe-open { overflow: hidden !important; }
+@font-face {
+  font-family: "Zomeex Figtree";
+  font-style: normal;
+  font-weight: 300 900;
+  font-display: swap;
+  src: url("why-zomeex/fonts/figtree-variable.ttf") format("truetype");
 }
-
-.zomeex-subscribe__backdrop {
-	inset: 0;
-	position: absolute;
-}
-
-body.zomeex-subscribe-open {
-	overflow: hidden !important;
-}
-
-/* Keep the third-party chat launcher completely hidden until explicitly shown.
- * Simple approach: hide by default, show only when ready class is added. */
-.chaty-widget {
-	opacity: 0 !important;
-	pointer-events: none !important;
-	visibility: hidden !important;
-	transition: opacity 0.3s ease-in-out !important;
-}
-
-/* Disable all Chaty animations to prevent any flash */
-.chaty-widget *,
-.chaty-widget .chaty-channels,
-.chaty-widget .chaty-channel {
-	animation: none !important;
-	-webkit-animation: none !important;
-}
-
-/* Only show when explicitly marked as ready */
-.chaty-widget.zomeex-chaty-ready {
-	opacity: 1 !important;
-	pointer-events: auto !important;
-	visibility: visible !important;
-}
-
 .zomeex-subscribe__dialog {
-	background: var(--subscribe-paper);
-	border: 1px solid rgba(17, 35, 29, .07);
-	border-radius: 18px;
-	box-shadow: 0 32px 90px rgba(4, 24, 16, .38), 0 8px 24px rgba(4, 24, 16, .14);
-	display: grid;
-	grid-template-columns: minmax(0, 1.06fr) minmax(300px, .94fr);
-	max-height: calc(100dvh - 40px);
-	max-width: 920px;
-	overflow: hidden;
-	position: relative;
-	width: 100%;
+  background: var(--sample-panel);
+  border: 1px solid var(--sample-line);
+  border-radius: 20px;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, .48);
+  display: grid;
+  grid-template-columns: minmax(0, 48fr) minmax(0, 52fr);
+  height: min(600px, calc(100dvh - 48px));
+  max-height: calc(100dvh - 48px);
+  max-width: 920px;
+  min-height: 0;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
-
-.zomeex-subscribe__close {
-	backdrop-filter: blur(8px);
-	-webkit-backdrop-filter: blur(8px);
-	align-items: center;
-	background: rgba(9, 27, 21, .5);
-	border: 1px solid rgba(255, 255, 255, .16);
-	border-radius: 50%;
-	color: #f7fbf8;
-	cursor: pointer;
-	display: inline-flex;
-	height: 38px;
-	justify-content: center;
-	padding: 0;
-	position: absolute;
-	right: 16px;
-	top: 16px;
-	transition: background-color .2s ease, border-color .2s ease, transform .25s ease;
-	width: 38px;
-	z-index: 3;
+.zomeex-subscribe__dialog:focus,
+.zomeex-subscribe__dialog:focus-visible { outline: none !important; }
+.zomeex-subscribe__toolbar { display: contents; }
+.zomeex-subscribe__mobile-logo { display: none; }
+.zomeex-subscribe .zomeex-subscribe__close {
+  align-items: center;
+  background: rgba(12, 27, 22, .74);
+  border: 1px solid rgba(220, 242, 229, .24);
+  border-radius: 50%;
+  box-shadow: none;
+  color: var(--sample-ink);
+  cursor: pointer;
+  display: flex;
+  height: 44px;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  transition: background-color .2s ease, border-color .2s ease;
+  width: 44px;
+  z-index: 4;
 }
-
-.zomeex-subscribe__close span::before {
-	content: "\f112";
-	font-family: woodmart-font;
-	font-size: 15px;
-	font-style: normal;
-	font-weight: 400;
+.zomeex-subscribe__close span { display: block; height: 18px; position: relative; width: 18px; }
+.zomeex-subscribe__close span::before,
+.zomeex-subscribe__close span::after {
+  background: currentColor;
+  border-radius: 1px;
+  content: "";
+  height: 1.5px;
+  left: 0;
+  position: absolute;
+  top: 8.25px;
+  transform-origin: center;
+  width: 18px;
 }
-
-.zomeex-subscribe__close:hover {
-	background: var(--subscribe-accent);
-	border-color: transparent;
-	transform: rotate(90deg);
+.zomeex-subscribe__close span::before { transform: rotate(45deg); }
+.zomeex-subscribe__close span::after { transform: rotate(-45deg); }
+.zomeex-subscribe .zomeex-subscribe__close:hover {
+  background: #29443a;
+  border-color: var(--sample-accent);
+  color: var(--sample-ink);
 }
-
-.zomeex-subscribe__close:active {
-	transform: rotate(90deg) scale(.94);
-}
-
-.zomeex-subscribe__close:focus-visible,
-.zomeex-subscribe__field input:focus-visible,
-.zomeex-subscribe__field button:focus-visible,
-.zomeex-subscribe__skip:focus-visible,
-.zomeex-subscribe__success button:focus-visible,
-.zomeex-subscribe__consent a:focus-visible {
-	box-shadow: 0 0 0 3px rgba(20, 116, 81, .24);
-	outline: 2px solid var(--subscribe-accent);
-	outline-offset: 2px;
-}
-
 .zomeex-subscribe__content {
-	align-self: center;
-	box-sizing: border-box;
-	display: flex;
-	flex-direction: column;
-	min-width: 0;
-	overflow-y: auto;
-	padding: clamp(32px, 4vw, 52px);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  min-width: 0;
+  overflow-y: auto;
+  padding: 30px 32px 24px;
+  scrollbar-color: #547769 var(--sample-panel);
+  scrollbar-width: thin;
 }
-
-.zomeex-subscribe__logo {
-	display: block;
-	height: auto;
-	margin: 0 0 clamp(26px, 3.5vh, 42px);
-	max-width: 132px;
-	width: 100%;
+.zomeex-subscribe__brand {
+  align-items: center;
+  display: flex;
+  flex-shrink: 0;
+  gap: 20px;
+  justify-content: space-between;
+  margin-bottom: 26px;
 }
-
+.zomeex-subscribe__logo { display: block; height: auto; max-width: 132px; width: 100%; }
+.zomeex-subscribe__eyebrow {
+  color: var(--sample-accent);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  margin: 0;
+  max-width: 46%;
+  text-align: right;
+  text-transform: uppercase;
+}
 .zomeex-subscribe__message h2,
 .zomeex-subscribe__success h3 {
-	color: var(--subscribe-ink);
-	font-family: var(--zomeex-nav-font-family, "Avenir Next", "Helvetica Neue", Arial, sans-serif);
-	font-size: clamp(30px, 2.9vw, 40px);
-	font-weight: 700;
-	letter-spacing: -.01em;
-	line-height: 1.12;
-	margin: 0 0 14px;
-	max-width: 15ch;
-	text-wrap: balance;
-	text-transform: none;
+  color: var(--sample-ink);
+  font-family: inherit;
+  font-size: 36px;
+  font-weight: 650;
+  letter-spacing: -.025em;
+  line-height: 1.1;
+  margin: 0 0 12px;
+  max-width: none;
+  overflow-wrap: break-word;
+  text-transform: none;
+  text-wrap: balance;
 }
-
-.zomeex-subscribe__message > p,
-.zomeex-subscribe__success > p {
-	color: var(--subscribe-muted);
-	font-size: 15.5px;
-	line-height: 1.6;
-	margin: 0;
-	max-width: 44ch;
-	text-transform: none;
+.zomeex-subscribe__message h2 span,
+.zomeex-subscribe__message h2 strong { display: block; }
+.zomeex-subscribe__message h2 strong { color: var(--sample-accent); font-weight: inherit; }
+.zomeex-subscribe__message > p {
+  color: #c0d0c7;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.6;
+  margin: 0;
+  text-transform: none;
 }
-
-.zomeex-subscribe__form {
-	margin-top: 30px;
+.zomeex-subscribe__message > .zomeex-subscribe__subhead {
+  color: #e5ede7;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .025em;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  text-transform: none;
 }
-
+.zomeex-subscribe__form { margin-top: 20px; }
 .zomeex-subscribe__form > label {
-	color: var(--subscribe-ink);
-	display: block;
-	font-size: 11.5px;
-	font-weight: 700;
-	letter-spacing: .06em;
-	margin-bottom: 9px;
-	text-transform: uppercase;
+  color: #e5ede7;
+  display: block;
+  font-size: 11px;
+  font-weight: 550;
+  letter-spacing: .04em;
+  line-height: 1.5;
+  margin-bottom: 8px;
+  text-transform: none;
 }
-
-.zomeex-subscribe__field {
-	display: grid;
-	grid-template-columns: minmax(0, 1fr) auto;
-	min-width: 0;
+.zomeex-subscribe__field { display: flex; flex-direction: column; gap: 10px; min-width: 0; }
+.zomeex-subscribe__email-row {
+  align-items: center;
+  background: #f3f7f4;
+  border: 1px solid #c7d7cd;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  min-height: 48px;
+  transition: border-color .2s ease;
 }
-
-.zomeex-subscribe__field input,
-.zomeex-subscribe__field button,
-.zomeex-subscribe__success button {
-	box-sizing: border-box;
-	font-family: var(--zomeex-nav-font-family, "Avenir Next", "Helvetica Neue", Arial, sans-serif);
-	min-height: 52px;
+.zomeex-subscribe__field-icon { color: #476456; display: flex; justify-content: center; }
+.zomeex-subscribe__icon { display: block; height: 20px; width: 20px; }
+.zomeex-subscribe .zomeex-subscribe__field input {
+  background: transparent;
+  border: 0;
+  border-radius: 0 8px 8px 0;
+  box-shadow: none;
+  caret-color: #0b6951;
+  color: #17372a;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  height: 46px;
+  line-height: 1.5;
+  min-height: 46px;
+  min-width: 0;
+  padding: 10px 14px 10px 0;
+  width: 100%;
 }
-
-.zomeex-subscribe__field input {
-	background: #fdfefd;
-	border: 1px solid var(--subscribe-line);
-	border-radius: 12px 0 0 12px;
-	border-right: 0;
-	color: var(--subscribe-ink);
-	font-size: 15px;
-	line-height: 1.2;
-	min-width: 0;
-	padding: 14px 18px;
-	transition: border-color .2s ease, box-shadow .2s ease;
-	width: 100%;
+.zomeex-subscribe__field input::placeholder { color: #536e5f; opacity: 1; }
+.zomeex-subscribe .zomeex-subscribe__field input:focus { outline: none; }
+.zomeex-subscribe__email-row:focus-within { border-color: var(--sample-accent); }
+.zomeex-subscribe__email-row:has(input:focus-visible) { outline: 2px solid var(--sample-accent); outline-offset: 3px; }
+.zomeex-subscribe__email-row:has(input[aria-invalid="true"]) { border-color: #ee9a8e; }
+.zomeex-subscribe .zomeex-subscribe__field button,
+.zomeex-subscribe .zomeex-subscribe__success button {
+  align-items: center;
+  background: var(--sample-action);
+  border: 1px solid var(--sample-action);
+  border-radius: 8px;
+  box-shadow: none;
+  color: #082c20;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 650;
+  gap: 14px;
+  justify-content: center;
+  letter-spacing: .035em;
+  line-height: 1.5;
+  min-height: 48px;
+  padding: 11px 16px;
+  text-transform: uppercase;
+  transition: background-color .2s ease, border-color .2s ease;
+  width: 100%;
 }
-
-.zomeex-subscribe__field input::placeholder {
-	color: #7d8a83;
-	opacity: 1;
+.zomeex-subscribe .zomeex-subscribe__field button:hover,
+.zomeex-subscribe .zomeex-subscribe__success button:hover {
+  background: var(--sample-action-hover);
+  border-color: var(--sample-action-hover);
+  box-shadow: none;
+  color: #082c20;
 }
-
-.zomeex-subscribe__field input:focus {
-	border-color: var(--subscribe-accent);
-	outline: none;
+.zomeex-subscribe .zomeex-subscribe__field button:active,
+.zomeex-subscribe .zomeex-subscribe__success button:active { background: #53bda8; border-color: #53bda8; }
+.zomeex-subscribe .zomeex-subscribe__field button:disabled {
+  background: #9bbfb0;
+  border-color: #9bbfb0;
+  color: #234638;
+  cursor: wait;
 }
-
-.zomeex-subscribe__field:focus-within input {
-	border-color: var(--subscribe-accent);
-	box-shadow: 0 0 0 3px rgba(20, 116, 81, .14);
-}
-
-.zomeex-subscribe__field input[aria-invalid="true"] {
-	border-color: #9b352d;
-	box-shadow: 0 0 0 3px rgba(155, 53, 45, .12);
-}
-
-.zomeex-subscribe__field button,
-.zomeex-subscribe__success button {
-	align-items: center;
-	background: var(--subscribe-cta);
-	border: 1px solid var(--subscribe-cta);
-	color: var(--subscribe-cta-ink);
-	cursor: pointer;
-	display: inline-flex;
-	font-size: 14.5px;
-	font-weight: 700;
-	justify-content: center;
-	letter-spacing: .01em;
-	line-height: 1.2;
-	padding: 14px 24px;
-	text-transform: none;
-	transition: background-color .2s ease, border-color .2s ease, box-shadow .2s ease, transform .2s ease;
-	white-space: nowrap;
-}
-
-.zomeex-subscribe__field button {
-	border-radius: 0 12px 12px 0;
-}
-
-.zomeex-subscribe__field button:hover,
-.zomeex-subscribe__success button:hover {
-	background: var(--subscribe-cta-hover);
-	border-color: var(--subscribe-cta-hover);
-	box-shadow: 0 6px 18px rgba(45, 226, 140, .32);
-	transform: translateY(-1px);
-}
-
-.zomeex-subscribe__field button:active,
-.zomeex-subscribe__success button:active {
-	box-shadow: none;
-	transform: translateY(0);
-}
-
-.zomeex-subscribe__field button:disabled {
-	background: #9dc9b4;
-	border-color: #9dc9b4;
-	box-shadow: none;
-	cursor: wait;
-	opacity: 1;
-}
-
 .zomeex-subscribe__status {
-	color: var(--subscribe-muted);
-	font-size: 13px;
-	line-height: 1.48;
-	margin: 11px 0 0;
-	min-height: 19px;
-	text-transform: none;
+  align-items: flex-start;
+  color: var(--sample-muted);
+  display: flex;
+  font-size: 11px;
+  font-weight: 400;
+  gap: 7px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+  min-height: 18px;
+  text-transform: none;
 }
-
-.zomeex-subscribe__status[data-status="error"] {
-	color: #8d2f28;
-	font-weight: 650;
+.zomeex-subscribe__status .zomeex-subscribe__icon { color: var(--sample-accent); height: 15px; margin-top: 1px; width: 15px; }
+.zomeex-subscribe__status[data-status="error"] { color: #ffb6a8; }
+.zomeex-subscribe__honeypot { height: 1px !important; left: -10000px !important; opacity: 0 !important; pointer-events: none !important; position: absolute !important; width: 1px !important; }
+.zomeex-subscribe .zomeex-subscribe__skip {
+  align-self: flex-start;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  box-shadow: none;
+  color: var(--sample-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: 1.5;
+  margin: 0;
+  min-height: 44px;
+  padding: 10px 0;
+  text-decoration: underline;
+  text-decoration-color: rgba(176, 194, 186, .5);
+  text-decoration-thickness: 1px;
+  text-transform: none;
+  text-underline-offset: 4px;
 }
-
-.zomeex-subscribe__honeypot {
-	height: 1px !important;
-	left: -10000px !important;
-	opacity: 0 !important;
-	overflow: hidden !important;
-	pointer-events: none !important;
-	position: absolute !important;
-	width: 1px !important;
+.zomeex-subscribe .zomeex-subscribe__skip:hover {
+  background: transparent;
+  box-shadow: none;
+  color: var(--sample-ink);
+  text-decoration-color: var(--sample-ink);
 }
-
-.zomeex-subscribe__skip {
-	align-items: center;
-	background: transparent;
-	border: 0;
-	color: var(--subscribe-muted);
-	cursor: pointer;
-	display: inline-flex;
-	font-size: 13px;
-	font-weight: 600;
-	justify-content: flex-start;
-	margin: 18px 0 0;
-	min-height: 44px;
-	padding: 8px 0;
-	text-decoration: none;
-	text-transform: none;
-	transition: color .2s ease;
-}
-
-.zomeex-subscribe__skip:hover {
-	color: var(--subscribe-ink);
-}
-
 .zomeex-subscribe__consent {
-	color: #75827b;
-	font-size: 11.5px;
-	line-height: 1.5;
-	margin: auto 0 0;
-	max-width: 60ch;
-	padding-top: 22px;
-	text-transform: none;
+  align-items: start;
+  border-top: 1px solid var(--sample-line);
+  color: #afc3b8;
+  display: grid;
+  font-size: 10.5px;
+  font-weight: 400;
+  gap: 8px;
+  grid-template-columns: 18px minmax(0, 1fr);
+  line-height: 1.55;
+  margin: auto 0 0;
+  padding-top: 14px;
+  text-transform: none;
 }
-
-.zomeex-subscribe__consent a {
-	color: var(--subscribe-ink);
-	text-decoration: underline;
-	text-underline-offset: 3px;
-}
-
+.zomeex-subscribe__consent .zomeex-subscribe__icon { color: var(--sample-accent); height: 17px; margin-top: 1px; width: 17px; }
+.zomeex-subscribe__consent a { color: var(--sample-ink); grid-column: 2; text-decoration: underline; text-underline-offset: 3px; }
 .zomeex-subscribe__visual {
-	background: #0e3127;
-	display: grid;
-	grid-template-rows: minmax(0, 1fr);
-	margin: 0;
-	min-height: 480px;
-	min-width: 0;
-	overflow: hidden;
-	position: relative;
+  background: #111c17;
+  border-left: 1px solid var(--sample-line);
+  display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
+  margin: 0;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  position: relative;
 }
-
-.zomeex-subscribe__visual img {
-	height: 100%;
-	min-height: 0;
-	object-fit: cover;
-	object-position: 65% center;
-	width: 100%;
+.zomeex-subscribe__visual-head {
+  color: #e5ede7;
+  font-size: 10px;
+  font-weight: 500;
+  left: 26px;
+  letter-spacing: .12em;
+  line-height: 1.5;
+  margin: 0;
+  max-width: calc(100% - 108px);
+  position: absolute;
+  text-transform: uppercase;
+  top: 29px;
+  z-index: 1;
 }
-
-.zomeex-subscribe__visual figcaption {
-	backdrop-filter: blur(10px);
-	-webkit-backdrop-filter: blur(10px);
-	background: rgba(9, 27, 21, .55);
-	border: 1px solid rgba(255, 255, 255, .14);
-	border-radius: 999px;
-	bottom: 18px;
-	color: #e9f5ee;
-	font-size: 11.5px;
-	font-weight: 600;
-	left: 18px;
-	letter-spacing: .02em;
-	line-height: 1.4;
-	padding: 9px 16px;
-	position: absolute;
-	right: 18px;
-	text-align: center;
-	text-transform: none;
-	z-index: 2;
+.zomeex-subscribe__visual-head i { display: none; }
+.zomeex-subscribe__visual > img { height: 100%; min-height: 0; object-fit: cover; object-position: center; width: 100%; }
+.zomeex-subscribe__facts {
+  background: #10271f;
+  border-top: 1px solid var(--sample-line);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: 0;
+  padding: 17px 12px;
 }
-
-.zomeex-subscribe__success {
-	margin-top: 30px;
+.zomeex-subscribe__facts > span {
+  align-content: start;
+  display: grid;
+  gap: 5px 7px;
+  grid-template-columns: 21px minmax(0, 1fr);
+  min-width: 0;
+  padding: 0 11px;
 }
-
-.zomeex-subscribe__success h3 {
-	font-size: clamp(28px, 3vw, 36px);
-	max-width: none;
+.zomeex-subscribe__facts > span + span { border-left: 1px solid var(--sample-line); }
+.zomeex-subscribe__facts b { color: var(--sample-accent); }
+.zomeex-subscribe__facts b .zomeex-subscribe__icon { height: 20px; width: 20px; }
+.zomeex-subscribe__facts strong {
+  align-self: center;
+  color: var(--sample-ink);
+  font-size: 11px;
+  font-weight: 600;
+  hyphens: auto;
+  line-height: 1.45;
+  overflow-wrap: break-word;
+  text-transform: none;
 }
-
-.zomeex-subscribe__success button {
-	border-radius: 12px;
-	margin-top: 26px;
-	padding-left: 30px;
-	padding-right: 30px;
-}
-
+.zomeex-subscribe__facts small { color: #b2c6b9; font-size: 10.5px; grid-column: 1 / -1; line-height: 1.5; text-transform: none; }
+.zomeex-subscribe__success { margin-top: 18px; }
+.zomeex-subscribe__success h3 { font-size: 32px; }
+.zomeex-subscribe__success > p { color: #c0d0c7; font-size: 14px; line-height: 1.6; }
+.zomeex-subscribe .zomeex-subscribe__success button { margin-top: 20px; }
 .zomeex-subscribe[data-state="success"] .zomeex-subscribe__skip,
-.zomeex-subscribe[data-state="success"] .zomeex-subscribe__consent {
-	display: none;
-}
-
+.zomeex-subscribe[data-state="success"] .zomeex-subscribe__consent { display: none; }
+.zomeex-subscribe .zomeex-subscribe__close:focus-visible,
+.zomeex-subscribe .zomeex-subscribe__field button:focus-visible,
+.zomeex-subscribe .zomeex-subscribe__skip:focus-visible,
+.zomeex-subscribe .zomeex-subscribe__success button:focus-visible,
+.zomeex-subscribe__consent a:focus-visible { outline: 2px solid var(--sample-accent); outline-offset: 3px; }
+/* CJK glyphs need their own spacing rather than the Latin headline tracking. */
+:lang(zh) .zomeex-subscribe { font-family: "PingFang SC", "Microsoft YaHei", "Zomeex Figtree", sans-serif; }
+:lang(zh) .zomeex-subscribe__message h2 { font-size: 32px; font-weight: 600; letter-spacing: 0; line-height: 1.18; }
+:lang(zh) .zomeex-subscribe__message > p { line-height: 1.65; }
+:lang(zh) .zomeex-subscribe__eyebrow { letter-spacing: .06em; }
+:lang(zh) .zomeex-subscribe__visual-head { font-size: 11px; letter-spacing: .06em; }
+:lang(zh) .zomeex-subscribe .zomeex-subscribe__field button { letter-spacing: .06em; }
+:lang(zh) .zomeex-subscribe__facts small { text-wrap: balance; }
 @media (prefers-reduced-motion: no-preference) {
-	.zomeex-subscribe {
-		animation: zomeex-subscribe-fade .28s ease-out both;
-	}
-
-	.zomeex-subscribe__dialog {
-		animation: zomeex-subscribe-enter .5s cubic-bezier(.16, 1, .3, 1) both;
-	}
-
-	@keyframes zomeex-subscribe-fade {
-		from { opacity: 0; }
-		to { opacity: 1; }
-	}
-
-	@keyframes zomeex-subscribe-enter {
-		from { opacity: 0; transform: translateY(22px) scale(.975); }
-		to { opacity: 1; transform: translateY(0) scale(1); }
-	}
+  .zomeex-subscribe { animation: zomeex-subscribe-fade .24s ease-out; }
+  .zomeex-subscribe__dialog { animation: zomeex-subscribe-enter .4s cubic-bezier(.16, 1, .3, 1); }
+  @keyframes zomeex-subscribe-fade { from { opacity: .3; } }
+  @keyframes zomeex-subscribe-enter { from { opacity: .6; transform: translateY(12px) scale(.985); } }
 }
-
-@media (prefers-reduced-transparency: reduce) {
-	.zomeex-subscribe {
-		backdrop-filter: none;
-		-webkit-backdrop-filter: none;
-		background: rgba(9, 27, 21, .94);
-	}
-
-	.zomeex-subscribe__close,
-	.zomeex-subscribe__visual figcaption {
-		backdrop-filter: none;
-		-webkit-backdrop-filter: none;
-	}
+@media (max-height: 760px) and (min-width: 861px) {
+  .zomeex-subscribe__dialog { height: min(540px, calc(100dvh - 48px)); }
+  .zomeex-subscribe__content { padding: 24px 30px 20px; }
+  .zomeex-subscribe__brand { margin-bottom: 20px; }
+  .zomeex-subscribe__logo { max-width: 126px; }
+  .zomeex-subscribe__message h2 { font-size: 32px; margin-bottom: 10px; }
+  :lang(zh) .zomeex-subscribe__message h2 { font-size: 30px; }
+  .zomeex-subscribe__message > .zomeex-subscribe__subhead { margin-bottom: 10px; }
+  .zomeex-subscribe__form { margin-top: 16px; }
+  .zomeex-subscribe__form > label { margin-bottom: 6px; }
+  .zomeex-subscribe__status { margin-top: 8px; }
+  .zomeex-subscribe__consent { padding-top: 12px; }
 }
-
+@media (max-width: 980px) and (min-width: 861px) {
+  .zomeex-subscribe__content { padding-left: 26px; padding-right: 26px; }
+  .zomeex-subscribe__facts { padding-left: 8px; padding-right: 8px; }
+  .zomeex-subscribe__facts > span { padding: 0 8px; }
+}
 @media (max-width: 860px) {
-	.zomeex-subscribe {
-		padding: 14px;
-	}
-
-	.zomeex-subscribe__dialog {
-		border-radius: 16px;
-		grid-template-columns: minmax(0, 1fr);
-		max-height: calc(100dvh - 28px);
-		overflow-y: auto;
-	}
-
-	.zomeex-subscribe__content {
-		overflow: visible;
-		padding: 30px 28px 32px;
-	}
-
-	.zomeex-subscribe__logo {
-		margin-bottom: 26px;
-		max-width: 122px;
-	}
-
-	.zomeex-subscribe__message h2 {
-		font-size: clamp(28px, 6.4vw, 38px);
-		max-width: 16ch;
-	}
-
-	.zomeex-subscribe__visual {
-		grid-row: 1;
-		min-height: 200px;
-	}
-
-	.zomeex-subscribe__visual img {
-		height: 200px;
-		object-position: 74% 53%;
-	}
-
-	.zomeex-subscribe__visual figcaption {
-		bottom: 12px;
-		font-size: 10.5px;
-		left: 12px;
-		padding: 7px 13px;
-		right: 12px;
-	}
-}
-
-@media (max-width: 520px) {
-	.zomeex-subscribe__content {
-		padding: 26px 20px 28px;
-	}
-
-	.zomeex-subscribe__close {
-		height: 36px;
-		right: 12px;
-		top: 12px;
-		width: 36px;
-	}
-
-	.zomeex-subscribe__logo {
-		margin-bottom: 22px;
-		max-width: 112px;
-	}
-
-	.zomeex-subscribe__message h2 {
-		font-size: 28px;
-		line-height: 1.14;
-		margin-bottom: 12px;
-	}
-
-	.zomeex-subscribe__message > p {
-		font-size: 14.5px;
-	}
-
-	.zomeex-subscribe__form {
-		margin-top: 24px;
-	}
-
-	.zomeex-subscribe__field {
-		gap: 10px;
-		grid-template-columns: minmax(0, 1fr);
-	}
-
-	.zomeex-subscribe__field input,
-	.zomeex-subscribe__field button {
-		border-radius: 12px;
-		width: 100%;
-	}
-
-	.zomeex-subscribe__field input {
-		border-right: 1px solid var(--subscribe-line);
-	}
-
-	.zomeex-subscribe__skip {
-		margin-top: 14px;
-	}
-
-	.zomeex-subscribe__consent {
-		padding-top: 16px;
-	}
-
-	.zomeex-subscribe__visual {
-		min-height: 150px;
-	}
-
-	.zomeex-subscribe__visual img {
-		height: 150px;
-	}
-
-	.zomeex-subscribe__visual figcaption {
-		display: none;
-	}
-}
-
-@media (max-height: 700px) and (min-width: 861px) {
-	.zomeex-subscribe__dialog {
-		max-height: calc(100dvh - 28px);
-	}
-
-	.zomeex-subscribe__content {
-		padding-bottom: 30px;
-		padding-top: 30px;
-	}
-
-	.zomeex-subscribe__logo {
-		margin-bottom: 22px;
-	}
-
-	.zomeex-subscribe__visual {
-		min-height: 440px;
-	}
+  .zomeex-subscribe { align-items: flex-start; padding: 12px; }
+  .zomeex-subscribe__dialog {
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    max-height: calc(100dvh - 24px);
+    overflow-y: auto;
+    scroll-padding-top: 80px;
+    scrollbar-color: #547769 var(--sample-panel);
+    scrollbar-width: thin;
+  }
+  .zomeex-subscribe__toolbar {
+    align-items: center;
+    background: var(--sample-panel);
+    border-bottom: 1px solid var(--sample-line);
+    display: flex;
+    flex: 0 0 68px;
+    justify-content: space-between;
+    min-height: 68px;
+    padding: 12px 16px 12px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 4;
+  }
+  .zomeex-subscribe__mobile-logo { display: block; height: auto; width: 116px; }
+  .zomeex-subscribe .zomeex-subscribe__close {
+    flex: 0 0 44px;
+    margin: 0;
+    position: relative;
+    right: auto;
+    top: auto;
+  }
+  .zomeex-subscribe__content { flex: 0 0 auto; overflow: visible; padding: 24px; }
+  .zomeex-subscribe__brand { align-items: flex-start; margin-bottom: 18px; }
+  .zomeex-subscribe__brand .zomeex-subscribe__logo { display: none; }
+  .zomeex-subscribe__eyebrow { max-width: none; text-align: left; }
+  .zomeex-subscribe__message h2 { font-size: 34px; }
+  :lang(zh) .zomeex-subscribe__message h2 { font-size: 30px; }
+  .zomeex-subscribe__form { margin-top: 22px; }
+  .zomeex-subscribe .zomeex-subscribe__field input { font-size: 16px; height: 48px; min-height: 48px; }
+  .zomeex-subscribe__email-row { min-height: 50px; }
+  .zomeex-subscribe .zomeex-subscribe__field button { min-height: 50px; }
+  .zomeex-subscribe__status { font-size: 11.5px; }
+  .zomeex-subscribe__consent { font-size: 11px; margin-top: 10px; padding-top: 16px; }
+  .zomeex-subscribe__visual { border-left: 0; border-top: 1px solid var(--sample-line); flex: 0 0 auto; }
+  .zomeex-subscribe__visual > img { height: 270px; object-position: center 55%; }
+  .zomeex-subscribe__visual-head { left: 24px; top: 22px; }
+  .zomeex-subscribe__facts { padding: 18px 12px; }
+  .zomeex-subscribe__facts > span { gap: 7px; grid-template-columns: minmax(0, 1fr); padding: 0 10px; }
+  .zomeex-subscribe__facts strong { font-size: 11px; }
+  .zomeex-subscribe__facts small { font-size: 11px; }
 }

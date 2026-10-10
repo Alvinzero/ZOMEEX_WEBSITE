@@ -35,6 +35,12 @@ $read_filter_list = static function ( $key ) {
 	return array_values( array_unique( $values ) );
 };
 
+$language_aliases = array( 'en' => 'en', 'zh' => 'zh', 'zh-cn' => 'zh-CN', 'ru' => 'ru', 'de' => 'de', 'fr' => 'fr' );
+$requested_language = $language_aliases[ strtolower( $read_filter( 'lang' ) ) ] ?? '';
+if ( $requested_language ) {
+	$page_url = add_query_arg( 'lang', $requested_language, $page_url );
+}
+
 $search_term  = $read_filter( 'insight_search' );
 $topic_slugs  = $read_filter_list( 'insight_topic' );
 $product_slugs = $read_filter_list( 'insight_product' );
@@ -263,6 +269,7 @@ get_header();
 				<h1>Cannabis Packaging Insights, Compliance &amp; Design Guides</h1>
 				<p>Practical notes for teams comparing packaging formats, materials, regulations and retail presentation.</p>
 				<form class="zomeex-insights-search" role="search" method="get" action="<?php echo esc_url( $page_url ); ?>">
+					<?php if ( $requested_language ) : ?><input type="hidden" name="lang" value="<?php echo esc_attr( $requested_language ); ?>"><?php endif; ?>
 					<label class="screen-reader-text" for="zomeex-insight-search">Search articles</label>
 					<input id="zomeex-insight-search" type="search" name="insight_search" value="<?php echo esc_attr( $search_term ); ?>" placeholder="Search articles, topics or keywords">
 					<button type="submit" aria-label="Search articles" title="Search articles"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.6"/><path d="m16 16 4.2 4.2"/></svg></button>
@@ -277,7 +284,7 @@ get_header();
 					</nav>
 				<?php endif; ?>
 			</div>
-			<div class="zomeex-insights-hero__visual" aria-hidden="true"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/why-zomeex/why-landscape.webp' ); ?>" alt="" loading="eager" fetchpriority="high" decoding="async"></div>
+			<div class="zomeex-insights-hero__visual" aria-hidden="true"><img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/insights/blog-hero-packaging.webp' ); ?>" alt="" width="736" height="421" loading="eager" fetchpriority="high" decoding="async"></div>
 		</div>
 	</header>
 
@@ -303,8 +310,12 @@ get_header();
 	<?php endif; ?>
 
 	<section class="zomeex-insights-archive" aria-label="Insights archive">
+		<div class="zomeex-container zomeex-insights-feedback screen-reader-text notranslate" role="status" aria-live="polite" aria-atomic="true">
+			<span data-zomeex-insights-message data-zomeex-i18n-ignore></span>
+			<button type="button" data-zomeex-insights-retry data-zomeex-i18n-ignore hidden>Try again</button>
+		</div>
 		<div class="zomeex-container zomeex-insights-archive__layout">
-			<div class="zomeex-insights-archive__main">
+			<div class="zomeex-insights-archive__main" aria-busy="false">
 				<?php if ( $featured_posts ) : ?>
 					<section class="zomeex-insights-featured" aria-labelledby="zomeex-insights-featured-title">
 						<header class="zomeex-insights-section-head">
@@ -365,6 +376,7 @@ get_header();
 
 			<aside class="zomeex-insights-filters" aria-labelledby="zomeex-insights-filters-title">
 				<form method="get" action="<?php echo esc_url( $page_url ); ?>">
+					<?php if ( $requested_language ) : ?><input type="hidden" name="lang" value="<?php echo esc_attr( $requested_language ); ?>"><?php endif; ?>
 					<?php if ( $search_term ) : ?><input type="hidden" name="insight_search" value="<?php echo esc_attr( $search_term ); ?>"><?php endif; ?>
 					<div class="zomeex-insights-filters__head">
 						<h2 id="zomeex-insights-filters-title">Filter by</h2>

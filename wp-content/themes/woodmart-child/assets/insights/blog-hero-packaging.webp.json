@@ -1,0 +1,20 @@
+{
+  "origin": "ZOMEEX-Why-Section-FINAL.zip, assets/why-zomeex-reference.png",
+  "source_asset": "../why-zomeex/why-landscape.webp",
+  "source_dimensions": [
+    1536,
+    421
+  ],
+  "crop": [
+    800,
+    0,
+    1536,
+    421
+  ],
+  "actual_dimensions": [
+    736,
+    421
+  ],
+  "role": "Blog hero packaging composition. Removes unused left-side panorama space; preserves all packaging products and surrounding scene.",
+  "prompt": "Origin: existing user-provided photographic region from ZOMEEX-Why-Section-FINAL.zip. Blog-specific crop of why-landscape.webp. No AI generation or upscaling."
+}

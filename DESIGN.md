@@ -12,6 +12,28 @@ colors:
   deep: "#10251d"
   white: "#ffffff"
   field-surface: "#f6f8f5"
+  why-ink: "#08291d"
+  why-body: "#254e50"
+  why-green: "#07634d"
+  why-ground: "#f4f7f1"
+  why-card-surface: "#f0f6f0"
+  why-action: "#164c36"
+  sample-panel: "#0a211c"
+  sample-visual: "#111c17"
+  sample-ink: "#f3f7f4"
+  sample-accent: "#75ddcb"
+  sample-action: "#63d1bd"
+  sample-action-hover: "#83e4d1"
+  sample-muted: "#b0c2ba"
+  sample-field: "#f3f7f4"
+  sample-field-ink: "#17372a"
+  sample-field-border: "#c7d7cd"
+  sample-action-ink: "#082c20"
+  sample-copy: "#c0d0c7"
+  sample-subtle-ink: "#e5ede7"
+  sample-line: "rgba(196, 225, 211, .18)"
+  sample-facts: "#10271f"
+  sample-capability-note: "#b2c6b9"
 typography:
   display:
     fontFamily: "Avenir Next, Helvetica Neue, Arial, sans-serif"
@@ -43,8 +65,74 @@ typography:
     fontWeight: 750
     lineHeight: 1.3
     letterSpacing: "0.1em"
+  why-headline:
+    fontFamily: "Zomeex Figtree, Avenir Next, sans-serif"
+    fontSize: "clamp(42px, 4vw, 66px)"
+    fontWeight: 900
+    lineHeight: 1.04
+    letterSpacing: "-0.035em"
+  why-headline-mobile:
+    fontFamily: "Zomeex Figtree, Avenir Next, sans-serif"
+    fontSize: "clamp(34px, 9.6vw, 48px)"
+    fontWeight: 900
+    lineHeight: 1.04
+    letterSpacing: "-0.03em"
+  sample-headline:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "36px"
+    fontWeight: 650
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
+  sample-headline-compact:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "32px"
+    fontWeight: 650
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
+  sample-headline-mobile:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "34px"
+    fontWeight: 650
+    lineHeight: 1.1
+    letterSpacing: "-0.025em"
+  sample-headline-zh:
+    fontFamily: "PingFang SC, Microsoft YaHei, Zomeex Figtree, sans-serif"
+    fontSize: "32px"
+    fontWeight: 600
+    lineHeight: 1.18
+    letterSpacing: "0"
+  sample-headline-zh-compact:
+    fontFamily: "PingFang SC, Microsoft YaHei, Zomeex Figtree, sans-serif"
+    fontSize: "30px"
+    fontWeight: 600
+    lineHeight: 1.18
+    letterSpacing: "0"
+  sample-body:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "14px"
+    fontWeight: 400
+    lineHeight: 1.6
+    letterSpacing: "normal"
+  sample-action:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "13px"
+    fontWeight: 650
+    lineHeight: 1.5
+    letterSpacing: "0.035em"
+  sample-skip:
+    fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "12px"
+    fontWeight: 400
+    lineHeight: 1.5
+    letterSpacing: "0"
 rounded:
   none: "0"
+  why-card: "10px"
+  why-circle: "50%"
+  sample-dialog: "20px"
+  sample-dialog-mobile: "18px"
+  sample-control: "8px"
+  sample-skip: "4px"
 spacing:
   xs: "8px"
   sm: "12px"
@@ -54,6 +142,7 @@ spacing:
   lg: "32px"
   tablet-section: "48px"
   directory-section: "64px"
+  sample-form-gap: "10px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
@@ -71,19 +160,43 @@ components:
     rounded: "{rounded.none}"
     padding: "0 0 5px"
   rfq-product-path:
-    backgroundColor: "{colors.paper-alt}"
+    backgroundColor: "{colors.white}"
     textColor: "{colors.ink}"
-    rounded: "{rounded.none}"
-    padding: "15px 20px"
-    height: "82px"
+    rounded: "999px"
+    padding: "7px 9px 7px 20px"
+    height: "58px"
   rfq-product-path-hover:
-    backgroundColor: "{colors.accent-dark}"
-    textColor: "{colors.white}"
+    backgroundColor: "{colors.white}"
+    textColor: "{colors.accent-dark}"
   text-field:
     backgroundColor: "{colors.field-surface}"
     textColor: "{colors.ink}"
     rounded: "{rounded.none}"
     padding: "12px 13px"
+    height: "48px"
+  why-capability-card:
+    backgroundColor: "{colors.why-card-surface}"
+    textColor: "{colors.why-body}"
+    rounded: "{rounded.why-card}"
+  why-capability-action:
+    backgroundColor: "{colors.why-action}"
+    textColor: "{colors.white}"
+    rounded: "{rounded.why-circle}"
+    size: "44px"
+  sample-primary-action:
+    backgroundColor: "{colors.sample-action}"
+    textColor: "{colors.sample-action-ink}"
+    typography: "{typography.sample-action}"
+    rounded: "{rounded.sample-control}"
+    padding: "11px 16px"
+    height: "48px"
+  sample-primary-action-hover:
+    backgroundColor: "{colors.sample-action-hover}"
+    textColor: "{colors.sample-action-ink}"
+  sample-email-field:
+    backgroundColor: "{colors.sample-field}"
+    textColor: "{colors.sample-field-ink}"
+    rounded: "{rounded.sample-control}"
     height: "48px"
 ---
 
@@ -96,6 +209,8 @@ components:
 The implemented homepage uses restrained paper surfaces, dark green type, thin dividers, square controls, and real product imagery to keep product evaluation ahead of decoration. Its density is catalogue-like rather than promotional: headings establish hierarchy, supporting copy stays compact, and repeated information is organized by grids and rules.
 
 This is a code-led local extension of the existing ZOMEEX WordPress/WooCommerce theme. The homepage `--zx-*` tokens are the normative values for this surface; the root theme has a closely related `--zomeex-*` family, so new work should continue the token namespace already active on its surface rather than mixing the two families inside one component.
+
+The sample-kit request popup is a local extension with its own deep-green and charcoal fields, white type, turquoise emphasis, and self-hosted Figtree. Its split composition and generated packaging concept belong to the prompt; the homepage, WHY module, and other existing surfaces retain their own visual systems.
 
 **Key Characteristics:**
 
@@ -126,6 +241,12 @@ The palette is a low-saturation green system: dark botanical text, light paper n
 
 **The Functional Accent Rule.** Green is used to signal action, state, and orientation; large neutral fields continue to carry most of the page.
 
+### Sample-kit Local Palette
+
+The prompt uses Deep Sample Green for its offer and mobile toolbar, Studio Charcoal for the image region, and a separate dark-green capability strip. Sample White carries headings; Sample Turquoise carries packaging emphasis, icons, and focus. The CTA uses a slightly deeper Action Turquoise and brightens on hover. Muted Sample Ink supports privacy and dismissal text. The continuous pale email surface uses dark-green text and a fine field border. These roles correspond only to the `sample-*` frontmatter tokens and the popup's local source CSS.
+
+**The Sample Surface Boundary Rule.** Keep the sample-kit palette and Figtree treatment local to the request prompt; they do not redefine the homepage, WHY module, or editorial surfaces.
+
 ## Typography
 
 **Display Font:** Avenir Next (with Helvetica Neue, Arial, and sans-serif fallbacks)
@@ -144,25 +265,41 @@ The palette is a low-saturation green system: dark botanical text, light paper n
 
 **The Case-by-Function Rule.** Use uppercase tracking for controls and labels, not for product names or explanatory copy.
 
+The sample-kit Latin headline uses the self-hosted variable Figtree file in `assets/why-zomeex/fonts/figtree-variable.ttf` (300–900, `font-display: swap`), with white offer text and a separate turquoise packaging line. It is 36px/650 with 1.1 line height and -0.025em tracking, becoming 32px on short desktop viewports and 34px at 860px and below. The receipt heading is 32px. Chinese prioritizes PingFang SC and Microsoft YaHei: the offer uses 32px/600, zero tracking, and 1.18 line height, becoming 30px on short desktop and mobile. Both offer lines use balanced wrapping.
+
+Supporting copy uses 14px/1.6, with Chinese at 1.65 line height. The subheading is 12px/600; the CTA is 13px/650 with 1.5 line height and 0.035em Latin tracking (0.06em in Chinese). Skip is 12px/400 with no tracking. Privacy status is 11px, or 11.5px on mobile; compliance is 10.5px, or 11px on mobile. Capability titles are 11px/600; notes are 10.5px on desktop and 11px on mobile, with balanced Chinese wrapping. The mobile email value remains 16px. These type rules stay local to the prompt; the existing WHY module retains its own Figtree treatment.
+
 ## Layout
 
 The homepage container is capped at 1488px with 24px side gutters. At 600px and below, the side gutter reduces to 18px. Sections use full-width tonal bands around a constrained inner grid.
 
-The RFQ product directory is a 3-column by 2-row grid above 820px. From 561px through 820px it becomes a complete 2-column by 3-row directory. At 560px and below it becomes a horizontal sequence with `minmax(248px, 78vw)` columns, proximity scroll snapping, container-aligned edge padding, and enough exposed width to reveal the next route. Each route has an 82px minimum height, exceeding the 44px touch-target floor.
+The RFQ product directory is a centered 3-column by 2-row shortcut grid above 820px. From 561px through 820px it becomes a complete 2-column by 3-row directory. At 560px and below it becomes a horizontal sequence with `minmax(252px, 78vw)` columns, proximity scroll snapping, container-aligned edge padding, a visually hidden scrollbar, and enough exposed width to reveal the next route. Each route has a 58px minimum height, exceeding the 44px touch-target floor.
 
 The directory precedes the existing three-step inquiry form. This order is intentional: visitors can browse a known product category or continue directly into a cross-category project brief without either route displacing the other.
 
 **The Complete Tablet Directory Rule.** The 561-820px layout shows all six routes in the two-column grid; it does not collapse them into a carousel or disclosure.
 
+The `/news/` hero keeps its packaging image proportional and vertically centered. Its visual area has a 492px minimum height above 820px, 280px at 820px and below, and 220px at 520px and below. The image fills the available width with automatic height and no minimum height; centered containment keeps the full packaging composition visible when the hero stacks at 820px.
+
+The sample-kit dialog has a 920px maximum width and uses a 48/52 split above 860px: offer and conversion on the left, packaging-development visual and three capabilities on the right. Its default height is capped at 600px and the viewport height minus 48px. The left content panel scrolls internally when constrained, including long localized copy. At desktop viewport heights of 760px and below, the dialog's height cap becomes 540px while remaining limited to the viewport minus 48px. The compact brand header pairs the logo and B2B offer label in one row. The visual heading is positioned over the image's quiet top area; there is no separate header band. The continuous email input and full-width CTA occupy separate rows with a 10px gap at every size.
+
+At 860px and below, the dialog stacks content first and visual second, uses 12px outer gutters and 18px corners, and caps its height at the viewport minus 24px. The entire dialog is the single vertical scroll region; the content panel has visible overflow. A solid 68px toolbar sticks at the top with a 116px logo and a 44px close control; scroll padding is 80px. The offer, form, privacy helper, skip action, licensed-business notice, visual, and capabilities remain in the same scroll sequence below it. The image is 270px high; the three capability columns remain together, with the icon above 11px title and note text.
+
+**The Single Mobile Scroll Rule.** At 860px and below, keep offer content before the visual in one scrolling dialog, with a solid sticky brand-and-close toolbar and reachable privacy, skip, and compliance content.
+
 ## Elevation & Depth
 
-The homepage is flat by default. Depth comes from tonal bands, one-pixel dividers, image scale on hover, and high-contrast state reversal. The RFQ product directory has no shadow, raised tile, or separate card background; its structure is carried by the shared paper surface and line grid.
+The homepage is flat by default. Depth comes from tonal bands, one-pixel dividers, image scale on hover, and restrained state changes. The RFQ product directory has no shadow or raised tile; each shortcut uses a fine green-gray outline and a pale circular arrow control against the shared paper surface.
 
-**The Line-Defined Directory Rule.** RFQ routes remain parts of one continuous directory; elevation must not turn them into a card wall.
+**The Shortcut Directory Rule.** RFQ routes read as compact navigation controls rather than content cards; elevation must not turn them into a card wall.
+
+The sample-kit overlay uses a dense dark-green veil (`rgba(3, 16, 13, .72)`) and a diffuse modal shadow (`0 24px 80px rgba(0, 0, 0, .48)`) with a fine green-tinted border. The two panels and ruled capability strip supply internal structure. The CTA changes fill and border on hover without a shadow or lift. The prompt fades in over .24s and the dialog settles over .4s from a 12px downward offset and .985 scale only when reduced motion is not requested; controls use .2s color and border transitions.
 
 ## Shapes
 
-Homepage controls, fields, category bodies, and RFQ paths use square corners. Boundaries are thin and structural. Circular geometry is limited to small status marks and does not define the main component language. Other WooCommerce account surfaces retain their existing rounded containers, so square corners are a homepage-local fact rather than a site-wide prohibition.
+Homepage buttons, fields, and category bodies use square corners. The RFQ product directory is the deliberate exception: its compact shortcuts use pill outlines and circular arrow controls to separate navigation from the form fields below. Other WooCommerce account surfaces retain their existing rounded containers, so shape remains surface-specific rather than site-wide.
+
+The sample-kit dialog has 20px corners on desktop and 18px corners at 860px and below. The continuous email row and separate full-width CTA each have 8px corners. Its 44px close control is circular, with a balanced X made from two centered 18px strokes; thin rules separate compliance, the mobile toolbar, and the three capability columns. These are prompt-local shapes.
 
 ## Components
 
@@ -195,13 +332,51 @@ Homepage controls, fields, category bodies, and RFQ paths use square corners. Bo
 - **Style:** Catalogue navigation favors concise labels, thin separators, and explicit destination text. The RFQ path group is a semantic `nav` labelled by its section heading.
 - **Localization:** Every visible RFQ path heading, description, product name, and follow-on form introduction has mappings for the four non-English homepage locales.
 
+### Capability Routes
+
+WHY ZOMEEX is an editable frontend recreation of the user-supplied reference in `wp-content/themes/woodmart-child/assets/why-zomeex/why-zomeex-reference.png`. The semantic heading, introduction, three service benefits, four capability cards, key-spec lists, and signoff are visible HTML text with mappings in the existing homepage localization system. Module-scoped pale sage and ivory surfaces, forest-green lettering, and self-hosted variable Figtree (300–900) preserve the reference's character; these local tokens do not replace the rest of the homepage system.
+
+The hero uses one independent packaging landscape, while each card has its own photograph. Existing theme SVG paths supply the benefit icons, card icons, and arrow links; numbers, text, badges, and controls are frontend elements. A separate crop of the reference's original contour texture sits at the lower left of the card region. The photographs and contour crop were extracted from the supplied reference with UI content removed and no resolution upscaling. `source-photography.json` and the asset sidecars record that provenance. The requested TokensKingdom API attempts failed with unavailable compatible accounts, HTTP 502, and rate limiting; no asset in this module is claimed as AI-generated. Whole-reference PNG/WebP files remain for comparison only; the flat artwork layer, percentage hotspots, and image-expand control have been removed.
+
+Above 1100px the cards form four columns; from 561–1100px they form two; at 560px and below they form one. The hero stacks its text above the landscape at 820px and below. The headline uses the module's responsive desktop and mobile tokens, with an intermediate `clamp(38px, 6.2vw, 50px)` at 561–820px and the existing Chinese locale adjustment. Mobile service-benefit labels retain a 10px minimum. Rounded cards use fine sage borders and a restrained shadow only on hover or focus-within. Each circular arrow link has a 44px target; the arrow moves on hover, while title and arrow links keep visible 2px focus outlines. Reduced-motion preferences disable the card and arrow transitions.
+
+The four destinations remain the site's product catalogue, `feature=child-resistant` catalogue filter, company capability page, and `#zx-finishes-title` homepage anchor. Final module captures are `.impeccable/review/why-native-desktop.png`, `.impeccable/review/why-native-tablet.png`, and `.impeccable/review/why-native-mobile.png`.
+
+### Blog Hero Packaging Visual
+
+The `/news/` hero uses `wp-content/themes/woodmart-child/assets/insights/blog-hero-packaging.webp` (736 × 421). It is a blog-specific crop of the existing `assets/why-zomeex/why-landscape.webp` (1536 × 421), retaining the region from x=800 to 1536 and y=0 to 421. This removes unused panorama space on the left while preserving every packaging object and the surrounding mountain scene. The original region comes from the user-provided `ZOMEEX-Why-Section-FINAL.zip` reference; the adjacent `.webp.json` records the crop. No AI generation or upscaling was used. The decorative image retains empty alt text, explicit intrinsic dimensions, eager loading, and high fetch priority.
+
+**The Complete Blog Composition Rule.** Keep the `/news/` hero image at full width with automatic height, zero minimum height, centered containment, and a vertically centered parent so every packaging object remains visible.
+
+Review captures are `.impeccable/review/blog-hero/user-1303.png` and `.impeccable/review/blog-hero/mobile.png`.
+
+### News Archive Filtering
+
+On `/news/`, topic links, hot tags, article badges, clear links, pagination, search submission, and sidebar category/product, date, and sort controls update the archive results in place. Only the archive's main results content is replaced; the hero, page shell, and existing form controls remain in place, with search and filter values synchronized after success. Sidebar changes update automatically after a 120ms debounce; a new selection cancels the previous request so stale results cannot replace the latest selection. Standard GET links and form submissions remain the fallback.
+
+Loading keeps the previous results visible with reduced opacity (.65), a progress cursor, and `aria-busy`. A polite `role="status"` announces loading, completion, and failure in English, Simplified Chinese, Russian, German, or French. Failure retains the previous results and current selections, then exposes an inline message and a retry action with a 44px minimum height. Successful navigation updates the URL; browser back/forward restores the corresponding results and reading position. The `lang` parameter is retained, including case-insensitive `zh-CN` aliases. When replacement removes the focused results control, focus moves to the new results heading without an extra scroll.
+
+Review captures are `.impeccable/review/insights-ajax/desktop.png`, `.impeccable/review/insights-ajax/mobile-filters.png`, and `.impeccable/review/insights-ajax/mobile-results.png`.
+
 ### RFQ Product Paths
 
-This is the homepage Signature Component. It is a six-link product directory, not a card collection: each link contains a product name, one short description, and the same 20px linear northeast arrow. The six WooCommerce category slugs are `mylar-bag`, `preroll-wraps`, `vape-box`, `terpa`, `accessories`, and `machine`; URLs resolve through the product-category term before the existing shop fallback is used.
+This is the homepage Signature Component. It is a six-link product shortcut directory, not a card collection: each link presents one product name and the same linear northeast arrow inside a 40px circular action field. Descriptions remain in the accessible name but are visually suppressed to keep the directory fast to scan. The six WooCommerce category slugs are `mylar-bag`, `preroll-wraps`, `vape-box`, `terpa`, `accessories`, and `machine`; URLs resolve through the product-category term before the existing shop fallback is used.
 
-At rest, the component uses alternate paper, botanical ink, soft supporting copy, and shared dividers. Hover and `:focus-visible` reverse the row to deep action green with white text; focus also keeps a 2px accent outline inset by 3px. The arrow shifts 2px right and 2px up. The full link surface is the target, so the 82px row height and padding remain intact across languages.
+At rest, the component uses a translucent white surface, botanical ink, a green-gray outline, and a pale green arrow field. Hover and `:focus-visible` brighten the surface, strengthen the border and reverse only the arrow field to deep action green; focus also keeps a 2px accent outline inset by 3px. The arrow shifts 2px right and 2px up. The full link surface is the target, so the 58px row height remains intact across languages.
 
 **The Dual RFQ Path Rule.** Keep the product directory immediately above the three-step project form so the page supports both known-product browsing and cross-category inquiry.
+
+### Sample-kit Request Prompt
+
+The prompt's heading, custom-dieline subheading, business offer, form, privacy helper, skip action, licensed-business notice, and three capability labels are real HTML. The logo is an editable light-color adaptation in `assets/sample-kit/zomeex-logo-light.svg`; email, lock, materials, structures, shield, and arrow icons are inline editable SVG paths in the child-theme source. The reference-led offer label is specific to this prompt rather than a new global heading pattern.
+
+The single raster is `assets/sample-kit/packaging-development.png`: an independent packaging-development concept scene generated through TokensKingdom with `gpt-image-2.5-sunburst`, using the supplied document image as a visual reference. It depicts a dieline alongside finished carton, pouch, and jar concepts; it is not a verified product photograph. The provider returned 1341 × 1173 after a 2048 × 1792 request, so the asset is not native 2K. Its adjacent JSON records provider, model, requested and actual dimensions, prompt, reference origin, and asset role. Interface text and controls are outside this raster.
+
+The continuous pale email row combines a 42px envelope-icon column and a labelled transparent input within one 8px border. Its envelope and CTA arrow are 20px inline icons. The 8px turquoise CTA occupies its own full-width row below it. Email row and CTA minimum heights are 48px on desktop, including short screens, and 50px on mobile; the inner input is 46px on desktop and 48px on mobile. Visible keyboard focus uses a 2px turquoise outline around the email row or action. Invalid input changes the row border to `#ee9a8e` and announces an error status in `#ffb6a8`; loading disables the CTA. Successful submission replaces the form with receipt confirmation and a continue-browsing action; it hides the initial skip and compliance block. The server accepts a sample-kit request, stores it privately, and records notification status; the success text promises team follow-up to confirm sample and dieline needs.
+
+Privacy/no-spam reassurance remains directly below the form, followed by the respectful skip action and the licensed-business/age notice. The Privacy policy link is rendered when WordPress supplies a configured policy URL. Escape, backdrop, close, and skip dismiss the prompt, restore prior focus, and release the startup gate. Tab stays within the dialog. Dismissal is remembered for 14 days; completed requests suppress future display when local storage is available. All prompt text, accessible labels, status messages, and image alt text participate in the existing five-language localization system.
+
+The original local direction remains in `outputs/popup-reference/direction.md`; the refinement contract is `outputs/popup-polish/direction.md`. Final refinement captures are `.impeccable/review/popup-polish/user-1065.png`, `desktop.png`, `mobile.png`, `mobile-bottom.png`, `mobile-invalid.png`, and `german-1065.png`.
 
 ## Do's and Don'ts
 
@@ -212,6 +387,9 @@ At rest, the component uses alternate paper, botanical ink, soft supporting copy
 - **Do** keep the full link surface at least 44px high and retain the visible 2px focus outline plus color reversal.
 - **Do** use the shared linear northeast arrow and keep product names and descriptions in normal case.
 - **Do** maintain all five language paths when changing RFQ-visible copy.
+- **Do** preserve the continuous sample-kit email surface and its separate full-width CTA, each with 8px corners.
+- **Do** keep sample-kit privacy reassurance, respectful skip, and licensed-business notice reachable in the mobile dialog's single scroll region.
+- **Do** retain real HTML interface text and editable SVG assets around the independent packaging concept scene.
 
 ### Don't:
 
@@ -219,3 +397,5 @@ At rest, the component uses alternate paper, botanical ink, soft supporting copy
 - **Don't** hide part of the six-item directory behind a tablet carousel or disclosure.
 - **Don't** replace verified WooCommerce category resolution with placeholder destinations.
 - **Don't** remove the project form when adding product-specific browse routes; the two paths serve different briefs.
+- **Don't** promote the sample-kit palette, split composition, or offer-label styling into the site's global visual system.
+- **Don't** describe the sample-kit concept image as native 2K or verified product photography.

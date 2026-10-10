@@ -2613,6 +2613,77 @@
   });
 
   var SOURCE_TO_KEY = {};
+  // Homepage category entry copy, matching the user-specified reference.
+  var CATEGORY_ENTRY_BY_SOURCE = {
+    "zh-CN": {
+      "Packaging solutions": "包装方案入口",
+      "Start with": "从产品需要的",
+      "the packaging format your product needs.": "包装形态开始。",
+      "Choose an established packaging category. We will help with structure, artwork and compliance requirements.": "选择成熟的包装品类，再把结构、设计稿和合规需求交给我们。",
+      "3.5g / 1oz · Child-resistant zipper · Custom shapes": "3.5g / 1oz · 防儿童开启拉链 · 异形",
+      "Child-resistant · Drawer · Magnetic": "防儿童开启 · 抽屉 · 磁吸",
+      "Flower jars · Wax jars · Pop-Top": "花卉罐 · 蜡罐 · Pop-Top",
+      "Joint tubes · Multi-pack tins": "Joint 管 · 多支装金属盒",
+      "Sliding lids · Hinged tins": "滑盖罐 · 铰链罐",
+      "Retail POS · Countertop displays": "零售 POS · 台面展示",
+      "Explore category": "进入品类",
+      "Custom Mylar Bags & Pouches": "定制拉链袋与自立袋",
+      "Pre-Roll Packaging & Tubes": "预卷包装与管材",
+      "Tins & Metal Containers": "金属罐与金属容器"
+    },
+    "ru": {
+      "Packaging solutions": "Решения для упаковки",
+      "Start with": "Начните с",
+      "the packaging format your product needs.": "подходящего формата упаковки.",
+      "Choose an established packaging category. We will help with structure, artwork and compliance requirements.": "Выберите готовую категорию упаковки. Мы поможем с конструкцией, макетами и требованиями рынка.",
+      "3.5g / 1oz · Child-resistant zipper · Custom shapes": "3.5g / 1oz · Защита от детей · Фигурные формы",
+      "Child-resistant · Drawer · Magnetic": "Защита от детей · Выдвижные · Магнитные",
+      "Flower jars · Wax jars · Pop-Top": "Банки для цветков · Воска · Pop-Top",
+      "Joint tubes · Multi-pack tins": "Тубы для джойнтов · Многоместные банки",
+      "Sliding lids · Hinged tins": "Сдвижные крышки · Петли",
+      "Retail POS · Countertop displays": "Розничные POS · Настольные дисплеи",
+      "Explore category": "Открыть категорию",
+      "Custom Mylar Bags & Pouches": "Пакеты Mylar и дой-паки",
+      "Pre-Roll Packaging & Tubes": "Упаковка и тубы для pre-roll",
+      "Tins & Metal Containers": "Металлические банки и контейнеры"
+    },
+    "de": {
+      "Packaging solutions": "Verpackungslösungen",
+      "Start with": "Starten Sie mit",
+      "the packaging format your product needs.": "dem passenden Verpackungsformat.",
+      "Choose an established packaging category. We will help with structure, artwork and compliance requirements.": "Wählen Sie eine bewährte Verpackungskategorie. Wir unterstützen Struktur, Artwork und Compliance.",
+      "3.5g / 1oz · Child-resistant zipper · Custom shapes": "3.5g / 1oz · Kindersicherer Zipper · Sonderformen",
+      "Child-resistant · Drawer · Magnetic": "Kindersicher · Schublade · Magnetisch",
+      "Flower jars · Wax jars · Pop-Top": "Blütenbehälter · Wachsbehälter · Pop-Top",
+      "Joint tubes · Multi-pack tins": "Joint-Tuben · Mehrfach-Metalldosen",
+      "Sliding lids · Hinged tins": "Schiebedeckel · Scharnierdosen",
+      "Retail POS · Countertop displays": "Retail-POS · Thekendisplays",
+      "Explore category": "Kategorie ansehen",
+      "Custom Mylar Bags & Pouches": "Mylar-Beutel & Standbodenbeutel",
+      "Pre-Roll Packaging & Tubes": "Pre-Roll-Verpackung & Tuben",
+      "Tins & Metal Containers": "Metalldosen & Metallbehälter"
+    },
+    "fr": {
+      "Packaging solutions": "Solutions d’emballage",
+      "Start with": "Commencez par",
+      "the packaging format your product needs.": "le format adapté à votre produit.",
+      "Choose an established packaging category. We will help with structure, artwork and compliance requirements.": "Choisissez une catégorie éprouvée. Nous vous accompagnons sur la structure, le graphisme et la conformité.",
+      "3.5g / 1oz · Child-resistant zipper · Custom shapes": "3.5g / 1oz · Zip sécurité enfant · Formes sur mesure",
+      "Child-resistant · Drawer · Magnetic": "Sécurité enfant · Tiroir · Magnétique",
+      "Flower jars · Wax jars · Pop-Top": "Pots pour fleurs · Pots pour cire · Pop-Top",
+      "Joint tubes · Multi-pack tins": "Tubes pour joints · Boîtes multi-unités",
+      "Sliding lids · Hinged tins": "Couvercles coulissants · Boîtes à charnière",
+      "Retail POS · Countertop displays": "PLV retail · Présentoirs de comptoir",
+      "Explore category": "Voir la catégorie",
+      "Custom Mylar Bags & Pouches": "Sachets Mylar et doypacks",
+      "Pre-Roll Packaging & Tubes": "Emballage et tubes pre-roll",
+      "Tins & Metal Containers": "Boîtes et contenants métalliques"
+    }
+  };
+  Object.keys(CATEGORY_ENTRY_BY_SOURCE).forEach(function (locale) {
+    EXTRA_BY_SOURCE[locale] = Object.assign(EXTRA_BY_SOURCE[locale] || {}, CATEGORY_ENTRY_BY_SOURCE[locale]);
+  });
+
   Object.keys(DICTIONARY.en).forEach(function (key) {
     SOURCE_TO_KEY[DICTIONARY.en[key]] = key;
   });

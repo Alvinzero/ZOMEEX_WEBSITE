@@ -19,12 +19,12 @@ $hero_product_webp  = get_stylesheet_directory_uri() . '/assets/zomeex-packaging
 $deferred_media_placeholder = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==';
 
 $category_data = array(
-	array( 'title' => 'Custom Mylar Bags & Pouches', 'slug' => 'mylar-bag', 'image' => 'pack_0003_药丸包装-拷贝-2-768x768.jpg', 'copy' => 'Barrier films, stand-up pouches and retail-ready formats.' ),
-	array( 'title' => 'Printed Paper Boxes & Rigid Boxes', 'slug' => 'vape-box', 'image' => 'pack_0002_背卡盒子_0003_背卡-拷贝-768x768.jpg', 'copy' => 'Folding cartons and rigid presentation boxes for shelf impact.' ),
-	array( 'title' => 'Glass Jars & Concentrate Containers', 'slug' => 'jars-glass-containers', 'image' => 'hot-knife-glass-cover_0000s_0003_矢量智能对象.jpg', 'copy' => 'Protective glass and concentrate formats with a considered fit.' ),
-	array( 'title' => 'Pre-Roll Packaging & Tubes', 'slug' => 'preroll-wraps', 'image' => 'drip-box_0000_矢量智能对象-700x700.jpg', 'copy' => 'Tubes, wraps and display-ready formats for pre-roll lines.' ),
-	array( 'title' => 'Tins & Metal Containers', 'slug' => 'tins-metal-containers', 'image' => 'pack_0001_背卡盒子_0004_组-5-768x768.jpg', 'copy' => 'Durable metal formats for a tactile, reusable presentation.' ),
-	array( 'title' => 'Corrugated POP Display Shelves', 'slug' => 'retail-displays-merch', 'image' => 'drip-box_0001_矢量智能对象-拷贝-585x295.jpg', 'copy' => 'Retail display pieces that make the product easy to find.' ),
+	array( 'title' => 'Custom Mylar Bags & Pouches', 'slug' => 'mylar-bag', 'image' => 'category-bags.jpg', 'width' => 467, 'height' => 257, 'tags' => '3.5g / 1oz · Child-resistant zipper · Custom shapes' ),
+	array( 'title' => 'Printed Paper Boxes & Rigid Boxes', 'slug' => 'vape-box', 'image' => 'category-boxes.jpg', 'width' => 461, 'height' => 257, 'tags' => 'Child-resistant · Drawer · Magnetic' ),
+	array( 'title' => 'Glass Jars & Concentrate Containers', 'slug' => 'jars-glass-containers', 'image' => 'category-jars.jpg', 'width' => 469, 'height' => 257, 'tags' => 'Flower jars · Wax jars · Pop-Top' ),
+	array( 'title' => 'Pre-Roll Packaging & Tubes', 'slug' => 'preroll-wraps', 'image' => 'category-tubes.jpg', 'width' => 1000, 'height' => 1000, 'tags' => 'Joint tubes · Multi-pack tins', 'contain' => true ),
+	array( 'title' => 'Tins & Metal Containers', 'slug' => 'tins-metal-containers', 'image' => 'category-tins.jpg', 'width' => 466, 'height' => 247, 'tags' => 'Sliding lids · Hinged tins' ),
+	array( 'title' => 'Corrugated POP Display Shelves', 'slug' => 'retail-displays-merch', 'image' => 'category-displays.jpg', 'width' => 468, 'height' => 247, 'tags' => 'Retail POS · Countertop displays' ),
 );
 
 $application_data = array(
@@ -226,13 +226,28 @@ $advantage_routes = array(
 
 	<section class="zx-categories" aria-labelledby="zx-categories-title">
 		<div class="zomeex-container">
-			<div class="zx-section-head zx-section-head--split"><div><h2 id="zx-categories-title">Choose the format first. Shape the details together.</h2></div><a class="zx-inline-link" href="<?php echo esc_url( $shop_url ); ?>">View all products <span aria-hidden="true">↗</span></a></div>
+			<div class="zx-section-head zx-section-head--split">
+				<div>
+					<p class="zx-eyebrow">Packaging solutions</p>
+					<h2 id="zx-categories-title"><span>Start with</span> <span>the packaging format your product needs.</span></h2>
+					<p>Choose an established packaging category. We will help with structure, artwork and compliance requirements.</p>
+				</div>
+				<a class="zx-categories__all" href="<?php echo esc_url( $shop_url ); ?>"><span>View all products</span><?php echo zomeex_nav_arrow(); ?></a>
+			</div>
 			<div class="zx-category-grid">
-			<?php foreach ( $category_data as $category ) : ?>
+			<?php foreach ( $category_data as $index => $category ) : ?>
 					<?php $url = $category_url( $category ); ?>
 					<article class="zx-category-card">
-						<a class="zx-category-card__media" href="<?php echo esc_url( $url ); ?>"><img src="<?php echo esc_url( zomeex_upload_url( $category['image'] ) ); ?>" alt="<?php echo esc_attr( $category['title'] ); ?>" loading="lazy" width="768" height="768"></a>
-						<div class="zx-category-card__body"><h3><a href="<?php echo esc_url( $url ); ?>"><?php echo esc_html( $category['title'] ); ?></a></h3><p><?php echo esc_html( $category['copy'] ); ?></p><a class="zx-inline-link" href="<?php echo esc_url( add_query_arg( 'interest', sanitize_title( $category['title'] ), $quote_url ) ); ?>">Request a dieline <span aria-hidden="true">↗</span></a></div>
+						<a class="zx-category-card__link" href="<?php echo esc_url( $url ); ?>" aria-labelledby="zx-category-<?php echo esc_attr( $index ); ?>">
+							<div class="zx-category-card__media<?php echo ! empty( $category['contain'] ) ? ' zx-category-card__media--contain' : ''; ?>">
+								<img src="<?php echo esc_url( get_stylesheet_directory_uri() . '/assets/categories/' . $category['image'] ); ?>" alt="" loading="lazy" decoding="async" width="<?php echo esc_attr( $category['width'] ); ?>" height="<?php echo esc_attr( $category['height'] ); ?>">
+							</div>
+							<div class="zx-category-card__body">
+								<p class="zx-category-card__tags"><span aria-hidden="true"><?php echo esc_html( sprintf( '%02d', $index + 1 ) ); ?> · </span><span><?php echo esc_html( $category['tags'] ); ?></span></p>
+								<h3 id="zx-category-<?php echo esc_attr( $index ); ?>"><?php echo esc_html( $category['title'] ); ?></h3>
+								<span class="zx-category-card__action"><span>Explore category</span><?php echo zomeex_nav_arrow(); ?></span>
+							</div>
+						</a>
 					</article>
 				<?php endforeach; ?>
 			</div>

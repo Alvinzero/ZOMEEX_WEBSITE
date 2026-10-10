@@ -525,12 +525,89 @@
 .zx-categories {
 	background: #fbfcfa;
 	border-bottom: 1px solid var(--zx-line);
-	border-top: 1px solid var(--zx-line);
+	font-family: "Zomeex Figtree", "Avenir Next", "PingFang SC", "Microsoft YaHei", sans-serif;
+	padding: 64px 0 70px;
+	scroll-margin-top: 88px;
+}
+
+.zx-categories :is(h2, h3, p, a, span) {
+	text-transform: none;
+}
+
+.zx-categories .zx-section-head {
+	align-items: center;
+	gap: 40px;
+	margin-bottom: 30px;
+}
+
+.zx-categories .zx-eyebrow {
+	font-size: 11px;
+	font-weight: 600;
+	letter-spacing: .08em;
+	margin-bottom: 12px;
+}
+
+.zx-categories .zx-section-head h2 {
+	font-family: inherit;
+	font-size: clamp(30px, 2.7vw, 38px);
+	font-weight: 600;
+	letter-spacing: -.025em;
+	line-height: 1.18;
+	margin-bottom: 14px;
+	max-width: 29ch;
+	text-wrap: balance;
+}
+
+.zx-categories .zx-section-head > div > p:not(.zx-eyebrow) {
+	font-size: 14px;
+	font-weight: 400;
+	line-height: 1.65;
+	max-width: 72ch;
+}
+
+.zx-categories__all,
+.zx-category-card__action {
+	align-items: center;
+	display: inline-flex;
+	font-size: 12px;
+	font-weight: 600;
+	gap: 8px;
+	letter-spacing: 0;
+	line-height: 1.5;
+}
+
+.zx-categories__all {
+	flex-shrink: 0;
+	min-height: 44px;
+}
+
+.zx-categories__all svg,
+.zx-category-card__action svg {
+	flex: 0 0 16px;
+	height: 16px;
+	width: 16px;
+}
+
+.zx-categories__all:hover span,
+.zx-category-card__link:hover .zx-category-card__action > span {
+	text-decoration: underline;
+	text-underline-offset: 4px;
+}
+
+.zx-categories a:focus-visible {
+	border-radius: 3px;
+	outline: 2px solid var(--zx-accent-dark);
+	outline-offset: 5px;
+}
+
+.zx-categories ::selection {
+	background: #c9ded1;
+	color: var(--zx-ink);
 }
 
 .zx-category-grid {
 	display: grid;
-	gap: 34px 22px;
+	gap: 30px 18px;
 	grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
@@ -538,14 +615,19 @@
 	min-width: 0;
 }
 
+.zx-category-card__link {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
 .zx-category-card__media {
-	align-items: center;
-	background: #fff;
+	aspect-ratio: 1.8;
+	background: #e8eeea;
+	border-radius: 4px;
 	display: block;
 	overflow: hidden;
-	padding: clamp(20px, 2.1vw, 34px);
 	position: relative;
-	aspect-ratio: 1.26 / 1;
 }
 
 .zx-category-card__media::after {
@@ -554,35 +636,67 @@
 
 .zx-category-card__media img {
 	height: 100%;
-	object-fit: contain;
-	transition: transform .45s cubic-bezier(.16, 1, .3, 1);
+	object-fit: cover;
+	transition: transform .4s cubic-bezier(.16, 1, .3, 1);
 	width: 100%;
 }
 
-.zx-category-card:hover img,
-.zx-category-card:focus-within img {
-	transform: scale(1.025);
+.zx-category-card__media--contain {
+	background: #f4f4f5;
+}
+
+.zx-category-card__media--contain img {
+	object-fit: contain;
+}
+
+.zx-category-card__link:hover img,
+.zx-category-card__link:focus-visible img {
+	transform: scale(1.02);
 }
 
 .zx-category-card__body {
-	border-bottom: 1px solid var(--zx-line);
-	padding: 16px 2px 18px;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 14px 0 0;
 }
 
-.zx-category-card__body h3 {
-	font-size: 21px;
-	line-height: 1.08;
-	margin: 0 0 10px;
-	max-width: 19ch;
-}
-
-.zx-category-card__body h3 a:hover,
-.zx-category-card__body h3 a:focus-visible {
+.zx-category-card .zx-category-card__tags {
 	color: var(--zx-accent-dark);
+	font-size: 11px;
+	font-weight: 500;
+	letter-spacing: .015em;
+	line-height: 1.55;
+	margin: 0 0 7px;
+	max-width: none;
 }
 
-.zx-category-card__body .zx-inline-link {
-	margin-top: 15px;
+.zx-categories .zx-category-card__body h3 {
+	font-family: inherit;
+	font-size: 18px;
+	font-weight: 600;
+	letter-spacing: -.015em;
+	line-height: 1.35;
+	margin: 0 0 12px;
+}
+
+.zx-category-card__action {
+	color: var(--zx-accent-dark);
+	font-size: 11px;
+	margin-top: auto;
+}
+
+html[data-zomeex-locale="zh-CN"] .zx-categories :is(h2, h3) {
+	font-family: "PingFang SC", "Microsoft YaHei", "Zomeex Figtree", sans-serif;
+	letter-spacing: 0;
+}
+
+html[data-zomeex-locale="zh-CN"] .zx-categories h2 > span {
+	white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.zx-category-card__media img { transition: none; }
 }
 
 .zx-product-bridge {
@@ -1844,7 +1958,21 @@
 	}
 
 	.zx-category-card__media {
-	padding: 22px;
+	padding: 0;
+	}
+
+	.zx-categories .zx-section-head {
+	align-items: flex-start;
+	gap: 14px;
+	}
+
+	.zx-categories .zx-section-head h2 {
+	font-size: 30px;
+	line-height: 1.2;
+	}
+
+	.zx-categories .zx-category-card__body h3 {
+	font-size: 18px;
 	}
 
 	.zx-product-bridge__layout {

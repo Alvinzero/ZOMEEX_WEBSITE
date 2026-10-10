@@ -12,6 +12,9 @@ colors:
   deep: "#10251d"
   white: "#ffffff"
   field-surface: "#f6f8f5"
+  category-ground: "#fbfcfa"
+  category-media: "#e8eeea"
+  category-media-contain: "#f4f4f5"
   why-ink: "#08291d"
   why-body: "#254e50"
   why-green: "#07634d"
@@ -77,6 +80,36 @@ typography:
     fontWeight: 900
     lineHeight: 1.04
     letterSpacing: "-0.03em"
+  category-headline:
+    fontFamily: "Zomeex Figtree, Avenir Next, PingFang SC, Microsoft YaHei, sans-serif"
+    fontSize: "clamp(30px, 2.7vw, 38px)"
+    fontWeight: 600
+    lineHeight: 1.18
+    letterSpacing: "-0.025em"
+  category-title:
+    fontFamily: "inherit"
+    fontSize: "18px"
+    fontWeight: 600
+    lineHeight: 1.35
+    letterSpacing: "-0.015em"
+  category-tags:
+    fontFamily: "inherit"
+    fontSize: "11px"
+    fontWeight: 500
+    lineHeight: 1.55
+    letterSpacing: "0.015em"
+  category-action:
+    fontFamily: "inherit"
+    fontSize: "11px"
+    fontWeight: 600
+    lineHeight: 1.5
+    letterSpacing: "0"
+  category-all:
+    fontFamily: "inherit"
+    fontSize: "12px"
+    fontWeight: 600
+    lineHeight: 1.5
+    letterSpacing: "0"
   sample-headline:
     fontFamily: "Zomeex Figtree, PingFang SC, Microsoft YaHei, sans-serif"
     fontSize: "36px"
@@ -129,6 +162,8 @@ rounded:
   none: "0"
   why-card: "10px"
   why-circle: "50%"
+  category-media: "4px"
+  category-focus: "3px"
   sample-dialog: "20px"
   sample-dialog-mobile: "18px"
   sample-control: "8px"
@@ -143,6 +178,9 @@ spacing:
   tablet-section: "48px"
   directory-section: "64px"
   sample-form-gap: "10px"
+  category-grid-row: "30px"
+  category-grid-column: "18px"
+  category-grid-mobile: "26px"
 components:
   button-primary:
     backgroundColor: "{colors.accent}"
@@ -183,6 +221,23 @@ components:
     textColor: "{colors.white}"
     rounded: "{rounded.why-circle}"
     size: "44px"
+  category-section:
+    backgroundColor: "{colors.category-ground}"
+    padding: "64px 0 70px"
+  category-section-mobile:
+    backgroundColor: "{colors.category-ground}"
+    padding: "52px 0 56px"
+  category-card:
+    textColor: "{colors.ink}"
+    typography: "{typography.category-title}"
+  category-card-focus:
+    rounded: "{rounded.category-focus}"
+  category-media:
+    backgroundColor: "{colors.category-media}"
+    rounded: "{rounded.category-media}"
+  category-media-contain:
+    backgroundColor: "{colors.category-media-contain}"
+    rounded: "{rounded.category-media}"
   sample-primary-action:
     backgroundColor: "{colors.sample-action}"
     textColor: "{colors.sample-action-ink}"
@@ -317,7 +372,7 @@ The sample-kit dialog has 20px corners on desktop and 18px corners at 860px and 
 
 ### Cards / Containers
 
-- **Category cards:** Use a white product-media field, real product imagery, and an unboxed text body finished by a one-pixel divider.
+- **Packaging category cards:** Use wide cool-sage photographic fields and an unboxed, divider-free body; the whole-tube photograph uses the neutral gray containment variant. See Packaging Category Entrance for its local behavior.
 - **Corner Style:** Square.
 - **Shadow Strategy:** None on the homepage catalogue and RFQ directory.
 
@@ -331,6 +386,16 @@ The sample-kit dialog has 20px corners on desktop and 18px corners at 860px and 
 
 - **Style:** Catalogue navigation favors concise labels, thin separators, and explicit destination text. The RFQ path group is a semantic `nav` labelled by its section heading.
 - **Localization:** Every visible RFQ path heading, description, product name, and follow-on form introduction has mappings for the four non-English homepage locales.
+
+### Packaging Category Entrance
+
+The section-local `category-*` tokens define white-paper ground, cool-sage photographic fields, a gray whole-tube variant, medium-weight Figtree type, and small image/focus corners; green actions and the section divider inherit the homepage tokens. Chinese headings prioritize PingFang SC and Microsoft YaHei with zero tracking. Text remains normal case, with a 30px/1.2 heading on phones. The user-pinned eyebrow and two-digit index tags stay local to this entrance.
+
+All six cards remain visible: 3 columns above 820px, 2 from 601–820px, and 1 at 600px and below. Use the category grid and section-padding tokens with the existing 48px total desktop / 36px total phone gutters. Media keeps a 1.8 aspect ratio; bodies are unboxed, divider-free, and padded 14px below the image. Each whole-card link is labelled by its heading; the small action is an internal span. Category destinations use existing WooCommerce term URLs or matching shop collection routes, and the header action opens the shop.
+
+**The Whole-Format Category Rule.** Keep the pre-roll photograph contained so the complete tubes remain visible; the other category photographs use cover within the shared wide frame.
+
+Hover underlines the action and scales the photograph to 1.02. Keyboard focus adds a 2px inherited green outline with 5px offset and the same image scale; reduced motion disables the image transition. The six existing user-reference photographs retain embedded origin metadata, with provenance in `wp-content/themes/woodmart-child/assets/categories/source-photography.json`; no AI generation or image editing. Final captures are in `.impeccable/review/categories/`.
 
 ### Capability Routes
 

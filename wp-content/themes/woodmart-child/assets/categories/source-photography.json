@@ -1,0 +1,38 @@
+[
+  {
+    "file": "category-bags.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/categories/category-bags.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "c1c9ecc8d980dd26ab41108909eff2100ca881f072a9e05ce8e7bbe0ad1e6c77"
+  },
+  {
+    "file": "category-boxes.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/categories/category-boxes.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "9432f8f59da01bcc4a8de5cd6ab77325b6bfb8ecefd82f4172e9dedd6f43fa9d"
+  },
+  {
+    "file": "category-jars.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/categories/category-jars.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "13d7169b78d64bbcbe1d7e7a492e5efe42c45c4192f6340d923560fd0ef2db51"
+  },
+  {
+    "file": "category-tubes.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/legacy/products/packaging-tubes.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "67a608dd5d0eeb4aa655d3e4d1060453d1f15a272207ff63b7a41be5c24c01cc"
+  },
+  {
+    "file": "category-tins.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/categories/category-tins.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "57893b4df3859f9a1025a8c20c2d7b74fec6514c0ff8de3de3f8fbb576c10902"
+  },
+  {
+    "file": "category-displays.jpg",
+    "source_url": "http://152.136.41.242:8318/assets/categories/category-displays.jpg",
+    "origin": "Existing packaging photography from the user-specified ZOMEEX reference site; reused for the matching homepage category. No AI generation or image editing.",
+    "download_sha256": "39fba1a5283503d92a5477d3e6e0974db16cceedc526574b939f1f91fd9c5fa7"
+  }
+]

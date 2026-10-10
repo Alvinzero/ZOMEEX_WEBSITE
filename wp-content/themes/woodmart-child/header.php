@@ -704,10 +704,6 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 				<div class="zomeex-language-switcher" aria-label="Language selector">
 					<?php echo zomeex_language_switcher(); // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
 				</div>
-				<a class="zomeex-header__quote" data-quote-link href="<?php echo esc_url( zomeex_quote_url() ); ?>" aria-label="Quote list" title="Quote list">
-					<span class="zomeex-utility-link__icon zomeex-utility-link__icon--quote" aria-hidden="true"></span>
-					<span class="zomeex-visually-hidden">Quote list</span><span data-quote-count hidden aria-hidden="true">0</span>
-				</a>
 				<button class="zomeex-menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="zomeex-mobile-nav" aria-label="Open menu"><span></span><span></span></button>
 			</div>
 		</div>
@@ -792,4 +788,3 @@ $artwork_url = add_query_arg( 'resource', 'artwork', $quote_url );
 			</div>
 		</nav>
 		</header>
-		<a class="zomeex-quote-float" data-quote-link href="<?php echo esc_url( zomeex_quote_url() ); ?>" aria-label="Quote list"><span data-quote-count hidden>0</span>Quote list <span aria-hidden="true">↗</span></a>
